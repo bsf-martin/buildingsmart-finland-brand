@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>buildingSMART Finland — Style Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ================================================================
+   buildingSMART Finland — Style Guide
+   Direction 02 "Open Ground" as default web register
+   ================================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ---- Tokens ---- */
+:root {
+  /* Colour */
+  --c-navy:       #041E42;
+  --c-slate:      #354B55;
+  --c-charcoal:   #38363D;
+  --c-mint:       #48BF91;
+  --c-silver:     #C8C6C5;
+  --c-gray-light: #E3E3E3;
+  --c-white:      #FFFFFF;
+  --c-bg:         #F0EFED;
+
+  /* Families */
+  --ff-display: 'Figtree', sans-serif;
+  --ff-body:    'Source Serif 4', Georgia, serif;
+  --ff-mono:    'JetBrains Mono', 'Courier New', monospace;
+
+  /* Scale */
+  --fs-display: 3rem;       /* 48px */
+  --fs-h1:      2.25rem;    /* 36px */
+  --fs-h2:      1.75rem;    /* 28px */
+  --fs-h3:      1.375rem;   /* 22px */
+  --fs-h4:      1.125rem;   /* 18px */
+  --fs-h5:      1rem;       /* 16px */
+  --fs-h6:      0.8125rem;  /* 13px */
+  --fs-body:    1rem;       /* 16px */
+  --fs-small:   0.875rem;   /* 14px */
+  --fs-label:   0.75rem;    /* 12px */
+  --fs-mono:    0.8125rem;  /* 13px */
+
+  /* Line heights */
+  --lh-display: 1.1;
+  --lh-heading: 1.2;
+  --lh-body:    1.7;
+  --lh-ui:      1.4;
+
+  /* Letter spacing */
+  --ls-display: -0.02em;
+  --ls-heading: -0.01em;
+  --ls-label:    0.06em;
+
+  /* Spacing (4px base) */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+  --sp-20: 80px;
+  --sp-24: 96px;
+
+  /* Radii */
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-pill: 999px;
+
+  /* Shadow */
+  --shadow-card: 0 1px 8px rgba(4,30,66,0.07);
+  --shadow-lift: 0 4px 20px rgba(4,30,66,0.10);
+}
+
+/* ---- Base ---- */
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--ff-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--c-charcoal);
+  background: var(--c-bg);
+  -webkit-font-smoothing: antialiased;
+  min-width: 900px;
+}
+
+/* ================================================================
+   LAYOUT
+   ================================================================ */
+
+/* Page header */
+.sg-header {
+  background: var(--c-navy);
+  color: white;
+  padding: var(--sp-16) var(--sp-20);
+  position: relative;
+  overflow: hidden;
+}
+
+.sg-header::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 5px;
+  background: var(--c-mint);
+}
+
+/* Subtle geo decoration - echoes the moodboard */
+.sg-header::after {
+  content: '';
+  position: absolute;
+  right: 80px; top: 0; bottom: 0;
+  width: 1px;
+  background: rgba(72,191,145,0.15);
+}
+
+.sg-header-label {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-mint);
+  margin-bottom: var(--sp-4);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sg-header-label::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: var(--c-mint);
+}
+
+.sg-header-logo {
+  display: block;
+  height: 48px;
+  width: auto;
+  margin-bottom: var(--sp-5);
+}
+
+.sg-header h1 {
+  font-family: var(--ff-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: var(--ls-heading);
+  line-height: var(--lh-heading);
+  color: white;
+  margin: 0;
+}
+
+.sg-header-sub {
+  margin-top: var(--sp-3);
+  font-family: var(--ff-body);
+  font-size: var(--fs-small);
+  color: rgba(227,227,227,0.65);
+  line-height: 1.6;
+}
+
+/* Shell */
+.sg-layout {
+  display: flex;
+  align-items: flex-start;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: var(--sp-12) var(--sp-8);
+  gap: var(--sp-12);
+}
+
+/* Sidebar */
+.sg-nav {
+  width: 196px;
+  flex-shrink: 0;
+  position: sticky;
+  top: var(--sp-8);
+  align-self: flex-start;
+}
+
+.sg-nav-label {
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-slate);
+  padding-bottom: var(--sp-3);
+  margin-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--c-gray-light);
+}
+
+.sg-nav ul { list-style: none; }
+
+.sg-nav li { margin-bottom: 1px; }
+
+.sg-nav a {
+  display: block;
+  font-family: var(--ff-display);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--c-charcoal);
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: var(--r-sm);
+  transition: background 0.12s, color 0.12s;
+  line-height: 1.4;
+}
+
+.sg-nav a:hover {
+  background: white;
+  color: var(--c-navy);
+}
+
+.sg-nav a.active {
+  background: white;
+  color: var(--c-navy);
+  font-weight: 600;
+  box-shadow: inset 3px 0 0 var(--c-mint);
+}
+
+.sg-nav-divider {
+  height: 1px;
+  background: var(--c-gray-light);
+  margin: var(--sp-3) 0;
+}
+
+/* Main content */
+.sg-main {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Section */
+.sg-section {
+  margin-bottom: var(--sp-20);
+  scroll-margin-top: var(--sp-8);
+}
+
+.sg-section-header {
+  margin-bottom: var(--sp-8);
+  padding-bottom: var(--sp-5);
+  border-bottom: 1px solid var(--c-gray-light);
+}
+
+.sg-eyebrow {
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-slate);
+  margin-bottom: 6px;
+}
+
+.sg-section-title {
+  font-family: var(--ff-display);
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  letter-spacing: var(--ls-heading);
+  color: var(--c-navy);
+  line-height: var(--lh-heading);
+}
+
+.sg-section-desc {
+  margin-top: var(--sp-3);
+  font-size: var(--fs-small);
+  line-height: var(--lh-body);
+  color: var(--c-slate);
+  max-width: 600px;
+}
+
+/* White card panel */
+.sg-panel {
+  background: white;
+  border-radius: var(--r-lg);
+  padding: var(--sp-8);
+  margin-bottom: var(--sp-5);
+  box-shadow: var(--shadow-card);
+}
+
+.sg-panel + .sg-panel { margin-top: 0; }
+
+/* Panel label */
+.sg-panel-label {
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-slate);
+  margin-bottom: var(--sp-5);
+}
+
+/* Page footer */
+.sg-footer {
+  background: var(--c-charcoal);
+  color: rgba(227,227,227,0.6);
+  padding: var(--sp-6) var(--sp-20);
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-6);
+}
+
+.sg-footer-brand {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  color: rgba(72,191,145,0.75);
+  letter-spacing: 0.08em;
+}
+
+.sg-footer-note { font-style: italic; opacity: 0.65; }
+
+/* ================================================================
+   SECTION 1 — COLOUR PALETTE
+   ================================================================ */
+
+.palette-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-4);
+}
+
+.swatch {
+  background: white;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.swatch-chip { height: 80px; }
+
+.swatch-chip--border { box-shadow: inset 0 0 0 1px var(--c-gray-light); }
+
+.swatch-body { padding: 14px 16px 16px; }
+
+.swatch-name {
+  font-family: var(--ff-display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-navy);
+  margin-bottom: var(--sp-2);
+}
+
+.swatch-values { display: flex; flex-direction: column; gap: 3px; }
+
+.swatch-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.swatch-val {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  color: var(--c-slate);
+}
+
+.copy-btn {
+  background: none;
+  border: 1px solid var(--c-silver);
+  cursor: pointer;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-family: var(--ff-mono);
+  font-size: 9.5px;
+  color: var(--c-slate);
+  transition: all 0.12s;
+  line-height: 1.5;
+  flex-shrink: 0;
+}
+
+.copy-btn:hover {
+  background: var(--c-gray-light);
+  color: var(--c-navy);
+  border-color: var(--c-gray-light);
+}
+
+.copy-btn.copied {
+  color: var(--c-mint);
+  background: rgba(72,191,145,0.1);
+  border-color: rgba(72,191,145,0.25);
+}
+
+.swatch-role {
+  margin-top: 8px;
+  font-size: 10.5px;
+  color: var(--c-slate);
+  line-height: 1.45;
+}
+
+.swatch-contrast {
+  margin-top: 9px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.contrast-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+}
+
+.contrast-label {
+  font-size: 10px;
+  color: var(--c-slate);
+}
+
+.contrast-sample {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 6px;
+  border-radius: 2px;
+  font-family: var(--ff-mono);
+  font-size: 8.5px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.contrast-ratio {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--c-charcoal);
+}
+
+.wcag-badge {
+  font-family: var(--ff-display);
+  font-size: 9px;
+  font-weight: 600;
+  padding: 1px 5px;
+  border-radius: 3px;
+  letter-spacing: 0.04em;
+}
+
+.wcag-aaa { background: rgba(72,191,145,0.15); color: #0f6641; }
+.wcag-aa  { background: rgba(72,191,145,0.1);  color: #1a7d5a; }
+.wcag-lg  { background: rgba(255,180,0,0.12);  color: #6b4700; }
+.wcag-nc  { background: rgba(180,40,40,0.08);  color: #7a2020; }
+
+/* ================================================================
+   SECTION 2 — TYPOGRAPHY (placeholder)
+   ================================================================ */
+
+/* (Styles added in next section) */
+
+/* ================================================================
+   SECTION 3 — SPACING (placeholder)
+   ================================================================ */
+
+/* ================================================================
+   SECTION 4 — COMPONENTS (placeholder)
+   ================================================================ */
+
+/* ================================================================
+   SECTION 5 — DO / DON'T (placeholder)
+   ================================================================ */
+
+</style>
+</head>
+<body>
+
+<!-- ================================================================
+     PAGE HEADER
+     ================================================================ -->
+<header class="sg-header">
+  <div class="sg-header-label">Visual Identity System &nbsp;·&nbsp; June 2026</div>
+  <svg class="sg-header-logo" viewBox="0 0 4617 830" version="1.1" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="bsf-logo-title" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <title id="bsf-logo-title">buildingSMART Finland logo</title>
+    <g id="Layer-1" transform="matrix(4.16667,0,0,4.16667,0,0)">
+        <g transform="matrix(1,0,0,1,44.7274,90.3303)">
+            <path d="M0,32.329C7.338,40.124 19.605,40.495 27.4,33.158L52.927,9.133L36.645,-8.166L-2.995,29.145L0,32.329Z" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,5.269,16.2075)">
+            <path d="M0,64.53L16.337,81.886L33.635,65.607L20.293,51.431L63.898,10.389L113.647,63.243L116.951,60.134C124.744,52.797 125.115,40.529 117.779,32.733L78.32,-9.188C70.981,-16.984 58.716,-17.356 50.92,-10.018L0.83,37.13C-6.966,44.468 -7.337,56.735 0,64.53" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,122.66,104.38)">
+            <path d="M0,49.93C7.794,42.593 8.166,30.326 0.83,22.533L-23.197,-2.996L-40.494,13.286L-3.183,52.926L0,49.93Z" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,80.7367,75.9897)">
+            <path d="M0,117.781L17.358,101.441L1.077,84.145L-13.098,97.486L-54.141,53.882L-1.287,4.133L-4.396,0.831C-11.733,-6.965 -24,-7.337 -31.796,0.002L-73.718,39.461C-81.514,46.798 -81.885,59.065 -74.547,66.86L-27.399,116.952C-20.062,124.747 -7.795,125.118 0,117.781" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,154.311,108.704)">
+            <path d="M0,-32.324C-7.339,-40.121 -19.604,-40.492 -27.4,-33.154L-52.927,-9.129L-36.645,8.168L2.995,-29.141L0,-32.324Z" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,193.77,182.831)">
+            <path d="M0,-64.53L-16.337,-81.887L-33.634,-65.606L-20.293,-51.431L-63.9,-10.388L-113.647,-63.243L-116.95,-60.134C-124.745,-52.797 -125.116,-40.529 -117.78,-32.734L-78.319,9.188C-70.983,16.986 -58.715,17.357 -50.922,10.017L-0.829,-37.131C6.967,-44.467 7.338,-56.734 0,-64.53" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,76.3793,94.6577)">
+            <path d="M0,-49.93C-7.795,-42.592 -8.167,-30.326 -0.829,-22.53L23.197,2.995L40.494,-13.286L3.183,-52.925L0,-49.93Z" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,118.302,123.045)">
+            <path d="M0,-117.775L-17.357,-101.438L-1.077,-84.14L13.098,-97.482L54.14,-53.879L1.286,-4.13L4.396,-0.826C11.734,6.968 24,7.339 31.796,0.003L73.72,-39.457C81.515,-46.795 81.886,-59.061 74.548,-66.856L27.398,-116.946C20.063,-124.742 7.795,-125.114 0,-117.775" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,221.305,116.185)">
+            <path d="M0,-106.496L0,-37.048C0,-20.549 11.85,-5.399 28.949,-5.399C43.348,-5.399 57.598,-18.749 57.598,-37.048C57.598,-55.347 43.348,-68.696 28.949,-68.696C19.5,-68.696 12.9,-64.797 6.75,-58.347L6.75,-65.097C11.1,-68.696 18,-74.097 28.949,-74.097C48.298,-74.097 63.597,-58.497 63.597,-37.048C63.597,-15.6 48.298,0 28.949,0C9.6,0 -5.7,-15.6 -5.7,-37.048L-5.7,-106.496L0,-106.496Z" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,300.955,116.185)">
+            <path d="M0,-72.597L0,-29.998C0,-15.149 10.35,-5.4 22.799,-5.4C35.249,-5.4 45.599,-15.149 45.599,-29.998L45.599,-72.597L51.298,-72.597L51.298,-29.248C51.298,-11.7 38.698,0 22.799,0C6.9,0 -5.699,-11.7 -5.699,-29.248L-5.699,-72.597L0,-72.597Z" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,0,-65.366)">
+            <path d="M369.038,108.954L374.737,108.954L374.737,180.051L369.038,180.051L369.038,108.954ZM371.888,84.354C374.437,84.354 376.388,86.305 376.388,88.854C376.388,91.404 374.437,93.354 371.888,93.354C369.338,93.354 367.388,91.404 367.388,88.854C367.388,86.305 369.338,84.354 371.888,84.354" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,0,-74.665)">
+            <rect x="393.483" y="84.354" width="5.699" height="104.996" style="fill:white;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,480.608,116.185)">
+            <path d="M0,-106.496L0,-37.048C0,-15.6 -15.299,0 -34.648,0C-53.997,0 -69.297,-15.6 -69.297,-37.048C-69.297,-58.497 -53.997,-74.097 -34.648,-74.097C-23.698,-74.097 -16.799,-68.696 -12.449,-65.097L-12.449,-58.347C-18.599,-64.797 -25.198,-68.696 -34.648,-68.696C-49.048,-68.696 -63.297,-55.347 -63.297,-37.048C-63.297,-18.749 -49.048,-5.399 -34.648,-5.399C-17.549,-5.399 -5.699,-20.549 -5.699,-37.048L-5.699,-106.496L0,-106.496Z" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,0,-65.366)">
+            <path d="M496.994,108.954L502.693,108.954L502.693,180.051L496.994,180.051L496.994,108.954ZM499.844,84.354C502.393,84.354 504.344,86.305 504.344,88.854C504.344,91.404 502.393,93.354 499.844,93.354C497.294,93.354 495.344,91.404 495.344,88.854C495.344,86.305 497.294,84.354 499.844,84.354" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,570.196,42.0877)">
+            <path d="M0,72.597L0,29.999C0,15.15 -10.35,5.401 -22.8,5.401C-35.249,5.401 -45.599,15.15 -45.599,29.999L-45.599,72.597L-51.298,72.597L-51.298,29.249C-51.298,11.701 -38.698,0 -22.8,0C-6.9,0 5.699,11.701 5.699,29.249L5.699,72.597L0,72.597Z" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,603.305,51.0884)">
+            <path d="M0,86.528C5.399,88.628 11.999,90.128 17.999,90.128C37.198,90.128 48.748,81.428 48.748,56.529L48.748,28.049C48.748,11.549 36.898,-3.6 19.799,-3.6C5.399,-3.6 -8.85,9.75 -8.85,28.049C-8.85,46.347 5.399,59.697 19.799,59.697C29.249,59.697 35.849,55.797 41.998,49.347L41.998,56.097C37.648,59.697 30.749,65.096 19.799,65.096C0.45,65.096 -14.85,49.497 -14.85,28.049C-14.85,6.599 0.45,-9 19.799,-9C39.148,-9 54.447,6.599 54.447,28.049L54.447,60.429C54.447,82.629 39.448,95.528 18.749,95.528C11.699,95.528 4.8,94.328 -1.8,91.927L0,86.528Z" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,714.089,69.2369)">
+            <path d="M0,-14.099C-14.857,-18.308 -27.688,-21.944 -27.688,-35.399C-27.688,-46.636 -21.503,-51.43 -7.007,-51.43L30.209,-51.43L30.209,-61.965L-9.407,-61.965C-27.736,-61.965 -39.122,-52.015 -39.122,-35.998C-39.122,-13.249 -20.378,-8.06 -3.841,-3.481C10.875,0.594 24.774,4.443 24.774,19.799C24.774,31.105 16.044,37.331 0.192,37.331L-39.122,37.331L-39.122,47.866L1.093,47.866C23.409,47.866 36.209,37.308 36.209,18.899C36.209,-3.84 16.973,-9.29 0,-14.099" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,850.328,118.303)">
+            <path d="M0,-112.831C-7.117,-112.831 -8.989,-110.687 -12.519,-98.498L-37.348,-14.397L-62.174,-98.486C-65.708,-110.686 -67.58,-112.831 -74.697,-112.831C-83.05,-112.831 -84.202,-104.766 -84.892,-99.939L-98.313,-1.2L-87.134,-1.2L-73.807,-99.704C-73.777,-99.602 -73.748,-99.496 -73.718,-99.386L-48.521,-13.298C-45.676,-3.418 -44.337,0 -37.348,0C-30.358,0 -29.02,-3.416 -26.179,-13.289L-0.965,-99.437C-0.939,-99.529 -0.915,-99.618 -0.891,-99.703L12.438,-1.2L23.618,-1.2L10.193,-99.956C9.505,-104.772 8.353,-112.831 0,-112.831" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,1037.21,117.103)">
+            <path d="M0,-109.831L0,-99.596L29.85,-99.596L29.85,0L40.982,0L40.982,-99.596L70.832,-99.596L70.832,-109.831L0,-109.831Z" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,1094.43,106.597)">
+            <path d="M0,-1.535L2.066,-1.535C4.042,-1.535 5.44,-1.674 5.44,-3.463C5.44,-4.704 4.582,-5.307 2.817,-5.307L0,-5.307L0,-1.535ZM7.875,5.421L5.866,5.421L2.503,-0.11L0,-0.11L0,5.421L-1.48,5.421L-1.48,-6.732L3.15,-6.732C5.762,-6.732 7.031,-5.654 7.031,-3.435C7.031,-1.113 5.623,-0.439 4.279,-0.171L7.875,5.421ZM2.483,-9.559C0.181,-9.559 -1.958,-8.633 -3.539,-6.949C-5.092,-5.293 -5.948,-3.097 -5.948,-0.767C-5.948,1.564 -5.092,3.759 -3.539,5.413C-1.958,7.098 0.181,8.026 2.483,8.026C7.163,8.026 10.971,4.081 10.971,-0.767C10.971,-5.616 7.163,-9.559 2.483,-9.559M2.483,9.506C-3.073,9.506 -7.595,4.897 -7.595,-0.767C-7.595,-6.432 -3.073,-11.041 2.483,-11.041C8.071,-11.041 12.618,-6.432 12.618,-0.767C12.618,4.897 8.071,9.506 2.483,9.506" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,917.529,117.103)">
+            <path d="M0,-111.631C-23.787,-111.631 -38.564,-96.854 -38.564,-73.065L-38.564,0L-27.432,0L-27.432,-75.015C-27.432,-91.103 -16.921,-101.096 0,-101.096C16.921,-101.096 27.432,-91.103 27.432,-75.015L27.432,-61.532L-21.543,-61.532L-21.543,-51.298L27.432,-51.298L27.432,0L38.566,0L38.566,-73.065C38.566,-96.854 23.789,-111.631 0,-111.631" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,1021.91,61.486)">
+            <path d="M0,-0.397C8.688,-5.479 13.089,-14.181 13.089,-26.298C13.089,-43.794 -1.104,-56.014 -21.427,-56.014C-41.848,-56.014 -55.042,-42.113 -55.042,-20.598L-55.042,55.617L-43.909,55.617L-43.909,-20.898C-43.909,-36.29 -35.505,-45.479 -21.427,-45.479C-7.836,-45.479 1.655,-37.344 1.655,-25.698C1.655,-12.173 -7.414,-4.416 -23.227,-4.416L-37.605,-4.416L-37.605,5.819L-18.727,5.819C-4.229,5.819 3.755,12.098 3.755,23.5L3.755,55.617L15.188,55.617L15.188,24.4C15.188,12.472 9.688,3.56 0,-0.397" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,237.593,191.794)">
+            <path d="M0,-36.428L-18.182,-36.428L-18.182,-20.984L-1.173,-20.984L-1.173,-17.53L-18.182,-17.53L-18.182,3.519L-22.352,3.519L-22.352,-39.947L0,-39.947L0,-36.428Z" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,0,147.145)">
+            <path d="M248.346,48.169L244.436,48.169L244.436,16.889L248.346,16.889L248.346,48.169ZM248.997,6.332C248.997,7.027 248.747,7.635 248.248,8.157C247.748,8.677 247.129,8.938 246.391,8.938C245.695,8.938 245.087,8.677 244.566,8.157C244.044,7.635 243.784,7.027 243.784,6.332C243.784,5.593 244.044,4.974 244.566,4.474C245.087,3.975 245.695,3.725 246.391,3.725C247.129,3.725 247.748,3.975 248.248,4.474C248.747,4.974 248.997,5.593 248.997,6.332" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,281.58,163.252)">
+            <path d="M0,32.062L-3.91,32.062L-3.91,13.815C-3.91,11.339 -3.975,9.645 -4.105,8.733C-4.366,7.212 -4.91,6.04 -5.735,5.213C-6.908,4.041 -8.537,3.454 -10.622,3.454C-12.577,3.454 -14.728,3.954 -17.074,4.953C-18.812,5.648 -19.854,6.169 -20.202,6.517L-20.202,32.062L-24.112,32.062L-24.112,0.782L-20.397,0.782L-20.397,3.063C-17.139,1.021 -13.708,0 -10.101,0C-7.017,0 -4.605,0.87 -2.868,2.607C-1.564,3.91 -0.717,5.562 -0.326,7.559C-0.109,8.69 0,10.58 0,13.229L0,32.062Z" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(-1,0,0,1,584.404,144.669)">
+            <rect x="290.247" y="3.725" width="3.91" height="46.92" style="fill:white;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,320.94,169.182)">
+            <path d="M0,20.788L0,10.231L-1.759,10.231C-11.013,10.231 -15.64,12.6 -15.64,17.334C-15.64,19.028 -15.097,20.42 -14.011,21.505C-12.795,22.722 -11.036,23.33 -8.732,23.33C-6.561,23.33 -3.649,22.482 0,20.788M3.91,26.132L0.326,26.132L0.326,23.786C-0.674,24.308 -1.673,24.828 -2.672,25.35C-5.018,26.305 -7.342,26.783 -9.645,26.783C-12.642,26.783 -15.064,25.903 -16.911,24.144C-18.758,22.385 -19.68,20.094 -19.68,17.269C-19.68,10.449 -13.664,7.038 -1.629,7.038L0,7.038L0,5.865C0,2.564 -0.521,0.37 -1.564,-0.717C-2.737,-1.933 -4.714,-2.541 -7.494,-2.541C-10.361,-2.541 -13.251,-1.716 -16.161,-0.066L-17.791,-2.802C-17.313,-3.279 -16.292,-3.845 -14.728,-4.496C-12.339,-5.495 -9.775,-5.995 -7.038,-5.995C-3.389,-5.995 -0.565,-4.995 1.434,-2.997C2.563,-1.867 3.28,-0.478 3.584,1.173C3.801,2.173 3.91,3.779 3.91,5.995L3.91,26.132Z" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,357.628,163.252)">
+            <path d="M0,32.062L-3.91,32.062L-3.91,13.815C-3.91,11.339 -3.975,9.645 -4.105,8.733C-4.366,7.212 -4.91,6.04 -5.735,5.213C-6.908,4.041 -8.537,3.454 -10.622,3.454C-12.577,3.454 -14.728,3.954 -17.074,4.953C-18.812,5.648 -19.854,6.169 -20.202,6.517L-20.202,32.062L-24.112,32.062L-24.112,0.782L-20.397,0.782L-20.397,3.063C-17.139,1.021 -13.708,0 -10.101,0C-7.017,0 -4.605,0.87 -2.868,2.607C-1.564,3.91 -0.717,5.562 -0.326,7.559C-0.109,8.69 0,10.58 0,13.229L0,32.062Z" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,387.017,154.91)">
+            <path d="M0,34.538L0,13.881C-2.434,12.491 -4.801,11.795 -7.103,11.795C-10.492,11.795 -13.229,13.045 -15.314,15.542C-17.399,18.041 -18.442,21.332 -18.442,25.415C-18.442,29.021 -17.497,31.954 -15.607,34.213C-13.718,36.472 -11.296,37.601 -8.341,37.601C-5.692,37.601 -2.911,36.581 0,34.538M3.975,40.403L0.391,40.403L0.391,38.058C-2.085,40.056 -5.127,41.055 -8.732,41.055C-12.86,41.055 -16.184,39.611 -18.703,36.722C-21.223,33.833 -22.482,30.02 -22.482,25.285C-22.482,20.289 -21.049,16.217 -18.182,13.066C-15.314,9.917 -11.622,8.342 -7.103,8.342C-4.324,8.342 -1.955,8.928 0,10.1L0,-6.517L3.975,-6.517L3.975,40.403Z" style="fill:white;fill-rule:nonzero;"/>
+        </g>
+    </g>
+  </svg>
+  <h1>Style Guide</h1>
+  <p class="sg-header-sub">Colour · Typography · Spacing · Components · Usage — self-contained reference for web and document production.</p>
+</header>
+
+<!-- ================================================================
+     LAYOUT SHELL
+     ================================================================ -->
+<div class="sg-layout">
+
+  <!-- Sidebar nav -->
+  <nav class="sg-nav" aria-label="Style guide sections">
+    <div class="sg-nav-label">Sections</div>
+    <ul>
+      <li><a href="#colour" class="active">Colour Palette</a></li>
+      <li><a href="#typography">Typography</a></li>
+      <li><a href="#spacing">Spacing Scale</a></li>
+      <div class="sg-nav-divider"></div>
+      <li><a href="#headings">Headings</a></li>
+      <li><a href="#body-text">Body Text</a></li>
+      <li><a href="#callouts">Callouts</a></li>
+      <li><a href="#tables">Tables</a></li>
+      <li><a href="#buttons">Buttons</a></li>
+      <li><a href="#tags">Tags &amp; Badges</a></li>
+      <li><a href="#code">Code Blocks</a></li>
+      <div class="sg-nav-divider"></div>
+      <li><a href="#usage">Do / Don't</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main content -->
+  <main class="sg-main">
+
+    <!-- ============================================================
+         SECTION 1 — COLOUR PALETTE
+         ============================================================ -->
+    <section class="sg-section" id="colour">
+      <div class="sg-section-header">
+        <div class="sg-eyebrow">Foundation · 01</div>
+        <h2 class="sg-section-title">Colour Palette</h2>
+        <p class="sg-section-desc">The buildingSMART Finland palette uses the bSI <em>secondary</em> palette exclusively. Mint (#48BF91) is the chapter's signature accent — one per composition, never paired with competing colours. Click any value to copy it.</p>
+      </div>
+
+      <div class="palette-grid">
+
+        <!-- Deep Navy -->
+        <div class="swatch">
+          <div class="swatch-chip" style="background:#041E42;"></div>
+          <div class="swatch-body">
+            <div class="swatch-name">Deep Navy</div>
+            <div class="swatch-values">
+              <div class="swatch-row">
+                <span class="swatch-val">#041E42</span>
+                <button class="copy-btn" data-copy="#041E42" title="Copy hex">copy</button>
+              </div>
+              <div class="swatch-row">
+                <span class="swatch-val">rgb(4, 30, 66)</span>
+                <button class="copy-btn" data-copy="rgb(4, 30, 66)" title="Copy RGB">copy</button>
+              </div>
+            </div>
+            <div class="swatch-role">Primary anchor — headlines, hero backgrounds, primary CTAs.</div>
+            <div class="swatch-contrast">
+              <div class="contrast-row">
+                <span class="contrast-sample" style="background:#041E42;color:white;">Aa</span>
+                <span class="contrast-ratio">15.1:1</span>
+                <span class="wcag-badge wcag-aaa">AAA</span>
+                <span class="contrast-label">white on Navy</span>
+              </div>
+              <div class="contrast-row">
+                <span class="contrast-sample" style="background:#041E42;color:#48BF91;">Aa</span>
+                <span class="contrast-ratio">6.6:1</span>
+                <span class="wcag-badge wcag-aa">AA</span>
+                <span class="contrast-label">Mint on Navy</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dark Slate -->
+        <div class="swatch">
+          <div class="swatch-chip" style="background:#354B55;"></div>
+          <div class="swatch-body">
+            <div class="swatch-name">Dark Slate</div>
+            <div class="swatch-values">
+              <div class="swatch-row">
+                <span class="swatch-val">#354B55</span>
+                <button class="copy-btn" data-copy="#354B55" title="Copy hex">copy</button>
+              </div>
+              <div class="swatch-row">
+                <span class="swatch-val">rgb(53, 75, 85)</span>
+                <button class="copy-btn" data-copy="rgb(53, 75, 85)" title="Copy RGB">copy</button>
+              </div>
+            </div>
+            <div class="swatch-role">Secondary surfaces, section backgrounds, H6 heading colour.</div>
+            <div class="swatch-contrast">
+              <div class="contrast-row">
+                <span class="contrast-sample" style="background:#354B55;color:white;">Aa</span>
+                <span class="contrast-ratio">9.1:1</span>
+                <span class="wcag-badge wcag-aaa">AAA</span>
+                <span class="contrast-label">white on Slate</span>
+              </div>
+              <div class="contrast-row">
+                <span class="contrast-sample" style="background:#354B55;color:#48BF91;">Aa</span>
+                <span class="contrast-ratio">3.9:1</span>
+                <span class="wcag-badge wcag-lg">AA-LG</span>
+                <span class="contrast-label">Mint on Slate</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charcoal -->
+        <div class="swatch">
+          <div class="swatch-chip" style="background:#38363D;"></div>
+          <div class="swatch-body">
+            <div class="swatch-name">Charcoal</div>
+            <div class="swatch-values">
+              <div class="swatch-row">
+                <span class="swatch-val">#38363D</span>
+                <button class="copy-btn" data-copy="#38363D" title="Copy hex">copy</button>
+              </div>
+              <div class="swatch-row">
+                <span class="swatch-val">rgb(56, 54, 61)</span>
+                <button class="copy-btn" data-copy="rgb(56, 54, 61)" title="Copy RGB">copy</button>
+              </div>
+            </div>
+            <div class="swatch-role">Body text, secondary UI. Replaces pure black — softer on screen.</div>
+            <div class="swatch-contrast">
+              <div class="contrast-row">
+                <span class="contrast-sample" style="background:white;color:#38363D;">Aa</span>
+                <span class="contrast-ratio">11.5:1</span>
+                <span class="wcag-badge wcag-aaa">AAA</span>
+                <span class="contrast-label">Charcoal on white</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mint -->
+        <div class="swatch">
+          <div class="swatch-chip" style="background:#48BF91;"></div>
+          <div class="swatch-body">
+            <div class="swatch-name">Mint <span style="font-family:var(--ff-mono);font-size:10px;font-weight:400;color:var(--c-slate);">★ signature accent</span></div>
+            <div class="swatch-values">
+              <div class="swatch-row">
+                <span class="swatch-val">#48BF91</span>
+                <button class="copy-btn" data-copy="#48BF91" title="Copy hex">copy</button>
+              </div>
+              <div class="swatch-row">
+                <span class="swatch-val">rgb(72, 191, 145)</span>
+                <button class="copy-btn" data-copy="rgb(72, 191, 145)" title="Copy RGB">copy</button>
+              </div>
+            </div>
+            <div class="swatch-role">Hero accent, CTAs, interactive elements. One per composition — never decorative.</div>
+            <div class="swatch-contrast">
+              <div class="contrast-row">
+                <span class="contrast-sample" style="background:white;color:#48BF91;">Aa</span>
+                <span class="contrast-ratio">2.3:1</span>
+                <span class="wcag-badge wcag-nc">NC</span>
+                <span class="contrast-label">Mint on white — icons/borders only</span>
+              </div>
+              <div class="contrast-row">
+                <span class="contrast-sample" style="background:#041E42;color:#48BF91;">Aa</span>
+                <span class="contrast-ratio">6.6:1</span>
+                <span class="wcag-badge wcag-aa">AA</span>
+                <span class="contrast-label">Mint on Navy — labels, UI</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Silver Gray -->
+        <div class="swatch">
+          <div class="swatch-chip swatch-chip--border" style="background:#C8C6C5;"></div>
+          <div class="swatch-body">
+            <div class="swatch-name">Silver Gray</div>
+            <div class="swatch-values">
+              <div class="swatch-row">
+                <span class="swatch-val">#C8C6C5</span>
+                <button class="copy-btn" data-copy="#C8C6C5" title="Copy hex">copy</button>
+              </div>
+              <div class="swatch-row">
+                <span class="swatch-val">rgb(200, 198, 197)</span>
+                <button class="copy-btn" data-copy="rgb(200, 198, 197)" title="Copy RGB">copy</button>
+              </div>
+            </div>
+            <div class="swatch-role">Borders, dividers, muted UI elements. Not for body text.</div>
+            <div class="swatch-contrast">
+              <div class="contrast-row">
+                <span class="contrast-sample" style="background:white;color:#C8C6C5;">Aa</span>
+                <span class="contrast-ratio">1.7:1</span>
+                <span class="wcag-badge wcag-nc">NC</span>
+                <span class="contrast-label">Decorative / UI dividers only</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Light Gray -->
+        <div class="swatch">
+          <div class="swatch-chip swatch-chip--border" style="background:#E3E3E3;"></div>
+          <div class="swatch-body">
+            <div class="swatch-name">Light Gray</div>
+            <div class="swatch-values">
+              <div class="swatch-row">
+                <span class="swatch-val">#E3E3E3</span>
+                <button class="copy-btn" data-copy="#E3E3E3" title="Copy hex">copy</button>
+              </div>
+              <div class="swatch-row">
+                <span class="swatch-val">rgb(227, 227, 227)</span>
+                <button class="copy-btn" data-copy="rgb(227, 227, 227)" title="Copy RGB">copy</button>
+              </div>
+            </div>
+            <div class="swatch-role">Page backgrounds, card surfaces, code block fills.</div>
+            <div class="swatch-contrast">
+              <div class="contrast-row">
+                <span class="contrast-sample" style="background:#E3E3E3;color:#38363D;">Aa</span>
+                <span class="contrast-ratio">8.9:1</span>
+                <span class="wcag-badge wcag-aaa">AAA</span>
+                <span class="contrast-label">Charcoal on Light Gray</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /palette-grid -->
+
+      <!-- Colour pairing table -->
+      <div class="sg-panel" style="margin-top:var(--sp-6);">
+        <div class="sg-panel-label">Approved Text / Background Pairings</div>
+        <table style="width:100%;border-collapse:collapse;font-size:13px;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--c-gray-light);">
+              <th style="text-align:left;font-family:var(--ff-display);font-weight:600;color:var(--c-navy);padding:0 12px 10px 0;font-size:12px;">Text</th>
+              <th style="text-align:left;font-family:var(--ff-display);font-weight:600;color:var(--c-navy);padding:0 12px 10px 0;font-size:12px;">Background</th>
+              <th style="text-align:left;font-family:var(--ff-display);font-weight:600;color:var(--c-navy);padding:0 12px 10px 0;font-size:12px;">Usage</th>
+              <th style="text-align:left;font-family:var(--ff-display);font-weight:600;color:var(--c-navy);padding:0 0 10px 0;font-size:12px;">Sample</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--c-gray-light);">
+              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#041E42 Navy</td>
+              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">white / #E3E3E3</td>
+              <td style="padding:9px 12px 9px 0;color:var(--c-charcoal);">H1–H5 headings on light backgrounds</td>
+              <td style="padding:9px 0;">
+                <span style="font-family:var(--ff-display);font-size:13px;font-weight:700;color:#041E42;background:white;padding:2px 8px;border-radius:3px;">Heading</span>
+              </td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--c-gray-light);">
+              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#354B55 Slate</td>
+              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">white / #E3E3E3</td>
+              <td style="padding:9px 12px 9px 0;color:var(--c-charcoal);">H6, secondary headings, supporting text</td>
+              <td style="padding:9px 0;">
+                <span style="font-family:var(--ff-display);font-size:13px;font-weight:600;color:#354B55;background:white;padding:2px 8px;border-radius:3px;">H6 Label</span>
+              </td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--c-gray-light);">
+              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#38363D Charcoal</td>
+              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">white / #E3E3E3</td>
+              <td style="padding:9px 12px 9px 0;color:var(--c-charcoal);">Body text — replaces pure black</td>
+              <td style="padding:9px 0;">
+                <span style="font-family:var(--ff-body);font-size:13px;color:#38363D;background:white;padding:2px 8px;border-radius:3px;">Body copy</span>
+              </td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--c-gray-light);">
+              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#FFFFFF White</td>
+              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#041E42 Navy</td>
+              <td style="padding:9px 12px 9px 0;color:var(--c-charcoal);">All text on dark/navy backgrounds</td>
+              <td style="padding:9px 0;">
+                <span style="font-family:var(--ff-body);font-size:13px;color:white;background:#041E42;padding:2px 8px;border-radius:3px;">Reversed</span>
+              </td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--c-gray-light);">
+              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#FFFFFF White</td>
+              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#354B55 Slate</td>
+              <td style="padding:9px 12px 9px 0;color:var(--c-charcoal);">All text on slate backgrounds</td>
+              <td style="padding:9px 0;">
+                <span style="font-family:var(--ff-body);font-size:13px;color:white;background:#354B55;padding:2px 8px;border-radius:3px;">On Slate</span>
+              </td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--c-gray-light);">
+              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#48BF91 Mint</td>
+              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#041E42 Navy</td>
+              <td style="padding:9px 12px 9px 0;color:var(--c-charcoal);">Accent labels and active states on dark only</td>
+              <td style="padding:9px 0;">
+                <span style="font-family:var(--ff-mono);font-size:12px;color:#48BF91;background:#041E42;padding:2px 8px;border-radius:3px;">ACTIVE</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#48BF91 Mint</td>
+              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">white</td>
+              <td style="padding:9px 12px 9px 0;color:var(--c-charcoal);">Inline links and accents only — never large text</td>
+              <td style="padding:9px 0;">
+                <span style="font-family:var(--ff-body);font-size:13px;color:#48BF91;background:white;padding:2px 8px;border-radius:3px;text-decoration:underline;">link</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </section><!-- /colour -->
+
+    <!-- ============================================================
+         REMAINING SECTIONS — COMING NEXT
+         ============================================================ -->
+    <section class="sg-section" id="typography">
+      <div class="sg-section-header">
+        <div class="sg-eyebrow">Foundation · 02</div>
+        <h2 class="sg-section-title">Typography</h2>
+      </div>
+      <div class="sg-panel" style="color:var(--c-silver);font-family:var(--ff-mono);font-size:12px;text-align:center;padding:var(--sp-12);">
+        — type specimens coming in next section —
+      </div>
+    </section>
+
+    <section class="sg-section" id="spacing">
+      <div class="sg-section-header">
+        <div class="sg-eyebrow">Foundation · 03</div>
+        <h2 class="sg-section-title">Spacing Scale</h2>
+      </div>
+      <div class="sg-panel" style="color:var(--c-silver);font-family:var(--ff-mono);font-size:12px;text-align:center;padding:var(--sp-12);">
+        — spacing scale coming next —
+      </div>
+    </section>
+
+    <section class="sg-section" id="headings">
+      <div class="sg-section-header">
+        <div class="sg-eyebrow">Components · 01</div>
+        <h2 class="sg-section-title">Headings</h2>
+      </div>
+      <div class="sg-panel" style="color:var(--c-silver);font-family:var(--ff-mono);font-size:12px;text-align:center;padding:var(--sp-12);">— coming next —</div>
+    </section>
+
+    <section class="sg-section" id="body-text">
+      <div class="sg-section-header">
+        <div class="sg-eyebrow">Components · 02</div>
+        <h2 class="sg-section-title">Body Text</h2>
+      </div>
+      <div class="sg-panel" style="color:var(--c-silver);font-family:var(--ff-mono);font-size:12px;text-align:center;padding:var(--sp-12);">— coming next —</div>
+    </section>
+
+    <section class="sg-section" id="callouts">
+      <div class="sg-section-header">
+        <div class="sg-eyebrow">Components · 03</div>
+        <h2 class="sg-section-title">Callouts</h2>
+      </div>
+      <div class="sg-panel" style="color:var(--c-silver);font-family:var(--ff-mono);font-size:12px;text-align:center;padding:var(--sp-12);">— coming next —</div>
+    </section>
+
+    <section class="sg-section" id="tables">
+      <div class="sg-section-header">
+        <div class="sg-eyebrow">Components · 04</div>
+        <h2 class="sg-section-title">Tables</h2>
+      </div>
+      <div class="sg-panel" style="color:var(--c-silver);font-family:var(--ff-mono);font-size:12px;text-align:center;padding:var(--sp-12);">— coming next —</div>
+    </section>
+
+    <section class="sg-section" id="buttons">
+      <div class="sg-section-header">
+        <div class="sg-eyebrow">Components · 05</div>
+        <h2 class="sg-section-title">Buttons</h2>
+      </div>
+      <div class="sg-panel" style="color:var(--c-silver);font-family:var(--ff-mono);font-size:12px;text-align:center;padding:var(--sp-12);">— coming next —</div>
+    </section>
+
+    <section class="sg-section" id="tags">
+      <div class="sg-section-header">
+        <div class="sg-eyebrow">Components · 06</div>
+        <h2 class="sg-section-title">Tags &amp; Badges</h2>
+      </div>
+      <div class="sg-panel" style="color:var(--c-silver);font-family:var(--ff-mono);font-size:12px;text-align:center;padding:var(--sp-12);">— coming next —</div>
+    </section>
+
+    <section class="sg-section" id="code">
+      <div class="sg-section-header">
+        <div class="sg-eyebrow">Components · 07</div>
+        <h2 class="sg-section-title">Code Blocks</h2>
+      </div>
+      <div class="sg-panel" style="color:var(--c-silver);font-family:var(--ff-mono);font-size:12px;text-align:center;padding:var(--sp-12);">— coming next —</div>
+    </section>
+
+    <section class="sg-section" id="usage">
+      <div class="sg-section-header">
+        <div class="sg-eyebrow">Guidance · 01</div>
+        <h2 class="sg-section-title">Do / Don't</h2>
+      </div>
+      <div class="sg-panel" style="color:var(--c-silver);font-family:var(--ff-mono);font-size:12px;text-align:center;padding:var(--sp-12);">— coming next —</div>
+    </section>
+
+  </main>
+</div><!-- /sg-layout -->
+
+<!-- ================================================================
+     FOOTER
+     ================================================================ -->
+<footer class="sg-footer">
+  <div class="sg-footer-brand">buildingSMART Finland · Style Guide · June 2026</div>
+  <div class="sg-footer-note">Self-contained reference file — do not add external dependencies</div>
+</footer>
+
+<!-- ================================================================
+     JAVASCRIPT — clipboard copy + nav highlight
+     ================================================================ -->
+<script>
+/* Clipboard copy */
+document.querySelectorAll('.copy-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var value = this.getAttribute('data-copy');
+    if (!value) return;
+    function onCopied() {
+      btn.textContent = 'copied';
+      btn.classList.add('copied');
+      setTimeout(function() {
+        btn.textContent = 'copy';
+        btn.classList.remove('copied');
+      }, 1800);
+    }
+    navigator.clipboard.writeText(value).then(onCopied).catch(function() {
+      var ta = document.createElement('textarea');
+      ta.value = value;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      onCopied();
+    });
+  });
+});
+
+/* Active nav highlight on scroll */
+var sections = document.querySelectorAll('.sg-section[id]');
+var navLinks = document.querySelectorAll('.sg-nav a');
+
+function setActiveNav() {
+  var scrollY = window.scrollY + 100;
+  var current = '';
+  sections.forEach(function(sec) {
+    if (sec.offsetTop <= scrollY) current = sec.id;
+  });
+  navLinks.forEach(function(a) {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+}
+
+window.addEventListener('scroll', setActiveNav, { passive: true });
+setActiveNav();
+</script>
+
+</body>
+</html>

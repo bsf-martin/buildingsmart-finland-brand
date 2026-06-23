@@ -35,19 +35,25 @@ Mint (#48BF91) is the most powerful asset in this palette — fresh, distinctive
 
 ### Display / Headlines / UI — Figtree
 
-A geometric rounded sans-serif with warmth and confidence at display sizes, clean legibility at smaller weights. Use at **600–700** for headings and UI elements, **800** for hero and event titles. Correctly handles Finnish characters (ä, ö, å). Available free via Google Fonts.
+A geometric rounded sans-serif with warmth and confidence at display sizes, clean legibility at smaller weights. Use at **600–700** for headings and UI elements, **800** for hero and display titles. Handles Finnish characters (ä, ö, å) correctly. Available free via Google Fonts.
 
 ### Body / Long-form — Source Serif 4
 
-A contemporary optical-size serif designed for screen and print. Brings editorial quality and reading comfort to long-form content. Use at **400** (body copy), **600** (emphasis), *italic* for pull quotes and callouts. Available free via Google Fonts.
+A contemporary optical-size serif designed for screen and print. Brings editorial quality and reading comfort to long-form content. Use at **400** (body copy), *italic* for pull quotes and callouts. Available free via Google Fonts.
 
 ### Technical / Code — JetBrains Mono
 
-Reserved for standards identifiers, schema references, code snippets, specification tables, and data. The monospace treatment signals technical precision without sacrificing readability. Examples: `IFC4.3`, `#IfcWall`, `BCF 3.0`, `IDS Specification`.
+Reserved for standards identifiers, schema references, code snippets, specification tables, and data. The monospace treatment signals technical precision without sacrificing readability. Examples: `IFC4.3`, `IfcWall`, `BCF 3.0`, `IDS Specification`.
 
 ### Pairing Logic
 
-Figtree headlines + Source Serif 4 body is the **default pairing** for all content. JetBrains Mono appears only where technical content demands it — never as decoration.
+Figtree headlines + Source Serif 4 body is the **default pairing** for web and document content. The heading scale runs H1–H6, all in Figtree, using size and weight to establish hierarchy.
+
+**PowerPoint exception:** Figtree carries all text on slides, including body copy. Source Serif 4 appears in *italic only*, in callout boxes and pull quotes — never as a body text substitute on slides. Fonts are embedded in the PowerPoint template; users must also install them locally to edit correctly.
+
+**Specification documents:** The same Figtree + Source Serif 4 system applies across Jekyll (browsable HTML) and Pandoc (PDF) output formats, driven by a shared CSS stylesheet.
+
+JetBrains Mono appears wherever technical content demands it — never as decoration.
 
 ---
 
