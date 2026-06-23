@@ -33,13 +33,13 @@ Mint (#48BF91) is the most powerful asset in this palette — fresh, distinctive
 
 ## Typography System
 
-### Display / Headlines — Plus Jakarta Sans
+### Display / Headlines / UI — Figtree
 
-A geometric humanist sans-serif with strong personality at large sizes and excellent readability at smaller weights. Use at **600–800** for headings, event titles, and hero text. Correctly handles Finnish characters (ä, ö, å). Available free via Google Fonts.
+A geometric rounded sans-serif with warmth and confidence at display sizes, clean legibility at smaller weights. Use at **600–700** for headings and UI elements, **800** for hero and event titles. Correctly handles Finnish characters (ä, ö, å). Available free via Google Fonts.
 
-### Body / UI — Inter
+### Body / Long-form — Source Serif 4
 
-The industry standard for screen-first interfaces. Clean, neutral, and exceptionally legible at small sizes. Use at **400** (body copy), **500** (UI labels, captions), **600** (subheadings, emphasis). Available free via Google Fonts.
+A contemporary optical-size serif designed for screen and print. Brings editorial quality and reading comfort to long-form content. Use at **400** (body copy), **600** (emphasis), *italic* for pull quotes and callouts. Available free via Google Fonts.
 
 ### Technical / Code — JetBrains Mono
 
@@ -47,7 +47,7 @@ Reserved for standards identifiers, schema references, code snippets, specificat
 
 ### Pairing Logic
 
-Plus Jakarta Sans headlines + Inter body is the **default pairing** for all content. JetBrains Mono appears only where technical content demands it — never as decoration.
+Figtree headlines + Source Serif 4 body is the **default pairing** for all content. JetBrains Mono appears only where technical content demands it — never as decoration.
 
 ---
 

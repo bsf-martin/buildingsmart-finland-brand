@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>buildingSMART Finland — Visual Direction Exploration</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -16,13 +16,13 @@
   --navy: #041E42;
   --slate: #354b55;
   --white: #ffffff;
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  --ff-body:    'Source Serif 4', Georgia, serif;
+  --ff-display: 'Figtree', sans-serif;
+  --ff-mono:    'JetBrains Mono', monospace;
 }
 
 body {
-  font-family: var(--font-sans);
+  font-family: var(--ff-body);
   background: #f0efed;
   color: var(--charcoal);
   line-height: 1.6;
@@ -72,7 +72,7 @@ body {
 .header-geo-block:nth-child(4) { margin-top: 12px; }
 
 .brand-label {
-  font-family: var(--font-mono);
+  font-family: var(--ff-mono);
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -90,7 +90,7 @@ body {
   background: var(--mint);
 }
 .page-header h1 {
-  font-family: var(--font-display);
+  font-family: var(--ff-display);
   font-size: 46px;
   font-weight: 800;
   letter-spacing: -0.025em;
@@ -121,7 +121,7 @@ section {
 }
 
 .section-eyebrow {
-  font-family: var(--font-mono);
+  font-family: var(--ff-mono);
   font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -129,7 +129,7 @@ section {
   margin-bottom: 6px;
 }
 .section-title {
-  font-family: var(--font-display);
+  font-family: var(--ff-display);
   font-size: 30px;
   font-weight: 700;
   letter-spacing: -0.015em;
@@ -162,7 +162,7 @@ section {
   margin-bottom: 3px;
 }
 .swatch-hex {
-  font-family: var(--font-mono);
+  font-family: var(--ff-mono);
   font-size: 11px;
   color: var(--slate);
   margin-bottom: 5px;
@@ -237,7 +237,7 @@ section {
   position: relative;
 }
 .preview-badge {
-  font-family: var(--font-mono);
+  font-family: var(--ff-mono);
   font-size: 8px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -248,7 +248,7 @@ section {
   margin-bottom: 10px;
 }
 .preview-h {
-  font-family: var(--font-display);
+  font-family: var(--ff-display);
   font-weight: 800;
   font-size: 19px;
   line-height: 1.15;
@@ -272,7 +272,7 @@ section {
   padding: 24px 26px 26px;
 }
 .dir-num {
-  font-family: var(--font-mono);
+  font-family: var(--ff-mono);
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -280,7 +280,7 @@ section {
   margin-bottom: 5px;
 }
 .dir-name {
-  font-family: var(--font-display);
+  font-family: var(--ff-display);
   font-size: 21px;
   font-weight: 700;
   letter-spacing: -0.01em;
@@ -341,7 +341,7 @@ section {
   box-shadow: 0 2px 16px rgba(0,0,0,0.07);
 }
 .type-eyebrow {
-  font-family: var(--font-mono);
+  font-family: var(--ff-mono);
   font-size: 10px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -351,7 +351,7 @@ section {
   border-bottom: 1px solid var(--gray-light);
 }
 .type-specimen-display {
-  font-family: var(--font-display);
+  font-family: var(--ff-display);
   font-size: 38px;
   font-weight: 800;
   letter-spacing: -0.025em;
@@ -373,7 +373,7 @@ section {
   margin-bottom: 14px;
 }
 .type-specimen-mono {
-  font-family: var(--font-mono);
+  font-family: var(--ff-mono);
   font-size: 12.5px;
   color: var(--slate);
   background: var(--gray-light);
@@ -402,7 +402,7 @@ section {
   box-shadow: 0 2px 16px rgba(0,0,0,0.07);
 }
 .rec-card-title {
-  font-family: var(--font-display);
+  font-family: var(--ff-display);
   font-size: 17px;
   font-weight: 700;
   color: var(--navy);
@@ -432,14 +432,14 @@ section {
   box-shadow: 0 1px 8px rgba(0,0,0,0.06);
 }
 .principle-num {
-  font-family: var(--font-mono);
+  font-family: var(--ff-mono);
   font-size: 11px;
   color: var(--mint);
   font-weight: 500;
   margin-bottom: 8px;
 }
 .principle-title {
-  font-family: var(--font-display);
+  font-family: var(--ff-display);
   font-size: 14px;
   font-weight: 700;
   color: var(--navy);
@@ -469,7 +469,7 @@ section {
   gap: 24px;
 }
 .footer-brand {
-  font-family: var(--font-mono);
+  font-family: var(--ff-mono);
   font-size: 11px;
   color: rgba(72,191,145,0.8);
   letter-spacing: 0.08em;
@@ -726,19 +726,19 @@ section {
     <div class="type-grid">
 
       <div class="type-card">
-        <div class="type-eyebrow">Display / Headlines</div>
-        <div class="type-specimen-display">Plus Jakarta<br>Sans</div>
-        <div class="type-alphabet" style="font-family:'Plus Jakarta Sans',sans-serif;">AaBbCcDd&nbsp; 0123456789</div>
-        <div class="type-sentence" style="font-family:'Plus Jakarta Sans',sans-serif;">Building Information Modelling for Finland's built environment.</div>
-        <div class="type-meta">Weights 600, 700, 800 · Geometric humanist · Handles ä ö å correctly</div>
+        <div class="type-eyebrow">Display / Headlines / UI</div>
+        <div class="type-specimen-display">Figtree</div>
+        <div class="type-alphabet" style="font-family:'Figtree',sans-serif;">AaBbCcDd&nbsp; 0123456789</div>
+        <div class="type-sentence" style="font-family:'Figtree',sans-serif;">Building Information Modelling for Finland's built environment.</div>
+        <div class="type-meta">Weights 300–700 · Geometric rounded · Handles ä ö å correctly</div>
       </div>
 
       <div class="type-card">
-        <div class="type-eyebrow">Body / UI</div>
-        <div class="type-specimen-display" style="font-family:'Inter',sans-serif; font-size:32px;">Inter</div>
-        <div class="type-alphabet" style="font-family:'Inter',sans-serif;">AaBbCcDd&nbsp; 0123456789</div>
-        <div class="type-sentence" style="font-family:'Inter',sans-serif;">openBIM standards enable interoperability across the entire lifecycle of a built asset — from design through operation.</div>
-        <div class="type-meta">Weights 400, 500, 600 · Screen-optimised · Industry standard</div>
+        <div class="type-eyebrow">Body / Long-form</div>
+        <div class="type-specimen-display" style="font-family:'Source Serif 4',Georgia,serif; font-size:32px;">Source Serif 4</div>
+        <div class="type-alphabet" style="font-family:'Source Serif 4',Georgia,serif;">AaBbCcDd&nbsp; 0123456789</div>
+        <div class="type-sentence" style="font-family:'Source Serif 4',Georgia,serif;">openBIM standards enable interoperability across the entire lifecycle of a built asset — from design through operation.</div>
+        <div class="type-meta">Weights 300, 400, 600 · Optical sizes · Italic for pull quotes</div>
       </div>
 
       <div class="type-card">
