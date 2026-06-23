@@ -4,7 +4,12 @@
 buildingSMART Finland is the Finnish chapter of buildingSMART International (bSI), the global body responsible for openBIM standards: IFC, IDS, BCF, and the OpenCDE platform. We promote and develop building information modelling in Finland, with a focus on open standards and interoperability across the built environment sector.
 
 ## What this project is
-We are developing a clean, minimal rebrand for buildingSMART Finland. The work lives in a GitHub repository containing two evolving documents: a visual moodboard (`bsf_moodboard.html`) and a brand direction brief (`bsf_brand_direction_brief.md`). These are the canonical source of truth — always read them before making decisions.
+We are developing a complete design system for buildingSMART Finland. The work lives in a GitHub repository. The canonical source of truth files are:
+- `bsf_brand_direction_brief.md` — visual direction, palette roles, design principles
+- `bsf-typography.md` — full type scale (H1–H6), CSS tokens, medium-specific usage rules
+- `bsf_moodboard.html` — visual reference
+
+Always read the relevant canonical files before making decisions. When files and project instructions conflict, the canonical files win.
 
 ## Non-negotiable decisions (already locked)
 - We use the **secondary** bSI palette only. The primary palette (red `#e5172a`, royal blue `#004f9f`, magenta `#9f3588`) is off-limits.
@@ -22,10 +27,12 @@ We are developing a clean, minimal rebrand for buildingSMART Finland. The work l
 | Light Gray | `#e3e3e3` | Page backgrounds, card surfaces |
 
 ## Typography system
-- **Display/headlines:** Plus Jakarta Sans — weights 600, 700, 800
-- **Body/UI:** Inter — weights 400, 500, 600
+- **Display/headlines (H1–H6):** Figtree — weights 600, 700, 800
+- **Body/long-form:** Source Serif 4 — weight 400 upright; italic for pull quotes and callouts
 - **Technical/code:** JetBrains Mono — for standards identifiers (IFC, IDS, BCF, IfcWall, etc.)
 - All three are available free via Google Fonts.
+- **PowerPoint exception:** Figtree for all slide text including body. Source Serif 4 italic only for callout boxes and pull quotes — never upright on slides. Fonts embedded in template; users must also install locally.
+- **Specification docs:** Jekyll (HTML site) + Pandoc (PDF) share a single CSS stylesheet. Same type system applies to both outputs.
 
 ## Three defined directions
 **01 Nordic Blueprint** — Deep navy dominant, mint as sole accent, slate for depth. For events, print, premium touchpoints. Maximum differentiation from the bSI primary brand.

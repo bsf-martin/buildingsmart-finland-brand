@@ -8,25 +8,50 @@
 | Body / Long-form | Source Serif 4 | Google Fonts |
 | Technical / Code | JetBrains Mono | Google Fonts |
 
-**Google Fonts import:**
+**Google Fonts import (web):**
 ```css
-@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&family=JetBrains+Mono:wght@400;500&display=swap');
 ```
 
 ---
 
 ## Type scale
 
+### Web and document scale
+
 | Token | Size | Weight | Family | Usage |
 |-------|------|--------|--------|-------|
-| display | 48px | 700 | Figtree | Hero headlines only — one per page |
-| h1 | 32px | 700 | Figtree | Page title — one per page |
-| h2 | 24px | 600 | Figtree | Section heading |
-| h3 | 18px | 600 | Figtree | Sub-section heading |
-| body | 16px | 400 | Source Serif 4 | Running body text, paragraphs |
-| small | 14px | 400 | Source Serif 4 | Captions, metadata, footnotes |
-| label | 12px | 600 | Figtree | UI labels — uppercase, tracking 0.06em |
-| mono | 13px | 400 | JetBrains Mono | Code, file types, schema names |
+| display | 48px / 3rem | 800 | Figtree | Hero headlines — one per page, cover pages only |
+| h1 | 36px / 2.25rem | 700 | Figtree | Document/page title — one per document |
+| h2 | 28px / 1.75rem | 700 | Figtree | Major section heading |
+| h3 | 22px / 1.375rem | 600 | Figtree | Sub-section heading |
+| h4 | 18px / 1.125rem | 600 | Figtree | Clause-level heading |
+| h5 | 16px / 1rem | 600 | Figtree | Minor heading — same size as body, weight differentiates |
+| h6 | 13px / 0.8125rem | 600 | Figtree | Lowest level — uppercase, letter-spacing 0.06em |
+| body | 16px / 1rem | 400 | Source Serif 4 | Running body text, paragraphs |
+| small | 14px / 0.875rem | 400 | Source Serif 4 | Captions, metadata, footnotes |
+| label | 12px / 0.75rem | 600 | Figtree | UI labels — uppercase, tracking 0.06em |
+| mono | 13px / 0.8125rem | 400 | JetBrains Mono | Code, schema names, file types, version strings |
+
+### PowerPoint scale
+
+PowerPoint uses points (pt). Minimum body size is **18pt** — no exceptions.
+
+| Level | Size | Weight | Family | Usage |
+|-------|------|--------|--------|-------|
+| Title (slide title) | 36pt | 700 | Figtree | Slide title — one per slide |
+| Heading 1 | 28pt | 700 | Figtree | Section title slides |
+| Heading 2 | 24pt | 600 | Figtree | Content heading within a slide |
+| Body | 20pt | 400 | Figtree | Primary body text on slides |
+| Body small | 18pt | 400 | Figtree | Secondary body text — hard minimum |
+| Callout / pull quote | 20pt | 400 *italic* | Source Serif 4 | Emphasis callout boxes and pull quotes only |
+| Caption | 14pt | 400 | Figtree | Image captions, footnotes, source attribution |
+| Mono | 16pt | 400 | JetBrains Mono | Standards identifiers, schema names, code |
+
+**PowerPoint font rules:**
+- Figtree is the primary typeface for all slide body text. Source Serif 4 is used in *italic only*, exclusively in callout boxes and pull quotes — never as a body text substitute.
+- Fonts are embedded in the template file. All users must also install the fonts locally to edit correctly (see font installation guide in the design system).
+- Never use upright Source Serif 4 on slides. The contrast between a geometric sans and an upright serif at slide reading sizes creates visual noise that undermines the clean, minimal system.
 
 ---
 
@@ -37,17 +62,20 @@
   /* Families */
   --ff-display: 'Figtree', sans-serif;
   --ff-body:    'Source Serif 4', Georgia, serif;
-  --ff-mono:    'JetBrains Mono', monospace;
+  --ff-mono:    'JetBrains Mono', 'Courier New', monospace;
 
-  /* Scale */
-  --fs-display: 3rem;       /* 48px */
-  --fs-h1:      2rem;       /* 32px */
-  --fs-h2:      1.5rem;     /* 24px */
-  --fs-h3:      1.125rem;   /* 18px */
-  --fs-body:    1rem;       /* 16px */
-  --fs-small:   0.875rem;   /* 14px */
-  --fs-label:   0.75rem;    /* 12px */
-  --fs-mono:    0.8125rem;  /* 13px */
+  /* Scale — web */
+  --fs-display: 3rem;        /* 48px */
+  --fs-h1:      2.25rem;     /* 36px */
+  --fs-h2:      1.75rem;     /* 28px */
+  --fs-h3:      1.375rem;    /* 22px */
+  --fs-h4:      1.125rem;    /* 18px */
+  --fs-h5:      1rem;        /* 16px */
+  --fs-h6:      0.8125rem;   /* 13px */
+  --fs-body:    1rem;        /* 16px */
+  --fs-small:   0.875rem;    /* 14px */
+  --fs-label:   0.75rem;     /* 12px */
+  --fs-mono:    0.8125rem;   /* 13px */
 
   /* Line heights */
   --lh-display: 1.1;
@@ -57,20 +85,60 @@
 
   /* Letter spacing */
   --ls-display: -0.02em;
-  --ls-label:    0.06em;
+  --ls-heading: -0.01em;
+  --ls-label:    0.06em;   /* Used for label and h6 */
+}
+```
+
+### CSS heading styles
+
+```css
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--ff-display);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+  color: #041E42;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+}
+
+h1 { font-size: var(--fs-h1); font-weight: 700; }
+h2 { font-size: var(--fs-h2); font-weight: 700; }
+h3 { font-size: var(--fs-h3); font-weight: 600; }
+h4 { font-size: var(--fs-h4); font-weight: 600; }
+h5 { font-size: var(--fs-h5); font-weight: 600; }
+h6 {
+  font-size: var(--fs-h6);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-label);
+  color: #354B55; /* Slate — visually recedes from H5 */
 }
 ```
 
 ---
 
-## Usage rules
+## Medium-specific usage rules
 
-- **Figtree** — every heading, button label, nav item, tag, and UI element. Never use it for running body copy.
-- **Source Serif 4** — all body text in documents and long-form web copy. Italic variant for pull quotes and callouts.
-- **JetBrains Mono** — IFC schema names, file extensions, code snippets, version strings. Never for decorative use.
+### All media
+- **JetBrains Mono** — IFC schema names, file extensions, code snippets, version strings (e.g. `IFC4.3`, `IfcWall`, `BCF 3.0`, `IDS`). Never for decorative use.
 - **No system fonts** — Arial, Calibri, and Times New Roman are forbidden in all externally distributed materials.
-- **No substitutions** — if a font fails to load, fix the font. Do not substitute.
-- **PowerPoint minimum** — 18pt hard floor. No exceptions.
+
+### Web and HTML documents (Jekyll / Pandoc output)
+- **Figtree** — all headings H1–H6, UI elements, labels, navigation.
+- **Source Serif 4** — all running body text, long-form paragraphs. Italic for pull quotes and callouts.
+- Load via Google Fonts CDN. Pandoc PDF output uses the same CSS via WeasyPrint.
+
+### Word documents (.docx)
+- **Figtree** — all headings H1–H6. Use named paragraph styles — never manual formatting.
+- **Source Serif 4** — body text (Normal style), captions, footnotes. Italic for emphasis and pull quotes.
+- Fonts must be installed on the authoring machine. The template file does not embed fonts.
+
+### PowerPoint presentations (.pptx)
+- **Figtree** — all text on slides including body. Minimum 18pt, no exceptions.
+- **Source Serif 4 italic** — callout boxes and pull quotes only. Never upright on slides.
+- Fonts are embedded in the template file. Users must also install fonts locally to edit. See installation guide.
+- **No substitutions** — if a font renders as Calibri, the font is not installed. Fix the installation, do not proceed.
 
 ---
 
@@ -78,9 +146,14 @@
 
 | Text | Background | Usage |
 |------|------------|-------|
-| #041E42 Navy | white / #E3E3E3 | Primary headings on light |
-| #354B55 Slate | white / #E3E3E3 | Sub-headings, secondary text |
-| #38363D Charcoal | white / #E3E3E3 | Body text — replaces pure black |
-| #ffffff White | #041E42 Navy | Headings and body on dark backgrounds |
-| #48BF91 Mint | #041E42 Navy | Accent labels and active states on dark |
-| #48BF91 Mint | white | Links and inline accents only — not large text blocks |
+| `#041E42` Deep Navy | white / `#E3E3E3` Light Gray | Primary headings on light backgrounds |
+| `#354B55` Dark Slate | white / `#E3E3E3` Light Gray | H4–H6, secondary headings, supporting text |
+| `#38363D` Charcoal | white / `#E3E3E3` Light Gray | Body text — replaces pure black |
+| `#FFFFFF` White | `#041E42` Deep Navy | All text on dark/navy backgrounds |
+| `#FFFFFF` White | `#354B55` Dark Slate | All text on slate backgrounds |
+| `#48BF91` Mint | `#041E42` Deep Navy | Accent labels and active states on dark only |
+| `#48BF91` Mint | white | Inline links and accents only — never large text blocks |
+
+---
+
+*buildingSMART Finland · Typography Specification · June 2026*
