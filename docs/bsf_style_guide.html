@@ -1229,7 +1229,8 @@ body {
           <thead>
             <tr>
               <th>Token</th>
-              <th>Size</th>
+              <th>Web</th>
+              <th>Word (pt)</th>
               <th>Weight</th>
               <th>Family</th>
               <th>Usage</th>
@@ -1239,66 +1240,77 @@ body {
             <tr>
               <td><span style="font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">--fs-display</span></td>
               <td><span style="font-family:var(--ff-mono);font-size:11px;">48px / 3rem</span></td>
+              <td><span style="font-family:var(--ff-mono);font-size:11px;">36pt</span></td>
               <td>800</td><td>Figtree</td>
               <td>Hero headlines — one per page, cover pages only</td>
             </tr>
             <tr>
               <td><span style="font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">--fs-h1</span></td>
               <td><span style="font-family:var(--ff-mono);font-size:11px;">36px / 2.25rem</span></td>
+              <td><span style="font-family:var(--ff-mono);font-size:11px;">27pt</span></td>
               <td>700</td><td>Figtree</td>
               <td>Document / page title — one per document</td>
             </tr>
             <tr>
               <td><span style="font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">--fs-h2</span></td>
               <td><span style="font-family:var(--ff-mono);font-size:11px;">28px / 1.75rem</span></td>
+              <td><span style="font-family:var(--ff-mono);font-size:11px;">21pt</span></td>
               <td>700</td><td>Figtree</td>
               <td>Major section heading</td>
             </tr>
             <tr>
               <td><span style="font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">--fs-h3</span></td>
               <td><span style="font-family:var(--ff-mono);font-size:11px;">22px / 1.375rem</span></td>
+              <td><span style="font-family:var(--ff-mono);font-size:11px;">16pt</span></td>
               <td>600</td><td>Figtree</td>
               <td>Sub-section heading</td>
             </tr>
             <tr>
               <td><span style="font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">--fs-h4</span></td>
               <td><span style="font-family:var(--ff-mono);font-size:11px;">18px / 1.125rem</span></td>
+              <td><span style="font-family:var(--ff-mono);font-size:11px;">14pt</span></td>
               <td>600</td><td>Figtree</td>
               <td>Clause-level heading</td>
             </tr>
             <tr>
               <td><span style="font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">--fs-h5</span></td>
               <td><span style="font-family:var(--ff-mono);font-size:11px;">16px / 1rem</span></td>
+              <td><span style="font-family:var(--ff-mono);font-size:11px;">12pt</span></td>
               <td>600</td><td>Figtree</td>
               <td>Minor heading — weight differentiates from body</td>
             </tr>
             <tr>
               <td><span style="font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">--fs-h6</span></td>
               <td><span style="font-family:var(--ff-mono);font-size:11px;">13px / 0.8125rem</span></td>
+              <td><span style="font-family:var(--ff-mono);font-size:11px;">10pt</span></td>
               <td>600</td><td>Figtree</td>
               <td>Lowest level — uppercase, 0.06em letter-spacing</td>
             </tr>
             <tr>
               <td><span style="font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">--fs-body</span></td>
               <td><span style="font-family:var(--ff-mono);font-size:11px;">16px / 1rem</span></td>
+              <td><span style="font-family:var(--ff-mono);font-size:11px;">12pt</span></td>
               <td>400</td><td>Source Serif 4</td>
               <td>Running body text, paragraphs</td>
             </tr>
             <tr>
               <td><span style="font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">--fs-small</span></td>
               <td><span style="font-family:var(--ff-mono);font-size:11px;">14px / 0.875rem</span></td>
+              <td><span style="font-family:var(--ff-mono);font-size:11px;">10.5pt</span></td>
               <td>400</td><td>Source Serif 4</td>
               <td>Captions, metadata, footnotes</td>
             </tr>
             <tr>
               <td><span style="font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">--fs-label</span></td>
               <td><span style="font-family:var(--ff-mono);font-size:11px;">12px / 0.75rem</span></td>
+              <td><span style="font-family:var(--ff-mono);font-size:11px;">9pt</span></td>
               <td>600</td><td>Figtree</td>
               <td>UI labels — uppercase, 0.06em tracking</td>
             </tr>
             <tr>
               <td><span style="font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">--fs-mono</span></td>
               <td><span style="font-family:var(--ff-mono);font-size:11px;">13px / 0.8125rem</span></td>
+              <td><span style="font-family:var(--ff-mono);font-size:11px;">10pt</span></td>
               <td>400</td><td>JetBrains Mono</td>
               <td>Code, schema names, file types, version strings</td>
             </tr>
@@ -1581,9 +1593,10 @@ body {
         <div class="type-medium-callout">
           <strong>Word documents (.docx)</strong>
           <ul>
-            <li>Figtree — all headings via named paragraph styles. Never manual formatting.</li>
-            <li>Source Serif 4 — Normal style for body text. Italic for emphasis and pull quotes.</li>
-            <li>Fonts must be installed on the authoring machine. The template does not embed fonts.</li>
+            <li>Figtree — all headings H1–H6 via named paragraph styles (27pt → 10pt). Never manual size overrides.</li>
+            <li>Source Serif 4 — Normal style for body text at 12pt. Italic for emphasis and pull quotes.</li>
+            <li>Caption style at 10.5pt; JetBrains Mono character style at 10pt for inline identifiers.</li>
+            <li>Fonts must be installed on the authoring machine. The <code style="font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;">.dotx</code> template does not embed fonts.</li>
           </ul>
         </div>
         <div class="type-medium-callout" style="border-left-color:var(--c-mint);">
