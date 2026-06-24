@@ -479,9 +479,36 @@ body {
 .type-specimen-row {
   padding: var(--sp-6) 0;
   border-bottom: 1px solid var(--c-gray-light);
+  display: flex;
+  gap: var(--sp-6);
+  align-items: flex-start;
 }
 .type-specimen-row:first-child { padding-top: 0; }
 .type-specimen-row:last-child { padding-bottom: 0; border-bottom: none; }
+
+.type-specimen-level {
+  width: 80px;
+  flex-shrink: 0;
+  padding-top: 3px;
+}
+
+.type-specimen-level-name {
+  font-family: var(--ff-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--c-navy);
+  line-height: 1.2;
+  margin-bottom: 3px;
+}
+
+.type-specimen-level-desc {
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-slate);
+  line-height: 1.4;
+}
 
 .type-meta {
   margin-top: var(--sp-3);
@@ -1284,123 +1311,190 @@ body {
         <div class="sg-panel-label">Live Specimens</div>
 
         <div class="type-specimen-row">
-          <div style="font-family:var(--ff-display);font-size:var(--fs-display);font-weight:800;letter-spacing:var(--ls-display);line-height:var(--lh-display);color:var(--c-navy);">buildingSMART</div>
-          <div class="type-meta">
-            <span class="type-meta-chip">--fs-display · 48px</span>
-            <span class="type-meta-chip">weight 800</span>
-            <span class="type-meta-chip">Figtree</span>
-            <span class="type-meta-chip">Hero / cover pages only</span>
+          <div class="type-specimen-level">
+            <div class="type-specimen-level-name">Display</div>
+            <div class="type-specimen-level-desc">Hero /<br>cover</div>
+          </div>
+          <div style="flex:1;">
+            <div style="font-family:var(--ff-display);font-size:var(--fs-display);font-weight:800;letter-spacing:var(--ls-display);line-height:var(--lh-display);color:var(--c-navy);">buildingSMART</div>
+            <div class="type-meta">
+              <span class="type-meta-chip">--fs-display · 48px</span>
+              <span class="type-meta-chip">weight 800</span>
+              <span class="type-meta-chip">Figtree</span>
+              <span class="type-meta-chip">One per page — covers only</span>
+            </div>
           </div>
         </div>
 
         <div class="type-specimen-row">
-          <div style="font-family:var(--ff-display);font-size:var(--fs-h1);font-weight:700;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);">Open Standards for the Built Environment</div>
-          <div class="type-meta">
-            <span class="type-meta-chip">--fs-h1 · 36px</span>
-            <span class="type-meta-chip">weight 700</span>
-            <span class="type-meta-chip">Figtree</span>
-            <span class="type-meta-chip">Document / page title</span>
+          <div class="type-specimen-level">
+            <div class="type-specimen-level-name">H1</div>
+            <div class="type-specimen-level-desc">Page<br>title</div>
+          </div>
+          <div style="flex:1;">
+            <div style="font-family:var(--ff-display);font-size:var(--fs-h1);font-weight:700;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);">Open Standards for the Built Environment</div>
+            <div class="type-meta">
+              <span class="type-meta-chip">--fs-h1 · 36px</span>
+              <span class="type-meta-chip">weight 700</span>
+              <span class="type-meta-chip">Figtree</span>
+              <span class="type-meta-chip">One per document</span>
+            </div>
           </div>
         </div>
 
         <div class="type-specimen-row">
-          <div style="font-family:var(--ff-display);font-size:var(--fs-h2);font-weight:700;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);">IFC Schema Reference</div>
-          <div class="type-meta">
-            <span class="type-meta-chip">--fs-h2 · 28px</span>
-            <span class="type-meta-chip">weight 700</span>
-            <span class="type-meta-chip">Figtree</span>
-            <span class="type-meta-chip">Major section heading</span>
+          <div class="type-specimen-level">
+            <div class="type-specimen-level-name">H2</div>
+            <div class="type-specimen-level-desc">Major<br>section</div>
+          </div>
+          <div style="flex:1;">
+            <div style="font-family:var(--ff-display);font-size:var(--fs-h2);font-weight:700;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);">IFC Schema Reference</div>
+            <div class="type-meta">
+              <span class="type-meta-chip">--fs-h2 · 28px</span>
+              <span class="type-meta-chip">weight 700</span>
+              <span class="type-meta-chip">Figtree</span>
+            </div>
           </div>
         </div>
 
         <div class="type-specimen-row">
-          <div style="font-family:var(--ff-display);font-size:var(--fs-h3);font-weight:600;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);">IfcWall — Properties and Constraints</div>
-          <div class="type-meta">
-            <span class="type-meta-chip">--fs-h3 · 22px</span>
-            <span class="type-meta-chip">weight 600</span>
-            <span class="type-meta-chip">Figtree</span>
-            <span class="type-meta-chip">Sub-section heading</span>
+          <div class="type-specimen-level">
+            <div class="type-specimen-level-name">H3</div>
+            <div class="type-specimen-level-desc">Sub-<br>section</div>
+          </div>
+          <div style="flex:1;">
+            <div style="font-family:var(--ff-display);font-size:var(--fs-h3);font-weight:600;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);">IfcWall — Properties and Constraints</div>
+            <div class="type-meta">
+              <span class="type-meta-chip">--fs-h3 · 22px</span>
+              <span class="type-meta-chip">weight 600</span>
+              <span class="type-meta-chip">Figtree</span>
+            </div>
           </div>
         </div>
 
         <div class="type-specimen-row">
-          <div style="font-family:var(--ff-display);font-size:var(--fs-h4);font-weight:600;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);">Pset_WallCommon Attributes</div>
-          <div class="type-meta">
-            <span class="type-meta-chip">--fs-h4 · 18px</span>
-            <span class="type-meta-chip">weight 600</span>
-            <span class="type-meta-chip">Figtree</span>
-            <span class="type-meta-chip">Clause-level heading</span>
+          <div class="type-specimen-level">
+            <div class="type-specimen-level-name">H4</div>
+            <div class="type-specimen-level-desc">Clause</div>
+          </div>
+          <div style="flex:1;">
+            <div style="font-family:var(--ff-display);font-size:var(--fs-h4);font-weight:600;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);">Pset_WallCommon Attributes</div>
+            <div class="type-meta">
+              <span class="type-meta-chip">--fs-h4 · 18px</span>
+              <span class="type-meta-chip">weight 600</span>
+              <span class="type-meta-chip">Figtree</span>
+            </div>
           </div>
         </div>
 
         <div class="type-specimen-row">
-          <div style="font-family:var(--ff-display);font-size:var(--fs-h5);font-weight:600;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);">Required attributes</div>
-          <div class="type-meta">
-            <span class="type-meta-chip">--fs-h5 · 16px</span>
-            <span class="type-meta-chip">weight 600</span>
-            <span class="type-meta-chip">Figtree</span>
-            <span class="type-meta-chip">Minor heading</span>
+          <div class="type-specimen-level">
+            <div class="type-specimen-level-name">H5</div>
+            <div class="type-specimen-level-desc">Minor<br>heading</div>
+          </div>
+          <div style="flex:1;">
+            <div style="font-family:var(--ff-display);font-size:var(--fs-h5);font-weight:600;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);">Required attributes</div>
+            <div class="type-meta">
+              <span class="type-meta-chip">--fs-h5 · 16px</span>
+              <span class="type-meta-chip">weight 600</span>
+              <span class="type-meta-chip">Figtree</span>
+              <span class="type-meta-chip">Weight differentiates from body</span>
+            </div>
           </div>
         </div>
 
         <div class="type-specimen-row">
-          <div style="font-family:var(--ff-display);font-size:var(--fs-h6);font-weight:600;letter-spacing:var(--ls-label);line-height:var(--lh-heading);color:var(--c-slate);text-transform:uppercase;">Normative references</div>
-          <div class="type-meta">
-            <span class="type-meta-chip">--fs-h6 · 13px</span>
-            <span class="type-meta-chip">weight 600</span>
-            <span class="type-meta-chip">Figtree</span>
-            <span class="type-meta-chip">uppercase · 0.06em</span>
-            <span class="type-meta-chip">colour: Dark Slate</span>
+          <div class="type-specimen-level">
+            <div class="type-specimen-level-name">H6</div>
+            <div class="type-specimen-level-desc">Label /<br>nav</div>
+          </div>
+          <div style="flex:1;">
+            <div style="font-family:var(--ff-display);font-size:var(--fs-h6);font-weight:600;letter-spacing:var(--ls-label);line-height:var(--lh-heading);color:var(--c-slate);text-transform:uppercase;">Normative references</div>
+            <div class="type-meta">
+              <span class="type-meta-chip">--fs-h6 · 13px</span>
+              <span class="type-meta-chip">weight 600</span>
+              <span class="type-meta-chip">uppercase · 0.06em</span>
+              <span class="type-meta-chip">colour: Dark Slate</span>
+            </div>
           </div>
         </div>
 
         <div class="type-specimen-row">
-          <div style="font-family:var(--ff-body);font-size:var(--fs-body);font-weight:400;line-height:var(--lh-body);color:var(--c-charcoal);max-width:640px;">buildingSMART International develops and maintains open standards for Building Information Modelling. The IFC schema provides a neutral, open file format for describing building and construction industry data across software applications and disciplines.</div>
-          <div class="type-meta">
-            <span class="type-meta-chip">--fs-body · 16px</span>
-            <span class="type-meta-chip">weight 400</span>
-            <span class="type-meta-chip">Source Serif 4</span>
-            <span class="type-meta-chip">line-height 1.7</span>
+          <div class="type-specimen-level">
+            <div class="type-specimen-level-name">Body</div>
+            <div class="type-specimen-level-desc">Long-<br>form</div>
+          </div>
+          <div style="flex:1;">
+            <div style="font-family:var(--ff-body);font-size:var(--fs-body);font-weight:400;line-height:var(--lh-body);color:var(--c-charcoal);max-width:640px;">buildingSMART International develops and maintains open standards for Building Information Modelling. The IFC schema provides a neutral, open file format for describing building and construction industry data across software applications and disciplines.</div>
+            <div class="type-meta">
+              <span class="type-meta-chip">--fs-body · 16px</span>
+              <span class="type-meta-chip">weight 400</span>
+              <span class="type-meta-chip">Source Serif 4</span>
+              <span class="type-meta-chip">line-height 1.7</span>
+            </div>
           </div>
         </div>
 
         <div class="type-specimen-row">
-          <div style="font-family:var(--ff-body);font-size:var(--fs-body);font-weight:400;font-style:italic;line-height:var(--lh-body);color:var(--c-charcoal);max-width:600px;">"Open standards remove barriers to interoperability. They are not a competitive advantage — they are the foundation on which advantages are built."</div>
-          <div class="type-meta">
-            <span class="type-meta-chip">--fs-body · italic</span>
-            <span class="type-meta-chip">Source Serif 4</span>
-            <span class="type-meta-chip">Pull quotes and callouts only</span>
+          <div class="type-specimen-level">
+            <div class="type-specimen-level-name">Italic</div>
+            <div class="type-specimen-level-desc">Callout /<br>quote</div>
+          </div>
+          <div style="flex:1;">
+            <div style="font-family:var(--ff-body);font-size:var(--fs-body);font-weight:400;font-style:italic;line-height:var(--lh-body);color:var(--c-charcoal);max-width:600px;">"Open standards remove barriers to interoperability. They are not a competitive advantage — they are the foundation on which advantages are built."</div>
+            <div class="type-meta">
+              <span class="type-meta-chip">--fs-body · italic</span>
+              <span class="type-meta-chip">Source Serif 4</span>
+              <span class="type-meta-chip">Pull quotes and callouts only</span>
+            </div>
           </div>
         </div>
 
         <div class="type-specimen-row">
-          <div style="font-family:var(--ff-body);font-size:var(--fs-small);font-weight:400;line-height:var(--lh-body);color:var(--c-slate);">Figure 1 — IFC4.3 entity relationship diagram. Source: buildingSMART International, June 2026.</div>
-          <div class="type-meta">
-            <span class="type-meta-chip">--fs-small · 14px</span>
-            <span class="type-meta-chip">weight 400</span>
-            <span class="type-meta-chip">Source Serif 4</span>
-            <span class="type-meta-chip">Captions, metadata, footnotes</span>
+          <div class="type-specimen-level">
+            <div class="type-specimen-level-name">Small</div>
+            <div class="type-specimen-level-desc">Caption</div>
+          </div>
+          <div style="flex:1;">
+            <div style="font-family:var(--ff-body);font-size:var(--fs-small);font-weight:400;line-height:var(--lh-body);color:var(--c-slate);">Figure 1 — IFC4.3 entity relationship diagram. Source: buildingSMART International, June 2026.</div>
+            <div class="type-meta">
+              <span class="type-meta-chip">--fs-small · 14px</span>
+              <span class="type-meta-chip">weight 400</span>
+              <span class="type-meta-chip">Source Serif 4</span>
+              <span class="type-meta-chip">Captions, metadata, footnotes</span>
+            </div>
           </div>
         </div>
 
         <div class="type-specimen-row">
-          <div style="font-family:var(--ff-display);font-size:var(--fs-label);font-weight:600;letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--c-slate);">Published · June 2026 · IDS Version 1.0</div>
-          <div class="type-meta">
-            <span class="type-meta-chip">--fs-label · 12px</span>
-            <span class="type-meta-chip">weight 600</span>
-            <span class="type-meta-chip">Figtree</span>
-            <span class="type-meta-chip">uppercase · 0.06em</span>
-            <span class="type-meta-chip">UI labels only</span>
+          <div class="type-specimen-level">
+            <div class="type-specimen-level-name">Label</div>
+            <div class="type-specimen-level-desc">UI<br>text</div>
+          </div>
+          <div style="flex:1;">
+            <div style="font-family:var(--ff-display);font-size:var(--fs-label);font-weight:600;letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--c-slate);">Published · June 2026 · IDS Version 1.0</div>
+            <div class="type-meta">
+              <span class="type-meta-chip">--fs-label · 12px</span>
+              <span class="type-meta-chip">weight 600</span>
+              <span class="type-meta-chip">Figtree</span>
+              <span class="type-meta-chip">uppercase · 0.06em · UI labels only</span>
+            </div>
           </div>
         </div>
 
         <div class="type-specimen-row">
-          <div style="font-family:var(--ff-mono);font-size:var(--fs-mono);font-weight:400;line-height:1.7;color:var(--c-charcoal);">IfcWall · IFC4.3 · Pset_WallCommon · BCF 3.0 · IDS · IfcPropertySingleValue</div>
-          <div class="type-meta">
-            <span class="type-meta-chip">--fs-mono · 13px</span>
-            <span class="type-meta-chip">weight 400</span>
-            <span class="type-meta-chip">JetBrains Mono</span>
-            <span class="type-meta-chip">Standards identifiers, schema names, code</span>
+          <div class="type-specimen-level">
+            <div class="type-specimen-level-name">Mono</div>
+            <div class="type-specimen-level-desc">Identi-<br>fiers</div>
+          </div>
+          <div style="flex:1;">
+            <div style="font-family:var(--ff-mono);font-size:var(--fs-mono);font-weight:400;line-height:1.7;color:var(--c-charcoal);">IfcWall · IFC4.3 · Pset_WallCommon · BCF 3.0 · IDS · IfcPropertySingleValue</div>
+            <div class="type-meta">
+              <span class="type-meta-chip">--fs-mono · 13px</span>
+              <span class="type-meta-chip">weight 400</span>
+              <span class="type-meta-chip">JetBrains Mono</span>
+              <span class="type-meta-chip">Standards identifiers, schema names, code</span>
+            </div>
           </div>
         </div>
 
