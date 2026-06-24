@@ -816,6 +816,26 @@ body {
   line-height: 1.45;
 }
 
+
+/* ---- Language switcher ---- */
+.sg-lang-switcher {
+  position: absolute; top: var(--sp-5); right: var(--sp-8);
+  display: flex; gap: 2px;
+  background: rgba(255,255,255,0.08);
+  border-radius: var(--r-pill); padding: 2px;
+  z-index: 10;
+}
+.sg-lang-btn {
+  font-family: var(--ff-mono); font-size: 10px; letter-spacing: 0.12em;
+  font-weight: 500; padding: 4px 10px; border: none;
+  border-radius: var(--r-pill); background: transparent;
+  color: rgba(255,255,255,0.55); cursor: pointer;
+  transition: background 0.12s, color 0.12s; line-height: 1;
+}
+.sg-lang-btn:hover { color: rgba(255,255,255,0.85); }
+.sg-lang-btn--active { background: rgba(72,191,145,0.18); color: var(--c-mint); }
+.sg-lang-btn:focus-visible { outline: 2px solid var(--c-mint); outline-offset: 2px; }
+
 </style>
 </head>
 <body>
@@ -824,7 +844,7 @@ body {
      PAGE HEADER
      ================================================================ -->
 <header class="sg-header">
-  <div class="sg-header-label">Visual Identity System &nbsp;·&nbsp; June 2026</div>
+  <div class="sg-header-label" data-i18n-html="header-label">Visual Identity System &nbsp;·&nbsp; June 2026</div>
   <svg class="sg-header-logo" viewBox="0 0 4617 830" version="1.1" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="bsf-logo-title" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
     <title id="bsf-logo-title">buildingSMART Finland logo</title>
     <g id="Layer-1" transform="matrix(4.16667,0,0,4.16667,0,0)">
@@ -917,8 +937,12 @@ body {
         </g>
     </g>
   </svg>
-  <h1>Style Guide</h1>
-  <p class="sg-header-sub">Colour · Typography · Spacing · Components · Usage — self-contained reference for web and document production.</p>
+  <h1 data-i18n="header-title">Style Guide</h1>
+  <p class="sg-header-sub" data-i18n="header-sub">Colour · Typography · Spacing · Components · Usage — self-contained reference for web and document production.</p>
+  <div class="sg-lang-switcher" role="group" aria-label="Language / Kieli">
+    <button class="sg-lang-btn sg-lang-btn--active" data-lang="en" aria-pressed="true">EN</button>
+    <button class="sg-lang-btn" data-lang="fi" aria-pressed="false">FI</button>
+  </div>
 </header>
 
 <!-- ================================================================
@@ -928,21 +952,21 @@ body {
 
   <!-- Sidebar nav -->
   <nav class="sg-nav" aria-label="Style guide sections">
-    <div class="sg-nav-label">Sections</div>
+    <div class="sg-nav-label" data-i18n="nav-sections">Sections</div>
     <ul>
-      <li><a href="#colour" class="active">Colour Palette</a></li>
-      <li><a href="#typography">Typography</a></li>
-      <li><a href="#spacing">Spacing Scale</a></li>
+      <li><a href="#colour" class="active" data-i18n="s-colour">Colour Palette</a></li>
+      <li><a href="#typography" data-i18n="s-typography">Typography</a></li>
+      <li><a href="#spacing" data-i18n="s-spacing">Spacing Scale</a></li>
       <li role="separator" class="sg-nav-divider"></li>
-      <li><a href="#headings">Headings</a></li>
-      <li><a href="#body-text">Body Text</a></li>
-      <li><a href="#callouts">Callouts</a></li>
-      <li><a href="#tables">Tables</a></li>
-      <li><a href="#buttons">Buttons</a></li>
-      <li><a href="#tags">Tags &amp; Badges</a></li>
-      <li><a href="#code">Code Blocks</a></li>
+      <li><a href="#headings" data-i18n="s-headings">Headings</a></li>
+      <li><a href="#body-text" data-i18n="s-body-text">Body Text</a></li>
+      <li><a href="#callouts" data-i18n="s-callouts">Callouts</a></li>
+      <li><a href="#tables" data-i18n="s-tables">Tables</a></li>
+      <li><a href="#buttons" data-i18n="s-buttons">Buttons</a></li>
+      <li><a href="#tags" data-i18n="s-tags">Tags &amp; Badges</a></li>
+      <li><a href="#code" data-i18n="s-code">Code Blocks</a></li>
       <li role="separator" class="sg-nav-divider"></li>
-      <li><a href="#usage">Do / Don't</a></li>
+      <li><a href="#usage" data-i18n="s-usage">Do / Don't</a></li>
     </ul>
   </nav>
 
@@ -954,9 +978,9 @@ body {
          ============================================================ -->
     <section class="sg-section" id="colour">
       <div class="sg-section-header">
-        <div class="sg-eyebrow">Foundation · 01</div>
-        <h2 class="sg-section-title">Colour Palette</h2>
-        <p class="sg-section-desc">The buildingSMART Finland palette uses the bSI <em>secondary</em> palette exclusively. Mint (#48BF91) is the chapter's signature accent — one per composition, never paired with competing colours. Click any value to copy it.</p>
+        <div class="sg-eyebrow" data-i18n="eyebrow-01">Foundation · 01</div>
+        <h2 class="sg-section-title" data-i18n="s-colour">Colour Palette</h2>
+        <p class="sg-section-desc" data-i18n-html="colour-desc">The buildingSMART Finland palette uses the bSI <em>secondary</em> palette exclusively. Mint (#48BF91) is the chapter's signature accent — one per composition, never paired with competing colours. Click any value to copy it.</p>
       </div>
 
       <div class="palette-grid">
@@ -976,19 +1000,19 @@ body {
                 <button class="copy-btn" data-copy="rgb(4, 30, 66)" title="Copy RGB" aria-label="Copy rgb(4, 30, 66)">copy</button>
               </div>
             </div>
-            <div class="swatch-role">Primary anchor — headlines, hero backgrounds, primary CTAs.</div>
+            <div class="swatch-role" data-i18n="role-navy">Primary anchor — headlines, hero backgrounds, primary CTAs.</div>
             <div class="swatch-contrast">
               <div class="contrast-row">
                 <span class="contrast-sample" style="background:#041E42;color:white;">Aa</span>
                 <span class="contrast-ratio">15.1:1</span>
                 <span class="wcag-badge wcag-aaa">AAA</span>
-                <span class="contrast-label">white on Navy</span>
+                <span class="contrast-label" data-i18n="cl-white-navy">white on Navy</span>
               </div>
               <div class="contrast-row">
                 <span class="contrast-sample" style="background:#041E42;color:#48BF91;">Aa</span>
                 <span class="contrast-ratio">6.6:1</span>
                 <span class="wcag-badge wcag-aa">AA</span>
-                <span class="contrast-label">Mint on Navy</span>
+                <span class="contrast-label" data-i18n="cl-mint-navy">Mint on Navy</span>
               </div>
             </div>
           </div>
@@ -1009,19 +1033,19 @@ body {
                 <button class="copy-btn" data-copy="rgb(53, 75, 85)" title="Copy RGB" aria-label="Copy rgb(53, 75, 85)">copy</button>
               </div>
             </div>
-            <div class="swatch-role">Secondary surfaces, section backgrounds, H6 heading colour.</div>
+            <div class="swatch-role" data-i18n="role-slate">Secondary surfaces, section backgrounds, H6 heading colour.</div>
             <div class="swatch-contrast">
               <div class="contrast-row">
                 <span class="contrast-sample" style="background:#354B55;color:white;">Aa</span>
                 <span class="contrast-ratio">9.1:1</span>
                 <span class="wcag-badge wcag-aaa">AAA</span>
-                <span class="contrast-label">white on Slate</span>
+                <span class="contrast-label" data-i18n="cl-white-slate">white on Slate</span>
               </div>
               <div class="contrast-row">
                 <span class="contrast-sample" style="background:#354B55;color:#48BF91;">Aa</span>
                 <span class="contrast-ratio">3.9:1</span>
                 <span class="wcag-badge wcag-lg">AA-LG</span>
-                <span class="contrast-label">Mint on Slate</span>
+                <span class="contrast-label" data-i18n="cl-mint-slate">Mint on Slate</span>
               </div>
             </div>
           </div>
@@ -1042,13 +1066,13 @@ body {
                 <button class="copy-btn" data-copy="rgb(56, 54, 61)" title="Copy RGB" aria-label="Copy rgb(56, 54, 61)">copy</button>
               </div>
             </div>
-            <div class="swatch-role">Body text, secondary UI. Replaces pure black — softer on screen.</div>
+            <div class="swatch-role" data-i18n="role-charcoal">Body text, secondary UI. Replaces pure black — softer on screen.</div>
             <div class="swatch-contrast">
               <div class="contrast-row">
                 <span class="contrast-sample" style="background:white;color:#38363D;">Aa</span>
                 <span class="contrast-ratio">11.5:1</span>
                 <span class="wcag-badge wcag-aaa">AAA</span>
-                <span class="contrast-label">Charcoal on white</span>
+                <span class="contrast-label" data-i18n="cl-charcoal-white">Charcoal on white</span>
               </div>
             </div>
           </div>
@@ -1058,7 +1082,7 @@ body {
         <div class="swatch">
           <div class="swatch-chip" style="background:#48BF91;"></div>
           <div class="swatch-body">
-            <div class="swatch-name">Mint <span style="font-family:var(--ff-mono);font-size:10px;font-weight:400;color:var(--c-slate);">★ signature accent</span></div>
+            <div class="swatch-name" data-i18n-html="swatch-mint-name">Mint <span style="font-family:var(--ff-mono);font-size:10px;font-weight:400;color:var(--c-slate);">★ signature accent</span></div>
             <div class="swatch-values">
               <div class="swatch-row">
                 <span class="swatch-val">#48BF91</span>
@@ -1069,19 +1093,19 @@ body {
                 <button class="copy-btn" data-copy="rgb(72, 191, 145)" title="Copy RGB" aria-label="Copy rgb(72, 191, 145)">copy</button>
               </div>
             </div>
-            <div class="swatch-role">Hero accent, CTAs, interactive elements. One per composition — never decorative.</div>
+            <div class="swatch-role" data-i18n="role-mint">Hero accent, CTAs, interactive elements. One per composition — never decorative.</div>
             <div class="swatch-contrast">
               <div class="contrast-row">
                 <span class="contrast-sample" style="background:white;color:#48BF91;">Aa</span>
                 <span class="contrast-ratio">2.3:1</span>
                 <span class="wcag-badge wcag-nc">NC</span>
-                <span class="contrast-label">Mint on white — icons/borders only</span>
+                <span class="contrast-label" data-i18n="cl-mint-white">Mint on white — icons/borders only</span>
               </div>
               <div class="contrast-row">
                 <span class="contrast-sample" style="background:#041E42;color:#48BF91;">Aa</span>
                 <span class="contrast-ratio">6.6:1</span>
                 <span class="wcag-badge wcag-aa">AA</span>
-                <span class="contrast-label">Mint on Navy — labels, UI</span>
+                <span class="contrast-label" data-i18n="cl-mint-navy-ui">Mint on Navy — labels, UI</span>
               </div>
             </div>
           </div>
@@ -1102,13 +1126,13 @@ body {
                 <button class="copy-btn" data-copy="rgb(200, 198, 197)" title="Copy RGB" aria-label="Copy rgb(200, 198, 197)">copy</button>
               </div>
             </div>
-            <div class="swatch-role">Borders, dividers, muted UI elements. Not for body text.</div>
+            <div class="swatch-role" data-i18n="role-silver">Borders, dividers, muted UI elements. Not for body text.</div>
             <div class="swatch-contrast">
               <div class="contrast-row">
                 <span class="contrast-sample" style="background:white;color:#C8C6C5;">Aa</span>
                 <span class="contrast-ratio">1.7:1</span>
                 <span class="wcag-badge wcag-nc">NC</span>
-                <span class="contrast-label">Decorative / UI dividers only</span>
+                <span class="contrast-label" data-i18n="cl-decorative">Decorative / UI dividers only</span>
               </div>
             </div>
           </div>
@@ -1129,13 +1153,13 @@ body {
                 <button class="copy-btn" data-copy="rgb(227, 227, 227)" title="Copy RGB" aria-label="Copy rgb(227, 227, 227)">copy</button>
               </div>
             </div>
-            <div class="swatch-role">Page backgrounds, card surfaces, code block fills.</div>
+            <div class="swatch-role" data-i18n="role-lightgray">Page backgrounds, card surfaces, code block fills.</div>
             <div class="swatch-contrast">
               <div class="contrast-row">
                 <span class="contrast-sample" style="background:#E3E3E3;color:#38363D;">Aa</span>
                 <span class="contrast-ratio">8.9:1</span>
                 <span class="wcag-badge wcag-aaa">AAA</span>
-                <span class="contrast-label">Charcoal on Light Gray</span>
+                <span class="contrast-label" data-i18n="cl-charcoal-lg">Charcoal on Light Gray</span>
               </div>
             </div>
           </div>
@@ -1145,7 +1169,7 @@ body {
 
       <!-- Colour pairing table -->
       <div class="sg-panel" style="margin-top:var(--sp-6);">
-        <div class="sg-panel-label">Approved Text / Background Pairings</div>
+        <div class="sg-panel-label" data-i18n="panel-pairings">Approved Text / Background Pairings</div>
         <table style="width:100%;border-collapse:collapse;font-size:13px;">
           <thead>
             <tr style="border-bottom:2px solid var(--c-gray-light);">
@@ -1223,14 +1247,14 @@ body {
          ============================================================ -->
     <section class="sg-section" id="typography">
       <div class="sg-section-header">
-        <div class="sg-eyebrow">Foundation · 02</div>
-        <h2 class="sg-section-title">Typography</h2>
-        <p class="sg-section-desc">Three typefaces cover all content needs. Figtree leads headings and UI; Source Serif 4 carries body and long-form text; JetBrains Mono marks every technical identifier.</p>
+        <div class="sg-eyebrow" data-i18n="eyebrow-02">Foundation · 02</div>
+        <h2 class="sg-section-title" data-i18n="s-typography">Typography</h2>
+        <p class="sg-section-desc" data-i18n="typo-desc">Three typefaces cover all content needs. Figtree leads headings and UI; Source Serif 4 carries body and long-form text; JetBrains Mono marks every technical identifier.</p>
       </div>
 
       <!-- Type scale reference table -->
       <div class="sg-panel">
-        <div class="sg-panel-label">Type Scale Reference</div>
+        <div class="sg-panel-label" data-i18n="panel-type-scale">Type Scale Reference</div>
         <table class="type-scale-table">
           <thead>
             <tr>
@@ -1326,12 +1350,12 @@ body {
 
       <!-- Live specimens -->
       <div class="sg-panel">
-        <div class="sg-panel-label">Live Specimens</div>
+        <div class="sg-panel-label" data-i18n="panel-specimens">Live Specimens</div>
 
         <div class="type-specimen-row">
           <div class="type-specimen-level">
             <div class="type-specimen-level-name">Display</div>
-            <div class="type-specimen-level-desc">Hero /<br>cover</div>
+            <div class="type-specimen-level-desc" data-i18n-html="spec-display">Hero /<br>cover</div>
           </div>
           <div style="flex:1;">
             <div style="font-family:var(--ff-display);font-size:var(--fs-display);font-weight:800;letter-spacing:var(--ls-display);line-height:var(--lh-display);color:var(--c-navy);">buildingSMART</div>
@@ -1347,7 +1371,7 @@ body {
         <div class="type-specimen-row">
           <div class="type-specimen-level">
             <div class="type-specimen-level-name">H1</div>
-            <div class="type-specimen-level-desc">Page<br>title</div>
+            <div class="type-specimen-level-desc" data-i18n-html="spec-h1">Page<br>title</div>
           </div>
           <div style="flex:1;">
             <div style="font-family:var(--ff-display);font-size:var(--fs-h1);font-weight:700;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);">Open Standards for the Built Environment</div>
@@ -1363,7 +1387,7 @@ body {
         <div class="type-specimen-row">
           <div class="type-specimen-level">
             <div class="type-specimen-level-name">H2</div>
-            <div class="type-specimen-level-desc">Major<br>section</div>
+            <div class="type-specimen-level-desc" data-i18n-html="spec-h2">Major<br>section</div>
           </div>
           <div style="flex:1;">
             <div style="font-family:var(--ff-display);font-size:var(--fs-h2);font-weight:700;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);">IFC Schema Reference</div>
@@ -1378,7 +1402,7 @@ body {
         <div class="type-specimen-row">
           <div class="type-specimen-level">
             <div class="type-specimen-level-name">H3</div>
-            <div class="type-specimen-level-desc">Sub-<br>section</div>
+            <div class="type-specimen-level-desc" data-i18n-html="spec-h3">Sub-<br>section</div>
           </div>
           <div style="flex:1;">
             <div style="font-family:var(--ff-display);font-size:var(--fs-h3);font-weight:600;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);">IfcWall — Properties and Constraints</div>
@@ -1393,7 +1417,7 @@ body {
         <div class="type-specimen-row">
           <div class="type-specimen-level">
             <div class="type-specimen-level-name">H4</div>
-            <div class="type-specimen-level-desc">Clause</div>
+            <div class="type-specimen-level-desc" data-i18n="spec-h4">Clause</div>
           </div>
           <div style="flex:1;">
             <div style="font-family:var(--ff-display);font-size:var(--fs-h4);font-weight:600;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);">Pset_WallCommon Attributes</div>
@@ -1408,7 +1432,7 @@ body {
         <div class="type-specimen-row">
           <div class="type-specimen-level">
             <div class="type-specimen-level-name">H5</div>
-            <div class="type-specimen-level-desc">Minor<br>heading</div>
+            <div class="type-specimen-level-desc" data-i18n-html="spec-h5">Minor<br>heading</div>
           </div>
           <div style="flex:1;">
             <div style="font-family:var(--ff-display);font-size:var(--fs-h5);font-weight:600;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);">Required attributes</div>
@@ -1424,7 +1448,7 @@ body {
         <div class="type-specimen-row">
           <div class="type-specimen-level">
             <div class="type-specimen-level-name">H6</div>
-            <div class="type-specimen-level-desc">Label /<br>nav</div>
+            <div class="type-specimen-level-desc" data-i18n-html="spec-h6">Label /<br>nav</div>
           </div>
           <div style="flex:1;">
             <div style="font-family:var(--ff-display);font-size:var(--fs-h6);font-weight:600;letter-spacing:var(--ls-label);line-height:var(--lh-heading);color:var(--c-slate);text-transform:uppercase;">Normative references</div>
@@ -1440,7 +1464,7 @@ body {
         <div class="type-specimen-row">
           <div class="type-specimen-level">
             <div class="type-specimen-level-name">Body</div>
-            <div class="type-specimen-level-desc">Long-<br>form</div>
+            <div class="type-specimen-level-desc" data-i18n-html="spec-body">Long-<br>form</div>
           </div>
           <div style="flex:1;">
             <div style="font-family:var(--ff-body);font-size:var(--fs-body);font-weight:400;line-height:var(--lh-body);color:var(--c-charcoal);max-width:640px;">buildingSMART International develops and maintains open standards for Building Information Modelling. The IFC schema provides a neutral, open file format for describing building and construction industry data across software applications and disciplines.</div>
@@ -1456,7 +1480,7 @@ body {
         <div class="type-specimen-row">
           <div class="type-specimen-level">
             <div class="type-specimen-level-name">Italic</div>
-            <div class="type-specimen-level-desc">Callout /<br>quote</div>
+            <div class="type-specimen-level-desc" data-i18n-html="spec-italic">Callout /<br>quote</div>
           </div>
           <div style="flex:1;">
             <div style="font-family:var(--ff-body);font-size:var(--fs-body);font-weight:400;font-style:italic;line-height:var(--lh-body);color:var(--c-charcoal);max-width:600px;">"Open standards remove barriers to interoperability. They are not a competitive advantage — they are the foundation on which advantages are built."</div>
@@ -1471,7 +1495,7 @@ body {
         <div class="type-specimen-row">
           <div class="type-specimen-level">
             <div class="type-specimen-level-name">Small</div>
-            <div class="type-specimen-level-desc">Caption</div>
+            <div class="type-specimen-level-desc" data-i18n="spec-small">Caption</div>
           </div>
           <div style="flex:1;">
             <div style="font-family:var(--ff-body);font-size:var(--fs-small);font-weight:400;line-height:var(--lh-body);color:var(--c-slate);">Figure 1 — IFC4.3 entity relationship diagram. Source: buildingSMART International, June 2026.</div>
@@ -1487,7 +1511,7 @@ body {
         <div class="type-specimen-row">
           <div class="type-specimen-level">
             <div class="type-specimen-level-name">Label</div>
-            <div class="type-specimen-level-desc">UI<br>text</div>
+            <div class="type-specimen-level-desc" data-i18n-html="spec-label">UI<br>text</div>
           </div>
           <div style="flex:1;">
             <div style="font-family:var(--ff-display);font-size:var(--fs-label);font-weight:600;letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--c-slate);">Published · June 2026 · IDS Version 1.0</div>
@@ -1503,7 +1527,7 @@ body {
         <div class="type-specimen-row">
           <div class="type-specimen-level">
             <div class="type-specimen-level-name">Mono</div>
-            <div class="type-specimen-level-desc">Identi-<br>fiers</div>
+            <div class="type-specimen-level-desc" data-i18n-html="spec-mono">Identi-<br>fiers</div>
           </div>
           <div style="flex:1;">
             <div style="font-family:var(--ff-mono);font-size:var(--fs-mono);font-weight:400;line-height:1.7;color:var(--c-charcoal);">IfcWall · IFC4.3 · Pset_WallCommon · BCF 3.0 · IDS · IfcPropertySingleValue</div>
@@ -1520,7 +1544,7 @@ body {
 
       <!-- Colour pairings for type -->
       <div class="sg-panel">
-        <div class="sg-panel-label">Approved Colour Pairings for Type</div>
+        <div class="sg-panel-label" data-i18n="panel-type-colour">Approved Colour Pairings for Type</div>
         <table style="width:100%;border-collapse:collapse;font-size:13px;">
           <thead>
             <tr style="border-bottom:2px solid var(--c-gray-light);">
@@ -1579,37 +1603,37 @@ body {
 
       <!-- Medium rules -->
       <div class="sg-panel">
-        <div class="sg-panel-label">Medium-Specific Rules</div>
+        <div class="sg-panel-label" data-i18n="panel-medium">Medium-Specific Rules</div>
         <div class="type-medium-callout">
-          <strong>Web &amp; HTML documents</strong>
+          <strong data-i18n="medium-web">Web &amp; HTML documents</strong>
           <ul>
-            <li>Figtree — all headings H1–H6, UI elements, labels, navigation.</li>
-            <li>Source Serif 4 — all running body text. Italic for pull quotes and callouts.</li>
-            <li>Load via Google Fonts CDN — no local font dependency for readers.</li>
+            <li data-i18n="medium-web-1">Figtree — all headings H1–H6, UI elements, labels, navigation.</li>
+            <li data-i18n="medium-web-2">Source Serif 4 — all running body text. Italic for pull quotes and callouts.</li>
+            <li data-i18n="medium-web-3">Load via Google Fonts CDN — no local font dependency for readers.</li>
           </ul>
         </div>
         <div class="type-medium-callout">
-          <strong>PowerPoint presentations</strong>
+          <strong data-i18n="medium-ppt">PowerPoint presentations</strong>
           <ul>
-            <li>Figtree carries <em>all</em> slide text including body. Minimum 18pt — no exceptions.</li>
-            <li>Source Serif 4 italic — callout boxes and pull quotes only. Never upright on slides.</li>
-            <li>Fonts are embedded in the template. Users must also install fonts locally to edit.</li>
+            <li data-i18n-html="medium-ppt-1">Figtree carries <em>all</em> slide text including body. Minimum 18pt — no exceptions.</li>
+            <li data-i18n="medium-ppt-2">Source Serif 4 italic — callout boxes and pull quotes only. Never upright on slides.</li>
+            <li data-i18n="medium-ppt-3">Fonts are embedded in the template. Users must also install fonts locally to edit.</li>
           </ul>
         </div>
         <div class="type-medium-callout">
-          <strong>Word documents (.docx)</strong>
+          <strong data-i18n="medium-word">Word documents (.docx)</strong>
           <ul>
-            <li>Figtree — all headings H1–H6 via named paragraph styles (27pt → 10pt). Never manual size overrides.</li>
-            <li>Source Serif 4 — Normal style for body text at 12pt. Italic for emphasis and pull quotes.</li>
-            <li>Caption style at 10.5pt; JetBrains Mono character style at 10pt for inline identifiers.</li>
-            <li>Fonts must be installed on the authoring machine. The <code style="font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;">.dotx</code> template does not embed fonts.</li>
+            <li data-i18n="medium-word-1">Figtree — all headings H1–H6 via named paragraph styles (27pt → 10pt). Never manual size overrides.</li>
+            <li data-i18n="medium-word-2">Source Serif 4 — Normal style for body text at 12pt. Italic for emphasis and pull quotes.</li>
+            <li data-i18n="medium-word-3">Caption style at 10.5pt; JetBrains Mono character style at 10pt for inline identifiers.</li>
+            <li data-i18n-html="medium-word-4">Fonts must be installed on the authoring machine. The <code style="font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;">.dotx</code> template does not embed fonts.</li>
           </ul>
         </div>
         <div class="type-medium-callout" style="border-left-color:var(--c-mint);">
-          <strong>JetBrains Mono — all media</strong>
+          <strong data-i18n="medium-mono">JetBrains Mono — all media</strong>
           <ul>
-            <li>IFC schema names, file extensions, version strings: <code style="font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;">IFC4.3</code> <code style="font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;">IfcWall</code> <code style="font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;">BCF 3.0</code></li>
-            <li>Never for decorative use. Arial, Calibri, and Times New Roman are forbidden in all distributed materials.</li>
+            <li data-i18n-html="medium-mono-1">IFC schema names, file extensions, version strings: <code style="font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;">IFC4.3</code> <code style="font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;">IfcWall</code> <code style="font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;">BCF 3.0</code></li>
+            <li data-i18n="medium-mono-2">Never for decorative use. Arial, Calibri, and Times New Roman are forbidden in all distributed materials.</li>
           </ul>
         </div>
       </div>
@@ -1618,84 +1642,84 @@ body {
 
     <section class="sg-section" id="spacing">
       <div class="sg-section-header">
-        <div class="sg-eyebrow">Foundation · 03</div>
-        <h2 class="sg-section-title">Spacing Scale</h2>
-        <p class="sg-section-desc">A 4px base unit. Twelve tokens cover all padding, margin, and gap values in the system. Never use arbitrary pixel values — always pick the nearest token.</p>
+        <div class="sg-eyebrow" data-i18n="eyebrow-03">Foundation · 03</div>
+        <h2 class="sg-section-title" data-i18n="s-spacing">Spacing Scale</h2>
+        <p class="sg-section-desc" data-i18n="spacing-desc">A 4px base unit. Twelve tokens cover all padding, margin, and gap values in the system. Never use arbitrary pixel values — always pick the nearest token.</p>
       </div>
 
       <div class="sg-panel">
-        <div class="sg-panel-label">Spacing Tokens</div>
+        <div class="sg-panel-label" data-i18n="panel-spacing">Spacing Tokens</div>
         <div class="sp-row">
           <span class="sp-token">--sp-1</span>
           <div class="sp-bar-wrap"><div class="sp-bar" style="width:4px;"></div></div>
           <span class="sp-values">4px / 0.25rem</span>
-          <span class="sp-use">Icon gap, tight insets</span>
+          <span class="sp-use" data-i18n="sp-1-use">Icon gap, tight insets</span>
         </div>
         <div class="sp-row">
           <span class="sp-token">--sp-2</span>
           <div class="sp-bar-wrap"><div class="sp-bar" style="width:8px;"></div></div>
           <span class="sp-values">8px / 0.5rem</span>
-          <span class="sp-use">Label margin, swatch row gap</span>
+          <span class="sp-use" data-i18n="sp-2-use">Label margin, swatch row gap</span>
         </div>
         <div class="sp-row">
           <span class="sp-token">--sp-3</span>
           <div class="sp-bar-wrap"><div class="sp-bar" style="width:12px;"></div></div>
           <span class="sp-values">12px / 0.75rem</span>
-          <span class="sp-use">Caption margin, nav item gap</span>
+          <span class="sp-use" data-i18n="sp-3-use">Caption margin, nav item gap</span>
         </div>
         <div class="sp-row">
           <span class="sp-token">--sp-4</span>
           <div class="sp-bar-wrap"><div class="sp-bar" style="width:16px;"></div></div>
           <span class="sp-values">16px / 1rem</span>
-          <span class="sp-use">Default component gap, palette grid</span>
+          <span class="sp-use" data-i18n="sp-4-use">Default component gap, palette grid</span>
         </div>
         <div class="sp-row">
           <span class="sp-token">--sp-5</span>
           <div class="sp-bar-wrap"><div class="sp-bar" style="width:20px;"></div></div>
           <span class="sp-values">20px / 1.25rem</span>
-          <span class="sp-use">Section header padding, callout padding</span>
+          <span class="sp-use" data-i18n="sp-5-use">Section header padding, callout padding</span>
         </div>
         <div class="sp-row">
           <span class="sp-token">--sp-6</span>
           <div class="sp-bar-wrap"><div class="sp-bar" style="width:24px;"></div></div>
           <span class="sp-values">24px / 1.5rem</span>
-          <span class="sp-use">Panel padding (horizontal), footer gap</span>
+          <span class="sp-use" data-i18n="sp-6-use">Panel padding (horizontal), footer gap</span>
         </div>
         <div class="sp-row">
           <span class="sp-token">--sp-8</span>
           <div class="sp-bar-wrap"><div class="sp-bar" style="width:32px;"></div></div>
           <span class="sp-values">32px / 2rem</span>
-          <span class="sp-use">Panel padding, layout padding</span>
+          <span class="sp-use" data-i18n="sp-8-use">Panel padding, layout padding</span>
         </div>
         <div class="sp-row">
           <span class="sp-token">--sp-10</span>
           <div class="sp-bar-wrap"><div class="sp-bar" style="width:40px;"></div></div>
           <span class="sp-values">40px / 2.5rem</span>
-          <span class="sp-use">Section header margin</span>
+          <span class="sp-use" data-i18n="sp-10-use">Section header margin</span>
         </div>
         <div class="sp-row">
           <span class="sp-token">--sp-12</span>
           <div class="sp-bar-wrap"><div class="sp-bar" style="width:48px;"></div></div>
           <span class="sp-values">48px / 3rem</span>
-          <span class="sp-use">Layout padding top, sidebar gap</span>
+          <span class="sp-use" data-i18n="sp-12-use">Layout padding top, sidebar gap</span>
         </div>
         <div class="sp-row">
           <span class="sp-token">--sp-16</span>
           <div class="sp-bar-wrap"><div class="sp-bar" style="width:64px;"></div></div>
           <span class="sp-values">64px / 4rem</span>
-          <span class="sp-use">Header padding, hero inset</span>
+          <span class="sp-use" data-i18n="sp-16-use">Header padding, hero inset</span>
         </div>
         <div class="sp-row">
           <span class="sp-token">--sp-20</span>
           <div class="sp-bar-wrap"><div class="sp-bar" style="width:80px;"></div></div>
           <span class="sp-values">80px / 5rem</span>
-          <span class="sp-use">Section margin-bottom, footer padding</span>
+          <span class="sp-use" data-i18n="sp-20-use">Section margin-bottom, footer padding</span>
         </div>
         <div class="sp-row">
           <span class="sp-token">--sp-24</span>
           <div class="sp-bar-wrap"><div class="sp-bar" style="width:96px;"></div></div>
           <span class="sp-values">96px / 6rem</span>
-          <span class="sp-use">Max vertical rhythm between major sections</span>
+          <span class="sp-use" data-i18n="sp-24-use">Max vertical rhythm between major sections</span>
         </div>
       </div>
 
@@ -1706,9 +1730,9 @@ body {
          ============================================================ -->
     <section class="sg-section" id="headings">
       <div class="sg-section-header">
-        <div class="sg-eyebrow">Components · 01</div>
-        <h2 class="sg-section-title">Headings</h2>
-        <p class="sg-section-desc">All six heading levels use Figtree. Size and weight create hierarchy — colour variation is not used within the heading scale except at H6.</p>
+        <div class="sg-eyebrow" data-i18n="eyebrow-c01">Components · 01</div>
+        <h2 class="sg-section-title" data-i18n="s-headings">Headings</h2>
+        <p class="sg-section-desc" data-i18n="headings-desc">All six heading levels use Figtree. Size and weight create hierarchy — colour variation is not used within the heading scale except at H6.</p>
       </div>
 
       <div class="sg-panel">
@@ -1771,13 +1795,13 @@ body {
          ============================================================ -->
     <section class="sg-section" id="body-text">
       <div class="sg-section-header">
-        <div class="sg-eyebrow">Components · 02</div>
-        <h2 class="sg-section-title">Body Text</h2>
-        <p class="sg-section-desc">Source Serif 4 handles all long-form reading. Figtree covers UI labels. Neither replaces the other.</p>
+        <div class="sg-eyebrow" data-i18n="eyebrow-c02">Components · 02</div>
+        <h2 class="sg-section-title" data-i18n="s-body-text">Body Text</h2>
+        <p class="sg-section-desc" data-i18n="body-text-desc">Source Serif 4 handles all long-form reading. Figtree covers UI labels. Neither replaces the other.</p>
       </div>
 
       <div class="sg-panel">
-        <div class="sg-panel-label">Body — Source Serif 4 400</div>
+        <div class="sg-panel-label" data-i18n="panel-body-regular">Body — Source Serif 4 400</div>
         <p style="font-family:var(--ff-body);font-size:var(--fs-body);font-weight:400;line-height:var(--lh-body);color:var(--c-charcoal);max-width:660px;margin:0;">buildingSMART International develops and maintains open standards for Building Information Modelling. The IFC schema provides a neutral, open file format for exchanging building and construction industry data across software applications, enabling genuine interoperability across the entire project lifecycle — from design and engineering through construction and operation.</p>
         <div class="type-meta" style="margin-top:var(--sp-4);">
           <span class="type-meta-chip">16px / 1rem</span>
@@ -1788,7 +1812,7 @@ body {
       </div>
 
       <div class="sg-panel">
-        <div class="sg-panel-label">Small / Caption — Source Serif 4 400</div>
+        <div class="sg-panel-label" data-i18n="panel-body-small">Small / Caption — Source Serif 4 400</div>
         <p style="font-family:var(--ff-body);font-size:var(--fs-small);font-weight:400;line-height:var(--lh-body);color:var(--c-slate);margin:0;">Figure 3 — Entity relationship between <span style="font-family:var(--ff-mono);font-size:12px;">IfcWall</span> and <span style="font-family:var(--ff-mono);font-size:12px;">Pset_WallCommon</span> in IFC4.3. Source: buildingSMART International, June 2026. All rights reserved.</p>
         <div class="type-meta" style="margin-top:var(--sp-4);">
           <span class="type-meta-chip">14px / 0.875rem</span>
@@ -1799,8 +1823,8 @@ body {
       </div>
 
       <div class="sg-panel">
-        <div class="sg-panel-label">Label — Figtree 600 uppercase</div>
-        <div style="font-family:var(--ff-display);font-size:var(--fs-label);font-weight:600;letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--c-slate);">Published · June 2026 &nbsp;·&nbsp; IDS Version 1.0 &nbsp;·&nbsp; IFC4.3</div>
+        <div class="sg-panel-label" data-i18n="panel-label-type">Label — Figtree 600 uppercase</div>
+        <div style="font-family:var(--ff-display);font-size:var(--fs-label);font-weight:600;letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--c-slate);" data-i18n-html="label-specimen">Published · June 2026 &nbsp;·&nbsp; IDS Version 1.0 &nbsp;·&nbsp; IFC4.3</div>
         <div class="type-meta" style="margin-top:var(--sp-4);">
           <span class="type-meta-chip">12px / 0.75rem</span>
           <span class="type-meta-chip">weight 600</span>
@@ -1816,13 +1840,13 @@ body {
          ============================================================ -->
     <section class="sg-section" id="callouts">
       <div class="sg-section-header">
-        <div class="sg-eyebrow">Components · 03</div>
-        <h2 class="sg-section-title">Callouts</h2>
-        <p class="sg-section-desc">Two callout patterns — pull quotes for editorial emphasis, info boxes for inline notices. Both use a left border as the sole structural device.</p>
+        <div class="sg-eyebrow" data-i18n="eyebrow-c03">Components · 03</div>
+        <h2 class="sg-section-title" data-i18n="s-callouts">Callouts</h2>
+        <p class="sg-section-desc" data-i18n="callouts-desc">Two callout patterns — pull quotes for editorial emphasis, info boxes for inline notices. Both use a left border as the sole structural device.</p>
       </div>
 
       <div class="sg-panel">
-        <div class="sg-panel-label">Pull Quote — Source Serif 4 italic</div>
+        <div class="sg-panel-label" data-i18n="panel-pull-quote">Pull Quote — Source Serif 4 italic</div>
         <blockquote style="border-left:3px solid var(--c-mint);margin:0;padding:var(--sp-3) 0 var(--sp-3) var(--sp-6);">
           <p style="font-family:var(--ff-body);font-size:1.125rem;font-weight:400;font-style:italic;line-height:1.65;color:var(--c-charcoal);margin:0 0 var(--sp-3) 0;">"Open standards remove barriers to interoperability. They are not a competitive advantage — they are the foundation on which advantages are built."</p>
           <cite style="font-family:var(--ff-display);font-size:var(--fs-label);font-weight:600;letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--c-slate);font-style:normal;">buildingSMART International</cite>
@@ -1830,7 +1854,7 @@ body {
       </div>
 
       <div class="sg-panel">
-        <div class="sg-panel-label">Info Callout Box</div>
+        <div class="sg-panel-label" data-i18n="panel-info-callout">Info Callout Box</div>
         <div style="background:var(--c-gray-light);border-left:4px solid var(--c-navy);border-radius:0 var(--r-md) var(--r-md) 0;padding:var(--sp-5) var(--sp-6);">
           <div style="font-family:var(--ff-display);font-size:var(--fs-h5);font-weight:600;color:var(--c-navy);margin-bottom:var(--sp-2);">Note — IFC4.3 required</div>
           <p style="font-family:var(--ff-body);font-size:var(--fs-small);line-height:var(--lh-body);color:var(--c-charcoal);margin:0;">This property set is only available in <span style="font-family:var(--ff-mono);font-size:12px;">IFC4.3</span> and later. Software implementing <span style="font-family:var(--ff-mono);font-size:12px;">IFC2x3</span> will not export these attributes. Verify your export settings before sharing files with project partners.</p>
@@ -1844,13 +1868,13 @@ body {
          ============================================================ -->
     <section class="sg-section" id="tables">
       <div class="sg-section-header">
-        <div class="sg-eyebrow">Components · 04</div>
-        <h2 class="sg-section-title">Tables</h2>
-        <p class="sg-section-desc">Specification-style tables. Column headers in Figtree; cell content in Source Serif 4. Technical identifiers always in JetBrains Mono.</p>
+        <div class="sg-eyebrow" data-i18n="eyebrow-c04">Components · 04</div>
+        <h2 class="sg-section-title" data-i18n="s-tables">Tables</h2>
+        <p class="sg-section-desc" data-i18n="tables-desc">Specification-style tables. Column headers in Figtree; cell content in Source Serif 4. Technical identifiers always in JetBrains Mono.</p>
       </div>
 
       <div class="sg-panel">
-        <div class="sg-panel-label">Property Set Table — IFC example</div>
+        <div class="sg-panel-label" data-i18n="panel-pset-table">Property Set Table — IFC example</div>
         <div style="overflow-x:auto;">
           <table style="width:100%;border-collapse:collapse;font-size:13.5px;">
             <thead>
@@ -1893,31 +1917,31 @@ body {
          ============================================================ -->
     <section class="sg-section" id="buttons">
       <div class="sg-section-header">
-        <div class="sg-eyebrow">Components · 05</div>
-        <h2 class="sg-section-title">Buttons</h2>
-        <p class="sg-section-desc">Four variants. Primary and Secondary for main actions; Ghost for low-priority actions; Accent (Mint) used at most once per composition.</p>
+        <div class="sg-eyebrow" data-i18n="eyebrow-c05">Components · 05</div>
+        <h2 class="sg-section-title" data-i18n="s-buttons">Buttons</h2>
+        <p class="sg-section-desc" data-i18n="buttons-desc">Four variants. Primary and Secondary for main actions; Ghost for low-priority actions; Accent (Mint) used at most once per composition.</p>
       </div>
 
       <div class="sg-panel">
         <div class="btn-row">
-          <span class="btn-row-label">Primary</span>
+          <span class="btn-row-label" data-i18n="btn-primary">Primary</span>
           <button class="sg-btn sg-btn-primary">Download IDS</button>
-          <span class="type-meta-chip" style="margin-left:var(--sp-3);">Navy fill · white text</span>
+          <span class="type-meta-chip" style="margin-left:var(--sp-3);" data-i18n="btn-primary-desc">Navy fill · white text</span>
         </div>
         <div class="btn-row">
-          <span class="btn-row-label">Secondary</span>
+          <span class="btn-row-label" data-i18n="btn-secondary">Secondary</span>
           <button class="sg-btn sg-btn-secondary">View schema</button>
-          <span class="type-meta-chip" style="margin-left:var(--sp-3);">Transparent · navy border</span>
+          <span class="type-meta-chip" style="margin-left:var(--sp-3);" data-i18n="btn-secondary-desc">Transparent · navy border</span>
         </div>
         <div class="btn-row">
-          <span class="btn-row-label">Ghost</span>
+          <span class="btn-row-label" data-i18n="btn-ghost">Ghost</span>
           <button class="sg-btn sg-btn-ghost">Cancel</button>
-          <span class="type-meta-chip" style="margin-left:var(--sp-3);">Transparent · silver border</span>
+          <span class="type-meta-chip" style="margin-left:var(--sp-3);" data-i18n="btn-ghost-desc">Transparent · silver border</span>
         </div>
         <div class="btn-row">
-          <span class="btn-row-label">Accent</span>
+          <span class="btn-row-label" data-i18n="btn-accent">Accent</span>
           <button class="sg-btn sg-btn-accent">Register now</button>
-          <span class="type-meta-chip" style="margin-left:var(--sp-3);">Mint fill · navy text · once per composition</span>
+          <span class="type-meta-chip" style="margin-left:var(--sp-3);" data-i18n="btn-accent-desc">Mint fill · navy text · once per composition</span>
         </div>
       </div>
 
@@ -1928,21 +1952,21 @@ body {
          ============================================================ -->
     <section class="sg-section" id="tags">
       <div class="sg-section-header">
-        <div class="sg-eyebrow">Components · 06</div>
-        <h2 class="sg-section-title">Tags &amp; Badges</h2>
-        <p class="sg-section-desc">Status tags, mono identifier tags, and WCAG badges. All use existing palette colours — no new colours introduced.</p>
+        <div class="sg-eyebrow" data-i18n="eyebrow-c06">Components · 06</div>
+        <h2 class="sg-section-title" data-i18n="s-tags">Tags &amp; Badges</h2>
+        <p class="sg-section-desc" data-i18n="tags-desc">Status tags, mono identifier tags, and WCAG badges. All use existing palette colours — no new colours introduced.</p>
       </div>
 
       <div class="sg-panel">
         <div class="tag-row">
-          <span class="tag-row-label">Status</span>
-          <span class="sg-tag sg-tag-active">Active</span>
-          <span class="sg-tag sg-tag-draft">Draft</span>
-          <span class="sg-tag sg-tag-deprecated">Deprecated</span>
-          <span class="sg-tag sg-tag-neutral">Informative</span>
+          <span class="tag-row-label" data-i18n="tag-row-status">Status</span>
+          <span class="sg-tag sg-tag-active" data-i18n="tag-active">Active</span>
+          <span class="sg-tag sg-tag-draft" data-i18n="tag-draft">Draft</span>
+          <span class="sg-tag sg-tag-deprecated" data-i18n="tag-deprecated">Deprecated</span>
+          <span class="sg-tag sg-tag-neutral" data-i18n="tag-informative">Informative</span>
         </div>
         <div class="tag-row">
-          <span class="tag-row-label">Identifiers</span>
+          <span class="tag-row-label" data-i18n="tag-row-ids">Identifiers</span>
           <span class="sg-tag-mono">IFC4.3</span>
           <span class="sg-tag-mono">IDS 1.0</span>
           <span class="sg-tag-mono">BCF 3.0</span>
@@ -1950,12 +1974,12 @@ body {
           <span class="sg-tag-mono">Pset_WallCommon</span>
         </div>
         <div class="tag-row">
-          <span class="tag-row-label">WCAG</span>
+          <span class="tag-row-label" data-i18n="tag-row-wcag">WCAG</span>
           <span class="wcag-badge wcag-aaa">AAA</span>
           <span class="wcag-badge wcag-aa">AA</span>
           <span class="wcag-badge wcag-lg">AA-LG</span>
           <span class="wcag-badge wcag-nc">NC</span>
-          <span class="type-meta-chip" style="margin-left:var(--sp-3);">Reused from colour palette section</span>
+          <span class="type-meta-chip" style="margin-left:var(--sp-3);" data-i18n="tag-wcag-note">Reused from colour palette section</span>
         </div>
       </div>
 
@@ -1966,18 +1990,18 @@ body {
          ============================================================ -->
     <section class="sg-section" id="code">
       <div class="sg-section-header">
-        <div class="sg-eyebrow">Components · 07</div>
-        <h2 class="sg-section-title">Code Blocks</h2>
-        <p class="sg-section-desc">Inline code for identifiers within running text; block code for schema fragments, snippets, and structured data. Both use JetBrains Mono.</p>
+        <div class="sg-eyebrow" data-i18n="eyebrow-c07">Components · 07</div>
+        <h2 class="sg-section-title" data-i18n="s-code">Code Blocks</h2>
+        <p class="sg-section-desc" data-i18n="code-desc">Inline code for identifiers within running text; block code for schema fragments, snippets, and structured data. Both use JetBrains Mono.</p>
       </div>
 
       <div class="sg-panel">
-        <div class="sg-panel-label">Inline Code</div>
+        <div class="sg-panel-label" data-i18n="panel-inline-code">Inline Code</div>
         <p style="font-family:var(--ff-body);font-size:var(--fs-body);line-height:var(--lh-body);color:var(--c-charcoal);margin:0;">The <code style="font-family:var(--ff-mono);font-size:13px;background:var(--c-gray-light);color:var(--c-charcoal);padding:2px 6px;border-radius:3px;">IfcWall</code> entity inherits from <code style="font-family:var(--ff-mono);font-size:13px;background:var(--c-gray-light);color:var(--c-charcoal);padding:2px 6px;border-radius:3px;">IfcBuildingElement</code>. Use <code style="font-family:var(--ff-mono);font-size:13px;background:var(--c-gray-light);color:var(--c-charcoal);padding:2px 6px;border-radius:3px;">Pset_WallCommon</code> to attach common properties defined by <code style="font-family:var(--ff-mono);font-size:13px;background:var(--c-gray-light);color:var(--c-charcoal);padding:2px 6px;border-radius:3px;">IFC4.3</code>.</p>
       </div>
 
       <div class="sg-panel">
-        <div class="sg-panel-label">Block Code — Navy background</div>
+        <div class="sg-panel-label" data-i18n="panel-block-code">Block Code — Navy background</div>
         <div class="sg-code-block">
           <code><span class="token-comment">// IDS requirement — IfcWall must carry Pset_WallCommon</span>
 <span class="token-key">"applicability"</span>: {
@@ -2001,17 +2025,17 @@ body {
          ============================================================ -->
     <section class="sg-section" id="usage">
       <div class="sg-section-header">
-        <div class="sg-eyebrow">Guidance · 01</div>
-        <h2 class="sg-section-title">Do / Don't</h2>
-        <p class="sg-section-desc">Four rules that protect the system's integrity. Each violation erodes the clarity and distinction the palette and type system are designed to create.</p>
+        <div class="sg-eyebrow" data-i18n="eyebrow-g01">Guidance · 01</div>
+        <h2 class="sg-section-title" data-i18n="s-usage">Do / Don't</h2>
+        <p class="sg-section-desc" data-i18n="usage-desc">Four rules that protect the system's integrity. Each violation erodes the clarity and distinction the palette and type system are designed to create.</p>
       </div>
 
       <!-- Rule 1: One accent -->
       <div class="sg-panel">
-        <div class="sg-panel-label">Rule 1 — One accent per composition</div>
+        <div class="sg-panel-label" data-i18n="rule1-label">Rule 1 — One accent per composition</div>
         <div class="guideline-pair">
           <div class="guideline-card guideline-do">
-            <div class="guideline-verdict">✓ Do</div>
+            <div class="guideline-verdict" data-i18n="verdict-do">✓ Do</div>
             <div class="guideline-preview">
               <div>
                 <div style="font-family:var(--ff-display);font-size:18px;font-weight:700;color:var(--c-navy);margin-bottom:8px;">IFC4.3 Released</div>
@@ -2019,10 +2043,10 @@ body {
                 <button class="sg-btn sg-btn-accent" style="font-size:12px;padding:6px 14px;">Read more</button>
               </div>
             </div>
-            <div class="guideline-caption">Single Mint element — the CTA button. Everything else is Navy and Charcoal.</div>
+            <div class="guideline-caption" data-i18n="r1-do-cap">Single Mint element — the CTA button. Everything else is Navy and Charcoal.</div>
           </div>
           <div class="guideline-card guideline-dont">
-            <div class="guideline-verdict">✗ Don't</div>
+            <div class="guideline-verdict" data-i18n="verdict-dont">✗ Don't</div>
             <div class="guideline-preview">
               <div>
                 <div style="font-family:var(--ff-display);font-size:18px;font-weight:700;color:var(--c-mint);margin-bottom:8px;">IFC4.3 Released</div>
@@ -2030,86 +2054,86 @@ body {
                 <button class="sg-btn sg-btn-accent" style="font-size:12px;padding:6px 14px;">Read more</button>
               </div>
             </div>
-            <div class="guideline-caption">Mint heading + Mint button. The accent loses its power when it appears twice.</div>
+            <div class="guideline-caption" data-i18n="r1-dont-cap">Mint heading + Mint button. The accent loses its power when it appears twice.</div>
           </div>
         </div>
       </div>
 
       <!-- Rule 2: Typography -->
       <div class="sg-panel">
-        <div class="sg-panel-label">Rule 2 — Figtree and Source Serif 4 only</div>
+        <div class="sg-panel-label" data-i18n="rule2-label">Rule 2 — Figtree and Source Serif 4 only</div>
         <div class="guideline-pair">
           <div class="guideline-card guideline-do">
-            <div class="guideline-verdict">✓ Do</div>
+            <div class="guideline-verdict" data-i18n="verdict-do">✓ Do</div>
             <div class="guideline-preview">
               <div>
                 <div style="font-family:'Figtree',sans-serif;font-size:18px;font-weight:700;color:var(--c-navy);margin-bottom:6px;">Open BIM Standards</div>
                 <p style="font-family:'Source Serif 4',Georgia,serif;font-size:13px;line-height:1.65;color:var(--c-charcoal);margin:0;">Interoperability begins with a shared language for building data.</p>
               </div>
             </div>
-            <div class="guideline-caption">Figtree heading + Source Serif 4 body — the correct pairing.</div>
+            <div class="guideline-caption" data-i18n="r2-do-cap">Figtree heading + Source Serif 4 body — the correct pairing.</div>
           </div>
           <div class="guideline-card guideline-dont">
-            <div class="guideline-verdict">✗ Don't</div>
+            <div class="guideline-verdict" data-i18n="verdict-dont">✗ Don't</div>
             <div class="guideline-preview">
               <div>
                 <div style="font-family:Arial,sans-serif;font-size:18px;font-weight:700;color:var(--c-navy);margin-bottom:6px;">Open BIM Standards</div>
                 <p style="font-family:'Times New Roman',serif;font-size:13px;line-height:1.65;color:var(--c-charcoal);margin:0;">Interoperability begins with a shared language for building data.</p>
               </div>
             </div>
-            <div class="guideline-caption">Arial heading + Times New Roman body. System fonts are forbidden in all distributed materials.</div>
+            <div class="guideline-caption" data-i18n="r2-dont-cap">Arial heading + Times New Roman body. System fonts are forbidden in all distributed materials.</div>
           </div>
         </div>
       </div>
 
       <!-- Rule 3: Contrast -->
       <div class="sg-panel">
-        <div class="sg-panel-label">Rule 3 — Use approved colour pairings only</div>
+        <div class="sg-panel-label" data-i18n="rule3-label">Rule 3 — Use approved colour pairings only</div>
         <div class="guideline-pair">
           <div class="guideline-card guideline-do">
-            <div class="guideline-verdict">✓ Do</div>
+            <div class="guideline-verdict" data-i18n="verdict-do">✓ Do</div>
             <div class="guideline-preview">
               <div>
                 <div style="font-family:var(--ff-display);font-size:14px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--c-slate);margin-bottom:6px;">Section label</div>
                 <p style="font-family:var(--ff-body);font-size:13px;line-height:1.65;color:var(--c-charcoal);margin:0;">Charcoal (#38363D) on white: 11.5:1 contrast ratio.</p>
               </div>
             </div>
-            <div class="guideline-caption">Charcoal on white passes AAA (11.5:1). Slate passes AAA for the label (9.1:1).</div>
+            <div class="guideline-caption" data-i18n="r3-do-cap">Charcoal on white passes AAA (11.5:1). Slate passes AAA for the label (9.1:1).</div>
           </div>
           <div class="guideline-card guideline-dont">
-            <div class="guideline-verdict">✗ Don't</div>
+            <div class="guideline-verdict" data-i18n="verdict-dont">✗ Don't</div>
             <div class="guideline-preview">
               <div>
                 <div style="font-family:var(--ff-display);font-size:14px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--c-silver);margin-bottom:6px;">Section label</div>
                 <p style="font-family:var(--ff-body);font-size:13px;line-height:1.65;color:var(--c-silver);margin:0;">Silver (#C8C6C5) on white: 1.7:1 — fails all WCAG criteria.</p>
               </div>
             </div>
-            <div class="guideline-caption">Silver on white fails WCAG (1.7:1). Silver is for borders and dividers — never for text.</div>
+            <div class="guideline-caption" data-i18n="r3-dont-cap">Silver on white fails WCAG (1.7:1). Silver is for borders and dividers — never for text.</div>
           </div>
         </div>
       </div>
 
       <!-- Rule 4: Mint at scale -->
       <div class="sg-panel">
-        <div class="sg-panel-label">Rule 4 — Mint is an accent, not a surface</div>
+        <div class="sg-panel-label" data-i18n="rule4-label">Rule 4 — Mint is an accent, not a surface</div>
         <div class="guideline-pair">
           <div class="guideline-card guideline-do">
-            <div class="guideline-verdict">✓ Do</div>
+            <div class="guideline-verdict" data-i18n="verdict-do">✓ Do</div>
             <div class="guideline-preview" style="gap:var(--sp-3);flex-wrap:wrap;">
-              <span class="sg-tag sg-tag-active">Active</span>
+              <span class="sg-tag sg-tag-active" data-i18n="tag-active">Active</span>
               <span style="font-family:var(--ff-mono);font-size:11px;color:var(--c-mint);background:var(--c-navy);padding:3px 8px;border-radius:3px;">ACTIVE STATE</span>
               <div style="width:24px;height:24px;border-radius:50%;background:var(--c-mint);border:2px solid white;box-shadow:0 0 0 1px rgba(0,0,0,0.1);"></div>
             </div>
-            <div class="guideline-caption">Mint as a small tag, active indicator, or dot. Contained, purposeful.</div>
+            <div class="guideline-caption" data-i18n="r4-do-cap">Mint as a small tag, active indicator, or dot. Contained, purposeful.</div>
           </div>
           <div class="guideline-card guideline-dont">
-            <div class="guideline-verdict">✗ Don't</div>
+            <div class="guideline-verdict" data-i18n="verdict-dont">✗ Don't</div>
             <div class="guideline-preview" style="padding:0;">
               <div style="background:var(--c-mint);width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:var(--sp-6);">
                 <p style="font-family:var(--ff-body);font-size:13px;line-height:1.65;color:var(--c-navy);margin:0;text-align:center;">Body text on a full Mint background panel.</p>
               </div>
             </div>
-            <div class="guideline-caption">Mint as a large background surface. It overwhelms the composition and reads as decorative, not purposeful.</div>
+            <div class="guideline-caption" data-i18n="r4-dont-cap">Mint as a large background surface. It overwhelms the composition and reads as decorative, not purposeful.</div>
           </div>
         </div>
       </div>
@@ -2123,14 +2147,363 @@ body {
      FOOTER
      ================================================================ -->
 <footer class="sg-footer">
-  <div class="sg-footer-brand">buildingSMART Finland · Style Guide · June 2026</div>
-  <div class="sg-footer-note">Self-contained reference file — do not add external dependencies</div>
+  <div class="sg-footer-brand" data-i18n="footer-brand">buildingSMART Finland · Style Guide · June 2026</div>
+  <div class="sg-footer-note" data-i18n="footer-note">Self-contained reference file — do not add external dependencies</div>
 </footer>
 
 <!-- ================================================================
      JAVASCRIPT — clipboard copy + nav highlight
      ================================================================ -->
 <script>
+/* i18n — EN / FI language switcher */
+var TRANSLATIONS = {
+  en: {
+    /* header */
+    "header-label":   "Visual Identity System &nbsp;·&nbsp; June 2026",
+    "header-title":   "Style Guide",
+    "header-sub":     "Colour · Typography · Spacing · Components · Usage — self-contained reference for web and document production.",
+    /* nav */
+    "nav-sections":   "Sections",
+    "s-colour":       "Colour Palette",
+    "s-typography":   "Typography",
+    "s-spacing":      "Spacing Scale",
+    "s-headings":     "Headings",
+    "s-body-text":    "Body Text",
+    "s-callouts":     "Callouts",
+    "s-tables":       "Tables",
+    "s-buttons":      "Buttons",
+    "s-tags":         "Tags & Badges",
+    "s-code":         "Code Blocks",
+    "s-usage":        "Do / Don’t",
+    /* section eyebrows */
+    "eyebrow-01":     "Foundation · 01",
+    "eyebrow-02":     "Foundation · 02",
+    "eyebrow-03":     "Foundation · 03",
+    "eyebrow-c01":    "Components · 01",
+    "eyebrow-c02":    "Components · 02",
+    "eyebrow-c03":    "Components · 03",
+    "eyebrow-c04":    "Components · 04",
+    "eyebrow-c05":    "Components · 05",
+    "eyebrow-c06":    "Components · 06",
+    "eyebrow-c07":    "Components · 07",
+    "eyebrow-g01":    "Guidance · 01",
+    /* colour */
+    "colour-desc":    "The buildingSMART Finland palette uses the bSI <em>secondary</em> palette exclusively. Mint (#48BF91) is the chapter’s signature accent — one per composition, never paired with competing colours. Click any value to copy it.",
+    "swatch-mint-name": "Mint <span style=\"font-family:var(--ff-mono);font-size:10px;font-weight:400;color:var(--c-slate);\">&#9733; signature accent</span>",
+    "role-navy":      "Primary anchor — headlines, hero backgrounds, primary CTAs.",
+    "role-slate":     "Secondary surfaces, section backgrounds, H6 heading colour.",
+    "role-charcoal":  "Body text, secondary UI. Replaces pure black — softer on screen.",
+    "role-mint":      "Hero accent, CTAs, interactive elements. One per composition — never decorative.",
+    "role-silver":    "Borders, dividers, muted UI elements. Not for body text.",
+    "role-lightgray": "Page backgrounds, card surfaces, code block fills.",
+    "cl-white-navy":  "white on Navy",
+    "cl-mint-navy":   "Mint on Navy",
+    "cl-white-slate": "white on Slate",
+    "cl-mint-slate":  "Mint on Slate",
+    "cl-charcoal-white": "Charcoal on white",
+    "cl-mint-white":  "Mint on white — icons/borders only",
+    "cl-mint-navy-ui":"Mint on Navy — labels, UI",
+    "cl-decorative":  "Decorative / UI dividers only",
+    "cl-charcoal-lg": "Charcoal on Light Gray",
+    "panel-pairings": "Approved Text / Background Pairings",
+    /* typography */
+    "typo-desc":      "Three typefaces cover all content needs. Figtree leads headings and UI; Source Serif 4 carries body and long-form text; JetBrains Mono marks every technical identifier.",
+    "panel-type-scale": "Type Scale Reference",
+    "panel-specimens":  "Live Specimens",
+    "panel-type-colour":"Approved Colour Pairings for Type",
+    "panel-medium":     "Medium-Specific Rules",
+    "spec-display":   "Hero /<br>cover",
+    "spec-h1":        "Page<br>title",
+    "spec-h2":        "Major<br>section",
+    "spec-h3":        "Sub-<br>section",
+    "spec-h4":        "Clause",
+    "spec-h5":        "Minor<br>heading",
+    "spec-h6":        "Label /<br>nav",
+    "spec-body":      "Long-<br>form",
+    "spec-italic":    "Callout /<br>quote",
+    "spec-small":     "Caption",
+    "spec-label":     "UI<br>text",
+    "spec-mono":      "Identi-<br>fiers",
+    "medium-web":     "Web &amp; HTML documents",
+    "medium-ppt":     "PowerPoint presentations",
+    "medium-word":    "Word documents (.docx)",
+    "medium-mono":    "JetBrains Mono — all media",
+    "medium-web-1":   "Figtree — all headings H1–H6, UI elements, labels, navigation.",
+    "medium-web-2":   "Source Serif 4 — all running body text. Italic for pull quotes and callouts.",
+    "medium-web-3":   "Load via Google Fonts CDN — no local font dependency for readers.",
+    "medium-ppt-1":   "Figtree carries <em>all</em> slide text including body. Minimum 18pt — no exceptions.",
+    "medium-ppt-2":   "Source Serif 4 italic — callout boxes and pull quotes only. Never upright on slides.",
+    "medium-ppt-3":   "Fonts are embedded in the template. Users must also install fonts locally to edit.",
+    "medium-word-1":  "Figtree — all headings H1–H6 via named paragraph styles (27pt → 10pt). Never manual size overrides.",
+    "medium-word-2":  "Source Serif 4 — Normal style for body text at 12pt. Italic for emphasis and pull quotes.",
+    "medium-word-3":  "Caption style at 10.5pt; JetBrains Mono character style at 10pt for inline identifiers.",
+    "medium-word-4":  "Fonts must be installed on the authoring machine. The <code style=\"font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;\">.dotx</code> template does not embed fonts.",
+    "medium-mono-1":  "IFC schema names, file extensions, version strings: <code style=\"font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;\">IFC4.3</code> <code style=\"font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;\">IfcWall</code> <code style=\"font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;\">BCF 3.0</code>",
+    "medium-mono-2":  "Never for decorative use. Arial, Calibri, and Times New Roman are forbidden in all distributed materials.",
+    /* spacing */
+    "spacing-desc":   "A 4px base unit. Twelve tokens cover all padding, margin, and gap values in the system. Never use arbitrary pixel values — always pick the nearest token.",
+    "panel-spacing":  "Spacing Tokens",
+    "sp-1-use":  "Icon gap, tight insets",
+    "sp-2-use":  "Label margin, swatch row gap",
+    "sp-3-use":  "Caption margin, nav item gap",
+    "sp-4-use":  "Default component gap, palette grid",
+    "sp-5-use":  "Section header padding, callout padding",
+    "sp-6-use":  "Panel padding (horizontal), footer gap",
+    "sp-8-use":  "Panel padding, layout padding",
+    "sp-10-use": "Section header margin",
+    "sp-12-use": "Layout padding top, sidebar gap",
+    "sp-16-use": "Header padding, hero inset",
+    "sp-20-use": "Section margin-bottom, footer padding",
+    "sp-24-use": "Max vertical rhythm between major sections",
+    /* headings */
+    "headings-desc":  "All six heading levels use Figtree. Size and weight create hierarchy — colour variation is not used within the heading scale except at H6.",
+    /* body text */
+    "body-text-desc": "Source Serif 4 handles all long-form reading. Figtree covers UI labels. Neither replaces the other.",
+    "panel-body-regular": "Body — Source Serif 4 400",
+    "panel-body-small":   "Small / Caption — Source Serif 4 400",
+    "panel-label-type":   "Label — Figtree 600 uppercase",
+    "label-specimen": "Published · June 2026 &nbsp;·&nbsp; IDS Version 1.0 &nbsp;·&nbsp; IFC4.3",
+    /* callouts */
+    "callouts-desc":      "Two callout patterns — pull quotes for editorial emphasis, info boxes for inline notices. Both use a left border as the sole structural device.",
+    "panel-pull-quote":   "Pull Quote — Source Serif 4 italic",
+    "panel-info-callout": "Info Callout Box",
+    /* tables */
+    "tables-desc":        "Specification-style tables. Column headers in Figtree; cell content in Source Serif 4. Technical identifiers always in JetBrains Mono.",
+    "panel-pset-table":   "Property Set Table — IFC example",
+    /* buttons */
+    "buttons-desc":       "Four variants. Primary and Secondary for main actions; Ghost for low-priority actions; Accent (Mint) used at most once per composition.",
+    "btn-primary":        "Primary",
+    "btn-secondary":      "Secondary",
+    "btn-ghost":          "Ghost",
+    "btn-accent":         "Accent",
+    "btn-primary-desc":   "Navy fill · white text",
+    "btn-secondary-desc": "Transparent · navy border",
+    "btn-ghost-desc":     "Transparent · silver border",
+    "btn-accent-desc":    "Mint fill · navy text · once per composition",
+    /* tags */
+    "tags-desc":          "Status tags, mono identifier tags, and WCAG badges. All use existing palette colours — no new colours introduced.",
+    "tag-row-status":     "Status",
+    "tag-row-ids":        "Identifiers",
+    "tag-row-wcag":       "WCAG",
+    "tag-active":         "Active",
+    "tag-draft":          "Draft",
+    "tag-deprecated":     "Deprecated",
+    "tag-informative":    "Informative",
+    "tag-wcag-note":      "Reused from colour palette section",
+    /* code */
+    "code-desc":          "Inline code for identifiers within running text; block code for schema fragments, snippets, and structured data. Both use JetBrains Mono.",
+    "panel-inline-code":  "Inline Code",
+    "panel-block-code":   "Block Code — Navy background",
+    /* usage */
+    "usage-desc":         "Four rules that protect the system’s integrity. Each violation erodes the clarity and distinction the palette and type system are designed to create.",
+    "rule1-label":        "Rule 1 — One accent per composition",
+    "rule2-label":        "Rule 2 — Figtree and Source Serif 4 only",
+    "rule3-label":        "Rule 3 — Use approved colour pairings only",
+    "rule4-label":        "Rule 4 — Mint is an accent, not a surface",
+    "verdict-do":         "✓ Do",
+    "verdict-dont":       "✗ Don’t",
+    "r1-do-cap":   "Single Mint element — the CTA button. Everything else is Navy and Charcoal.",
+    "r1-dont-cap": "Mint heading + Mint button. The accent loses its power when it appears twice.",
+    "r2-do-cap":   "Figtree heading + Source Serif 4 body — the correct pairing.",
+    "r2-dont-cap": "Arial heading + Times New Roman body. System fonts are forbidden in all distributed materials.",
+    "r3-do-cap":   "Charcoal on white passes AAA (11.5:1). Slate passes AAA for the label (9.1:1).",
+    "r3-dont-cap": "Silver on white fails WCAG (1.7:1). Silver is for borders and dividers — never for text.",
+    "r4-do-cap":   "Mint as a small tag, active indicator, or dot. Contained, purposeful.",
+    "r4-dont-cap": "Mint as a large background surface. It overwhelms the composition and reads as decorative, not purposeful.",
+    /* footer */
+    "footer-brand": "buildingSMART Finland · Style Guide · June 2026",
+    "footer-note":  "Self-contained reference file — do not add external dependencies"
+  },
+  fi: {
+    /* header */
+    "header-label":   "Visuaalinen identiteettijärjestelmä &nbsp;·&nbsp; Kesäkuu 2026",
+    "header-title":   "Tyyliopas",
+    "header-sub":     "Värit · Typografia · Välistys · Komponentit · Käyttö — itsenäinen viite verkkoon ja asiakirjatuotantoon.",
+    /* nav */
+    "nav-sections":   "Osiot",
+    "s-colour":       "Väripaletti",
+    "s-typography":   "Typografia",
+    "s-spacing":      "Välistysasteikko",
+    "s-headings":     "Otsikot",
+    "s-body-text":    "Leipäteksti",
+    "s-callouts":     "Huomiolaatikot",
+    "s-tables":       "Taulukot",
+    "s-buttons":      "Painikkeet",
+    "s-tags":         "Tagit ja merkit",
+    "s-code":         "Koodilohkot",
+    "s-usage":        "Tee / Älä tee",
+    /* section eyebrows */
+    "eyebrow-01":  "Perusta · 01",
+    "eyebrow-02":  "Perusta · 02",
+    "eyebrow-03":  "Perusta · 03",
+    "eyebrow-c01": "Komponentit · 01",
+    "eyebrow-c02": "Komponentit · 02",
+    "eyebrow-c03": "Komponentit · 03",
+    "eyebrow-c04": "Komponentit · 04",
+    "eyebrow-c05": "Komponentit · 05",
+    "eyebrow-c06": "Komponentit · 06",
+    "eyebrow-c07": "Komponentit · 07",
+    "eyebrow-g01": "Ohjeistus · 01",
+    /* colour */
+    "colour-desc":    "buildingSMART Finland käyttää yksinomaan bSI:n <em>toissijaista</em> väripalettia. Minttu (#48BF91) on luvun tunnusväri — yksi per koostumus, ei koskaan kilpailevien värien kanssa. Klikkaa arvoa kopioidaksesi sen.",
+    "swatch-mint-name": "Minttu <span style=\"font-family:var(--ff-mono);font-size:10px;font-weight:400;color:var(--c-slate);\">&#9733; tunnusväri</span>",
+    "role-navy":      "Ensisijainen ankuri — otsikot, hero-taustat, ensisijaiset toimintapainikkeet.",
+    "role-slate":     "Toissijaiset pinnat, osiotaustat, H6-otsikon väri.",
+    "role-charcoal":  "Leipäteksti, toissijainen käyttöliittymä. Korvaa puhtaan mustan — pehmeämpi näytöllä.",
+    "role-mint":      "Pääkorostus, toimintapainikkeet, interaktiiviset elementit. Yksi per koostumus — ei koskaan koristeelliseen käyttöön.",
+    "role-silver":    "Reunat, jakajat, haalea käyttöliittymä. Ei leipätekstille.",
+    "role-lightgray": "Sivutaustat, korttipinnat, koodilohkojen täyttö.",
+    "cl-white-navy":  "valkoinen Navyllä",
+    "cl-mint-navy":   "Minttu Navyllä",
+    "cl-white-slate": "valkoinen Slatella",
+    "cl-mint-slate":  "Minttu Slatella",
+    "cl-charcoal-white": "Hiilenharmaa valkoisella",
+    "cl-mint-white":  "Minttu valkoisella — vain kuvakkeet/reunat",
+    "cl-mint-navy-ui":"Minttu Navyllä — merkinnät, käyttöliittymä",
+    "cl-decorative":  "Koristeellinen / vain käyttöliittymäjakajat",
+    "cl-charcoal-lg": "Hiilenharmaa Vaalealla harmaalla",
+    "panel-pairings": "Hyväksytyt teksti / tausta -yhdistelmät",
+    /* typography */
+    "typo-desc":      "Kolme kirjasinperhettä kattaa kaikki sisältötarpeet. Figtree johtaa otsikot ja käyttöliittymän; Source Serif 4 kantaa leipä- ja pitkämuotoisen tekstin; JetBrains Mono merkitsee jokaisen teknisen tunnisteen.",
+    "panel-type-scale": "Kirjainkokoviite",
+    "panel-specimens":  "Elävät näytteet",
+    "panel-type-colour":"Hyväksytyt väriparit tekstille",
+    "panel-medium":     "Välinekohtaiset säännöt",
+    "spec-display":   "Sankari /<br>kantti",
+    "spec-h1":        "Sivu-<br>otsikko",
+    "spec-h2":        "Pää-<br>osio",
+    "spec-h3":        "Ala-<br>osio",
+    "spec-h4":        "Lauseke",
+    "spec-h5":        "Pieni<br>otsikko",
+    "spec-h6":        "Merkintä /<br>nav",
+    "spec-body":      "Pitkä-<br>muotoinen",
+    "spec-italic":    "Huomio /<br>lainaus",
+    "spec-small":     "Kuvateksti",
+    "spec-label":     "Käyttö-<br>liittymä",
+    "spec-mono":      "Tunnis-<br>teet",
+    "medium-web":     "Verkko &amp; HTML-asiakirjat",
+    "medium-ppt":     "PowerPoint-esitykset",
+    "medium-word":    "Word-asiakirjat (.docx)",
+    "medium-mono":    "JetBrains Mono — kaikki välineet",
+    "medium-web-1":   "Figtree — kaikki otsikot H1–H6, käyttöliittymäelementit, merkinnät, navigointi.",
+    "medium-web-2":   "Source Serif 4 — kaikki juokseva leipäteksti. Kursiivi lainauksille ja huomioille.",
+    "medium-web-3":   "Lataa Google Fonts CDN:stä — ei paikallista fonttiriippuvuutta lukijoille.",
+    "medium-ppt-1":   "Figtree kantaa <em>kaiken</em> diatekstin mukaan lukien runkoosa. Vähintään 18pt — ei poikkeuksia.",
+    "medium-ppt-2":   "Source Serif 4 kursiivi — vain huomiolaatikot ja lainaukset. Ei koskaan pystyasennossa dioilla.",
+    "medium-ppt-3":   "Fontit on upotettu malliin. Käyttäjien on myös asennettava fontit paikallisesti muokatakseen.",
+    "medium-word-1":  "Figtree — kaikki otsikot H1–H6 nimettyjen kappaletyöylien kautta (27pt → 10pt). Ei koskaan manuaalisia kokoja.",
+    "medium-word-2":  "Source Serif 4 — Normaali-tyyli leipätekstille 12 pt. Kursiivi korostuksille ja lainauksille.",
+    "medium-word-3":  "Kuvatekstityyli 10,5 pt; JetBrains Mono -merkistötyyli 10 pt inlinetunnisteille.",
+    "medium-word-4":  "Fontit on asennettava kirjoituskoneelle. <code style=\"font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;\">.dotx</code>-malli ei upota fontteja.",
+    "medium-mono-1":  "IFC-skeemanimet, tiedostopäätteet, versiojonot: <code style=\"font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;\">IFC4.3</code> <code style=\"font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;\">IfcWall</code> <code style=\"font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;\">BCF 3.0</code>",
+    "medium-mono-2":  "Ei koskaan koristeelliseen käyttöön. Arial, Calibri ja Times New Roman ovat kiellettyjyä kaikissa jakelumateriaalissa.",
+    /* spacing */
+    "spacing-desc":  "4 px:n perusyksikkö. Kaksitoista merkkiä kattaa kaikki täyttö-, marginaali- ja väliarvot järjestelmässä. Älä koskaan käytä mielivaltaisia pikseliarvoja — valitse aina lähin merkki.",
+    "panel-spacing": "Välistysmerkit",
+    "sp-1-use":  "Kuvakeväli, tiukat sisätilat",
+    "sp-2-use":  "Merkintämarginaali, swatch-riviväli",
+    "sp-3-use":  "Kuvatekstimarginaali, nav-elementtiväli",
+    "sp-4-use":  "Oletuskomponenttiväli, paletiruudukko",
+    "sp-5-use":  "Osion otsikkon täyttö, huomion täyttö",
+    "sp-6-use":  "Paneelin täyttö (vaaka), alatunnisteeväli",
+    "sp-8-use":  "Paneelin täyttö, asettelun täyttö",
+    "sp-10-use": "Osion otsikon marginaali",
+    "sp-12-use": "Asettelun yläosa täyttö, sivupalkkiväli",
+    "sp-16-use": "Ylätunnisteen täyttö, hero-sisätila",
+    "sp-20-use": "Osion marginaali-alalaita, alatunnisteen täyttö",
+    "sp-24-use": "Enimmäisvertikaalirytmi pääosioiden välillä",
+    /* headings */
+    "headings-desc": "Kaikki kuusi otsikkotasoa käyttävät Figtreeta. Koko ja paino luovat hierarkian — värivaihtelua ei käytetä otsikkoskaalassa H6:ta lukuun ottamatta.",
+    /* body text */
+    "body-text-desc":   "Source Serif 4 käsittelee kaiken pitkämuotoisen lukemisen. Figtree kattaa käyttöliittymämerkinnät. Kumpikaan ei korvaa toista.",
+    "panel-body-regular": "Leipäteksti — Source Serif 4 400",
+    "panel-body-small":   "Pieni / Kuvateksti — Source Serif 4 400",
+    "panel-label-type":   "Merkintä — Figtree 600 versaalit",
+    "label-specimen": "Julkaistu · Kesäkuu 2026 &nbsp;·&nbsp; IDS Versio 1.0 &nbsp;·&nbsp; IFC4.3",
+    /* callouts */
+    "callouts-desc":      "Kaksi huomiolaatikkomallia — lainaukset toimitukselliseen korostukseen, infolaatikot sisäisiin ilmoituksiin. Molemmat käyttävät vasenta reunaa ainoana rakenteellisena elementtinä.",
+    "panel-pull-quote":   "Lainaus — Source Serif 4 kursiivi",
+    "panel-info-callout": "Infohuomio",
+    /* tables */
+    "tables-desc":      "Spesifikaatiotyylisiä taulukoita. Sarakkeiden otsikot Figtreessa; sisältö Source Serif 4:ssä. Tekniset tunnisteet aina JetBrains Monossa.",
+    "panel-pset-table": "Ominaisuusjoukko — IFC-esimerkki",
+    /* buttons */
+    "buttons-desc":       "Neljä varianttia. Ensisijainen ja Toissijainen päätoiminnoille; Haamu vähäisille toiminnoille; Korostus (Minttu) käytössä enintään kerran per koostumus.",
+    "btn-primary":        "Ensisijainen",
+    "btn-secondary":      "Toissijainen",
+    "btn-ghost":          "Haamu",
+    "btn-accent":         "Korostus",
+    "btn-primary-desc":   "Navy täyttö · valkoinen teksti",
+    "btn-secondary-desc": "Läpinäkyvä · navy-reuna",
+    "btn-ghost-desc":     "Läpinäkyvä · hopeinen reuna",
+    "btn-accent-desc":    "Minttu täyttö · navy teksti · kerran per koostumus",
+    /* tags */
+    "tags-desc":       "Tilatagit, mono-tunniste-tagit ja WCAG-merkit. Kaikki käyttävät olemassa olevia värejä — uusia värejä ei oteta käyttöön.",
+    "tag-row-status":  "Tila",
+    "tag-row-ids":     "Tunnisteet",
+    "tag-row-wcag":    "WCAG",
+    "tag-active":      "Aktiivinen",
+    "tag-draft":       "Luonnos",
+    "tag-deprecated":  "Vanhentunut",
+    "tag-informative": "Informatiivinen",
+    "tag-wcag-note":   "Uudelleenkäytetty väripaletti-osiosta",
+    /* code */
+    "code-desc":         "Inlinekoodi tunnisteille juoksevassa tekstissä; lohkokoodi skeemafragmenteille, katkelmille ja strukturoidulle datalle. Molemmat käyttävät JetBrains Monoa.",
+    "panel-inline-code": "Inlinekoodi",
+    "panel-block-code":  "Lohkokoodi — tummansininen tausta",
+    /* usage */
+    "usage-desc":    "Neljä sääntöä, jotka suojaavat järjestelmän eheyttä. Jokainen rikkomus heikentää selkeyttä ja erotusta, jota paletti ja kirjasinperhe on suunniteltu luomaan.",
+    "rule1-label":   "Sääntö 1 — Yksi korostus per koostumus",
+    "rule2-label":   "Sääntö 2 — Vain Figtree ja Source Serif 4",
+    "rule3-label":   "Sääntö 3 — Käytä vain hyväksyttyjä väripareja",
+    "rule4-label":   "Sääntö 4 — Minttu on korostus, ei pinta",
+    "verdict-do":    "✓ Tee",
+    "verdict-dont":  "✗ Älä tee",
+    "r1-do-cap":   "Yksittäinen Minttu-elementti — toimintapainike. Kaikki muu on Navy ja Hiilenharmaa.",
+    "r1-dont-cap": "Minttu-otsikko + Minttu-painike. Korostus menettää tehonsa, kun se esiintyy kahdesti.",
+    "r2-do-cap":   "Figtree-otsikko + Source Serif 4 -runko — oikea yhdistelmä.",
+    "r2-dont-cap": "Arial-otsikko + Times New Roman -runko. Järjestelmäfontit ovat kiellettyjä kaikissa jakelumateriaalissa.",
+    "r3-do-cap":   "Hiilenharmaa valkoisella läpäisee AAA:n (11,5:1). Slate läpäisee AAA:n merkinnälle (9,1:1).",
+    "r3-dont-cap": "Hopea valkoisella epäonnistuu WCAG:ssa (1,7:1). Hopea on reunoille ja jakajille — ei koskaan tekstille.",
+    "r4-do-cap":   "Minttu pienenä tägiksi, aktiiviseksi ilmaisimeksi tai pisteeksi. Rajattu, tarkoituksellinen.",
+    "r4-dont-cap": "Minttu laajana taustapintana. Se hallitsee koostumusta ja näyttää koristeelliselta, ei tarkoitukselliselta.",
+    /* footer */
+    "footer-brand": "buildingSMART Finland · Tyyliopas · Kesäkuu 2026",
+    "footer-note":  "Itsenäinen viitetiedosto — älä lisää ulkoisia riippuvuuksia"
+  }
+};
+
+var currentLang = (function() {
+  try { return localStorage.getItem('bsf-lang') || 'en'; } catch(e) { return 'en'; }
+})();
+
+function setLang(lang) {
+  currentLang = lang;
+  try { localStorage.setItem('bsf-lang', lang); } catch(e) {}
+  document.documentElement.lang = (lang === 'fi') ? 'fi' : 'en';
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n');
+    if (TRANSLATIONS[lang] && TRANSLATIONS[lang][key] !== undefined)
+      el.textContent = TRANSLATIONS[lang][key];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n-html');
+    if (TRANSLATIONS[lang] && TRANSLATIONS[lang][key] !== undefined)
+      el.innerHTML = TRANSLATIONS[lang][key];
+  });
+  document.querySelectorAll('.sg-lang-btn').forEach(function(btn) {
+    var active = btn.getAttribute('data-lang') === lang;
+    btn.classList.toggle('sg-lang-btn--active', active);
+    btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+  });
+}
+
+document.querySelectorAll('.sg-lang-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() { setLang(this.getAttribute('data-lang')); });
+});
+
+setLang(currentLang);
+
 /* Clipboard copy */
 document.querySelectorAll('.copy-btn').forEach(function(btn) {
   btn.addEventListener('click', function() {
