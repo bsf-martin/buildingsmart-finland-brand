@@ -229,6 +229,8 @@ body {
   box-shadow: inset 3px 0 0 var(--c-mint);
 }
 
+.sg-nav a:focus-visible { outline: 2px solid var(--c-mint); outline-offset: 2px; }
+
 .sg-nav-divider {
   height: 1px;
   background: var(--c-gray-light);
@@ -315,11 +317,11 @@ body {
 .sg-footer-brand {
   font-family: var(--ff-mono);
   font-size: 11px;
-  color: rgba(72,191,145,0.75);
+  color: var(--c-mint);
   letter-spacing: 0.08em;
 }
 
-.sg-footer-note { font-style: italic; opacity: 0.65; }
+.sg-footer-note { font-style: italic; color: rgba(255,255,255,0.7); }
 
 /* ================================================================
    SECTION 1 — COLOUR PALETTE
@@ -391,6 +393,8 @@ body {
   background: rgba(72,191,145,0.1);
   border-color: rgba(72,191,145,0.25);
 }
+
+.copy-btn:focus-visible { outline: 2px solid var(--c-mint); outline-offset: 2px; }
 
 .swatch-role {
   margin-top: 8px;
@@ -619,7 +623,7 @@ body {
 .heading-specimen-label {
   font-family: var(--ff-mono);
   font-size: 10px;
-  color: var(--c-silver);
+  color: var(--c-slate);
   width: 28px;
   flex-shrink: 0;
   text-transform: uppercase;
@@ -695,6 +699,8 @@ body {
 }
 .sg-btn-accent:hover { background: #39ae80; border-color: #39ae80; }
 
+.sg-btn:focus-visible { outline: 2px solid var(--c-mint); outline-offset: 3px; }
+
 /* Tags & badges */
 .tag-row {
   display: flex;
@@ -759,7 +765,7 @@ body {
 .sg-code-block .token-key    { color: var(--c-mint); }
 .sg-code-block .token-string { color: #a8d8c8; }
 .sg-code-block .token-num    { color: #f0b868; }
-.sg-code-block .token-comment { color: rgba(255,255,255,0.45); }
+.sg-code-block .token-comment { color: rgba(255,255,255,0.65); }
 
 /* ================================================================
    SECTION 5 — DO / DON'T
@@ -927,7 +933,7 @@ body {
       <li><a href="#colour" class="active">Colour Palette</a></li>
       <li><a href="#typography">Typography</a></li>
       <li><a href="#spacing">Spacing Scale</a></li>
-      <div class="sg-nav-divider"></div>
+      <li role="separator" class="sg-nav-divider"></li>
       <li><a href="#headings">Headings</a></li>
       <li><a href="#body-text">Body Text</a></li>
       <li><a href="#callouts">Callouts</a></li>
@@ -935,7 +941,7 @@ body {
       <li><a href="#buttons">Buttons</a></li>
       <li><a href="#tags">Tags &amp; Badges</a></li>
       <li><a href="#code">Code Blocks</a></li>
-      <div class="sg-nav-divider"></div>
+      <li role="separator" class="sg-nav-divider"></li>
       <li><a href="#usage">Do / Don't</a></li>
     </ul>
   </nav>
@@ -963,11 +969,11 @@ body {
             <div class="swatch-values">
               <div class="swatch-row">
                 <span class="swatch-val">#041E42</span>
-                <button class="copy-btn" data-copy="#041E42" title="Copy hex">copy</button>
+                <button class="copy-btn" data-copy="#041E42" title="Copy hex" aria-label="Copy #041E42">copy</button>
               </div>
               <div class="swatch-row">
                 <span class="swatch-val">rgb(4, 30, 66)</span>
-                <button class="copy-btn" data-copy="rgb(4, 30, 66)" title="Copy RGB">copy</button>
+                <button class="copy-btn" data-copy="rgb(4, 30, 66)" title="Copy RGB" aria-label="Copy rgb(4, 30, 66)">copy</button>
               </div>
             </div>
             <div class="swatch-role">Primary anchor — headlines, hero backgrounds, primary CTAs.</div>
@@ -996,11 +1002,11 @@ body {
             <div class="swatch-values">
               <div class="swatch-row">
                 <span class="swatch-val">#354B55</span>
-                <button class="copy-btn" data-copy="#354B55" title="Copy hex">copy</button>
+                <button class="copy-btn" data-copy="#354B55" title="Copy hex" aria-label="Copy #354B55">copy</button>
               </div>
               <div class="swatch-row">
                 <span class="swatch-val">rgb(53, 75, 85)</span>
-                <button class="copy-btn" data-copy="rgb(53, 75, 85)" title="Copy RGB">copy</button>
+                <button class="copy-btn" data-copy="rgb(53, 75, 85)" title="Copy RGB" aria-label="Copy rgb(53, 75, 85)">copy</button>
               </div>
             </div>
             <div class="swatch-role">Secondary surfaces, section backgrounds, H6 heading colour.</div>
@@ -1029,11 +1035,11 @@ body {
             <div class="swatch-values">
               <div class="swatch-row">
                 <span class="swatch-val">#38363D</span>
-                <button class="copy-btn" data-copy="#38363D" title="Copy hex">copy</button>
+                <button class="copy-btn" data-copy="#38363D" title="Copy hex" aria-label="Copy #38363D">copy</button>
               </div>
               <div class="swatch-row">
                 <span class="swatch-val">rgb(56, 54, 61)</span>
-                <button class="copy-btn" data-copy="rgb(56, 54, 61)" title="Copy RGB">copy</button>
+                <button class="copy-btn" data-copy="rgb(56, 54, 61)" title="Copy RGB" aria-label="Copy rgb(56, 54, 61)">copy</button>
               </div>
             </div>
             <div class="swatch-role">Body text, secondary UI. Replaces pure black — softer on screen.</div>
@@ -1056,11 +1062,11 @@ body {
             <div class="swatch-values">
               <div class="swatch-row">
                 <span class="swatch-val">#48BF91</span>
-                <button class="copy-btn" data-copy="#48BF91" title="Copy hex">copy</button>
+                <button class="copy-btn" data-copy="#48BF91" title="Copy hex" aria-label="Copy #48BF91">copy</button>
               </div>
               <div class="swatch-row">
                 <span class="swatch-val">rgb(72, 191, 145)</span>
-                <button class="copy-btn" data-copy="rgb(72, 191, 145)" title="Copy RGB">copy</button>
+                <button class="copy-btn" data-copy="rgb(72, 191, 145)" title="Copy RGB" aria-label="Copy rgb(72, 191, 145)">copy</button>
               </div>
             </div>
             <div class="swatch-role">Hero accent, CTAs, interactive elements. One per composition — never decorative.</div>
@@ -1089,11 +1095,11 @@ body {
             <div class="swatch-values">
               <div class="swatch-row">
                 <span class="swatch-val">#C8C6C5</span>
-                <button class="copy-btn" data-copy="#C8C6C5" title="Copy hex">copy</button>
+                <button class="copy-btn" data-copy="#C8C6C5" title="Copy hex" aria-label="Copy #C8C6C5">copy</button>
               </div>
               <div class="swatch-row">
                 <span class="swatch-val">rgb(200, 198, 197)</span>
-                <button class="copy-btn" data-copy="rgb(200, 198, 197)" title="Copy RGB">copy</button>
+                <button class="copy-btn" data-copy="rgb(200, 198, 197)" title="Copy RGB" aria-label="Copy rgb(200, 198, 197)">copy</button>
               </div>
             </div>
             <div class="swatch-role">Borders, dividers, muted UI elements. Not for body text.</div>
@@ -1116,11 +1122,11 @@ body {
             <div class="swatch-values">
               <div class="swatch-row">
                 <span class="swatch-val">#E3E3E3</span>
-                <button class="copy-btn" data-copy="#E3E3E3" title="Copy hex">copy</button>
+                <button class="copy-btn" data-copy="#E3E3E3" title="Copy hex" aria-label="Copy #E3E3E3">copy</button>
               </div>
               <div class="swatch-row">
                 <span class="swatch-val">rgb(227, 227, 227)</span>
-                <button class="copy-btn" data-copy="rgb(227, 227, 227)" title="Copy RGB">copy</button>
+                <button class="copy-btn" data-copy="rgb(227, 227, 227)" title="Copy RGB" aria-label="Copy rgb(227, 227, 227)">copy</button>
               </div>
             </div>
             <div class="swatch-role">Page backgrounds, card surfaces, code block fills.</div>
