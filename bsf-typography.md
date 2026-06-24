@@ -55,6 +55,33 @@ PowerPoint uses points (pt). Minimum body size is **18pt** — no exceptions.
 
 ---
 
+### Word document scale
+
+Word uses points (pt). Minimum body size is **12pt**. Sizes derived from the web scale at 1pt ≈ 1.333px, rounded to the nearest half-point used in Word paragraph styles.
+
+| Level | Size | Weight | Family | Usage |
+|-------|------|--------|--------|-------|
+| Display | 36pt | 800 | Figtree | Cover page title — one per document, cover only |
+| Heading 1 | 27pt | 700 | Figtree | Document title — one per document |
+| Heading 2 | 21pt | 700 | Figtree | Major section heading |
+| Heading 3 | 16pt | 600 | Figtree | Sub-section heading |
+| Heading 4 | 14pt | 600 | Figtree | Clause-level heading |
+| Heading 5 | 12pt | 600 | Figtree | Minor heading |
+| Heading 6 | 10pt | 600 | Figtree | Uppercase label — letter-spacing 0.06em |
+| Body (Normal) | 12pt | 400 | Source Serif 4 | Running body text — use Named paragraph style |
+| Caption | 10.5pt | 400 | Source Serif 4 | Captions, footnotes, metadata |
+| Label | 9pt | 600 | Figtree | UI labels — uppercase, use sparingly |
+| Mono | 10pt | 400 | JetBrains Mono | Standards identifiers, schema names, code |
+
+**Word font rules:**
+- Use named paragraph styles for all heading levels — never apply manual size or weight overrides.
+- Figtree — all headings (Heading 1–6). Source Serif 4 — Normal (body), Caption, and italic callout styles.
+- Source Serif 4 italic — pull quotes and callout boxes only, via a dedicated paragraph style.
+- Fonts must be installed on the authoring machine. The `.dotx` template does not embed fonts.
+- JetBrains Mono — use a dedicated character style for inline technical identifiers.
+
+---
+
 ## CSS tokens
 
 ```css
