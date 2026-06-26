@@ -6,7 +6,7 @@
 <title>buildingSMART Finland — Style Guide</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@1,8..60,400;1,8..60,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 
 /* ================================================================
@@ -30,7 +30,8 @@
 
   /* Families */
   --ff-display: 'Figtree', sans-serif;
-  --ff-body:    'Source Serif 4', Georgia, serif;
+  --ff-body:    'Source Sans 3', system-ui, sans-serif;
+  --ff-quote:   'Source Serif 4', Georgia, serif;    /* italic only — pull quotes and callout emphasis */
   --ff-mono:    'JetBrains Mono', 'Courier New', monospace;
 
   /* Scale */
@@ -1249,7 +1250,7 @@ body {
       <div class="sg-section-header">
         <div class="sg-eyebrow" data-i18n="eyebrow-02">Foundation · 02</div>
         <h2 class="sg-section-title" data-i18n="s-typography">Typography</h2>
-        <p class="sg-section-desc" data-i18n="typo-desc">Three typefaces cover all content needs. Figtree leads headings and UI; Source Serif 4 carries body and long-form text; JetBrains Mono marks every technical identifier.</p>
+        <p class="sg-section-desc" data-i18n="typo-desc">Three typefaces cover all content needs. Figtree leads headings and UI; Source Sans 3 carries body and long-form text; JetBrains Mono marks every technical identifier. Source Serif 4 italic is reserved for pull quotes and callout emphasis only.</p>
       </div>
 
       <!-- Type scale reference table -->
@@ -1320,14 +1321,14 @@ body {
               <td><span style="font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">--fs-body</span></td>
               <td><span style="font-family:var(--ff-mono);font-size:11px;">16px / 1rem</span></td>
               <td><span style="font-family:var(--ff-mono);font-size:11px;">12pt</span></td>
-              <td>400</td><td>Source Serif 4</td>
+              <td>400</td><td>Source Sans 3</td>
               <td>Running body text, paragraphs</td>
             </tr>
             <tr>
               <td><span style="font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">--fs-small</span></td>
               <td><span style="font-family:var(--ff-mono);font-size:11px;">14px / 0.875rem</span></td>
               <td><span style="font-family:var(--ff-mono);font-size:11px;">10.5pt</span></td>
-              <td>400</td><td>Source Serif 4</td>
+              <td>400</td><td>Source Sans 3</td>
               <td>Captions, metadata, footnotes</td>
             </tr>
             <tr>
@@ -1471,7 +1472,7 @@ body {
             <div class="type-meta">
               <span class="type-meta-chip">--fs-body · 16px</span>
               <span class="type-meta-chip">weight 400</span>
-              <span class="type-meta-chip">Source Serif 4</span>
+              <span class="type-meta-chip">Source Sans 3</span>
               <span class="type-meta-chip">line-height 1.7</span>
             </div>
           </div>
@@ -1483,10 +1484,10 @@ body {
             <div class="type-specimen-level-desc" data-i18n-html="spec-italic">Callout /<br>quote</div>
           </div>
           <div style="flex:1;">
-            <div style="font-family:var(--ff-body);font-size:var(--fs-body);font-weight:400;font-style:italic;line-height:var(--lh-body);color:var(--c-charcoal);max-width:600px;">"Open standards remove barriers to interoperability. They are not a competitive advantage — they are the foundation on which advantages are built."</div>
+            <div style="font-family:var(--ff-quote);font-size:var(--fs-body);font-weight:400;font-style:italic;line-height:var(--lh-body);color:var(--c-charcoal);max-width:600px;">"Open standards remove barriers to interoperability. They are not a competitive advantage — they are the foundation on which advantages are built."</div>
             <div class="type-meta">
-              <span class="type-meta-chip">--fs-body · italic</span>
-              <span class="type-meta-chip">Source Serif 4</span>
+              <span class="type-meta-chip">--ff-quote · italic</span>
+              <span class="type-meta-chip">Source Serif 4 italic</span>
               <span class="type-meta-chip">Pull quotes and callouts only</span>
             </div>
           </div>
@@ -1502,7 +1503,7 @@ body {
             <div class="type-meta">
               <span class="type-meta-chip">--fs-small · 14px</span>
               <span class="type-meta-chip">weight 400</span>
-              <span class="type-meta-chip">Source Serif 4</span>
+              <span class="type-meta-chip">Source Sans 3</span>
               <span class="type-meta-chip">Captions, metadata, footnotes</span>
             </div>
           </div>
@@ -1797,11 +1798,11 @@ body {
       <div class="sg-section-header">
         <div class="sg-eyebrow" data-i18n="eyebrow-c02">Components · 02</div>
         <h2 class="sg-section-title" data-i18n="s-body-text">Body Text</h2>
-        <p class="sg-section-desc" data-i18n="body-text-desc">Source Serif 4 handles all long-form reading. Figtree covers UI labels. Neither replaces the other.</p>
+        <p class="sg-section-desc" data-i18n="body-text-desc">Source Sans 3 handles all long-form reading. Source Serif 4 italic is reserved for pull quotes and callout emphasis. Figtree covers UI labels.</p>
       </div>
 
       <div class="sg-panel">
-        <div class="sg-panel-label" data-i18n="panel-body-regular">Body — Source Serif 4 400</div>
+        <div class="sg-panel-label" data-i18n="panel-body-regular">Body — Source Sans 3 400</div>
         <p style="font-family:var(--ff-body);font-size:var(--fs-body);font-weight:400;line-height:var(--lh-body);color:var(--c-charcoal);max-width:660px;margin:0;">buildingSMART International develops and maintains open standards for Building Information Modelling. The IFC schema provides a neutral, open file format for exchanging building and construction industry data across software applications, enabling genuine interoperability across the entire project lifecycle — from design and engineering through construction and operation.</p>
         <div class="type-meta" style="margin-top:var(--sp-4);">
           <span class="type-meta-chip">16px / 1rem</span>
@@ -1812,7 +1813,7 @@ body {
       </div>
 
       <div class="sg-panel">
-        <div class="sg-panel-label" data-i18n="panel-body-small">Small / Caption — Source Serif 4 400</div>
+        <div class="sg-panel-label" data-i18n="panel-body-small">Small / Caption — Source Sans 3 400</div>
         <p style="font-family:var(--ff-body);font-size:var(--fs-small);font-weight:400;line-height:var(--lh-body);color:var(--c-slate);margin:0;">Figure 3 — Entity relationship between <span style="font-family:var(--ff-mono);font-size:12px;">IfcWall</span> and <span style="font-family:var(--ff-mono);font-size:12px;">Pset_WallCommon</span> in IFC4.3. Source: buildingSMART International, June 2026. All rights reserved.</p>
         <div class="type-meta" style="margin-top:var(--sp-4);">
           <span class="type-meta-chip">14px / 0.875rem</span>
@@ -1848,7 +1849,7 @@ body {
       <div class="sg-panel">
         <div class="sg-panel-label" data-i18n="panel-pull-quote">Pull Quote — Source Serif 4 italic</div>
         <blockquote style="border-left:3px solid var(--c-mint);margin:0;padding:var(--sp-3) 0 var(--sp-3) var(--sp-6);">
-          <p style="font-family:var(--ff-body);font-size:1.125rem;font-weight:400;font-style:italic;line-height:1.65;color:var(--c-charcoal);margin:0 0 var(--sp-3) 0;">"Open standards remove barriers to interoperability. They are not a competitive advantage — they are the foundation on which advantages are built."</p>
+          <p style="font-family:var(--ff-quote);font-size:1.125rem;font-weight:400;font-style:italic;line-height:1.65;color:var(--c-charcoal);margin:0 0 var(--sp-3) 0;">"Open standards remove barriers to interoperability. They are not a competitive advantage — they are the foundation on which advantages are built."</p>
           <cite style="font-family:var(--ff-display);font-size:var(--fs-label);font-weight:600;letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--c-slate);font-style:normal;">buildingSMART International</cite>
         </blockquote>
       </div>
@@ -1870,7 +1871,7 @@ body {
       <div class="sg-section-header">
         <div class="sg-eyebrow" data-i18n="eyebrow-c04">Components · 04</div>
         <h2 class="sg-section-title" data-i18n="s-tables">Tables</h2>
-        <p class="sg-section-desc" data-i18n="tables-desc">Specification-style tables. Column headers in Figtree; cell content in Source Serif 4. Technical identifiers always in JetBrains Mono.</p>
+        <p class="sg-section-desc" data-i18n="tables-desc">Specification-style tables. Column headers in Figtree; cell content in Source Sans 3. Technical identifiers always in JetBrains Mono.</p>
       </div>
 
       <div class="sg-panel">
@@ -2061,17 +2062,17 @@ body {
 
       <!-- Rule 2: Typography -->
       <div class="sg-panel">
-        <div class="sg-panel-label" data-i18n="rule2-label">Rule 2 — Figtree and Source Serif 4 only</div>
+        <div class="sg-panel-label" data-i18n="rule2-label">Rule 2 — Figtree and Source Sans 3 only</div>
         <div class="guideline-pair">
           <div class="guideline-card guideline-do">
             <div class="guideline-verdict" data-i18n="verdict-do">✓ Do</div>
             <div class="guideline-preview">
               <div>
                 <div style="font-family:'Figtree',sans-serif;font-size:18px;font-weight:700;color:var(--c-navy);margin-bottom:6px;">Open BIM Standards</div>
-                <p style="font-family:'Source Serif 4',Georgia,serif;font-size:13px;line-height:1.65;color:var(--c-charcoal);margin:0;">Interoperability begins with a shared language for building data.</p>
+                <p style="font-family:'Source Sans 3',system-ui,sans-serif;font-size:13px;line-height:1.65;color:var(--c-charcoal);margin:0;">Interoperability begins with a shared language for building data.</p>
               </div>
             </div>
-            <div class="guideline-caption" data-i18n="r2-do-cap">Figtree heading + Source Serif 4 body — the correct pairing.</div>
+            <div class="guideline-caption" data-i18n="r2-do-cap">Figtree heading + Source Sans 3 body — the correct pairing.</div>
           </div>
           <div class="guideline-card guideline-dont">
             <div class="guideline-verdict" data-i18n="verdict-dont">✗ Don't</div>
@@ -2207,7 +2208,7 @@ var TRANSLATIONS = {
     "cl-charcoal-lg": "Charcoal on Light Gray",
     "panel-pairings": "Approved Text / Background Pairings",
     /* typography */
-    "typo-desc":      "Three typefaces cover all content needs. Figtree leads headings and UI; Source Serif 4 carries body and long-form text; JetBrains Mono marks every technical identifier.",
+    "typo-desc":      "Three typefaces cover all content needs. Figtree leads headings and UI; Source Sans 3 carries body and long-form text; JetBrains Mono marks every technical identifier. Source Serif 4 italic is reserved for pull quotes and callout emphasis only.",
     "panel-type-scale": "Type Scale Reference",
     "panel-specimens":  "Live Specimens",
     "panel-type-colour":"Approved Colour Pairings for Type",
@@ -2229,13 +2230,13 @@ var TRANSLATIONS = {
     "medium-word":    "Word documents (.docx)",
     "medium-mono":    "JetBrains Mono — all media",
     "medium-web-1":   "Figtree — all headings H1–H6, UI elements, labels, navigation.",
-    "medium-web-2":   "Source Serif 4 — all running body text. Italic for pull quotes and callouts.",
+    "medium-web-2":   "Source Sans 3 — all running body text. Source Serif 4 italic for pull quotes and callouts only.",
     "medium-web-3":   "Load via Google Fonts CDN — no local font dependency for readers.",
     "medium-ppt-1":   "Figtree carries <em>all</em> slide text including body. Minimum 18pt — no exceptions.",
     "medium-ppt-2":   "Source Serif 4 italic — callout boxes and pull quotes only. Never upright on slides.",
     "medium-ppt-3":   "Fonts are embedded in the template. Users must also install fonts locally to edit.",
     "medium-word-1":  "Figtree — all headings H1–H6 via named paragraph styles (27pt → 10pt). Never manual size overrides.",
-    "medium-word-2":  "Source Serif 4 — Normal style for body text at 12pt. Italic for emphasis and pull quotes.",
+    "medium-word-2":  "Source Sans 3 — Normal style for body text at 12pt. Source Serif 4 italic for Block Quotation and callout emphasis only.",
     "medium-word-3":  "Caption style at 10.5pt; JetBrains Mono character style at 10pt for inline identifiers.",
     "medium-word-4":  "Fonts must be installed on the authoring machine. The <code style=\"font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;\">.dotx</code> template does not embed fonts.",
     "medium-mono-1":  "IFC schema names, file extensions, version strings: <code style=\"font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;\">IFC4.3</code> <code style=\"font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;\">IfcWall</code> <code style=\"font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;\">BCF 3.0</code>",
@@ -2258,9 +2259,9 @@ var TRANSLATIONS = {
     /* headings */
     "headings-desc":  "All six heading levels use Figtree. Size and weight create hierarchy — colour variation is not used within the heading scale except at H6.",
     /* body text */
-    "body-text-desc": "Source Serif 4 handles all long-form reading. Figtree covers UI labels. Neither replaces the other.",
-    "panel-body-regular": "Body — Source Serif 4 400",
-    "panel-body-small":   "Small / Caption — Source Serif 4 400",
+    "body-text-desc": "Source Sans 3 handles all long-form reading. Source Serif 4 italic is reserved for pull quotes and callout emphasis. Figtree covers UI labels.",
+    "panel-body-regular": "Body — Source Sans 3 400",
+    "panel-body-small":   "Small / Caption — Source Sans 3 400",
     "panel-label-type":   "Label — Figtree 600 uppercase",
     "label-specimen": "Published · June 2026 &nbsp;·&nbsp; IDS Version 1.0 &nbsp;·&nbsp; IFC4.3",
     /* callouts */
@@ -2268,7 +2269,7 @@ var TRANSLATIONS = {
     "panel-pull-quote":   "Pull Quote — Source Serif 4 italic",
     "panel-info-callout": "Info Callout Box",
     /* tables */
-    "tables-desc":        "Specification-style tables. Column headers in Figtree; cell content in Source Serif 4. Technical identifiers always in JetBrains Mono.",
+    "tables-desc":        "Specification-style tables. Column headers in Figtree; cell content in Source Sans 3. Technical identifiers always in JetBrains Mono.",
     "panel-pset-table":   "Property Set Table — IFC example",
     /* buttons */
     "buttons-desc":       "Four variants. Primary and Secondary for main actions; Ghost for low-priority actions; Accent (Mint) used at most once per composition.",
@@ -2297,14 +2298,14 @@ var TRANSLATIONS = {
     /* usage */
     "usage-desc":         "Four rules that protect the system’s integrity. Each violation erodes the clarity and distinction the palette and type system are designed to create.",
     "rule1-label":        "Rule 1 — One accent per composition",
-    "rule2-label":        "Rule 2 — Figtree and Source Serif 4 only",
+    "rule2-label":        "Rule 2 — Figtree and Source Sans 3 only",
     "rule3-label":        "Rule 3 — Use approved colour pairings only",
     "rule4-label":        "Rule 4 — Mint is an accent, not a surface",
     "verdict-do":         "✓ Do",
     "verdict-dont":       "✗ Don’t",
     "r1-do-cap":   "Single Mint element — the CTA button. Everything else is Navy and Charcoal.",
     "r1-dont-cap": "Mint heading + Mint button. The accent loses its power when it appears twice.",
-    "r2-do-cap":   "Figtree heading + Source Serif 4 body — the correct pairing.",
+    "r2-do-cap":   "Figtree heading + Source Sans 3 body — the correct pairing.",
     "r2-dont-cap": "Arial heading + Times New Roman body. System fonts are forbidden in all distributed materials.",
     "r3-do-cap":   "Charcoal on white passes AAA (11.5:1). Slate passes AAA for the label (9.1:1).",
     "r3-dont-cap": "Silver on white fails WCAG (1.7:1). Silver is for borders and dividers — never for text.",
@@ -2364,7 +2365,7 @@ var TRANSLATIONS = {
     "cl-charcoal-lg": "Hiilenharmaa Vaalealla harmaalla",
     "panel-pairings": "Hyväksytyt teksti / tausta -yhdistelmät",
     /* typography */
-    "typo-desc":      "Kolme kirjasinperhettä kattaa kaikki sisältötarpeet. Figtree johtaa otsikot ja käyttöliittymän; Source Serif 4 kantaa leipä- ja pitkämuotoisen tekstin; JetBrains Mono merkitsee jokaisen teknisen tunnisteen.",
+    "typo-desc":      "Kolme kirjasinperhettä kattaa kaikki sisältötarpeet. Figtree johtaa otsikot ja käyttöliittymän; Source Sans 3 kantaa leipä- ja pitkämuotoisen tekstin; JetBrains Mono merkitsee jokaisen teknisen tunnisteen. Source Serif 4 kursiivi on varattu lainauksille ja huomioteksteille.",
     "panel-type-scale": "Kirjainkokoviite",
     "panel-specimens":  "Elävät näytteet",
     "panel-type-colour":"Hyväksytyt väriparit tekstille",
@@ -2386,13 +2387,13 @@ var TRANSLATIONS = {
     "medium-word":    "Word-asiakirjat (.docx)",
     "medium-mono":    "JetBrains Mono — kaikki välineet",
     "medium-web-1":   "Figtree — kaikki otsikot H1–H6, käyttöliittymäelementit, merkinnät, navigointi.",
-    "medium-web-2":   "Source Serif 4 — kaikki juokseva leipäteksti. Kursiivi lainauksille ja huomioille.",
+    "medium-web-2":   "Source Sans 3 — kaikki juokseva leipäteksti. Source Serif 4 kursiivi vain lainauksille ja huomioille.",
     "medium-web-3":   "Lataa Google Fonts CDN:stä — ei paikallista fonttiriippuvuutta lukijoille.",
     "medium-ppt-1":   "Figtree kantaa <em>kaiken</em> diatekstin mukaan lukien runkoosa. Vähintään 18pt — ei poikkeuksia.",
     "medium-ppt-2":   "Source Serif 4 kursiivi — vain huomiolaatikot ja lainaukset. Ei koskaan pystyasennossa dioilla.",
     "medium-ppt-3":   "Fontit on upotettu malliin. Käyttäjien on myös asennettava fontit paikallisesti muokatakseen.",
     "medium-word-1":  "Figtree — kaikki otsikot H1–H6 nimettyjen kappaletyöylien kautta (27pt → 10pt). Ei koskaan manuaalisia kokoja.",
-    "medium-word-2":  "Source Serif 4 — Normaali-tyyli leipätekstille 12 pt. Kursiivi korostuksille ja lainauksille.",
+    "medium-word-2":  "Source Sans 3 — Normaali-tyyli leipätekstille 12 pt. Source Serif 4 kursiivi vain Lainaus-tyylille ja huomioille.",
     "medium-word-3":  "Kuvatekstityyli 10,5 pt; JetBrains Mono -merkistötyyli 10 pt inlinetunnisteille.",
     "medium-word-4":  "Fontit on asennettava kirjoituskoneelle. <code style=\"font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;\">.dotx</code>-malli ei upota fontteja.",
     "medium-mono-1":  "IFC-skeemanimet, tiedostopäätteet, versiojonot: <code style=\"font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;\">IFC4.3</code> <code style=\"font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;\">IfcWall</code> <code style=\"font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;\">BCF 3.0</code>",
@@ -2415,9 +2416,9 @@ var TRANSLATIONS = {
     /* headings */
     "headings-desc": "Kaikki kuusi otsikkotasoa käyttävät Figtreeta. Koko ja paino luovat hierarkian — värivaihtelua ei käytetä otsikkoskaalassa H6:ta lukuun ottamatta.",
     /* body text */
-    "body-text-desc":   "Source Serif 4 käsittelee kaiken pitkämuotoisen lukemisen. Figtree kattaa käyttöliittymämerkinnät. Kumpikaan ei korvaa toista.",
-    "panel-body-regular": "Leipäteksti — Source Serif 4 400",
-    "panel-body-small":   "Pieni / Kuvateksti — Source Serif 4 400",
+    "body-text-desc":   "Source Sans 3 käsittelee kaiken pitkämuotoisen lukemisen. Source Serif 4 kursiivi on varattu lainauksille ja huomioteksteille. Figtree kattaa käyttöliittymämerkinnät.",
+    "panel-body-regular": "Leipäteksti — Source Sans 3 400",
+    "panel-body-small":   "Pieni / Kuvateksti — Source Sans 3 400",
     "panel-label-type":   "Merkintä — Figtree 600 versaalit",
     "label-specimen": "Julkaistu · Kesäkuu 2026 &nbsp;·&nbsp; IDS Versio 1.0 &nbsp;·&nbsp; IFC4.3",
     /* callouts */
@@ -2425,7 +2426,7 @@ var TRANSLATIONS = {
     "panel-pull-quote":   "Lainaus — Source Serif 4 kursiivi",
     "panel-info-callout": "Infohuomio",
     /* tables */
-    "tables-desc":      "Spesifikaatiotyylisiä taulukoita. Sarakkeiden otsikot Figtreessa; sisältö Source Serif 4:ssä. Tekniset tunnisteet aina JetBrains Monossa.",
+    "tables-desc":      "Spesifikaatiotyylisiä taulukoita. Sarakkeiden otsikot Figtreessa; sisältö Source Sans 3:ssa. Tekniset tunnisteet aina JetBrains Monossa.",
     "panel-pset-table": "Ominaisuusjoukko — IFC-esimerkki",
     /* buttons */
     "buttons-desc":       "Neljä varianttia. Ensisijainen ja Toissijainen päätoiminnoille; Haamu vähäisille toiminnoille; Korostus (Minttu) käytössä enintään kerran per koostumus.",
@@ -2454,14 +2455,14 @@ var TRANSLATIONS = {
     /* usage */
     "usage-desc":    "Neljä sääntöä, jotka suojaavat järjestelmän eheyttä. Jokainen rikkomus heikentää selkeyttä ja erotusta, jota paletti ja kirjasinperhe on suunniteltu luomaan.",
     "rule1-label":   "Sääntö 1 — Yksi korostus per koostumus",
-    "rule2-label":   "Sääntö 2 — Vain Figtree ja Source Serif 4",
+    "rule2-label":   "Sääntö 2 — Vain Figtree ja Source Sans 3",
     "rule3-label":   "Sääntö 3 — Käytä vain hyväksyttyjä väripareja",
     "rule4-label":   "Sääntö 4 — Minttu on korostus, ei pinta",
     "verdict-do":    "✓ Tee",
     "verdict-dont":  "✗ Älä tee",
     "r1-do-cap":   "Yksittäinen Minttu-elementti — toimintapainike. Kaikki muu on Navy ja Hiilenharmaa.",
     "r1-dont-cap": "Minttu-otsikko + Minttu-painike. Korostus menettää tehonsa, kun se esiintyy kahdesti.",
-    "r2-do-cap":   "Figtree-otsikko + Source Serif 4 -runko — oikea yhdistelmä.",
+    "r2-do-cap":   "Figtree-otsikko + Source Sans 3 -runko — oikea yhdistelmä.",
     "r2-dont-cap": "Arial-otsikko + Times New Roman -runko. Järjestelmäfontit ovat kiellettyjä kaikissa jakelumateriaalissa.",
     "r3-do-cap":   "Hiilenharmaa valkoisella läpäisee AAA:n (11,5:1). Slate läpäisee AAA:n merkinnälle (9,1:1).",
     "r3-dont-cap": "Hopea valkoisella epäonnistuu WCAG:ssa (1,7:1). Hopea on reunoille ja jakajille — ei koskaan tekstille.",
