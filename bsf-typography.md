@@ -5,12 +5,13 @@
 | Role | Family | Source |
 |------|--------|--------|
 | Display / Headings / UI | Figtree | Google Fonts |
-| Body / Long-form | Source Serif 4 | Google Fonts |
+| Body / Long-form | Source Sans 3 | Google Fonts |
+| Quote / Emphasis | Source Serif 4 | Google Fonts · *italic only* |
 | Technical / Code | JetBrains Mono | Google Fonts |
 
 **Google Fonts import (web):**
 ```css
-@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@1,8..60,400;1,8..60,600&family=JetBrains+Mono:wght@400;500&display=swap');
 ```
 
 ---
@@ -28,8 +29,9 @@
 | h4 | 18px / 1.125rem | 600 | Figtree | Clause-level heading |
 | h5 | 16px / 1rem | 600 | Figtree | Minor heading — same size as body, weight differentiates |
 | h6 | 13px / 0.8125rem | 600 | Figtree | Lowest level — uppercase, letter-spacing 0.06em |
-| body | 16px / 1rem | 400 | Source Serif 4 | Running body text, paragraphs |
-| small | 14px / 0.875rem | 400 | Source Serif 4 | Captions, metadata, footnotes |
+| body | 16px / 1rem | 400 | Source Sans 3 | Running body text, paragraphs |
+| quote | 16px / 1rem | 400 *italic* | Source Serif 4 | Pull quotes and callout emphasis — italic only |
+| small | 14px / 0.875rem | 400 | Source Sans 3 | Captions, metadata, footnotes |
 | label | 12px / 0.75rem | 600 | Figtree | UI labels — uppercase, tracking 0.06em |
 | mono | 13px / 0.8125rem | 400 | JetBrains Mono | Code, schema names, file types, version strings |
 
@@ -68,15 +70,15 @@ Word uses points (pt). Minimum body size is **12pt**. Sizes derived from the web
 | Heading 4 | 14pt | 600 | Figtree | Clause-level heading |
 | Heading 5 | 12pt | 600 | Figtree | Minor heading |
 | Heading 6 | 10pt | 600 | Figtree | Uppercase label — letter-spacing 0.06em |
-| Body (Normal) | 12pt | 400 | Source Serif 4 | Running body text — use Named paragraph style |
-| Caption | 10.5pt | 400 | Source Serif 4 | Captions, footnotes, metadata |
+| Body (Normal) | 12pt | 400 | Source Sans 3 | Running body text — use Named paragraph style |
+| Caption | 10.5pt | 400 | Source Sans 3 | Captions, footnotes, metadata |
 | Label | 9pt | 600 | Figtree | UI labels — uppercase, use sparingly |
 | Mono | 10pt | 400 | JetBrains Mono | Standards identifiers, schema names, code |
 
 **Word font rules:**
 - Use named paragraph styles for all heading levels — never apply manual size or weight overrides.
-- Figtree — all headings (Heading 1–6). Source Serif 4 — Normal (body), Caption, and italic callout styles.
-- Source Serif 4 italic — pull quotes and callout boxes only, via a dedicated paragraph style.
+- Figtree — all headings (Heading 1–6). Source Sans 3 — Normal (body) and Caption.
+- Source Serif 4 italic — Block Quotation and callout emphasis only, via a dedicated paragraph style. Never upright.
 - Fonts must be installed on the authoring machine. The `.dotx` template does not embed fonts.
 - JetBrains Mono — use a dedicated character style for inline technical identifiers.
 
@@ -88,7 +90,8 @@ Word uses points (pt). Minimum body size is **12pt**. Sizes derived from the web
 :root {
   /* Families */
   --ff-display: 'Figtree', sans-serif;
-  --ff-body:    'Source Serif 4', Georgia, serif;
+  --ff-body:    'Source Sans 3', system-ui, sans-serif;
+  --ff-quote:   'Source Serif 4', Georgia, serif;    /* italic only — pull quotes and callout emphasis */
   --ff-mono:    'JetBrains Mono', 'Courier New', monospace;
 
   /* Scale — web */
@@ -158,7 +161,8 @@ h6 {
 
 ### Word documents (.docx)
 - **Figtree** — all headings H1–H6. Use named paragraph styles — never manual formatting.
-- **Source Serif 4** — body text (Normal style), captions, footnotes. Italic for emphasis and pull quotes.
+- **Source Sans 3** — body text (Normal style), captions, footnotes.
+- **Source Serif 4 italic** — Block Quotation style for pull quotes and callout emphasis only. Never upright.
 - Fonts must be installed on the authoring machine. The template file does not embed fonts.
 
 ### PowerPoint presentations (.pptx)

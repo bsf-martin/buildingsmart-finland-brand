@@ -37,9 +37,13 @@ Mint (#48BF91) is the most powerful asset in this palette — fresh, distinctive
 
 A geometric rounded sans-serif with warmth and confidence at display sizes, clean legibility at smaller weights. Use at **600–700** for headings and UI elements, **800** for hero and display titles. Handles Finnish characters (ä, ö, å) correctly. Available free via Google Fonts.
 
-### Body / Long-form — Source Serif 4
+### Body / Long-form — Source Sans 3
 
-A contemporary optical-size serif designed for screen and print. Brings editorial quality and reading comfort to long-form content. Use at **400** (body copy), *italic* for pull quotes and callouts. Available free via Google Fonts.
+A clean, contemporary humanist sans-serif optimised for screen legibility across all sizes. Brings clarity and reading comfort to long-form running text and captions. Use at **400** (body copy) and **600** (sub-labels). Available free via Google Fonts.
+
+### Quote / Emphasis — Source Serif 4 *italic*
+
+Retained as a deliberate emphasis register for pull quotes and callout text. Used in *italic only* — never upright. The contrast between the geometric precision of Figtree headings and the editorial warmth of Source Serif 4 italic creates hierarchy and emphasis without reaching for colour. Available free via Google Fonts.
 
 ### Technical / Code — JetBrains Mono
 
@@ -47,11 +51,11 @@ Reserved for standards identifiers, schema references, code snippets, specificat
 
 ### Pairing Logic
 
-Figtree headlines + Source Serif 4 body is the **default pairing** for web and document content. The heading scale runs H1–H6, all in Figtree, using size and weight to establish hierarchy.
+Figtree headlines + Source Sans 3 body is the **default pairing** for web and document content. The heading scale runs H1–H6, all in Figtree, using size and weight to establish hierarchy. Source Serif 4 italic is reserved for pull quotes and callout emphasis — it does not appear as running body text.
 
 **PowerPoint exception:** Figtree carries all text on slides, including body copy. Source Serif 4 appears in *italic only*, in callout boxes and pull quotes — never as a body text substitute on slides. Fonts are embedded in the PowerPoint template; users must also install them locally to edit correctly.
 
-**Specification documents:** The same Figtree + Source Serif 4 system applies across Jekyll (browsable HTML) and Pandoc (PDF) output formats, driven by a shared CSS stylesheet.
+**Specification documents:** The same Figtree + Source Sans 3 system applies across Jekyll (browsable HTML) and Pandoc (PDF) output formats, driven by a shared CSS stylesheet.
 
 JetBrains Mono appears wherever technical content demands it — never as decoration.
 
