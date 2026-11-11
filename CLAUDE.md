@@ -137,3 +137,4 @@ All via Google Fonts. No system fonts (Arial, Calibri, Times New Roman) in any d
 - The project is Finnish/English bilingual — brand copy may be in Finnish; all documentation and code is in English.
 - HTML files should be self-contained (single file, Google Fonts via CDN, no external dependencies beyond fonts).
 - Accessibility: maintain WCAG AA contrast ratios for all text. The palette supports this — don't introduce combinations that break it.
+- Never read `docs/index.html` (the style guide, about 2,000 lines) whole. Search it, or read only the lines you need.
