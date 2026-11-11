@@ -25,7 +25,7 @@ This brief proposes a rebrand that:
 | Silver Gray | `#C8C6C5` | Borders, dividers, muted UI elements |
 | Light Gray | `#e3e3e3` | Page backgrounds, card surfaces, subtle fills |
 
-### The Mint Principle
+### The one-accent rule
 
 Mint (#48BF91) is the colour people will remember us by. It doesn't appear in bSI's primary brand, so it sets the chapter apart without clashing with international material. We use it as the **single accent colour**: one Mint element per layout. If two things on a page are Mint, neither stands out.
 

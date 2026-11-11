@@ -156,7 +156,8 @@ h6 {
 
 ### Web and HTML documents (Jekyll / Pandoc output)
 - **Figtree** for headings H1–H6, interface elements, labels and navigation.
-- **Source Serif 4** for running body text and long paragraphs. Italic for pull quotes and callouts.
+- **Source Sans 3** for running body text and long paragraphs.
+- **Source Serif 4 italic** for pull quotes and callouts only. Never upright.
 - Load the fonts from the Google Fonts CDN. Pandoc PDF output uses the same CSS through WeasyPrint.
 
 ### Word documents (.docx)
@@ -183,7 +184,7 @@ h6 {
 | `#FFFFFF` White | `#041E42` Deep Navy | All text on dark/navy backgrounds |
 | `#FFFFFF` White | `#354B55` Dark Slate | All text on slate backgrounds |
 | `#48BF91` Mint | `#041E42` Deep Navy | Accent labels and active states on dark only |
-| `#48BF91` Mint | white | Inline links and accents only — never large text blocks |
+| `#48BF91` Mint | white | Not for text (2.3:1 fails WCAG). Icons, borders and indicators only |
 
 ---
 
