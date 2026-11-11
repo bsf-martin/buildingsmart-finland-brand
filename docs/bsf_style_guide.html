@@ -104,71 +104,101 @@ body {
 .sg-header {
   background: var(--c-navy);
   color: white;
-  padding: var(--sp-16) var(--sp-20);
+  padding: var(--sp-20) var(--sp-20) 0;
   position: relative;
   overflow: hidden;
 }
 
-.sg-header::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 5px;
-  background: var(--c-mint);
-}
-
-/* Subtle geo decoration - echoes the moodboard */
-.sg-header::after {
-  content: '';
-  position: absolute;
-  right: 80px; top: 0; bottom: 0;
-  width: 1px;
-  background: rgba(72,191,145,0.15);
+.sg-header-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: var(--sp-12);
+  padding-bottom: var(--sp-16);
 }
 
 .sg-header-label {
   font-family: var(--ff-mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--c-mint);
-  margin-bottom: var(--sp-4);
+  margin-bottom: var(--sp-8);
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .sg-header-label::before {
   content: '';
   display: block;
-  width: 20px;
-  height: 1px;
+  width: 32px;
+  height: 2px;
   background: var(--c-mint);
 }
 
 .sg-header-logo {
   display: block;
-  height: 48px;
+  height: 40px;
   width: auto;
-  margin-bottom: var(--sp-5);
+  margin-bottom: var(--sp-12);
 }
 
 .sg-header h1 {
   font-family: var(--ff-display);
-  font-size: 1.75rem;
-  font-weight: 600;
-  letter-spacing: var(--ls-heading);
-  line-height: var(--lh-heading);
+  font-size: 3.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
   color: white;
   margin: 0;
 }
 
 .sg-header-sub {
-  margin-top: var(--sp-3);
+  margin-top: var(--sp-5);
+  max-width: 52ch;
   font-family: var(--ff-body);
-  font-size: var(--fs-small);
-  color: rgba(227,227,227,0.65);
+  font-size: 1.0625rem;
+  color: rgba(227,227,227,0.78);
   line-height: 1.6;
+}
+
+/* Blueprint motif — thin rules and outlined rectangles, one Mint accent in the label */
+.sg-header-art {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.sg-header-meta {
+  position: relative;
+  z-index: 1;
+  max-width: 1160px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3) var(--sp-8);
+  padding: var(--sp-4) 0 var(--sp-5);
+  border-top: 1px solid rgba(200,198,197,0.2);
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: rgba(227,227,227,0.7);
+}
+
+.sg-header-meta span:last-child { margin-left: auto; }
+
+@media (max-width: 860px) {
+  .sg-header { padding: var(--sp-12) var(--sp-5) 0; }
+  .sg-header-inner { grid-template-columns: 1fr; padding-bottom: var(--sp-8); }
+  .sg-header-art { display: none; }
+  .sg-header h1 { font-size: 2.25rem; }
+  .sg-header-logo { margin-bottom: var(--sp-8); }
+  .sg-header-meta span:last-child { margin-left: 0; }
 }
 
 /* Shell */
@@ -827,7 +857,9 @@ body {
      PAGE HEADER
      ================================================================ -->
 <header class="sg-header">
-  <div class="sg-header-label">Visual Identity System &nbsp;·&nbsp; June 2026</div>
+  <div class="sg-header-inner">
+  <div class="sg-header-copy">
+  <div class="sg-header-label">Visual Identity System</div>
   <svg class="sg-header-logo" viewBox="0 0 4617 830" version="1.1" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="bsf-logo-title" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
     <title id="bsf-logo-title">buildingSMART Finland logo</title>
     <g id="Layer-1" transform="matrix(4.16667,0,0,4.16667,0,0)">
@@ -922,6 +954,31 @@ body {
   </svg>
   <h1>Style Guide</h1>
   <p class="sg-header-sub">Colour · Typography · Spacing · Components · Usage — self-contained reference for web and document production.</p>
+  </div>
+  <svg class="sg-header-art" viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <defs>
+      <pattern id="sg-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+        <path d="M40 0H0V40" fill="none" stroke="#354B55" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="480" height="360" fill="url(#sg-grid)" opacity="0.55"/>
+    <g fill="none" stroke="#C8C6C5" stroke-width="1.5" opacity="0.55">
+      <rect x="40" y="200" width="160" height="120"/>
+      <rect x="200" y="120" width="120" height="200"/>
+      <rect x="320" y="240" width="120" height="80"/>
+    </g>
+    <g fill="none" stroke="#C8C6C5" stroke-width="1" opacity="0.3">
+      <rect x="80" y="240" width="40" height="80"/>
+      <rect x="240" y="160" width="40" height="40"/>
+      <rect x="240" y="240" width="40" height="40"/>
+    </g>
+    <path d="M0 320H480" stroke="#C8C6C5" stroke-width="1.5" opacity="0.55"/>
+  </svg>
+  </div>
+  <div class="sg-header-meta">
+    <span>IFC · IDS · BCF · OpenCDE</span>
+    <span>June 2026</span>
+  </div>
 </header>
 
 <!-- ================================================================
