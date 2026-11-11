@@ -130,16 +130,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
 .topnav-brand {
   display: flex;
   align-items: center;
-  gap: var(--sp-3);
   color: white;
-  text-decoration: none;
-  font-family: var(--ff-display);
-  font-weight: 700;
-  font-size: 14px;
   flex-shrink: 0;
 }
 
-.topnav-brand svg { width: 26px; height: 26px; }
+/* Full lockup; 28px tall is about 156px wide (minimum is 120px) */
+.topnav-brand svg { height: 28px; width: auto; aspect-ratio: 4617 / 830; }
 
 .topnav ul {
   display: flex;
@@ -171,9 +167,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
 
 .topnav ul a .n {
   font-family: var(--ff-mono);
-  font-size: 10px;
-  font-weight: 400;
-  opacity: 0.8;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 .topnav ul a:hover { color: white; }
@@ -1175,7 +1170,7 @@ code.inline {
 
 @media (max-width: 860px) {
   .wrap { padding: 0 var(--sp-5); }
-  .topnav-brand span { display: none; }
+  .topnav-brand svg { height: 22px; }
   .topnav ul { margin-left: 0; }
   .sg-header-inner { grid-template-columns: 1fr; padding-top: var(--sp-12); }
   .sg-header-art { display: none; }
@@ -1334,7 +1329,7 @@ code.inline {
      ================================================================ -->
 <nav class="topnav" aria-label="Style guide sections">
   <div class="wrap topnav-inner">
-    <a class="topnav-brand" href="#top"><svg aria-hidden="true"><use href="#bsf-mark"/></svg><span>Style Guide</span></a>
+    <a class="topnav-brand" href="#top" aria-label="buildingSMART Finland style guide, back to top"><svg aria-hidden="true"><use href="#bsf-logo"/></svg></a>
     <ul>
       <li><a href="#glance"><span class="n">00</span>At a glance</a></li>
       <li><a href="#logo"><span class="n">01</span>Logo</a></li>
