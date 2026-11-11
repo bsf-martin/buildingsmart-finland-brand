@@ -104,7 +104,7 @@ body {
 .sg-header {
   background: var(--c-navy);
   color: white;
-  padding: var(--sp-20) var(--sp-20) 0;
+  padding: var(--sp-20);
   position: relative;
   overflow: hidden;
 }
@@ -118,7 +118,6 @@ body {
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
   align-items: center;
   gap: var(--sp-12);
-  padding-bottom: var(--sp-16);
 }
 
 .sg-header-label {
@@ -174,31 +173,13 @@ body {
   display: block;
 }
 
-.sg-header-meta {
-  position: relative;
-  z-index: 1;
-  max-width: 1160px;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--sp-3) var(--sp-8);
-  padding: var(--sp-4) 0 var(--sp-5);
-  border-top: 1px solid rgba(200,198,197,0.2);
-  font-family: var(--ff-mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  color: rgba(227,227,227,0.7);
-}
-
-.sg-header-meta span:last-child { margin-left: auto; }
 
 @media (max-width: 860px) {
-  .sg-header { padding: var(--sp-12) var(--sp-5) 0; }
-  .sg-header-inner { grid-template-columns: 1fr; padding-bottom: var(--sp-8); }
+  .sg-header { padding: var(--sp-12) var(--sp-5); }
+  .sg-header-inner { grid-template-columns: 1fr; }
   .sg-header-art { display: none; }
   .sg-header h1 { font-size: 2.25rem; }
   .sg-header-logo { margin-bottom: var(--sp-8); }
-  .sg-header-meta span:last-child { margin-left: 0; }
 }
 
 /* Shell */
@@ -974,10 +955,6 @@ body {
     </g>
     <path d="M0 320H480" stroke="#C8C6C5" stroke-width="1.5" opacity="0.55"/>
   </svg>
-  </div>
-  <div class="sg-header-meta">
-    <span>IFC · IDS · BCF · OpenCDE</span>
-    <span>June 2026</span>
   </div>
 </header>
 
