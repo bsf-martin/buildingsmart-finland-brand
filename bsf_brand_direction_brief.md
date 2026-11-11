@@ -5,12 +5,12 @@
 
 ## Overview
 
-buildingSMART Finland is the Finnish chapter of buildingSMART International (bSI), the global body responsible for openBIM standards including IFC, IDS, BCF, and the OpenCDE platform. The chapter promotes and develops building information modelling in Finland, with a focus on open standards and interoperability across the built environment sector.
+buildingSMART Finland is the Finnish chapter of buildingSMART International (bSI), which maintains the openBIM standards: IFC, IDS, BCF and the OpenCDE APIs. The chapter promotes building information modelling in Finland, with a focus on open standards that let different software share data.
 
 This brief proposes a rebrand that:
-- Uses the **secondary** bSI palette exclusively rather than the primary (avoiding the red/blue/magenta combination that dominates international materials)
-- Establishes a clean, minimal visual language appropriate for a technical standards organisation
-- Creates a distinctive chapter identity that remains clearly connected to the bSI family without being a copy of it
+- Uses only the **secondary** bSI palette. The primary red, blue and magenta appear on most international bSI material, and we want to look different from it.
+- Keeps the look clean and simple, which suits a technical standards organisation.
+- Gives the chapter its own look while staying recognisably part of the bSI family.
 
 ---
 
@@ -27,7 +27,7 @@ This brief proposes a rebrand that:
 
 ### The Mint Principle
 
-Mint (#48BF91) is the most powerful asset in this palette — fresh, distinctive, and entirely absent from bSI's primary brand. Used consistently as the **single accent colour**, it becomes the chapter's signature without competing with international brand assets. The rule is simple: one mint element per composition. Two or more and it loses its power.
+Mint (#48BF91) is the colour people will remember us by. It doesn't appear in bSI's primary brand, so it sets the chapter apart without clashing with international material. We use it as the **single accent colour**: one Mint element per layout. If two things on a page are Mint, neither stands out.
 
 ---
 
@@ -35,29 +35,29 @@ Mint (#48BF91) is the most powerful asset in this palette — fresh, distinctive
 
 ### Display / Headlines / UI — Figtree
 
-A geometric rounded sans-serif with warmth and confidence at display sizes, clean legibility at smaller weights. Use at **600–700** for headings and UI elements, **800** for hero and display titles. Handles Finnish characters (ä, ö, å) correctly. Available free via Google Fonts.
+A rounded geometric sans that looks good large and stays readable small. Use **600–700** for headings and interface elements, and **800** for large display titles. It has proper Finnish characters (ä, ö, å). Free on Google Fonts.
 
 ### Body / Long-form — Source Sans 3
 
-A clean, contemporary humanist sans-serif optimised for screen legibility across all sizes. Brings clarity and reading comfort to long-form running text and captions. Use at **400** (body copy) and **600** (sub-labels). Available free via Google Fonts.
+A humanist sans designed for reading on screen. We use it for paragraphs and captions. Use **400** for body text and **600** for sub-labels. Free on Google Fonts.
 
 ### Quote / Emphasis — Source Serif 4 *italic*
 
-Retained as a deliberate emphasis register for pull quotes and callout text. Used in *italic only* — never upright. The contrast between the geometric precision of Figtree headings and the editorial warmth of Source Serif 4 italic creates hierarchy and emphasis without reaching for colour. Available free via Google Fonts.
+Used for pull quotes and callout text, in *italic only*. The italic serif looks different enough from Figtree that a quote stands out without needing a colour of its own. Free on Google Fonts.
 
 ### Technical / Code — JetBrains Mono
 
-Reserved for standards identifiers, schema references, code snippets, specification tables, and data. The monospace treatment signals technical precision without sacrificing readability. Examples: `IFC4.3`, `IfcWall`, `BCF 3.0`, `IDS Specification`.
+For standard names, schema references, code, specification tables and data. Setting these in a monospace font makes it obvious they are exact technical names. Examples: `IFC4.3`, `IfcWall`, `BCF 3.0`, `IDS Specification`.
 
 ### Pairing Logic
 
-Figtree headlines + Source Sans 3 body is the **default pairing** for web and document content. The heading scale runs H1–H6, all in Figtree, using size and weight to establish hierarchy. Source Serif 4 italic is reserved for pull quotes and callout emphasis — it does not appear as running body text.
+Figtree for headings and Source Sans 3 for body text is the **default pairing** for web pages and documents. Headings H1–H6 are all Figtree and differ in size and weight. Source Serif 4 italic is only for pull quotes and callouts.
 
-**PowerPoint exception:** Figtree carries all text on slides, including body copy. Source Serif 4 appears in *italic only*, in callout boxes and pull quotes — never as a body text substitute on slides. Fonts are embedded in the PowerPoint template; users must also install them locally to edit correctly.
+**PowerPoint exception:** Figtree is used for all slide text, including body text. Source Serif 4 appears in *italic only*, in callout boxes and pull quotes. It is not a body font on slides. The PowerPoint template embeds the fonts, but anyone editing the slides also needs them installed.
 
-**Specification documents:** The same Figtree + Source Sans 3 system applies across Jekyll (browsable HTML) and Pandoc (PDF) output formats, driven by a shared CSS stylesheet.
+**Specification documents:** Jekyll (HTML) and Pandoc (PDF) output both use Figtree and Source Sans 3, from one shared CSS file.
 
-JetBrains Mono appears wherever technical content demands it — never as decoration.
+Use JetBrains Mono for technical content only.
 
 ---
 
@@ -66,73 +66,73 @@ JetBrains Mono appears wherever technical content demands it — never as decora
 ---
 
 ### Direction 01 — Nordic Blueprint
-**Tagline:** *Authority through depth*
+**In short:** *Dark navy backgrounds for events and print*
 
 **Palette in use:** Deep Navy (#041E42) as dominant ground, Mint (#48BF91) as accent, Dark Slate (#354b55) for secondary depth, Light Gray (#e3e3e3) for content surfaces.
 
 **Character:**
-Technical authority delivered without coldness. The deep navy creates immediate gravitas and reads as expertise — the kind of organisation that has earned its position. Mint is deployed as a single decisive accent: on CTAs, highlights, active navigation states, and key data points. Geometric elements (lines, grids, rectangular blocks) support the BIM and built environment theme without being literal.
+Serious and technical, but not cold. Deep navy backgrounds make the material look established and expert. Mint is used once per layout: on a button, a highlight, an active menu item or an important figure. Simple geometric shapes (lines, grids, rectangles) hint at buildings and BIM without drawing them literally.
 
 **Best for:** Event materials, conference presence, publications, formal reports, social media graphics, sponsorship materials.
 
-**Differentiation from bSI Primary:** Maximum. The primary brand's red (#e5172a), royal blue (#004f9f), and magenta (#9f3588) are completely absent. This reads as a premium, mature chapter identity — not a derivative of the international brand.
+**Differentiation from bSI Primary:** High. None of the primary brand's red (#e5172a), royal blue (#004f9f) or magenta (#9f3588) is used, so the chapter's material looks clearly its own.
 
 ---
 
 ### Direction 02 — Open Ground
-**Tagline:** *Clarity through light*
+**In short:** *Light backgrounds for the website and documents*
 
 **Palette in use:** Light Gray (#e3e3e3) and white as ground, Charcoal (#38363d) and Navy (#041E42) for typographic hierarchy, Mint (#48BF91) as accent.
 
 **Character:**
-Accessible, airy, and digital-first. The light foundation puts content — standards documentation, articles, event listings, member resources — at the centre. It is inherently forgiving for content-heavy pages and ensures strong accessibility contrast ratios across all text sizes. Mint brings energy and warmth to interactive elements without competing with content.
+Light and easy to read, designed with screens in mind. White and light gray backgrounds keep the focus on the content: standards documentation, articles, event listings and member material. It copes well with long, text-heavy pages, and dark text on light backgrounds passes contrast checks at every size. Mint marks the interactive parts, such as buttons and links in navigation.
 
 **Best for:** Website, member portal, documentation, email newsletters, member communications, onboarding materials, everyday office templates.
 
-**Differentiation from bSI Primary:** Moderate. The palette is clearly secondary-family, and the clean white/light ground will look fresh alongside bSI's often colour-heavy primary materials.
+**Differentiation from bSI Primary:** Moderate. The palette is clearly from the secondary family, and the light backgrounds look different from bSI's more colourful primary material.
 
 ---
 
 ### Direction 03 — Deep Slate
-**Tagline:** *Strength through material*
+**In short:** *Slate backgrounds for covers and one-off pieces*
 
 **Palette in use:** Dark Slate (#354b55) as hero ground, Deep Navy (#041E42) for depth layers, Mint (#48BF91) as accent highlight, Light Gray (#e3e3e3) for content.
 
 **Character:**
-Architectural and material — as if the visual language is made of the same substance as the buildings it helps to model. The slate ground is unusual in the AEC/BIM space; no major player uses it, making it an immediately differentiating choice. Layered with navy for depth, then illuminated by mint, the result is premium and confident. 
+Has a solid, architectural feel. Few organisations in construction and BIM use slate as a main colour, so it stands out. Navy adds depth in places, and Mint picks out a single detail.
 
 **Best for:** Brand hero moments, splash screens and covers, printed award certificates, merchandise, executive presentations, annual reports.
 
-**Differentiation from bSI Primary:** Maximum. Nothing in this direction reads as derivative of the primary brand. It is visually independent while remaining palette-consistent.
+**Differentiation from bSI Primary:** High. Nothing here looks borrowed from the primary brand, though it still uses the same palette as the rest of the chapter's material.
 
 ---
 
 ## Recommendation
 
 ### Starting point for web and digital communications
-**Direction 02 — Open Ground** is the most practical foundation. Accessible, content-friendly, and easy to implement consistently across web, email, and documents. Navy + mint on white has proven longevity in technical and standards organisations and is the lowest-risk choice for a chapter that needs to communicate clearly across a range of touchpoints.
+**Direction 02 — Open Ground** is the most practical place to start. It is readable, works well for long content, and is easy to apply consistently to the website, email and documents. Navy and mint on white is a common, well-tested combination for technical organisations, and it is the safest choice for a chapter that publishes in many different formats.
 
 ### Starting point for a bold, distinctive chapter identity
-**Direction 01 — Nordic Blueprint** creates the strongest differentiation from the bSI primary brand and the most premium feel. If buildingSMART Finland wants to signal expertise and leadership — particularly in event and publication contexts — this is the more impactful choice. It will stand out in a crowded conference environment where the primary bSI palette is dominant.
+**Direction 01 — Nordic Blueprint** looks the most different from the bSI primary brand and the most polished. If buildingSMART Finland wants to come across as the expert in the room, especially at events and in publications, this is the stronger choice. At conferences, where the primary bSI colours are everywhere, it will be easy to spot.
 
 ### Recommended hybrid approach
-Use **Open Ground** as the default digital register (website, newsletters, documentation) and **Nordic Blueprint** for brand hero moments (event presence, social headers, publications, covers). The two directions share the same palette, typography, and design principles — they are naturally coherent and can be deployed together without visual conflict.
+Use **Open Ground** for everyday digital material (website, newsletters, documentation) and **Nordic Blueprint** for the big moments (events, social media headers, publications, covers). Both use the same colours, fonts and principles, so they work side by side.
 
 ---
 
 ## Design Principles
 
-**01 — One accent rule.** Mint (#48BF91) appears as the single accent colour in any composition. Never pair it with multiple competing colours.
+**01 — One accent colour.** Mint (#48BF91) is the only accent colour in a layout. Don't combine it with other bright colours.
 
-**02 — Whitespace is structure.** Clean and minimal means generous margins and padding. Empty space is not wasted space — it is the foundation of clarity.
+**02 — Leave space.** Use generous margins and padding. Empty space makes pages easier to read.
 
-**03 — Type does the work.** Rely on typographic hierarchy rather than colour variation to create visual structure. Strong weights over decorative colour fills.
+**03 — Use type for structure.** Show what matters through font size and weight. Don't add colour fills to make things stand out.
 
-**04 — Technical precision.** Use JetBrains Mono wherever standards identifiers appear (IFC, IDS, BCF, IfcWall, etc.). The monospace treatment signals technical credibility instantly.
+**04 — Set technical names in mono.** Use JetBrains Mono for standard names (IFC, IDS, BCF, IfcWall, etc.), so readers can see they are exact identifiers.
 
-**05 — Chapter, not copy.** The secondary palette is an intentional choice, not a fallback. Resist reaching for the primary bSI red or magenta. That restraint is what gives the chapter its distinct voice.
+**05 — Stay with the secondary palette.** We chose it on purpose. Don't bring in the primary bSI red or magenta, even when it's tempting.
 
-**06 — Geometric, not illustrative.** Where decoration is needed, use geometric shapes and lines — rectangles, grids, thin rules — that echo the precision of BIM rather than figurative or organic illustration.
+**06 — Use simple shapes for decoration.** When a layout needs decoration, use rectangles, grids and thin lines. Avoid drawings and organic shapes.
 
 ---
 

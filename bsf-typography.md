@@ -37,7 +37,7 @@
 
 ### PowerPoint scale
 
-PowerPoint uses points (pt). Minimum body size is **18pt** — no exceptions.
+PowerPoint uses points (pt). Body text is never smaller than **18pt**.
 
 | Level | Size | Weight | Family | Usage |
 |-------|------|--------|--------|-------|
@@ -51,15 +51,15 @@ PowerPoint uses points (pt). Minimum body size is **18pt** — no exceptions.
 | Mono | 16pt | 400 | JetBrains Mono | Standards identifiers, schema names, code |
 
 **PowerPoint font rules:**
-- Figtree is the primary typeface for all slide body text. Source Serif 4 is used in *italic only*, exclusively in callout boxes and pull quotes — never as a body text substitute.
-- Fonts are embedded in the template file. All users must also install the fonts locally to edit correctly (see font installation guide in the design system).
-- Never use upright Source Serif 4 on slides. The contrast between a geometric sans and an upright serif at slide reading sizes creates visual noise that undermines the clean, minimal system.
+- Use Figtree for all slide text, including body text. Source Serif 4 appears in *italic only*, and only in callout boxes and pull quotes. Don't use it for body text.
+- The template embeds the fonts, but anyone editing the slides also needs them installed (see the font installation guide in the design system).
+- Don't use upright Source Serif 4 on slides. At slide sizes, an upright serif next to Figtree looks busy and clashes with the rest of the layout.
 
 ---
 
 ### Word document scale
 
-Word uses points (pt). Minimum body size is **12pt**. Sizes derived from the web scale at 1pt ≈ 1.333px, rounded to the nearest half-point used in Word paragraph styles.
+Word uses points (pt). Minimum body size is **12pt**. The sizes come from the web scale at 1pt ≈ 1.333px, rounded to the nearest half point.
 
 | Level | Size | Weight | Family | Usage |
 |-------|------|--------|--------|-------|
@@ -76,11 +76,11 @@ Word uses points (pt). Minimum body size is **12pt**. Sizes derived from the web
 | Mono | 10pt | 400 | JetBrains Mono | Standards identifiers, schema names, code |
 
 **Word font rules:**
-- Use named paragraph styles for all heading levels — never apply manual size or weight overrides.
-- Figtree — all headings (Heading 1–6). Source Sans 3 — Normal (body) and Caption.
-- Source Serif 4 italic — Block Quotation and callout emphasis only, via a dedicated paragraph style. Never upright.
-- Fonts must be installed on the authoring machine. The `.dotx` template does not embed fonts.
-- JetBrains Mono — use a dedicated character style for inline technical identifiers.
+- Use the named paragraph styles for every heading level. Don't change size or weight by hand.
+- Figtree for all headings (Heading 1–6). Source Sans 3 for Normal (body) and Caption.
+- Source Serif 4 italic only for Block Quotation and callout emphasis, through its own paragraph style. Never upright.
+- The `.dotx` template doesn't embed fonts, so they must be installed on the computer you write on.
+- JetBrains Mono through its own character style, for technical names in running text.
 
 ---
 
@@ -151,25 +151,25 @@ h6 {
 ## Medium-specific usage rules
 
 ### All media
-- **JetBrains Mono** — IFC schema names, file extensions, code snippets, version strings (e.g. `IFC4.3`, `IfcWall`, `BCF 3.0`, `IDS`). Never for decorative use.
-- **No system fonts** — Arial, Calibri, and Times New Roman are forbidden in all externally distributed materials.
+- **JetBrains Mono** for IFC schema names, file extensions, code and version strings (e.g. `IFC4.3`, `IfcWall`, `BCF 3.0`, `IDS`). Don't use it just for looks.
+- **No system fonts.** Don't use Arial, Calibri or Times New Roman in anything we send outside the chapter.
 
 ### Web and HTML documents (Jekyll / Pandoc output)
-- **Figtree** — all headings H1–H6, UI elements, labels, navigation.
-- **Source Serif 4** — all running body text, long-form paragraphs. Italic for pull quotes and callouts.
-- Load via Google Fonts CDN. Pandoc PDF output uses the same CSS via WeasyPrint.
+- **Figtree** for headings H1–H6, interface elements, labels and navigation.
+- **Source Serif 4** for running body text and long paragraphs. Italic for pull quotes and callouts.
+- Load the fonts from the Google Fonts CDN. Pandoc PDF output uses the same CSS through WeasyPrint.
 
 ### Word documents (.docx)
-- **Figtree** — all headings H1–H6. Use named paragraph styles — never manual formatting.
-- **Source Sans 3** — body text (Normal style), captions, footnotes.
-- **Source Serif 4 italic** — Block Quotation style for pull quotes and callout emphasis only. Never upright.
-- Fonts must be installed on the authoring machine. The template file does not embed fonts.
+- **Figtree** for headings H1–H6, through the named paragraph styles rather than manual formatting.
+- **Source Sans 3** for body text (Normal style), captions and footnotes.
+- **Source Serif 4 italic** in the Block Quotation style, for pull quotes and callout emphasis only. Never upright.
+- The template doesn't embed fonts, so they must be installed on the computer you write on.
 
 ### PowerPoint presentations (.pptx)
-- **Figtree** — all text on slides including body. Minimum 18pt, no exceptions.
-- **Source Serif 4 italic** — callout boxes and pull quotes only. Never upright on slides.
-- Fonts are embedded in the template file. Users must also install fonts locally to edit. See installation guide.
-- **No substitutions** — if a font renders as Calibri, the font is not installed. Fix the installation, do not proceed.
+- **Figtree** for all slide text, including body text. Nothing smaller than 18pt.
+- **Source Serif 4 italic** only in callout boxes and pull quotes. Never upright on slides.
+- The template embeds the fonts, but you need them installed to edit. See the installation guide.
+- **No substitutes.** If text shows up in Calibri, the font isn't installed. Install it before you carry on.
 
 ---
 
