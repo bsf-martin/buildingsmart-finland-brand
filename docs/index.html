@@ -262,10 +262,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
   line-height: 1.6;
 }
 
-/* Blueprint motif — thin rules and outlined rectangles */
+/* Animated dot grid (drawn by the script at the end of the page) */
 .sg-header-art {
   width: 100%;
-  height: auto;
+  aspect-ratio: 4 / 3;
   display: block;
 }
 
@@ -1353,25 +1353,7 @@ code.inline {
       <h1>Style Guide</h1>
       <p class="sg-header-sub">How buildingSMART Finland uses its logo, colours and fonts in documents, slides and on the web.</p>
     </div>
-    <svg class="sg-header-art" viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-      <defs>
-        <pattern id="sg-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-          <path d="M40 0H0V40" fill="none" stroke="#354B55" stroke-width="1"/>
-        </pattern>
-      </defs>
-      <rect width="480" height="360" fill="url(#sg-grid)" opacity="0.55"/>
-      <g fill="none" stroke="#C8C6C5" stroke-width="1.5" opacity="0.55">
-        <rect x="40" y="200" width="160" height="120"/>
-        <rect x="200" y="120" width="120" height="200"/>
-        <rect x="320" y="240" width="120" height="80"/>
-      </g>
-      <g fill="none" stroke="#C8C6C5" stroke-width="1" opacity="0.3">
-        <rect x="80" y="240" width="40" height="80"/>
-        <rect x="240" y="160" width="40" height="40"/>
-        <rect x="240" y="240" width="40" height="40"/>
-      </g>
-      <path d="M0 320H480" stroke="#C8C6C5" stroke-width="1.5" opacity="0.55"/>
-    </svg>
+    <canvas class="sg-header-art" aria-hidden="true"></canvas>
   </div>
   <div class="wrap">
     <ol class="hero-index" aria-label="Contents">
@@ -2041,6 +2023,66 @@ if ('IntersectionObserver' in window) {
 } else {
   reveals.forEach(function(el) { el.classList.add('is-in'); });
 }
+
+/* Hero dot grid: a slow diagonal wave of brightness */
+(function() {
+  var canvas = document.querySelector('.sg-header-art');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+  var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var GAP = 24, PERIOD = 7000;
+  var w = 0, h = 0, raf = 0, onScreen = true;
+
+  function resize() {
+    var dpr = window.devicePixelRatio || 1;
+    w = canvas.clientWidth;
+    h = canvas.clientHeight;
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  // t === null draws the plain grid with no wave
+  function draw(t) {
+    var cols = Math.floor(w / GAP), rows = Math.floor(h / GAP);
+    var ox = (w - (cols - 1) * GAP) / 2, oy = (h - (rows - 1) * GAP) / 2;
+    var phase = t === null ? 0 : (t % PERIOD) / PERIOD * Math.PI * 2;
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = '#C8C6C5';
+    for (var r = 0; r < rows; r++) {
+      for (var c = 0; c < cols; c++) {
+        var b = t === null ? 0 : Math.pow(Math.max(0, Math.cos((c + r) * 0.18 - phase)), 4);
+        ctx.globalAlpha = 0.18 + b * 0.57;
+        ctx.beginPath();
+        ctx.arc(ox + c * GAP, oy + r * GAP, 1.2 + b, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function frame(t) { draw(t); raf = requestAnimationFrame(frame); }
+
+  function update() {
+    cancelAnimationFrame(raf);
+    raf = 0;
+    if (canvas.offsetParent === null) return;   // hidden on phones
+    resize();
+    if (motion.matches || !onScreen || document.hidden) draw(null);
+    else raf = requestAnimationFrame(frame);
+  }
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function(entries) {
+      onScreen = entries[0].isIntersecting;
+      update();
+    }).observe(document.querySelector('.sg-header'));
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(update).observe(canvas);
+  document.addEventListener('visibilitychange', update);
+  if (motion.addEventListener) motion.addEventListener('change', update);
+  update();
+})();
 </script>
 
 </body>
