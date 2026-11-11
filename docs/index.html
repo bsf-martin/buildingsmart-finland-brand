@@ -845,9 +845,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
 }
 
 .medium {
-  background: white;
+  background: var(--c-gray-light);
   padding: var(--sp-6);
-  border: 1px solid var(--c-silver);
   border-top: 3px solid var(--c-navy);
 }
 .medium--mono { border-top-color: var(--c-mint); }
@@ -858,8 +857,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
   color: var(--c-navy);
   margin-bottom: var(--sp-3);
 }
-.medium ul { padding-left: 1.1em; font-size: 0.9375rem; line-height: 1.55; display: grid; gap: 6px; }
+.medium ul { padding-left: 1.1em; font-size: 0.9375rem; line-height: 1.55; color: var(--c-navy); display: grid; gap: 6px; }
 .medium li::marker { color: var(--c-slate); }
+.medium code.inline { background: white; }
 
 code.inline {
   font-family: var(--ff-mono);
