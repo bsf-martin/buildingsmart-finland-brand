@@ -547,9 +547,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
 
 .type-panel-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 64px;
-  gap: var(--sp-5);
-  align-items: center;
+  grid-template-columns: minmax(0, 1fr);
+  container-type: inline-size;   /* alphabet sizes below scale with the row width */
 }
 
 .type-panel-row .fam {
@@ -565,16 +564,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
   font-size: 15px;
   line-height: 1.5;
   color: var(--c-navy);
-  word-break: break-word;
-}
-
-.type-panel-row .aa {
-  width: 64px; height: 64px;
-  display: flex; align-items: center; justify-content: center;
-  background: white;
-  box-shadow: inset 0 0 0 1px var(--c-silver);
-  font-size: 26px;
-  color: var(--c-navy);
+  overflow-wrap: break-word;
 }
 
 /* ================================================================
@@ -1432,23 +1422,20 @@ code.inline {
           <div class="type-panel-row">
             <div>
               <div class="fam">Figtree 800 / 700 / 600<span class="mono">Headings · UI</span></div>
-              <div class="abc" style="font-family:var(--ff-display);font-weight:700;">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz Ää Öö Åå<br>1234567890</div>
+              <div class="abc" style="font-family:var(--ff-display);font-weight:700;font-size:clamp(11px, 2.3cqi, 15px);">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz Åå Ää Öö<br>1234567890</div>
             </div>
-            <div class="aa" style="font-family:var(--ff-display);font-weight:800;">Aa</div>
           </div>
           <div class="type-panel-row">
             <div>
               <div class="fam">Source Sans 3 400 / 600<span class="mono">Body</span></div>
-              <div class="abc" style="font-family:var(--ff-body);">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz Ää Öö Åå<br>1234567890</div>
+              <div class="abc" style="font-family:var(--ff-body);font-size:clamp(11px, 2.65cqi, 15px);">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz Åå Ää Öö<br>1234567890</div>
             </div>
-            <div class="aa" style="font-family:var(--ff-body);">Bb</div>
           </div>
           <div class="type-panel-row">
             <div>
               <div class="fam">JetBrains Mono 400 / 500<span class="mono">Identifiers</span></div>
-              <div class="abc" style="font-family:var(--ff-mono);font-size:13.5px;">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz<br>1234567890 IfcWall IFC4.3</div>
+              <div class="abc" style="font-family:var(--ff-mono);font-size:clamp(10px, 1.88cqi, 13.5px);">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz Åå Ää Öö<br>1234567890 IfcWall IFC4.3</div>
             </div>
-            <div class="aa" style="font-family:var(--ff-mono);">Cc</div>
           </div>
         </div>
       </div>
@@ -1615,7 +1602,7 @@ code.inline {
         <span class="cap role">Display · Headings · UI</span>
         <div class="big" style="font-family:var(--ff-display);font-weight:800;">Aa</div>
         <h3>Figtree</h3>
-        <p>A rounded geometric sans that works at large and small sizes. It has proper ä, ö and å.</p>
+        <p>A rounded geometric sans that works at large and small sizes. It has proper å, ä and ö.</p>
         <ul class="weights" style="font-family:var(--ff-display);">
           <li style="font-weight:600;">Semibold <span class="mono">600</span></li>
           <li style="font-weight:700;">Bold <span class="mono">700</span></li>
