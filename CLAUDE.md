@@ -107,7 +107,7 @@ All via Google Fonts. No system fonts (Arial, Calibri, Times New Roman) in any d
 ├── bsf_moodboard.html               # Visual reference
 ├── claude_project_instructions.md   # Cowork session instructions
 ├── docs/                            # Jekyll site root (GitHub Pages)
-│   └── bsf_style_guide.html         # Phase 2: HTML style guide (complete)
+│   └── index.html                   # Phase 2: HTML style guide (complete)
 ├── assets/                          # Logos, images, fonts
 └── luts/                            # Colour LUTs
 ```
@@ -121,7 +121,7 @@ All via Google Fonts. No system fonts (Arial, Calibri, Times New Roman) in any d
 | Phase | Deliverable | Status |
 |-------|-------------|--------|
 | 1 | Foundations locked (palette, type, tokens) | ✅ Complete |
-| 2 | HTML style guide (`docs/bsf_style_guide.html`) | ✅ Complete |
+| 2 | HTML style guide (`docs/index.html`) | ✅ Complete |
 | 3 | PowerPoint master template (.pptx) | ✅ Complete |
 | 4 | Word document template (.dotx) | 🔄 In progress |
 | 5 | HTML/CSS for Jekyll + Pandoc spec pipeline | Pending |
