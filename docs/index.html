@@ -845,8 +845,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
 }
 
 .medium {
-  background: var(--c-gray-light);
+  background: white;
   padding: var(--sp-6);
+  border: 1px solid var(--c-silver);
   border-top: 3px solid var(--c-navy);
 }
 .medium--mono { border-top-color: var(--c-mint); }
@@ -857,7 +858,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
   color: var(--c-navy);
   margin-bottom: var(--sp-3);
 }
-.medium ul { padding-left: 1.1em; font-size: var(--fs-small); line-height: 1.6; display: grid; gap: 6px; }
+.medium ul { padding-left: 1.1em; font-size: 0.9375rem; line-height: 1.55; display: grid; gap: 6px; }
+.medium li::marker { color: var(--c-slate); }
 
 code.inline {
   font-family: var(--ff-mono);
@@ -866,8 +868,8 @@ code.inline {
   color: var(--c-charcoal);
   padding: 1px 6px;
   border-radius: var(--r-sm);
+  white-space: nowrap;
 }
-.medium code.inline { background: white; }
 
 /* ================================================================
    04 — COMPONENTS
