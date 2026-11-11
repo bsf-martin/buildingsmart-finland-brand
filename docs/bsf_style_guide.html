@@ -11,14 +11,14 @@
 
 /* ================================================================
    buildingSMART Finland — Style Guide
-   Direction 02 "Open Ground" as default web register
+   Mixed register: "Nordic Blueprint" bands over "Open Ground" content
    ================================================================ */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 /* ---- Tokens ---- */
 :root {
-  /* Colour */
+  /* Palette — bSI secondary only */
   --c-navy:       #041E42;
   --c-slate:      #354B55;
   --c-charcoal:   #38363D;
@@ -26,7 +26,6 @@
   --c-silver:     #C8C6C5;
   --c-gray-light: #E3E3E3;
   --c-white:      #FFFFFF;
-  --c-bg:         #F0EFED;
 
   /* Families */
   --ff-display: 'Figtree', sans-serif;
@@ -72,15 +71,14 @@
   --sp-20: 80px;
   --sp-24: 96px;
 
-  /* Radii */
-  --r-sm: 4px;
-  --r-md: 8px;
-  --r-lg: 12px;
+  /* Radii — kept tight for an architectural feel */
+  --r-sm: 2px;
+  --r-md: 4px;
   --r-pill: 999px;
 
-  /* Shadow */
-  --shadow-card: 0 1px 8px rgba(4,30,66,0.07);
-  --shadow-lift: 0 4px 20px rgba(4,30,66,0.10);
+  /* Layout */
+  --nav-h: 56px;
+  --wrap: 1280px;
 }
 
 /* ---- Base ---- */
@@ -91,33 +89,130 @@ body {
   font-size: var(--fs-body);
   line-height: var(--lh-body);
   color: var(--c-charcoal);
-  background: var(--c-bg);
+  background: var(--c-white);
   -webkit-font-smoothing: antialiased;
-  min-width: 900px;
+}
+
+.wrap {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 var(--sp-10);
+}
+
+.mono { font-family: var(--ff-mono); }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outline-offset: 3px; }
+
+/* ================================================================
+   TOP NAV
+   ================================================================ */
+
+.topnav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--c-navy);
+  border-bottom: 1px solid rgba(200,198,197,0.18);
+}
+
+.topnav-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-8);
+  height: var(--nav-h);
+}
+
+.topnav-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  color: white;
+  text-decoration: none;
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.topnav-brand svg { width: 26px; height: 26px; }
+
+.topnav ul {
+  display: flex;
+  list-style: none;
+  height: 100%;
+  margin-left: auto;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.topnav ul::-webkit-scrollbar { display: none; }
+
+.topnav li { height: 100%; }
+
+.topnav ul a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+  padding: 0 var(--sp-4);
+  font-family: var(--ff-display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-silver);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+
+.topnav ul a .n {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+.topnav ul a:hover { color: white; }
+.topnav ul a.active { color: white; }
+
+/* The nav bar's single Mint element */
+.topnav ul a.active::after {
+  content: '';
+  position: absolute;
+  left: var(--sp-4); right: var(--sp-4); bottom: 0;
+  height: 2px;
+  background: var(--c-mint);
 }
 
 /* ================================================================
-   LAYOUT
+   HERO
    ================================================================ */
 
-/* Page header */
 .sg-header {
   background: var(--c-navy);
   color: white;
-  padding: var(--sp-20);
-  position: relative;
+  min-height: calc(100vh - var(--nav-h));
+  min-height: calc(100svh - var(--nav-h));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   overflow: hidden;
 }
 
+.sg-header > .wrap { width: 100%; }
+
 .sg-header-inner {
-  position: relative;
-  z-index: 1;
-  max-width: 1160px;
-  margin: 0 auto;
+  flex: 1;
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
   align-items: center;
   gap: var(--sp-12);
+  padding-top: var(--sp-20);
+  padding-bottom: var(--sp-16);
 }
 
 .sg-header-label {
@@ -142,325 +237,477 @@ body {
 
 .sg-header-logo {
   display: block;
-  height: 40px;
+  height: 44px;
   width: auto;
+  aspect-ratio: 4617 / 830;
+  color: white;
   margin-bottom: var(--sp-12);
 }
 
 .sg-header h1 {
   font-family: var(--ff-display);
-  font-size: 3.25rem;
+  font-size: clamp(3rem, 7vw, 6rem);
   font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
   color: white;
-  margin: 0;
 }
 
 .sg-header-sub {
-  margin-top: var(--sp-5);
-  max-width: 52ch;
+  margin-top: var(--sp-6);
+  max-width: 48ch;
   font-family: var(--ff-body);
-  font-size: 1.0625rem;
-  color: rgba(227,227,227,0.78);
+  font-size: 1.125rem;
+  color: var(--c-silver);
   line-height: 1.6;
 }
 
-/* Blueprint motif — thin rules and outlined rectangles, one Mint accent in the label */
+/* Blueprint motif — thin rules and outlined rectangles */
 .sg-header-art {
   width: 100%;
   height: auto;
   display: block;
 }
 
-
-@media (max-width: 860px) {
-  .sg-header { padding: var(--sp-12) var(--sp-5); }
-  .sg-header-inner { grid-template-columns: 1fr; }
-  .sg-header-art { display: none; }
-  .sg-header h1 { font-size: 2.25rem; }
-  .sg-header-logo { margin-bottom: var(--sp-8); }
+/* Section index along the bottom of the hero */
+.hero-index {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  border-top: 1px solid rgba(200,198,197,0.2);
+  list-style: none;
 }
 
-/* Shell */
-.sg-layout {
-  display: flex;
-  align-items: flex-start;
-  max-width: 1160px;
-  margin: 0 auto;
-  padding: var(--sp-12) var(--sp-8);
-  gap: var(--sp-12);
+.hero-index a {
+  display: block;
+  padding: var(--sp-5) var(--sp-4) var(--sp-6);
+  border-left: 1px solid rgba(200,198,197,0.2);
+  color: var(--c-silver);
+  text-decoration: none;
+  transition: color 0.15s;
 }
+.hero-index li:first-child a { border-left: none; padding-left: 0; }
 
-/* Sidebar */
-.sg-nav {
-  width: 196px;
-  flex-shrink: 0;
-  position: sticky;
-  top: var(--sp-8);
-  align-self: flex-start;
-}
-
-.sg-nav-label {
-  font-family: var(--ff-mono);
-  font-size: 9px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--c-slate);
-  padding-bottom: var(--sp-3);
-  margin-bottom: var(--sp-3);
-  border-bottom: 1px solid var(--c-gray-light);
-}
-
-.sg-nav ul { list-style: none; }
-
-.sg-nav li { margin-bottom: 1px; }
-
-.sg-nav a {
+.hero-index .num {
   display: block;
   font-family: var(--ff-display);
-  font-size: 12.5px;
-  font-weight: 500;
-  color: var(--c-charcoal);
-  text-decoration: none;
-  padding: 5px 10px;
-  border-radius: var(--r-sm);
-  transition: background 0.12s, color 0.12s;
-  line-height: 1.4;
+  font-size: clamp(2.25rem, 4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(200,198,197,0.6);
+  margin-bottom: var(--sp-3);
+  transition: color 0.15s, -webkit-text-stroke-color 0.15s;
 }
 
-.sg-nav a:hover {
-  background: white;
-  color: var(--c-navy);
-}
-
-.sg-nav a.active {
-  background: white;
-  color: var(--c-navy);
-  font-weight: 600;
-  box-shadow: inset 3px 0 0 var(--c-mint);
-}
-
-.sg-nav a:focus-visible { outline: 2px solid var(--c-mint); outline-offset: 2px; }
-
-.sg-nav-divider {
-  height: 1px;
-  background: var(--c-gray-light);
-  margin: var(--sp-3) 0;
-}
-
-/* Main content */
-.sg-main {
-  flex: 1;
-  min-width: 0;
-}
-
-/* Section */
-.sg-section {
-  margin-bottom: var(--sp-20);
-  scroll-margin-top: var(--sp-8);
-}
-
-.sg-section-header {
-  margin-bottom: var(--sp-8);
-  padding-bottom: var(--sp-5);
-  border-bottom: 1px solid var(--c-gray-light);
-}
-
-.sg-eyebrow {
-  font-family: var(--ff-mono);
-  font-size: 9px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--c-slate);
-  margin-bottom: 6px;
-}
-
-.sg-section-title {
+.hero-index .lbl {
   font-family: var(--ff-display);
-  font-size: var(--fs-h2);
-  font-weight: 700;
-  letter-spacing: var(--ls-heading);
-  color: var(--c-navy);
-  line-height: var(--lh-heading);
+  font-size: 13px;
+  font-weight: 600;
 }
 
-.sg-section-desc {
-  margin-top: var(--sp-3);
-  font-size: var(--fs-small);
-  line-height: var(--lh-body);
-  color: var(--c-slate);
-  max-width: 600px;
+.hero-index a:hover { color: white; }
+.hero-index a:hover .num { color: white; -webkit-text-stroke-color: white; }
+
+/* ================================================================
+   BANDS
+   ================================================================ */
+
+.band {
+  position: relative;
+  padding: var(--sp-24) 0;
+  overflow: hidden;
+  scroll-margin-top: var(--nav-h);
 }
 
-/* White card panel */
-.sg-panel {
-  background: white;
-  border-radius: var(--r-lg);
-  padding: var(--sp-8);
-  margin-bottom: var(--sp-5);
-  box-shadow: var(--shadow-card);
+.band--navy  { background: var(--c-navy);  color: white; }
+.band--slate { background: var(--c-slate); color: white; }
+.band--white { background: var(--c-white); }
+.band--light { background: var(--c-gray-light); }
+
+.band-head {
+  position: relative;
+  margin-bottom: var(--sp-16);
+  max-width: 100%;
 }
 
-.sg-panel + .sg-panel { margin-top: 0; }
+/* Giant outlined section numeral — thin-rule decoration */
+.band-num {
+  position: absolute;
+  right: -0.04em;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--ff-display);
+  font-size: clamp(8rem, 20vw, 17rem);
+  font-weight: 800;
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--c-silver);
+  pointer-events: none;
+  user-select: none;
+}
 
-/* Panel label */
-.sg-panel-label {
+.band--navy .band-num,
+.band--slate .band-num { -webkit-text-stroke-color: rgba(200,198,197,0.35); }
+
+.band-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   font-family: var(--ff-mono);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--c-slate);
   margin-bottom: var(--sp-5);
 }
 
-/* Page footer */
-.sg-footer {
-  background: var(--c-charcoal);
-  color: rgba(227,227,227,0.6);
-  padding: var(--sp-6) var(--sp-20);
-  font-size: 12px;
+.band-eyebrow::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: currentColor;
+}
+
+.band-title {
+  position: relative;
+  font-family: var(--ff-display);
+  font-size: clamp(2.75rem, 6vw, 4.75rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  color: var(--c-navy);
+}
+
+.band-lede {
+  position: relative;
+  margin-top: var(--sp-6);
+  max-width: 60ch;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--c-charcoal);
+}
+
+.band--navy .band-eyebrow, .band--slate .band-eyebrow,
+.band--navy .band-lede,    .band--slate .band-lede { color: var(--c-silver); }
+.band--navy .band-title,   .band--slate .band-title { color: white; }
+
+.sub-head {
+  font-family: var(--ff-display);
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  letter-spacing: var(--ls-heading);
+  color: var(--c-navy);
+  margin: var(--sp-20) 0 var(--sp-6);
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: var(--sp-6);
+  align-items: baseline;
+  gap: var(--sp-3);
 }
+.sub-head .mono { font-size: 11px; font-weight: 400; color: var(--c-slate); letter-spacing: 0.1em; }
+.band--navy .sub-head, .band--slate .sub-head { color: white; }
+.band--navy .sub-head .mono, .band--slate .sub-head .mono { color: var(--c-silver); }
 
-.sg-footer-brand {
+.cap {
   font-family: var(--ff-mono);
-  font-size: 11px;
-  color: var(--c-mint);
+  font-size: 10px;
   letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.sg-footer-note { font-style: italic; color: rgba(255,255,255,0.7); }
+/* White content sheet used inside dark bands */
+.sheet {
+  background: white;
+  color: var(--c-charcoal);
+  border-radius: var(--r-md);
+  padding: var(--sp-8);
+}
 
 /* ================================================================
-   SECTION 1 — COLOUR PALETTE
+   COPY BUTTON
    ================================================================ */
-
-.palette-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--sp-4);
-}
-
-.swatch {
-  background: white;
-  border-radius: var(--r-md);
-  overflow: hidden;
-  box-shadow: var(--shadow-card);
-}
-
-.swatch-chip { height: 80px; }
-
-.swatch-chip--border { box-shadow: inset 0 0 0 1px var(--c-gray-light); }
-
-.swatch-body { padding: 14px 16px 16px; }
-
-.swatch-name {
-  font-family: var(--ff-display);
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--c-navy);
-  margin-bottom: var(--sp-2);
-}
-
-.swatch-values { display: flex; flex-direction: column; gap: 3px; }
-
-.swatch-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.swatch-val {
-  font-family: var(--ff-mono);
-  font-size: 11px;
-  color: var(--c-slate);
-}
 
 .copy-btn {
   background: none;
-  border: 1px solid var(--c-silver);
+  border: 1px solid currentColor;
   cursor: pointer;
   padding: 1px 6px;
-  border-radius: 3px;
+  border-radius: var(--r-sm);
   font-family: var(--ff-mono);
   font-size: 9.5px;
-  color: var(--c-slate);
-  transition: all 0.12s;
+  color: inherit;
+  opacity: 0.75;
+  transition: opacity 0.12s;
   line-height: 1.5;
   flex-shrink: 0;
 }
+.copy-btn:hover { opacity: 1; }
+.copy-btn.copied { opacity: 1; font-weight: 500; }
 
-.copy-btn:hover {
-  background: var(--c-gray-light);
-  color: var(--c-navy);
-  border-color: var(--c-gray-light);
+/* ================================================================
+   00 — AT A GLANCE BOARD
+   ================================================================ */
+
+.board {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr) minmax(0, 1fr) 240px;
+  grid-template-rows: auto auto;
+  gap: var(--sp-8);
+  background: white;
+  padding: var(--sp-10);
+  border-radius: var(--r-md);
 }
 
-.copy-btn.copied {
-  color: var(--c-mint);
-  background: rgba(72,191,145,0.1);
-  border-color: rgba(72,191,145,0.25);
-}
-
-.copy-btn:focus-visible { outline: 2px solid var(--c-mint); outline-offset: 2px; }
-
-.swatch-role {
-  margin-top: 8px;
-  font-size: 10.5px;
-  color: var(--c-slate);
-  line-height: 1.45;
-}
-
-.swatch-contrast {
-  margin-top: 9px;
+.board-rail {
+  grid-row: 1 / span 2;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  align-items: center;
+  gap: var(--sp-8);
+  padding-right: var(--sp-6);
+  border-right: 1px solid var(--c-silver);
 }
 
-.contrast-row {
+.board-rail-title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--ff-display);
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--c-navy);
+  line-height: 1;
+}
+
+.board-rail svg { width: 36px; height: 36px; color: var(--c-navy); }
+
+.board-label {
+  font-family: var(--ff-display);
+  font-size: var(--fs-h5);
+  font-weight: 700;
+  color: var(--c-navy);
+  margin-bottom: var(--sp-3);
+}
+
+.tile {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 10px;
+  justify-content: center;
+  aspect-ratio: 16 / 10;
+}
+.tile .cap { position: absolute; left: 10px; bottom: 8px; }
+
+.tile--navy     { background: var(--c-navy);       color: white; }
+.tile--slate    { background: var(--c-slate);      color: white; }
+.tile--charcoal { background: var(--c-charcoal);   color: white; }
+.tile--silver   { background: var(--c-silver);     color: var(--c-navy); }
+.tile--light    { background: var(--c-gray-light); color: var(--c-navy); }
+.tile--white    { background: white; color: var(--c-navy); box-shadow: inset 0 0 0 1px var(--c-silver); }
+
+.tile--navy .cap, .tile--slate .cap, .tile--charcoal .cap { color: var(--c-silver); }
+.tile--silver .cap, .tile--light .cap, .tile--white .cap { color: var(--c-slate); }
+.tile--silver .cap { color: var(--c-navy); }
+
+.tile .logo-full { width: 72%; height: auto; aspect-ratio: 4617 / 830; }
+.tile .logo-mark { width: 30%; height: auto; aspect-ratio: 1; }
+
+.quad {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.quad .tile .logo-full { width: 78%; }
+.quad .tile .logo-mark { width: 26%; }
+
+.board-colours { grid-column: 4; grid-row: 1 / span 2; display: flex; flex-direction: column; }
+
+.colour-stack {
+  flex: 1;
+  display: grid;
+  grid-template-rows: 2.2fr 1.5fr 1.3fr 1fr 1fr 0.8fr;
+  min-height: 560px;
 }
 
-.contrast-label {
-  font-size: 10px;
+.colour-stack > div {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 2px;
+}
+.colour-stack strong { font-family: var(--ff-display); font-size: 13px; font-weight: 700; }
+.colour-stack span   { font-family: var(--ff-mono); font-size: 10.5px; }
+
+.board-type { grid-column: 2 / span 2; }
+
+.type-panel {
+  background: var(--c-gray-light);
+  padding: var(--sp-6);
+  display: grid;
+  gap: var(--sp-5);
+}
+
+.type-panel-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 64px;
+  gap: var(--sp-5);
+  align-items: center;
+}
+
+.type-panel-row .fam {
+  font-family: var(--ff-display);
+  font-size: 13px;
+  font-weight: 700;
   color: var(--c-slate);
+  margin-bottom: 2px;
+}
+.type-panel-row .fam .mono { font-weight: 400; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; margin-left: 6px; }
+
+.type-panel-row .abc {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--c-navy);
+  word-break: break-word;
 }
 
-.contrast-sample {
+.type-panel-row .aa {
+  width: 64px; height: 64px;
+  display: flex; align-items: center; justify-content: center;
+  background: white;
+  box-shadow: inset 0 0 0 1px var(--c-silver);
+  font-size: 26px;
+  color: var(--c-navy);
+}
+
+/* ================================================================
+   01 — LOGO
+   ================================================================ */
+
+.logo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-4);
+}
+
+.logo-grid .tile { aspect-ratio: 16 / 8; }
+.logo-grid .tile .logo-full { width: 58%; }
+.logo-grid .tile .cap { left: var(--sp-5); bottom: var(--sp-4); font-size: 11px; }
+
+.logo-rules {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: var(--sp-4);
+  margin-top: var(--sp-4);
+}
+
+.rule-card {
+  border: 1px solid var(--c-silver);
+  padding: var(--sp-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+.rule-card h3 {
+  font-family: var(--ff-display);
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  color: var(--c-navy);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.rule-card p { font-size: var(--fs-small); color: var(--c-charcoal); max-width: 52ch; }
+.rule-card svg { width: 100%; height: auto; color: var(--c-navy); }
+
+.min-sizes { display: flex; align-items: flex-end; gap: var(--sp-10); flex-wrap: wrap; }
+.min-sizes figure { display: flex; flex-direction: column; gap: var(--sp-2); }
+.min-sizes figcaption { color: var(--c-slate); }
+.min-sizes svg { color: var(--c-navy); }
+
+/* ================================================================
+   02 — COLOUR
+   ================================================================ */
+
+.swatch-mosaic {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-rows: minmax(150px, auto);
+  gap: 2px;
+  background: rgba(200,198,197,0.25);
+  border: 1px solid rgba(200,198,197,0.25);
+}
+
+.sw {
+  padding: var(--sp-6);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  transition: transform 0.2s;
+}
+
+.sw-name {
+  font-family: var(--ff-display);
+  font-size: clamp(1.25rem, 2.2vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.sw-role { font-size: var(--fs-small); max-width: 34ch; margin-top: var(--sp-2); }
+
+.sw-vals { display: grid; gap: 4px; }
+.sw-vals div { display: flex; align-items: center; gap: var(--sp-2); font-family: var(--ff-mono); font-size: 12px; }
+
+.sw--navy     { grid-column: span 6; grid-row: span 3; background: var(--c-navy); color: white; }
+.sw--slate    { grid-column: span 6; grid-row: span 2; background: var(--c-slate); color: white; }
+.sw--charcoal { grid-column: span 6; background: var(--c-charcoal); color: white; }
+.sw--light    { grid-column: span 6; background: var(--c-gray-light); color: var(--c-navy); }
+.sw--silver   { grid-column: span 4; background: var(--c-silver); color: var(--c-navy); }
+.sw--mint     { grid-column: span 2; background: var(--c-mint); color: var(--c-navy); }
+
+.sw--navy .sw-role, .sw--slate .sw-role, .sw--charcoal .sw-role { color: var(--c-silver); }
+.sw--mint .sw-name { font-size: clamp(1.1rem, 1.6vw, 1.4rem); }
+
+.pair-table { width: 100%; border-collapse: collapse; font-size: var(--fs-small); }
+.pair-table th {
+  text-align: left;
+  font-family: var(--ff-display);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--c-navy);
+  padding: 0 var(--sp-4) var(--sp-3) 0;
+  border-bottom: 2px solid var(--c-navy);
+}
+.pair-table td {
+  padding: var(--sp-3) var(--sp-4) var(--sp-3) 0;
+  border-bottom: 1px solid var(--c-gray-light);
+  vertical-align: middle;
+}
+.pair-table td.mono { font-size: 11.5px; color: var(--c-slate); white-space: nowrap; }
+.pair-table tr:last-child td { border-bottom: none; }
+
+.pair-sample {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 1px 6px;
-  border-radius: 2px;
-  font-family: var(--ff-mono);
-  font-size: 8.5px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  white-space: nowrap;
-}
-
-.contrast-ratio {
-  font-family: var(--ff-mono);
-  font-size: 10px;
-  font-weight: 500;
-  color: var(--c-charcoal);
+  width: 56px; height: 36px;
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: 16px;
+  border-radius: var(--r-sm);
 }
 
 .wcag-badge {
   font-family: var(--ff-display);
-  font-size: 9px;
-  font-weight: 600;
-  padding: 1px 5px;
-  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: var(--r-sm);
   letter-spacing: 0.04em;
+  white-space: nowrap;
 }
 
 .wcag-aaa { background: rgba(72,191,145,0.15); color: #0f6641; }
@@ -468,269 +715,237 @@ body {
 .wcag-lg  { background: rgba(255,180,0,0.12);  color: #6b4700; }
 .wcag-nc  { background: rgba(180,40,40,0.08);  color: #7a2020; }
 
+.mint-rule {
+  margin-top: var(--sp-20);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--sp-10);
+  align-items: center;
+  padding-top: var(--sp-10);
+  border-top: 1px solid rgba(200,198,197,0.3);
+}
+
+.mint-rule .dot {
+  width: 96px; height: 96px;
+  border: 1px solid rgba(200,198,197,0.5);
+  display: flex; align-items: center; justify-content: center;
+}
+.mint-rule .dot span { width: 16px; height: 16px; background: var(--c-mint); }
+
+.mint-rule blockquote {
+  font-family: var(--ff-quote);
+  font-style: italic;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  line-height: 1.35;
+  color: white;
+  max-width: 34ch;
+}
+.mint-rule cite {
+  display: block;
+  margin-top: var(--sp-4);
+  font-family: var(--ff-mono);
+  font-style: normal;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-silver);
+}
+
 /* ================================================================
-   SECTION 2 — TYPOGRAPHY
+   03 — TYPOGRAPHY
    ================================================================ */
 
-.type-scale-table { width: 100%; border-collapse: collapse; }
-.type-scale-table thead tr { border-bottom: 2px solid var(--c-gray-light); }
-.type-scale-table th {
-  text-align: left;
-  font-family: var(--ff-display);
-  font-weight: 600;
-  color: var(--c-navy);
-  padding: 0 12px 10px 0;
-  font-size: 12px;
+.families {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-10);
 }
-.type-scale-table td {
-  padding: 8px 12px 8px 0;
-  border-bottom: 1px solid var(--c-gray-light);
-  vertical-align: middle;
-  font-size: 13px;
-  color: var(--c-charcoal);
-}
-.type-scale-table td:last-child { padding-right: 0; }
-.type-scale-table tr:last-child td { border-bottom: none; }
 
-.type-specimen-row {
-  padding: var(--sp-6) 0;
-  border-bottom: 1px solid var(--c-gray-light);
+.family {
+  border-top: 2px solid var(--c-navy);
+  padding-top: var(--sp-5);
   display: flex;
-  gap: var(--sp-6);
-  align-items: flex-start;
-}
-.type-specimen-row:first-child { padding-top: 0; }
-.type-specimen-row:last-child { padding-bottom: 0; border-bottom: none; }
-
-.type-specimen-level {
-  width: 80px;
-  flex-shrink: 0;
-  padding-top: 3px;
+  flex-direction: column;
 }
 
-.type-specimen-level-name {
+.family .role { color: var(--c-slate); }
+
+.family .big {
+  font-size: clamp(7rem, 12vw, 11rem);
+  line-height: 1;
+  color: var(--c-navy);
+  margin: var(--sp-6) 0 var(--sp-4);
+  letter-spacing: -0.03em;
+}
+
+.family h3 {
   font-family: var(--ff-display);
-  font-size: 15px;
+  font-size: var(--fs-h2);
   font-weight: 700;
   color: var(--c-navy);
-  line-height: 1.2;
-  margin-bottom: 3px;
+  letter-spacing: var(--ls-heading);
 }
 
-.type-specimen-level-desc {
-  font-family: var(--ff-mono);
-  font-size: 9px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--c-slate);
-  line-height: 1.4;
-}
+.family p { font-size: var(--fs-small); margin-top: var(--sp-2); max-width: 40ch; }
 
-.type-meta {
-  margin-top: var(--sp-3);
+.weights {
+  list-style: none;
+  margin-top: var(--sp-5);
+  border-top: 1px solid var(--c-silver);
+}
+.weights li {
   display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--c-gray-light);
+  font-size: 1.125rem;
+  color: var(--c-navy);
+}
+.weights li .mono { font-size: 11px; color: var(--c-slate); }
+
+.family .abc { margin-top: var(--sp-5); font-size: 15px; line-height: 1.6; color: var(--c-charcoal); word-break: break-word; }
+
+.quote-strip {
+  margin-top: var(--sp-16);
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: var(--sp-10);
+  padding: var(--sp-10) 0;
+  border-top: 1px solid var(--c-silver);
+  border-bottom: 1px solid var(--c-silver);
+}
+.quote-strip .meta { color: var(--c-slate); display: grid; gap: var(--sp-2); align-content: start; }
+.quote-strip .meta strong { font-family: var(--ff-display); font-size: var(--fs-h4); color: var(--c-navy); text-transform: none; letter-spacing: 0; }
+.quote-strip p {
+  font-family: var(--ff-quote);
+  font-style: italic;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  line-height: 1.3;
+  color: var(--c-navy);
+  max-width: 30ch;
 }
 
-.type-meta-chip {
-  font-family: var(--ff-mono);
-  font-size: 10px;
-  color: var(--c-slate);
+.scale { border-top: 2px solid var(--c-navy); }
+
+.scale-row {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: var(--sp-8);
+  align-items: baseline;
+  padding: var(--sp-5) 0;
+  border-bottom: 1px solid var(--c-gray-light);
+}
+
+.scale-meta { display: grid; gap: 2px; }
+.scale-meta b {
+  font-family: var(--ff-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--c-navy);
+}
+.scale-meta span { font-family: var(--ff-mono); font-size: 11px; color: var(--c-slate); }
+
+.mediums {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--sp-4);
+}
+
+.medium {
   background: var(--c-gray-light);
-  padding: 2px 7px;
-  border-radius: var(--r-sm);
-  white-space: nowrap;
+  padding: var(--sp-6);
+  border-top: 3px solid var(--c-navy);
 }
-
-.type-medium-callout {
-  background: var(--c-gray-light);
-  border-left: 3px solid var(--c-navy);
-  border-radius: 0 var(--r-md) var(--r-md) 0;
-  padding: var(--sp-5) var(--sp-6);
-  margin-bottom: var(--sp-3);
-}
-.type-medium-callout:last-child { margin-bottom: 0; }
-
-.type-medium-callout strong {
+.medium--mono { border-top-color: var(--c-mint); }
+.medium h4 {
   font-family: var(--ff-display);
   font-size: var(--fs-h5);
-  font-weight: 600;
+  font-weight: 700;
   color: var(--c-navy);
-  display: block;
-  margin-bottom: var(--sp-2);
+  margin-bottom: var(--sp-3);
 }
+.medium ul { padding-left: 1.1em; font-size: var(--fs-small); line-height: 1.6; display: grid; gap: 6px; }
 
-.type-medium-callout ul {
-  margin: 0;
-  padding-left: var(--sp-6);
-  font-size: var(--fs-small);
+code.inline {
+  font-family: var(--ff-mono);
+  font-size: 0.85em;
+  background: var(--c-gray-light);
   color: var(--c-charcoal);
-  line-height: var(--lh-body);
+  padding: 1px 6px;
+  border-radius: var(--r-sm);
 }
+.medium code.inline { background: white; }
 
 /* ================================================================
-   SECTION 3 — SPACING
+   04 — COMPONENTS
    ================================================================ */
 
-.sp-row {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-5);
-  padding: 5px 0;
-  border-bottom: 1px solid var(--c-gray-light);
-}
-.sp-row:last-child { border-bottom: none; }
-
-.sp-token {
-  font-family: var(--ff-mono);
-  font-size: 11px;
-  color: var(--c-slate);
-  width: 72px;
-  flex-shrink: 0;
-}
-
-.sp-bar-wrap {
-  width: 120px;
-  flex-shrink: 0;
-}
-
-.sp-bar {
-  height: 8px;
-  background: var(--c-navy);
-  border-radius: 2px;
-  opacity: 0.75;
-}
-
-.sp-values {
-  font-family: var(--ff-mono);
-  font-size: 10.5px;
-  color: var(--c-charcoal);
-  width: 100px;
-  flex-shrink: 0;
-}
-
-.sp-use {
-  font-size: 12px;
-  color: var(--c-slate);
-  line-height: 1.4;
-}
-
-/* ================================================================
-   SECTION 4 — COMPONENTS
-   ================================================================ */
-
-/* Heading specimens */
-.heading-specimen-row {
-  padding: var(--sp-5) 0;
-  border-bottom: 1px solid var(--c-gray-light);
-  display: flex;
-  align-items: baseline;
-  gap: var(--sp-6);
-}
-.heading-specimen-row:first-child { padding-top: 0; }
-.heading-specimen-row:last-child { border-bottom: none; padding-bottom: 0; }
-
-.heading-specimen-label {
-  font-family: var(--ff-mono);
-  font-size: 10px;
-  color: var(--c-slate);
-  width: 28px;
-  flex-shrink: 0;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding-top: 4px;
-}
-
-.heading-specimen-meta {
-  margin-left: auto;
-  display: flex;
-  gap: 5px;
-  flex-wrap: wrap;
-  align-items: center;
-  flex-shrink: 0;
-}
-
-/* Buttons */
-.btn-row {
-  display: flex;
-  align-items: center;
+.cards {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: var(--sp-4);
-  flex-wrap: wrap;
-  padding: var(--sp-5) 0;
+}
+
+.card {
+  grid-column: span 6;
+  background: white;
+  border-radius: var(--r-md);
+  padding: var(--sp-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+.card--12 { grid-column: span 12; }
+.card--7  { grid-column: span 7; }
+.card--5  { grid-column: span 5; }
+
+.card-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: var(--sp-3);
   border-bottom: 1px solid var(--c-gray-light);
 }
-.btn-row:last-child { border-bottom: none; }
-
-.btn-row-label {
-  font-family: var(--ff-mono);
-  font-size: 10px;
-  color: var(--c-slate);
-  width: 88px;
-  flex-shrink: 0;
+.card-label h3 {
+  font-family: var(--ff-display);
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  color: var(--c-navy);
 }
+.card-label .cap { color: var(--c-slate); }
+
+.demo-row {
+  display: grid;
+  grid-template-columns: 96px auto minmax(0, 1fr);
+  gap: var(--sp-4);
+  align-items: center;
+}
+.demo-row .cap { color: var(--c-slate); }
+.demo-row .note { font-family: var(--ff-mono); font-size: 11px; color: var(--c-slate); }
+
+.tag-row { display: flex; align-items: center; gap: var(--sp-3); flex-wrap: wrap; }
+.tag-row .cap { width: 96px; color: var(--c-slate); }
 
 .sg-btn {
   font-family: var(--ff-display);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.01em;
-  padding: 8px 18px;
+  padding: 9px 20px;
   border-radius: var(--r-sm);
   cursor: pointer;
   transition: all 0.12s;
   white-space: nowrap;
 }
-
-.sg-btn-primary {
-  background: var(--c-navy);
-  color: white;
-  border: 1.5px solid var(--c-navy);
-}
+.sg-btn-primary   { background: var(--c-navy); color: white; border: 1.5px solid var(--c-navy); }
 .sg-btn-primary:hover { background: #021530; border-color: #021530; }
-
-.sg-btn-secondary {
-  background: transparent;
-  color: var(--c-navy);
-  border: 1.5px solid var(--c-navy);
-}
+.sg-btn-secondary { background: transparent; color: var(--c-navy); border: 1.5px solid var(--c-navy); }
 .sg-btn-secondary:hover { background: var(--c-navy); color: white; }
-
-.sg-btn-ghost {
-  background: transparent;
-  color: var(--c-charcoal);
-  border: 1px solid var(--c-silver);
-}
+.sg-btn-ghost     { background: transparent; color: var(--c-charcoal); border: 1px solid var(--c-silver); }
 .sg-btn-ghost:hover { background: var(--c-gray-light); border-color: var(--c-gray-light); }
-
-.sg-btn-accent {
-  background: var(--c-mint);
-  color: var(--c-navy);
-  border: 1.5px solid var(--c-mint);
-}
+.sg-btn-accent    { background: var(--c-mint); color: var(--c-navy); border: 1.5px solid var(--c-mint); }
 .sg-btn-accent:hover { background: #39ae80; border-color: #39ae80; }
-
-.sg-btn:focus-visible { outline: 2px solid var(--c-mint); outline-offset: 3px; }
-
-/* Tags & badges */
-.tag-row {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-3);
-  flex-wrap: wrap;
-  padding: var(--sp-4) 0;
-  border-bottom: 1px solid var(--c-gray-light);
-}
-.tag-row:last-child { border-bottom: none; }
-
-.tag-row-label {
-  font-family: var(--ff-mono);
-  font-size: 10px;
-  color: var(--c-slate);
-  width: 88px;
-  flex-shrink: 0;
-}
 
 .sg-tag {
   display: inline-flex;
@@ -742,30 +957,75 @@ body {
   border-radius: var(--r-pill);
   white-space: nowrap;
 }
-
-.sg-tag-active   { background: rgba(72,191,145,0.15); color: #0f6641; }
-.sg-tag-draft    { background: rgba(255,180,0,0.12);  color: #6b4700; }
-.sg-tag-deprecated { background: rgba(180,40,40,0.08); color: #7a2020; }
-.sg-tag-neutral  { background: var(--c-gray-light); color: var(--c-charcoal); }
+.sg-tag-active     { background: rgba(72,191,145,0.15); color: #0f6641; }
+.sg-tag-draft      { background: rgba(255,180,0,0.12);  color: #6b4700; }
+.sg-tag-deprecated { background: rgba(180,40,40,0.08);  color: #7a2020; }
+.sg-tag-neutral    { background: var(--c-gray-light);   color: var(--c-charcoal); }
 
 .sg-tag-mono {
   font-family: var(--ff-mono);
   font-size: 11px;
-  font-weight: 400;
   background: var(--c-gray-light);
   color: var(--c-charcoal);
   padding: 3px 8px;
   border-radius: var(--r-sm);
 }
 
-/* Code blocks */
+.pull-quote { border-left: 3px solid var(--c-mint); padding: var(--sp-2) 0 var(--sp-2) var(--sp-6); }
+.pull-quote p {
+  font-family: var(--ff-quote);
+  font-style: italic;
+  font-size: 1.25rem;
+  line-height: 1.55;
+  color: var(--c-charcoal);
+  margin-bottom: var(--sp-3);
+}
+.pull-quote cite {
+  font-family: var(--ff-display);
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--c-slate);
+  font-style: normal;
+}
+
+.info-box {
+  background: var(--c-gray-light);
+  border-left: 4px solid var(--c-navy);
+  padding: var(--sp-5) var(--sp-6);
+}
+.info-box h4 {
+  font-family: var(--ff-display);
+  font-size: var(--fs-h5);
+  font-weight: 600;
+  color: var(--c-navy);
+  margin-bottom: var(--sp-2);
+}
+.info-box p { font-size: var(--fs-small); line-height: var(--lh-body); }
+
+.spec-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.spec-table th {
+  text-align: left;
+  font-family: var(--ff-display);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--c-navy);
+  padding: 0 var(--sp-4) var(--sp-3) 0;
+  border-bottom: 2px solid var(--c-navy);
+}
+.spec-table td { padding: 10px var(--sp-4) 10px 0; line-height: 1.5; vertical-align: top; }
+.spec-table td:last-child { padding-right: 0; }
+.spec-table tbody tr:nth-child(odd) { background: rgba(227,227,227,0.45); }
+.spec-table td.mono { font-size: 12px; white-space: nowrap; }
+.spec-table td.mono + td.mono { color: var(--c-slate); }
+
 .sg-code-block {
   background: var(--c-charcoal);
-  border-radius: var(--r-lg);
+  border-radius: var(--r-md);
   padding: var(--sp-6) var(--sp-8);
   overflow-x: auto;
 }
-
 .sg-code-block code {
   font-family: var(--ff-mono);
   font-size: 13px;
@@ -773,48 +1033,78 @@ body {
   color: #e3e3e3;
   white-space: pre;
 }
-
-.sg-code-block .token-key    { color: var(--c-mint); }
-.sg-code-block .token-string { color: #a8d8c8; }
-.sg-code-block .token-num    { color: #f0b868; }
+.sg-code-block .token-key     { color: var(--c-mint); }
+.sg-code-block .token-string  { color: #a8d8c8; }
+.sg-code-block .token-num     { color: #f0b868; }
 .sg-code-block .token-comment { color: rgba(255,255,255,0.65); }
 
+/* Spacing ladder — actual-size squares */
+.ladder {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+}
+.ladder figure { display: flex; flex-direction: column; align-items: flex-start; gap: var(--sp-2); }
+.ladder .sq { background: var(--c-navy); }
+.ladder figcaption { font-family: var(--ff-mono); font-size: 10.5px; color: var(--c-slate); line-height: 1.4; }
+.ladder figcaption b { display: block; color: var(--c-navy); font-weight: 500; }
+
 /* ================================================================
-   SECTION 5 — DO / DON'T
+   05 — DO / DON'T
    ================================================================ */
+
+.rules { display: grid; gap: var(--sp-16); }
+
+.rule-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--sp-5);
+  align-items: baseline;
+  margin-bottom: var(--sp-6);
+}
+.rule-head .n {
+  font-family: var(--ff-display);
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(200,198,197,0.6);
+}
+.rule-head h3 {
+  font-family: var(--ff-display);
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  color: white;
+  letter-spacing: var(--ls-heading);
+}
 
 .guideline-pair {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--sp-4);
-  margin-bottom: var(--sp-5);
 }
-.guideline-pair:last-child { margin-bottom: 0; }
 
-.guideline-card {
-  border-radius: var(--r-md);
-  overflow: hidden;
-  box-shadow: var(--shadow-card);
-}
+.guideline-card { background: white; color: var(--c-charcoal); border-radius: var(--r-md); overflow: hidden; display: flex; flex-direction: column; }
 
 .guideline-verdict {
   display: flex;
   align-items: center;
   gap: var(--sp-2);
-  padding: 8px 14px;
+  padding: 10px var(--sp-6);
   font-family: var(--ff-display);
-  font-size: 11px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 800;
   letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
-
 .guideline-do .guideline-verdict   { background: rgba(72,191,145,0.15); color: #0f6641; }
 .guideline-dont .guideline-verdict { background: rgba(180,40,40,0.08);  color: #7a2020; }
 
 .guideline-preview {
-  background: white;
-  padding: var(--sp-6);
-  min-height: 90px;
+  flex: 1;
+  padding: var(--sp-8) var(--sp-6);
+  min-height: 150px;
   display: flex;
   align-items: center;
 }
@@ -822,1199 +1112,717 @@ body {
 .guideline-caption {
   font-size: var(--fs-small);
   color: var(--c-slate);
-  padding: 8px 14px;
-  background: white;
+  padding: var(--sp-3) var(--sp-6) var(--sp-4);
   border-top: 1px solid var(--c-gray-light);
   line-height: 1.45;
 }
 
+/* ================================================================
+   FOOTER
+   ================================================================ */
 
+.sg-footer { background: var(--c-navy); color: var(--c-silver); padding: var(--sp-12) 0; }
+.sg-footer .wrap { display: flex; align-items: center; gap: var(--sp-8); flex-wrap: wrap; }
+.sg-footer svg { height: 28px; width: auto; aspect-ratio: 4617 / 830; color: white; }
+.sg-footer p { font-size: var(--fs-small); }
+.sg-footer a {
+  margin-left: auto;
+  font-family: var(--ff-display);
+  font-weight: 600;
+  font-size: 13px;
+  color: white;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(200,198,197,0.5);
+}
+
+/* ================================================================
+   MOTION — reveal on scroll (JS adds .js to <html>)
+   ================================================================ */
+
+.js .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.js .reveal.is-in { opacity: 1; transform: none; }
+
+@media (hover: hover) {
+  .sw:hover { transform: scale(1.015); position: relative; z-index: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+  .sw, .sw:hover { transform: none; transition: none; }
+}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+
+@media (max-width: 1100px) {
+  .board { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .board-rail {
+    grid-column: 1 / -1; grid-row: auto;
+    flex-direction: row; justify-content: space-between;
+    padding: 0 0 var(--sp-5); border-right: none; border-bottom: 1px solid var(--c-silver);
+  }
+  .board-rail-title { writing-mode: horizontal-tb; transform: none; }
+  .board-colours { grid-column: 1 / -1; grid-row: auto; }
+  .colour-stack { grid-template-rows: none; grid-template-columns: repeat(6, minmax(0, 1fr)); min-height: 140px; }
+  .board-type { grid-column: 1 / -1; }
+  .families { grid-template-columns: 1fr; }
+  .mediums { grid-template-columns: 1fr 1fr; }
+  .card, .card--7, .card--5 { grid-column: span 12; }
+}
+
+@media (max-width: 860px) {
+  .wrap { padding: 0 var(--sp-5); }
+  .topnav-brand span { display: none; }
+  .topnav ul { margin-left: 0; }
+  .sg-header-inner { grid-template-columns: 1fr; padding-top: var(--sp-12); }
+  .sg-header-art { display: none; }
+  .hero-index { grid-template-columns: repeat(3, 1fr); }
+  .hero-index li:nth-child(4) a { border-left: none; padding-left: 0; }
+  .hero-index li:nth-child(n+4) a { border-top: 1px solid rgba(200,198,197,0.2); }
+  .band { padding: var(--sp-16) 0; }
+  .band-head { margin-bottom: var(--sp-10); }
+  .band-num { font-size: 7rem; top: 0; transform: none; opacity: 0.6; }
+  .board { padding: var(--sp-5); grid-template-columns: minmax(0, 1fr); }
+  .colour-stack { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 90px; }
+  .logo-grid, .logo-rules, .guideline-pair, .mediums { grid-template-columns: 1fr; }
+  .swatch-mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sw--navy, .sw--slate, .sw--charcoal, .sw--light { grid-column: span 2; grid-row: span 1; }
+  .sw--silver, .sw--mint { grid-column: span 1; }
+  .pair-table .hide-sm { display: none; }
+  .mint-rule { grid-template-columns: 1fr; }
+  .quote-strip, .scale-row { grid-template-columns: 1fr; gap: var(--sp-3); }
+  .demo-row { grid-template-columns: 1fr; gap: var(--sp-2); }
+  .spec-table td.mono { white-space: normal; word-break: break-all; }
+  .card { padding: var(--sp-5); }
+  .sheet { padding: var(--sp-5); overflow-x: auto; }
+  .sg-footer a { margin-left: 0; }
+}
 
 </style>
 </head>
-<body>
+<body id="top">
 
-<!-- ================================================================
-     PAGE HEADER
-     ================================================================ -->
-<header class="sg-header">
-  <div class="sg-header-inner">
-  <div class="sg-header-copy">
-  <div class="sg-header-label">Visual Identity System</div>
-  <svg class="sg-header-logo" viewBox="0 0 4617 830" version="1.1" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="bsf-logo-title" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
-    <title id="bsf-logo-title">buildingSMART Finland logo</title>
-    <g id="Layer-1" transform="matrix(4.16667,0,0,4.16667,0,0)">
+<!-- Logo symbols: full lockup and mark only. Fill follows currentColor. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="bsf-logo" viewBox="0 0 4617 830">
+    <g transform="matrix(4.16667,0,0,4.16667,0,0)">
         <g transform="matrix(1,0,0,1,44.7274,90.3303)">
-            <path d="M0,32.329C7.338,40.124 19.605,40.495 27.4,33.158L52.927,9.133L36.645,-8.166L-2.995,29.145L0,32.329Z" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M0,32.329C7.338,40.124 19.605,40.495 27.4,33.158L52.927,9.133L36.645,-8.166L-2.995,29.145L0,32.329Z" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
         <g transform="matrix(1,0,0,1,5.269,16.2075)">
-            <path d="M0,64.53L16.337,81.886L33.635,65.607L20.293,51.431L63.898,10.389L113.647,63.243L116.951,60.134C124.744,52.797 125.115,40.529 117.779,32.733L78.32,-9.188C70.981,-16.984 58.716,-17.356 50.92,-10.018L0.83,37.13C-6.966,44.468 -7.337,56.735 0,64.53" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M0,64.53L16.337,81.886L33.635,65.607L20.293,51.431L63.898,10.389L113.647,63.243L116.951,60.134C124.744,52.797 125.115,40.529 117.779,32.733L78.32,-9.188C70.981,-16.984 58.716,-17.356 50.92,-10.018L0.83,37.13C-6.966,44.468 -7.337,56.735 0,64.53" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
         <g transform="matrix(1,0,0,1,122.66,104.38)">
-            <path d="M0,49.93C7.794,42.593 8.166,30.326 0.83,22.533L-23.197,-2.996L-40.494,13.286L-3.183,52.926L0,49.93Z" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M0,49.93C7.794,42.593 8.166,30.326 0.83,22.533L-23.197,-2.996L-40.494,13.286L-3.183,52.926L0,49.93Z" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
         <g transform="matrix(1,0,0,1,80.7367,75.9897)">
-            <path d="M0,117.781L17.358,101.441L1.077,84.145L-13.098,97.486L-54.141,53.882L-1.287,4.133L-4.396,0.831C-11.733,-6.965 -24,-7.337 -31.796,0.002L-73.718,39.461C-81.514,46.798 -81.885,59.065 -74.547,66.86L-27.399,116.952C-20.062,124.747 -7.795,125.118 0,117.781" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M0,117.781L17.358,101.441L1.077,84.145L-13.098,97.486L-54.141,53.882L-1.287,4.133L-4.396,0.831C-11.733,-6.965 -24,-7.337 -31.796,0.002L-73.718,39.461C-81.514,46.798 -81.885,59.065 -74.547,66.86L-27.399,116.952C-20.062,124.747 -7.795,125.118 0,117.781" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
         <g transform="matrix(1,0,0,1,154.311,108.704)">
-            <path d="M0,-32.324C-7.339,-40.121 -19.604,-40.492 -27.4,-33.154L-52.927,-9.129L-36.645,8.168L2.995,-29.141L0,-32.324Z" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M0,-32.324C-7.339,-40.121 -19.604,-40.492 -27.4,-33.154L-52.927,-9.129L-36.645,8.168L2.995,-29.141L0,-32.324Z" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
         <g transform="matrix(1,0,0,1,193.77,182.831)">
-            <path d="M0,-64.53L-16.337,-81.887L-33.634,-65.606L-20.293,-51.431L-63.9,-10.388L-113.647,-63.243L-116.95,-60.134C-124.745,-52.797 -125.116,-40.529 -117.78,-32.734L-78.319,9.188C-70.983,16.986 -58.715,17.357 -50.922,10.017L-0.829,-37.131C6.967,-44.467 7.338,-56.734 0,-64.53" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M0,-64.53L-16.337,-81.887L-33.634,-65.606L-20.293,-51.431L-63.9,-10.388L-113.647,-63.243L-116.95,-60.134C-124.745,-52.797 -125.116,-40.529 -117.78,-32.734L-78.319,9.188C-70.983,16.986 -58.715,17.357 -50.922,10.017L-0.829,-37.131C6.967,-44.467 7.338,-56.734 0,-64.53" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
         <g transform="matrix(1,0,0,1,76.3793,94.6577)">
-            <path d="M0,-49.93C-7.795,-42.592 -8.167,-30.326 -0.829,-22.53L23.197,2.995L40.494,-13.286L3.183,-52.925L0,-49.93Z" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M0,-49.93C-7.795,-42.592 -8.167,-30.326 -0.829,-22.53L23.197,2.995L40.494,-13.286L3.183,-52.925L0,-49.93Z" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
         <g transform="matrix(1,0,0,1,118.302,123.045)">
-            <path d="M0,-117.775L-17.357,-101.438L-1.077,-84.14L13.098,-97.482L54.14,-53.879L1.286,-4.13L4.396,-0.826C11.734,6.968 24,7.339 31.796,0.003L73.72,-39.457C81.515,-46.795 81.886,-59.061 74.548,-66.856L27.398,-116.946C20.063,-124.742 7.795,-125.114 0,-117.775" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M0,-117.775L-17.357,-101.438L-1.077,-84.14L13.098,-97.482L54.14,-53.879L1.286,-4.13L4.396,-0.826C11.734,6.968 24,7.339 31.796,0.003L73.72,-39.457C81.515,-46.795 81.886,-59.061 74.548,-66.856L27.398,-116.946C20.063,-124.742 7.795,-125.114 0,-117.775" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
         <g transform="matrix(1,0,0,1,221.305,116.185)">
-            <path d="M0,-106.496L0,-37.048C0,-20.549 11.85,-5.399 28.949,-5.399C43.348,-5.399 57.598,-18.749 57.598,-37.048C57.598,-55.347 43.348,-68.696 28.949,-68.696C19.5,-68.696 12.9,-64.797 6.75,-58.347L6.75,-65.097C11.1,-68.696 18,-74.097 28.949,-74.097C48.298,-74.097 63.597,-58.497 63.597,-37.048C63.597,-15.6 48.298,0 28.949,0C9.6,0 -5.7,-15.6 -5.7,-37.048L-5.7,-106.496L0,-106.496Z" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M0,-106.496L0,-37.048C0,-20.549 11.85,-5.399 28.949,-5.399C43.348,-5.399 57.598,-18.749 57.598,-37.048C57.598,-55.347 43.348,-68.696 28.949,-68.696C19.5,-68.696 12.9,-64.797 6.75,-58.347L6.75,-65.097C11.1,-68.696 18,-74.097 28.949,-74.097C48.298,-74.097 63.597,-58.497 63.597,-37.048C63.597,-15.6 48.298,0 28.949,0C9.6,0 -5.7,-15.6 -5.7,-37.048L-5.7,-106.496L0,-106.496Z" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
         <g transform="matrix(1,0,0,1,300.955,116.185)">
-            <path d="M0,-72.597L0,-29.998C0,-15.149 10.35,-5.4 22.799,-5.4C35.249,-5.4 45.599,-15.149 45.599,-29.998L45.599,-72.597L51.298,-72.597L51.298,-29.248C51.298,-11.7 38.698,0 22.799,0C6.9,0 -5.699,-11.7 -5.699,-29.248L-5.699,-72.597L0,-72.597Z" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M0,-72.597L0,-29.998C0,-15.149 10.35,-5.4 22.799,-5.4C35.249,-5.4 45.599,-15.149 45.599,-29.998L45.599,-72.597L51.298,-72.597L51.298,-29.248C51.298,-11.7 38.698,0 22.799,0C6.9,0 -5.699,-11.7 -5.699,-29.248L-5.699,-72.597L0,-72.597Z" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
         <g transform="matrix(1,0,0,1,0,-65.366)">
-            <path d="M369.038,108.954L374.737,108.954L374.737,180.051L369.038,180.051L369.038,108.954ZM371.888,84.354C374.437,84.354 376.388,86.305 376.388,88.854C376.388,91.404 374.437,93.354 371.888,93.354C369.338,93.354 367.388,91.404 367.388,88.854C367.388,86.305 369.338,84.354 371.888,84.354" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M369.038,108.954L374.737,108.954L374.737,180.051L369.038,180.051L369.038,108.954ZM371.888,84.354C374.437,84.354 376.388,86.305 376.388,88.854C376.388,91.404 374.437,93.354 371.888,93.354C369.338,93.354 367.388,91.404 367.388,88.854C367.388,86.305 369.338,84.354 371.888,84.354" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
         <g transform="matrix(1,0,0,1,0,-74.665)">
-            <rect x="393.483" y="84.354" width="5.699" height="104.996" style="fill:white;"/>
+            <rect x="393.483" y="84.354" width="5.699" height="104.996" style="fill:currentColor;"/>
         </g>
         <g transform="matrix(1,0,0,1,480.608,116.185)">
-            <path d="M0,-106.496L0,-37.048C0,-15.6 -15.299,0 -34.648,0C-53.997,0 -69.297,-15.6 -69.297,-37.048C-69.297,-58.497 -53.997,-74.097 -34.648,-74.097C-23.698,-74.097 -16.799,-68.696 -12.449,-65.097L-12.449,-58.347C-18.599,-64.797 -25.198,-68.696 -34.648,-68.696C-49.048,-68.696 -63.297,-55.347 -63.297,-37.048C-63.297,-18.749 -49.048,-5.399 -34.648,-5.399C-17.549,-5.399 -5.699,-20.549 -5.699,-37.048L-5.699,-106.496L0,-106.496Z" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M0,-106.496L0,-37.048C0,-15.6 -15.299,0 -34.648,0C-53.997,0 -69.297,-15.6 -69.297,-37.048C-69.297,-58.497 -53.997,-74.097 -34.648,-74.097C-23.698,-74.097 -16.799,-68.696 -12.449,-65.097L-12.449,-58.347C-18.599,-64.797 -25.198,-68.696 -34.648,-68.696C-49.048,-68.696 -63.297,-55.347 -63.297,-37.048C-63.297,-18.749 -49.048,-5.399 -34.648,-5.399C-17.549,-5.399 -5.699,-20.549 -5.699,-37.048L-5.699,-106.496L0,-106.496Z" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
         <g transform="matrix(1,0,0,1,0,-65.366)">
-            <path d="M496.994,108.954L502.693,108.954L502.693,180.051L496.994,180.051L496.994,108.954ZM499.844,84.354C502.393,84.354 504.344,86.305 504.344,88.854C504.344,91.404 502.393,93.354 499.844,93.354C497.294,93.354 495.344,91.404 495.344,88.854C495.344,86.305 497.294,84.354 499.844,84.354" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M496.994,108.954L502.693,108.954L502.693,180.051L496.994,180.051L496.994,108.954ZM499.844,84.354C502.393,84.354 504.344,86.305 504.344,88.854C504.344,91.404 502.393,93.354 499.844,93.354C497.294,93.354 495.344,91.404 495.344,88.854C495.344,86.305 497.294,84.354 499.844,84.354" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
         <g transform="matrix(1,0,0,1,570.196,42.0877)">
-            <path d="M0,72.597L0,29.999C0,15.15 -10.35,5.401 -22.8,5.401C-35.249,5.401 -45.599,15.15 -45.599,29.999L-45.599,72.597L-51.298,72.597L-51.298,29.249C-51.298,11.701 -38.698,0 -22.8,0C-6.9,0 5.699,11.701 5.699,29.249L5.699,72.597L0,72.597Z" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M0,72.597L0,29.999C0,15.15 -10.35,5.401 -22.8,5.401C-35.249,5.401 -45.599,15.15 -45.599,29.999L-45.599,72.597L-51.298,72.597L-51.298,29.249C-51.298,11.701 -38.698,0 -22.8,0C-6.9,0 5.699,11.701 5.699,29.249L5.699,72.597L0,72.597Z" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
         <g transform="matrix(1,0,0,1,603.305,51.0884)">
-            <path d="M0,86.528C5.399,88.628 11.999,90.128 17.999,90.128C37.198,90.128 48.748,81.428 48.748,56.529L48.748,28.049C48.748,11.549 36.898,-3.6 19.799,-3.6C5.399,-3.6 -8.85,9.75 -8.85,28.049C-8.85,46.347 5.399,59.697 19.799,59.697C29.249,59.697 35.849,55.797 41.998,49.347L41.998,56.097C37.648,59.697 30.749,65.096 19.799,65.096C0.45,65.096 -14.85,49.497 -14.85,28.049C-14.85,6.599 0.45,-9 19.799,-9C39.148,-9 54.447,6.599 54.447,28.049L54.447,60.429C54.447,82.629 39.448,95.528 18.749,95.528C11.699,95.528 4.8,94.328 -1.8,91.927L0,86.528Z" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M0,86.528C5.399,88.628 11.999,90.128 17.999,90.128C37.198,90.128 48.748,81.428 48.748,56.529L48.748,28.049C48.748,11.549 36.898,-3.6 19.799,-3.6C5.399,-3.6 -8.85,9.75 -8.85,28.049C-8.85,46.347 5.399,59.697 19.799,59.697C29.249,59.697 35.849,55.797 41.998,49.347L41.998,56.097C37.648,59.697 30.749,65.096 19.799,65.096C0.45,65.096 -14.85,49.497 -14.85,28.049C-14.85,6.599 0.45,-9 19.799,-9C39.148,-9 54.447,6.599 54.447,28.049L54.447,60.429C54.447,82.629 39.448,95.528 18.749,95.528C11.699,95.528 4.8,94.328 -1.8,91.927L0,86.528Z" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
         <g transform="matrix(1,0,0,1,714.089,69.2369)">
-            <path d="M0,-14.099C-14.857,-18.308 -27.688,-21.944 -27.688,-35.399C-27.688,-46.636 -21.503,-51.43 -7.007,-51.43L30.209,-51.43L30.209,-61.965L-9.407,-61.965C-27.736,-61.965 -39.122,-52.015 -39.122,-35.998C-39.122,-13.249 -20.378,-8.06 -3.841,-3.481C10.875,0.594 24.774,4.443 24.774,19.799C24.774,31.105 16.044,37.331 0.192,37.331L-39.122,37.331L-39.122,47.866L1.093,47.866C23.409,47.866 36.209,37.308 36.209,18.899C36.209,-3.84 16.973,-9.29 0,-14.099" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M0,-14.099C-14.857,-18.308 -27.688,-21.944 -27.688,-35.399C-27.688,-46.636 -21.503,-51.43 -7.007,-51.43L30.209,-51.43L30.209,-61.965L-9.407,-61.965C-27.736,-61.965 -39.122,-52.015 -39.122,-35.998C-39.122,-13.249 -20.378,-8.06 -3.841,-3.481C10.875,0.594 24.774,4.443 24.774,19.799C24.774,31.105 16.044,37.331 0.192,37.331L-39.122,37.331L-39.122,47.866L1.093,47.866C23.409,47.866 36.209,37.308 36.209,18.899C36.209,-3.84 16.973,-9.29 0,-14.099" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
         <g transform="matrix(1,0,0,1,850.328,118.303)">
-            <path d="M0,-112.831C-7.117,-112.831 -8.989,-110.687 -12.519,-98.498L-37.348,-14.397L-62.174,-98.486C-65.708,-110.686 -67.58,-112.831 -74.697,-112.831C-83.05,-112.831 -84.202,-104.766 -84.892,-99.939L-98.313,-1.2L-87.134,-1.2L-73.807,-99.704C-73.777,-99.602 -73.748,-99.496 -73.718,-99.386L-48.521,-13.298C-45.676,-3.418 -44.337,0 -37.348,0C-30.358,0 -29.02,-3.416 -26.179,-13.289L-0.965,-99.437C-0.939,-99.529 -0.915,-99.618 -0.891,-99.703L12.438,-1.2L23.618,-1.2L10.193,-99.956C9.505,-104.772 8.353,-112.831 0,-112.831" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M0,-112.831C-7.117,-112.831 -8.989,-110.687 -12.519,-98.498L-37.348,-14.397L-62.174,-98.486C-65.708,-110.686 -67.58,-112.831 -74.697,-112.831C-83.05,-112.831 -84.202,-104.766 -84.892,-99.939L-98.313,-1.2L-87.134,-1.2L-73.807,-99.704C-73.777,-99.602 -73.748,-99.496 -73.718,-99.386L-48.521,-13.298C-45.676,-3.418 -44.337,0 -37.348,0C-30.358,0 -29.02,-3.416 -26.179,-13.289L-0.965,-99.437C-0.939,-99.529 -0.915,-99.618 -0.891,-99.703L12.438,-1.2L23.618,-1.2L10.193,-99.956C9.505,-104.772 8.353,-112.831 0,-112.831" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
         <g transform="matrix(1,0,0,1,1037.21,117.103)">
-            <path d="M0,-109.831L0,-99.596L29.85,-99.596L29.85,0L40.982,0L40.982,-99.596L70.832,-99.596L70.832,-109.831L0,-109.831Z" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M0,-109.831L0,-99.596L29.85,-99.596L29.85,0L40.982,0L40.982,-99.596L70.832,-99.596L70.832,-109.831L0,-109.831Z" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
         <g transform="matrix(1,0,0,1,1094.43,106.597)">
-            <path d="M0,-1.535L2.066,-1.535C4.042,-1.535 5.44,-1.674 5.44,-3.463C5.44,-4.704 4.582,-5.307 2.817,-5.307L0,-5.307L0,-1.535ZM7.875,5.421L5.866,5.421L2.503,-0.11L0,-0.11L0,5.421L-1.48,5.421L-1.48,-6.732L3.15,-6.732C5.762,-6.732 7.031,-5.654 7.031,-3.435C7.031,-1.113 5.623,-0.439 4.279,-0.171L7.875,5.421ZM2.483,-9.559C0.181,-9.559 -1.958,-8.633 -3.539,-6.949C-5.092,-5.293 -5.948,-3.097 -5.948,-0.767C-5.948,1.564 -5.092,3.759 -3.539,5.413C-1.958,7.098 0.181,8.026 2.483,8.026C7.163,8.026 10.971,4.081 10.971,-0.767C10.971,-5.616 7.163,-9.559 2.483,-9.559M2.483,9.506C-3.073,9.506 -7.595,4.897 -7.595,-0.767C-7.595,-6.432 -3.073,-11.041 2.483,-11.041C8.071,-11.041 12.618,-6.432 12.618,-0.767C12.618,4.897 8.071,9.506 2.483,9.506" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M0,-1.535L2.066,-1.535C4.042,-1.535 5.44,-1.674 5.44,-3.463C5.44,-4.704 4.582,-5.307 2.817,-5.307L0,-5.307L0,-1.535ZM7.875,5.421L5.866,5.421L2.503,-0.11L0,-0.11L0,5.421L-1.48,5.421L-1.48,-6.732L3.15,-6.732C5.762,-6.732 7.031,-5.654 7.031,-3.435C7.031,-1.113 5.623,-0.439 4.279,-0.171L7.875,5.421ZM2.483,-9.559C0.181,-9.559 -1.958,-8.633 -3.539,-6.949C-5.092,-5.293 -5.948,-3.097 -5.948,-0.767C-5.948,1.564 -5.092,3.759 -3.539,5.413C-1.958,7.098 0.181,8.026 2.483,8.026C7.163,8.026 10.971,4.081 10.971,-0.767C10.971,-5.616 7.163,-9.559 2.483,-9.559M2.483,9.506C-3.073,9.506 -7.595,4.897 -7.595,-0.767C-7.595,-6.432 -3.073,-11.041 2.483,-11.041C8.071,-11.041 12.618,-6.432 12.618,-0.767C12.618,4.897 8.071,9.506 2.483,9.506" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
         <g transform="matrix(1,0,0,1,917.529,117.103)">
-            <path d="M0,-111.631C-23.787,-111.631 -38.564,-96.854 -38.564,-73.065L-38.564,0L-27.432,0L-27.432,-75.015C-27.432,-91.103 -16.921,-101.096 0,-101.096C16.921,-101.096 27.432,-91.103 27.432,-75.015L27.432,-61.532L-21.543,-61.532L-21.543,-51.298L27.432,-51.298L27.432,0L38.566,0L38.566,-73.065C38.566,-96.854 23.789,-111.631 0,-111.631" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M0,-111.631C-23.787,-111.631 -38.564,-96.854 -38.564,-73.065L-38.564,0L-27.432,0L-27.432,-75.015C-27.432,-91.103 -16.921,-101.096 0,-101.096C16.921,-101.096 27.432,-91.103 27.432,-75.015L27.432,-61.532L-21.543,-61.532L-21.543,-51.298L27.432,-51.298L27.432,0L38.566,0L38.566,-73.065C38.566,-96.854 23.789,-111.631 0,-111.631" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
         <g transform="matrix(1,0,0,1,1021.91,61.486)">
-            <path d="M0,-0.397C8.688,-5.479 13.089,-14.181 13.089,-26.298C13.089,-43.794 -1.104,-56.014 -21.427,-56.014C-41.848,-56.014 -55.042,-42.113 -55.042,-20.598L-55.042,55.617L-43.909,55.617L-43.909,-20.898C-43.909,-36.29 -35.505,-45.479 -21.427,-45.479C-7.836,-45.479 1.655,-37.344 1.655,-25.698C1.655,-12.173 -7.414,-4.416 -23.227,-4.416L-37.605,-4.416L-37.605,5.819L-18.727,5.819C-4.229,5.819 3.755,12.098 3.755,23.5L3.755,55.617L15.188,55.617L15.188,24.4C15.188,12.472 9.688,3.56 0,-0.397" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M0,-0.397C8.688,-5.479 13.089,-14.181 13.089,-26.298C13.089,-43.794 -1.104,-56.014 -21.427,-56.014C-41.848,-56.014 -55.042,-42.113 -55.042,-20.598L-55.042,55.617L-43.909,55.617L-43.909,-20.898C-43.909,-36.29 -35.505,-45.479 -21.427,-45.479C-7.836,-45.479 1.655,-37.344 1.655,-25.698C1.655,-12.173 -7.414,-4.416 -23.227,-4.416L-37.605,-4.416L-37.605,5.819L-18.727,5.819C-4.229,5.819 3.755,12.098 3.755,23.5L3.755,55.617L15.188,55.617L15.188,24.4C15.188,12.472 9.688,3.56 0,-0.397" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
         <g transform="matrix(1,0,0,1,237.593,191.794)">
-            <path d="M0,-36.428L-18.182,-36.428L-18.182,-20.984L-1.173,-20.984L-1.173,-17.53L-18.182,-17.53L-18.182,3.519L-22.352,3.519L-22.352,-39.947L0,-39.947L0,-36.428Z" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M0,-36.428L-18.182,-36.428L-18.182,-20.984L-1.173,-20.984L-1.173,-17.53L-18.182,-17.53L-18.182,3.519L-22.352,3.519L-22.352,-39.947L0,-39.947L0,-36.428Z" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
         <g transform="matrix(1,0,0,1,0,147.145)">
-            <path d="M248.346,48.169L244.436,48.169L244.436,16.889L248.346,16.889L248.346,48.169ZM248.997,6.332C248.997,7.027 248.747,7.635 248.248,8.157C247.748,8.677 247.129,8.938 246.391,8.938C245.695,8.938 245.087,8.677 244.566,8.157C244.044,7.635 243.784,7.027 243.784,6.332C243.784,5.593 244.044,4.974 244.566,4.474C245.087,3.975 245.695,3.725 246.391,3.725C247.129,3.725 247.748,3.975 248.248,4.474C248.747,4.974 248.997,5.593 248.997,6.332" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M248.346,48.169L244.436,48.169L244.436,16.889L248.346,16.889L248.346,48.169ZM248.997,6.332C248.997,7.027 248.747,7.635 248.248,8.157C247.748,8.677 247.129,8.938 246.391,8.938C245.695,8.938 245.087,8.677 244.566,8.157C244.044,7.635 243.784,7.027 243.784,6.332C243.784,5.593 244.044,4.974 244.566,4.474C245.087,3.975 245.695,3.725 246.391,3.725C247.129,3.725 247.748,3.975 248.248,4.474C248.747,4.974 248.997,5.593 248.997,6.332" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
         <g transform="matrix(1,0,0,1,281.58,163.252)">
-            <path d="M0,32.062L-3.91,32.062L-3.91,13.815C-3.91,11.339 -3.975,9.645 -4.105,8.733C-4.366,7.212 -4.91,6.04 -5.735,5.213C-6.908,4.041 -8.537,3.454 -10.622,3.454C-12.577,3.454 -14.728,3.954 -17.074,4.953C-18.812,5.648 -19.854,6.169 -20.202,6.517L-20.202,32.062L-24.112,32.062L-24.112,0.782L-20.397,0.782L-20.397,3.063C-17.139,1.021 -13.708,0 -10.101,0C-7.017,0 -4.605,0.87 -2.868,2.607C-1.564,3.91 -0.717,5.562 -0.326,7.559C-0.109,8.69 0,10.58 0,13.229L0,32.062Z" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M0,32.062L-3.91,32.062L-3.91,13.815C-3.91,11.339 -3.975,9.645 -4.105,8.733C-4.366,7.212 -4.91,6.04 -5.735,5.213C-6.908,4.041 -8.537,3.454 -10.622,3.454C-12.577,3.454 -14.728,3.954 -17.074,4.953C-18.812,5.648 -19.854,6.169 -20.202,6.517L-20.202,32.062L-24.112,32.062L-24.112,0.782L-20.397,0.782L-20.397,3.063C-17.139,1.021 -13.708,0 -10.101,0C-7.017,0 -4.605,0.87 -2.868,2.607C-1.564,3.91 -0.717,5.562 -0.326,7.559C-0.109,8.69 0,10.58 0,13.229L0,32.062Z" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
         <g transform="matrix(-1,0,0,1,584.404,144.669)">
-            <rect x="290.247" y="3.725" width="3.91" height="46.92" style="fill:white;"/>
+            <rect x="290.247" y="3.725" width="3.91" height="46.92" style="fill:currentColor;"/>
         </g>
         <g transform="matrix(1,0,0,1,320.94,169.182)">
-            <path d="M0,20.788L0,10.231L-1.759,10.231C-11.013,10.231 -15.64,12.6 -15.64,17.334C-15.64,19.028 -15.097,20.42 -14.011,21.505C-12.795,22.722 -11.036,23.33 -8.732,23.33C-6.561,23.33 -3.649,22.482 0,20.788M3.91,26.132L0.326,26.132L0.326,23.786C-0.674,24.308 -1.673,24.828 -2.672,25.35C-5.018,26.305 -7.342,26.783 -9.645,26.783C-12.642,26.783 -15.064,25.903 -16.911,24.144C-18.758,22.385 -19.68,20.094 -19.68,17.269C-19.68,10.449 -13.664,7.038 -1.629,7.038L0,7.038L0,5.865C0,2.564 -0.521,0.37 -1.564,-0.717C-2.737,-1.933 -4.714,-2.541 -7.494,-2.541C-10.361,-2.541 -13.251,-1.716 -16.161,-0.066L-17.791,-2.802C-17.313,-3.279 -16.292,-3.845 -14.728,-4.496C-12.339,-5.495 -9.775,-5.995 -7.038,-5.995C-3.389,-5.995 -0.565,-4.995 1.434,-2.997C2.563,-1.867 3.28,-0.478 3.584,1.173C3.801,2.173 3.91,3.779 3.91,5.995L3.91,26.132Z" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M0,20.788L0,10.231L-1.759,10.231C-11.013,10.231 -15.64,12.6 -15.64,17.334C-15.64,19.028 -15.097,20.42 -14.011,21.505C-12.795,22.722 -11.036,23.33 -8.732,23.33C-6.561,23.33 -3.649,22.482 0,20.788M3.91,26.132L0.326,26.132L0.326,23.786C-0.674,24.308 -1.673,24.828 -2.672,25.35C-5.018,26.305 -7.342,26.783 -9.645,26.783C-12.642,26.783 -15.064,25.903 -16.911,24.144C-18.758,22.385 -19.68,20.094 -19.68,17.269C-19.68,10.449 -13.664,7.038 -1.629,7.038L0,7.038L0,5.865C0,2.564 -0.521,0.37 -1.564,-0.717C-2.737,-1.933 -4.714,-2.541 -7.494,-2.541C-10.361,-2.541 -13.251,-1.716 -16.161,-0.066L-17.791,-2.802C-17.313,-3.279 -16.292,-3.845 -14.728,-4.496C-12.339,-5.495 -9.775,-5.995 -7.038,-5.995C-3.389,-5.995 -0.565,-4.995 1.434,-2.997C2.563,-1.867 3.28,-0.478 3.584,1.173C3.801,2.173 3.91,3.779 3.91,5.995L3.91,26.132Z" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
         <g transform="matrix(1,0,0,1,357.628,163.252)">
-            <path d="M0,32.062L-3.91,32.062L-3.91,13.815C-3.91,11.339 -3.975,9.645 -4.105,8.733C-4.366,7.212 -4.91,6.04 -5.735,5.213C-6.908,4.041 -8.537,3.454 -10.622,3.454C-12.577,3.454 -14.728,3.954 -17.074,4.953C-18.812,5.648 -19.854,6.169 -20.202,6.517L-20.202,32.062L-24.112,32.062L-24.112,0.782L-20.397,0.782L-20.397,3.063C-17.139,1.021 -13.708,0 -10.101,0C-7.017,0 -4.605,0.87 -2.868,2.607C-1.564,3.91 -0.717,5.562 -0.326,7.559C-0.109,8.69 0,10.58 0,13.229L0,32.062Z" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M0,32.062L-3.91,32.062L-3.91,13.815C-3.91,11.339 -3.975,9.645 -4.105,8.733C-4.366,7.212 -4.91,6.04 -5.735,5.213C-6.908,4.041 -8.537,3.454 -10.622,3.454C-12.577,3.454 -14.728,3.954 -17.074,4.953C-18.812,5.648 -19.854,6.169 -20.202,6.517L-20.202,32.062L-24.112,32.062L-24.112,0.782L-20.397,0.782L-20.397,3.063C-17.139,1.021 -13.708,0 -10.101,0C-7.017,0 -4.605,0.87 -2.868,2.607C-1.564,3.91 -0.717,5.562 -0.326,7.559C-0.109,8.69 0,10.58 0,13.229L0,32.062Z" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
         <g transform="matrix(1,0,0,1,387.017,154.91)">
-            <path d="M0,34.538L0,13.881C-2.434,12.491 -4.801,11.795 -7.103,11.795C-10.492,11.795 -13.229,13.045 -15.314,15.542C-17.399,18.041 -18.442,21.332 -18.442,25.415C-18.442,29.021 -17.497,31.954 -15.607,34.213C-13.718,36.472 -11.296,37.601 -8.341,37.601C-5.692,37.601 -2.911,36.581 0,34.538M3.975,40.403L0.391,40.403L0.391,38.058C-2.085,40.056 -5.127,41.055 -8.732,41.055C-12.86,41.055 -16.184,39.611 -18.703,36.722C-21.223,33.833 -22.482,30.02 -22.482,25.285C-22.482,20.289 -21.049,16.217 -18.182,13.066C-15.314,9.917 -11.622,8.342 -7.103,8.342C-4.324,8.342 -1.955,8.928 0,10.1L0,-6.517L3.975,-6.517L3.975,40.403Z" style="fill:white;fill-rule:nonzero;"/>
+            <path d="M0,34.538L0,13.881C-2.434,12.491 -4.801,11.795 -7.103,11.795C-10.492,11.795 -13.229,13.045 -15.314,15.542C-17.399,18.041 -18.442,21.332 -18.442,25.415C-18.442,29.021 -17.497,31.954 -15.607,34.213C-13.718,36.472 -11.296,37.601 -8.341,37.601C-5.692,37.601 -2.911,36.581 0,34.538M3.975,40.403L0.391,40.403L0.391,38.058C-2.085,40.056 -5.127,41.055 -8.732,41.055C-12.86,41.055 -16.184,39.611 -18.703,36.722C-21.223,33.833 -22.482,30.02 -22.482,25.285C-22.482,20.289 -21.049,16.217 -18.182,13.066C-15.314,9.917 -11.622,8.342 -7.103,8.342C-4.324,8.342 -1.955,8.928 0,10.1L0,-6.517L3.975,-6.517L3.975,40.403Z" style="fill:currentColor;fill-rule:nonzero;"/>
         </g>
     </g>
-  </svg>
-  <h1>Style Guide</h1>
-  <p class="sg-header-sub">Colour · Typography · Spacing · Components · Usage — self-contained reference for web and document production.</p>
+  </symbol>
+  <symbol id="bsf-mark" viewBox="0 0 840 840">
+    <g transform="matrix(4.16667,0,0,4.16667,0,0)">
+        <g transform="matrix(1,0,0,1,44.7274,90.3303)">
+            <path d="M0,32.329C7.338,40.124 19.605,40.495 27.4,33.158L52.927,9.133L36.645,-8.166L-2.995,29.145L0,32.329Z" style="fill:currentColor;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,5.269,16.2075)">
+            <path d="M0,64.53L16.337,81.886L33.635,65.607L20.293,51.431L63.898,10.389L113.647,63.243L116.951,60.134C124.744,52.797 125.115,40.529 117.779,32.733L78.32,-9.188C70.981,-16.984 58.716,-17.356 50.92,-10.018L0.83,37.13C-6.966,44.468 -7.337,56.735 0,64.53" style="fill:currentColor;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,122.66,104.38)">
+            <path d="M0,49.93C7.794,42.593 8.166,30.326 0.83,22.533L-23.197,-2.996L-40.494,13.286L-3.183,52.926L0,49.93Z" style="fill:currentColor;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,80.7367,75.9897)">
+            <path d="M0,117.781L17.358,101.441L1.077,84.145L-13.098,97.486L-54.141,53.882L-1.287,4.133L-4.396,0.831C-11.733,-6.965 -24,-7.337 -31.796,0.002L-73.718,39.461C-81.514,46.798 -81.885,59.065 -74.547,66.86L-27.399,116.952C-20.062,124.747 -7.795,125.118 0,117.781" style="fill:currentColor;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,154.311,108.704)">
+            <path d="M0,-32.324C-7.339,-40.121 -19.604,-40.492 -27.4,-33.154L-52.927,-9.129L-36.645,8.168L2.995,-29.141L0,-32.324Z" style="fill:currentColor;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,193.77,182.831)">
+            <path d="M0,-64.53L-16.337,-81.887L-33.634,-65.606L-20.293,-51.431L-63.9,-10.388L-113.647,-63.243L-116.95,-60.134C-124.745,-52.797 -125.116,-40.529 -117.78,-32.734L-78.319,9.188C-70.983,16.986 -58.715,17.357 -50.922,10.017L-0.829,-37.131C6.967,-44.467 7.338,-56.734 0,-64.53" style="fill:currentColor;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,76.3793,94.6577)">
+            <path d="M0,-49.93C-7.795,-42.592 -8.167,-30.326 -0.829,-22.53L23.197,2.995L40.494,-13.286L3.183,-52.925L0,-49.93Z" style="fill:currentColor;fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,118.302,123.045)">
+            <path d="M0,-117.775L-17.357,-101.438L-1.077,-84.14L13.098,-97.482L54.14,-53.879L1.286,-4.13L4.396,-0.826C11.734,6.968 24,7.339 31.796,0.003L73.72,-39.457C81.515,-46.795 81.886,-59.061 74.548,-66.856L27.398,-116.946C20.063,-124.742 7.795,-125.114 0,-117.775" style="fill:currentColor;fill-rule:nonzero;"/>
+        </g>
+    </g>
+  </symbol>
+</svg>
+
+<!-- ================================================================
+     NAV
+     ================================================================ -->
+<nav class="topnav" aria-label="Style guide sections">
+  <div class="wrap topnav-inner">
+    <a class="topnav-brand" href="#top"><svg aria-hidden="true"><use href="#bsf-mark"/></svg><span>Style Guide</span></a>
+    <ul>
+      <li><a href="#glance"><span class="n">00</span>At a glance</a></li>
+      <li><a href="#logo"><span class="n">01</span>Logo</a></li>
+      <li><a href="#colour"><span class="n">02</span>Colour</a></li>
+      <li><a href="#typography"><span class="n">03</span>Typography</a></li>
+      <li><a href="#components"><span class="n">04</span>Components</a></li>
+      <li><a href="#usage"><span class="n">05</span>Do / Don't</a></li>
+    </ul>
   </div>
-  <svg class="sg-header-art" viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-    <defs>
-      <pattern id="sg-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-        <path d="M40 0H0V40" fill="none" stroke="#354B55" stroke-width="1"/>
-      </pattern>
-    </defs>
-    <rect width="480" height="360" fill="url(#sg-grid)" opacity="0.55"/>
-    <g fill="none" stroke="#C8C6C5" stroke-width="1.5" opacity="0.55">
-      <rect x="40" y="200" width="160" height="120"/>
-      <rect x="200" y="120" width="120" height="200"/>
-      <rect x="320" y="240" width="120" height="80"/>
-    </g>
-    <g fill="none" stroke="#C8C6C5" stroke-width="1" opacity="0.3">
-      <rect x="80" y="240" width="40" height="80"/>
-      <rect x="240" y="160" width="40" height="40"/>
-      <rect x="240" y="240" width="40" height="40"/>
-    </g>
-    <path d="M0 320H480" stroke="#C8C6C5" stroke-width="1.5" opacity="0.55"/>
-  </svg>
+</nav>
+
+<!-- ================================================================
+     HERO
+     ================================================================ -->
+<header class="sg-header">
+  <div class="wrap sg-header-inner">
+    <div class="sg-header-copy">
+      <div class="sg-header-label">Visual Identity System</div>
+      <svg class="sg-header-logo" role="img" aria-label="buildingSMART Finland logo"><use href="#bsf-logo"/></svg>
+      <h1>Style Guide</h1>
+      <p class="sg-header-sub">Colour · Typography · Spacing · Components · Usage — self-contained reference for web and document production.</p>
+    </div>
+    <svg class="sg-header-art" viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <defs>
+        <pattern id="sg-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M40 0H0V40" fill="none" stroke="#354B55" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <rect width="480" height="360" fill="url(#sg-grid)" opacity="0.55"/>
+      <g fill="none" stroke="#C8C6C5" stroke-width="1.5" opacity="0.55">
+        <rect x="40" y="200" width="160" height="120"/>
+        <rect x="200" y="120" width="120" height="200"/>
+        <rect x="320" y="240" width="120" height="80"/>
+      </g>
+      <g fill="none" stroke="#C8C6C5" stroke-width="1" opacity="0.3">
+        <rect x="80" y="240" width="40" height="80"/>
+        <rect x="240" y="160" width="40" height="40"/>
+        <rect x="240" y="240" width="40" height="40"/>
+      </g>
+      <path d="M0 320H480" stroke="#C8C6C5" stroke-width="1.5" opacity="0.55"/>
+    </svg>
+  </div>
+  <div class="wrap">
+    <ol class="hero-index" aria-label="Contents">
+      <li><a href="#glance"><span class="num" aria-hidden="true">00</span><span class="lbl">At a glance</span></a></li>
+      <li><a href="#logo"><span class="num" aria-hidden="true">01</span><span class="lbl">Logo</span></a></li>
+      <li><a href="#colour"><span class="num" aria-hidden="true">02</span><span class="lbl">Colour</span></a></li>
+      <li><a href="#typography"><span class="num" aria-hidden="true">03</span><span class="lbl">Typography</span></a></li>
+      <li><a href="#components"><span class="num" aria-hidden="true">04</span><span class="lbl">Components</span></a></li>
+      <li><a href="#usage"><span class="num" aria-hidden="true">05</span><span class="lbl">Do / Don't</span></a></li>
+    </ol>
   </div>
 </header>
 
+<main>
+
 <!-- ================================================================
-     LAYOUT SHELL
+     00 — AT A GLANCE
      ================================================================ -->
-<div class="sg-layout">
+<section class="band band--light" id="glance">
+  <div class="wrap">
+    <div class="band-head reveal">
+      <span class="band-num" aria-hidden="true">00</span>
+      <div class="band-eyebrow">Overview</div>
+      <h2 class="band-title">At a glance</h2>
+      <p class="band-lede">The whole identity on one board — logo, palette and type. Use it as a quick reference; the sections below hold the detail.</p>
+    </div>
 
-  <!-- Sidebar nav -->
-  <nav class="sg-nav" aria-label="Style guide sections">
-    <div class="sg-nav-label">Sections</div>
-    <ul>
-      <li><a href="#colour" class="active">Colour Palette</a></li>
-      <li><a href="#typography">Typography</a></li>
-      <li><a href="#spacing">Spacing Scale</a></li>
-      <li role="separator" class="sg-nav-divider"></li>
-      <li><a href="#headings">Headings</a></li>
-      <li><a href="#body-text">Body Text</a></li>
-      <li><a href="#callouts">Callouts</a></li>
-      <li><a href="#tables">Tables</a></li>
-      <li><a href="#buttons">Buttons</a></li>
-      <li><a href="#tags">Tags &amp; Badges</a></li>
-      <li><a href="#code">Code Blocks</a></li>
-      <li role="separator" class="sg-nav-divider"></li>
-      <li><a href="#usage">Do / Don't</a></li>
-    </ul>
-  </nav>
-
-  <!-- Main content -->
-  <main class="sg-main">
-
-    <!-- ============================================================
-         SECTION 1 — COLOUR PALETTE
-         ============================================================ -->
-    <section class="sg-section" id="colour">
-      <div class="sg-section-header">
-        <div class="sg-eyebrow">Foundation · 01</div>
-        <h2 class="sg-section-title">Colour Palette</h2>
-        <p class="sg-section-desc">The buildingSMART Finland palette uses the bSI <em>secondary</em> palette exclusively. Mint (#48BF91) is the chapter's signature accent — one per composition, never paired with competing colours. Click any value to copy it.</p>
+    <div class="board reveal">
+      <div class="board-rail">
+        <span class="board-rail-title">Style Guide</span>
+        <svg aria-hidden="true"><use href="#bsf-mark"/></svg>
       </div>
 
-      <div class="palette-grid">
-
-        <!-- Deep Navy -->
-        <div class="swatch">
-          <div class="swatch-chip" style="background:#041E42;"></div>
-          <div class="swatch-body">
-            <div class="swatch-name">Deep Navy</div>
-            <div class="swatch-values">
-              <div class="swatch-row">
-                <span class="swatch-val">#041E42</span>
-                <button class="copy-btn" data-copy="#041E42" title="Copy hex" aria-label="Copy #041E42">copy</button>
-              </div>
-              <div class="swatch-row">
-                <span class="swatch-val">rgb(4, 30, 66)</span>
-                <button class="copy-btn" data-copy="rgb(4, 30, 66)" title="Copy RGB" aria-label="Copy rgb(4, 30, 66)">copy</button>
-              </div>
-            </div>
-            <div class="swatch-role">Primary anchor — headlines, hero backgrounds, primary CTAs.</div>
-            <div class="swatch-contrast">
-              <div class="contrast-row">
-                <span class="contrast-sample" style="background:#041E42;color:white;">Aa</span>
-                <span class="contrast-ratio">15.1:1</span>
-                <span class="wcag-badge wcag-aaa">AAA</span>
-                <span class="contrast-label">white on Navy</span>
-              </div>
-              <div class="contrast-row">
-                <span class="contrast-sample" style="background:#041E42;color:#48BF91;">Aa</span>
-                <span class="contrast-ratio">6.6:1</span>
-                <span class="wcag-badge wcag-aa">AA</span>
-                <span class="contrast-label">Mint on Navy</span>
-              </div>
-            </div>
-          </div>
+      <div class="board-logo">
+        <h3 class="board-label">Primary logo</h3>
+        <div class="tile tile--light" style="aspect-ratio:16/9;">
+          <svg class="logo-full" role="img" aria-label="buildingSMART Finland logo on Light Gray"><use href="#bsf-logo"/></svg>
+          <span class="cap">Colour</span>
         </div>
-
-        <!-- Dark Slate -->
-        <div class="swatch">
-          <div class="swatch-chip" style="background:#354B55;"></div>
-          <div class="swatch-body">
-            <div class="swatch-name">Dark Slate</div>
-            <div class="swatch-values">
-              <div class="swatch-row">
-                <span class="swatch-val">#354B55</span>
-                <button class="copy-btn" data-copy="#354B55" title="Copy hex" aria-label="Copy #354B55">copy</button>
-              </div>
-              <div class="swatch-row">
-                <span class="swatch-val">rgb(53, 75, 85)</span>
-                <button class="copy-btn" data-copy="rgb(53, 75, 85)" title="Copy RGB" aria-label="Copy rgb(53, 75, 85)">copy</button>
-              </div>
-            </div>
-            <div class="swatch-role">Secondary surfaces, section backgrounds, H6 heading colour.</div>
-            <div class="swatch-contrast">
-              <div class="contrast-row">
-                <span class="contrast-sample" style="background:#354B55;color:white;">Aa</span>
-                <span class="contrast-ratio">9.1:1</span>
-                <span class="wcag-badge wcag-aaa">AAA</span>
-                <span class="contrast-label">white on Slate</span>
-              </div>
-              <div class="contrast-row">
-                <span class="contrast-sample" style="background:#354B55;color:#48BF91;">Aa</span>
-                <span class="contrast-ratio">3.9:1</span>
-                <span class="wcag-badge wcag-lg">AA-LG</span>
-                <span class="contrast-label">Mint on Slate</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Charcoal -->
-        <div class="swatch">
-          <div class="swatch-chip" style="background:#38363D;"></div>
-          <div class="swatch-body">
-            <div class="swatch-name">Charcoal</div>
-            <div class="swatch-values">
-              <div class="swatch-row">
-                <span class="swatch-val">#38363D</span>
-                <button class="copy-btn" data-copy="#38363D" title="Copy hex" aria-label="Copy #38363D">copy</button>
-              </div>
-              <div class="swatch-row">
-                <span class="swatch-val">rgb(56, 54, 61)</span>
-                <button class="copy-btn" data-copy="rgb(56, 54, 61)" title="Copy RGB" aria-label="Copy rgb(56, 54, 61)">copy</button>
-              </div>
-            </div>
-            <div class="swatch-role">Body text, secondary UI. Replaces pure black — softer on screen.</div>
-            <div class="swatch-contrast">
-              <div class="contrast-row">
-                <span class="contrast-sample" style="background:white;color:#38363D;">Aa</span>
-                <span class="contrast-ratio">11.5:1</span>
-                <span class="wcag-badge wcag-aaa">AAA</span>
-                <span class="contrast-label">Charcoal on white</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Mint -->
-        <div class="swatch">
-          <div class="swatch-chip" style="background:#48BF91;"></div>
-          <div class="swatch-body">
-            <div class="swatch-name">Mint <span style="font-family:var(--ff-mono);font-size:10px;font-weight:400;color:var(--c-slate);">★ signature accent</span></div>
-            <div class="swatch-values">
-              <div class="swatch-row">
-                <span class="swatch-val">#48BF91</span>
-                <button class="copy-btn" data-copy="#48BF91" title="Copy hex" aria-label="Copy #48BF91">copy</button>
-              </div>
-              <div class="swatch-row">
-                <span class="swatch-val">rgb(72, 191, 145)</span>
-                <button class="copy-btn" data-copy="rgb(72, 191, 145)" title="Copy RGB" aria-label="Copy rgb(72, 191, 145)">copy</button>
-              </div>
-            </div>
-            <div class="swatch-role">Hero accent, CTAs, interactive elements. One per composition — never decorative.</div>
-            <div class="swatch-contrast">
-              <div class="contrast-row">
-                <span class="contrast-sample" style="background:white;color:#48BF91;">Aa</span>
-                <span class="contrast-ratio">2.3:1</span>
-                <span class="wcag-badge wcag-nc">NC</span>
-                <span class="contrast-label">Mint on white — icons/borders only</span>
-              </div>
-              <div class="contrast-row">
-                <span class="contrast-sample" style="background:#041E42;color:#48BF91;">Aa</span>
-                <span class="contrast-ratio">6.6:1</span>
-                <span class="wcag-badge wcag-aa">AA</span>
-                <span class="contrast-label">Mint on Navy — labels, UI</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Silver Gray -->
-        <div class="swatch">
-          <div class="swatch-chip swatch-chip--border" style="background:#C8C6C5;"></div>
-          <div class="swatch-body">
-            <div class="swatch-name">Silver Gray</div>
-            <div class="swatch-values">
-              <div class="swatch-row">
-                <span class="swatch-val">#C8C6C5</span>
-                <button class="copy-btn" data-copy="#C8C6C5" title="Copy hex" aria-label="Copy #C8C6C5">copy</button>
-              </div>
-              <div class="swatch-row">
-                <span class="swatch-val">rgb(200, 198, 197)</span>
-                <button class="copy-btn" data-copy="rgb(200, 198, 197)" title="Copy RGB" aria-label="Copy rgb(200, 198, 197)">copy</button>
-              </div>
-            </div>
-            <div class="swatch-role">Borders, dividers, muted UI elements. Not for body text.</div>
-            <div class="swatch-contrast">
-              <div class="contrast-row">
-                <span class="contrast-sample" style="background:white;color:#C8C6C5;">Aa</span>
-                <span class="contrast-ratio">1.7:1</span>
-                <span class="wcag-badge wcag-nc">NC</span>
-                <span class="contrast-label">Decorative / UI dividers only</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Light Gray -->
-        <div class="swatch">
-          <div class="swatch-chip swatch-chip--border" style="background:#E3E3E3;"></div>
-          <div class="swatch-body">
-            <div class="swatch-name">Light Gray</div>
-            <div class="swatch-values">
-              <div class="swatch-row">
-                <span class="swatch-val">#E3E3E3</span>
-                <button class="copy-btn" data-copy="#E3E3E3" title="Copy hex" aria-label="Copy #E3E3E3">copy</button>
-              </div>
-              <div class="swatch-row">
-                <span class="swatch-val">rgb(227, 227, 227)</span>
-                <button class="copy-btn" data-copy="rgb(227, 227, 227)" title="Copy RGB" aria-label="Copy rgb(227, 227, 227)">copy</button>
-              </div>
-            </div>
-            <div class="swatch-role">Page backgrounds, card surfaces, code block fills.</div>
-            <div class="swatch-contrast">
-              <div class="contrast-row">
-                <span class="contrast-sample" style="background:#E3E3E3;color:#38363D;">Aa</span>
-                <span class="contrast-ratio">8.9:1</span>
-                <span class="wcag-badge wcag-aaa">AAA</span>
-                <span class="contrast-label">Charcoal on Light Gray</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /palette-grid -->
-
-      <!-- Colour pairing table -->
-      <div class="sg-panel" style="margin-top:var(--sp-6);">
-        <div class="sg-panel-label">Approved Text / Background Pairings</div>
-        <table style="width:100%;border-collapse:collapse;font-size:13px;">
-          <thead>
-            <tr style="border-bottom:2px solid var(--c-gray-light);">
-              <th style="text-align:left;font-family:var(--ff-display);font-weight:600;color:var(--c-navy);padding:0 12px 10px 0;font-size:12px;">Text</th>
-              <th style="text-align:left;font-family:var(--ff-display);font-weight:600;color:var(--c-navy);padding:0 12px 10px 0;font-size:12px;">Background</th>
-              <th style="text-align:left;font-family:var(--ff-display);font-weight:600;color:var(--c-navy);padding:0 12px 10px 0;font-size:12px;">Usage</th>
-              <th style="text-align:left;font-family:var(--ff-display);font-weight:600;color:var(--c-navy);padding:0 0 10px 0;font-size:12px;">Sample</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style="border-bottom:1px solid var(--c-gray-light);">
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#041E42 Navy</td>
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">white / #E3E3E3</td>
-              <td style="padding:9px 12px 9px 0;color:var(--c-charcoal);">H1–H5 headings on light backgrounds</td>
-              <td style="padding:9px 0;">
-                <span style="font-family:var(--ff-display);font-size:13px;font-weight:700;color:#041E42;background:white;padding:2px 8px;border-radius:3px;">Heading</span>
-              </td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--c-gray-light);">
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#354B55 Slate</td>
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">white / #E3E3E3</td>
-              <td style="padding:9px 12px 9px 0;color:var(--c-charcoal);">H6, secondary headings, supporting text</td>
-              <td style="padding:9px 0;">
-                <span style="font-family:var(--ff-display);font-size:13px;font-weight:600;color:#354B55;background:white;padding:2px 8px;border-radius:3px;">H6 Label</span>
-              </td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--c-gray-light);">
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#38363D Charcoal</td>
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">white / #E3E3E3</td>
-              <td style="padding:9px 12px 9px 0;color:var(--c-charcoal);">Body text — replaces pure black</td>
-              <td style="padding:9px 0;">
-                <span style="font-family:var(--ff-body);font-size:13px;color:#38363D;background:white;padding:2px 8px;border-radius:3px;">Body copy</span>
-              </td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--c-gray-light);">
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#FFFFFF White</td>
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#041E42 Navy</td>
-              <td style="padding:9px 12px 9px 0;color:var(--c-charcoal);">All text on dark/navy backgrounds</td>
-              <td style="padding:9px 0;">
-                <span style="font-family:var(--ff-body);font-size:13px;color:white;background:#041E42;padding:2px 8px;border-radius:3px;">Reversed</span>
-              </td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--c-gray-light);">
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#FFFFFF White</td>
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#354B55 Slate</td>
-              <td style="padding:9px 12px 9px 0;color:var(--c-charcoal);">All text on slate backgrounds</td>
-              <td style="padding:9px 0;">
-                <span style="font-family:var(--ff-body);font-size:13px;color:white;background:#354B55;padding:2px 8px;border-radius:3px;">On Slate</span>
-              </td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--c-gray-light);">
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#48BF91 Mint</td>
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#041E42 Navy</td>
-              <td style="padding:9px 12px 9px 0;color:var(--c-charcoal);">Accent labels and active states on dark only</td>
-              <td style="padding:9px 0;">
-                <span style="font-family:var(--ff-mono);font-size:12px;color:#48BF91;background:#041E42;padding:2px 8px;border-radius:3px;">ACTIVE</span>
-              </td>
-            </tr>
-            <tr>
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#48BF91 Mint</td>
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">white</td>
-              <td style="padding:9px 12px 9px 0;color:var(--c-charcoal);">Inline links and accents only — never large text</td>
-              <td style="padding:9px 0;">
-                <span style="font-family:var(--ff-body);font-size:13px;color:#48BF91;background:white;padding:2px 8px;border-radius:3px;text-decoration:underline;">link</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-    </section><!-- /colour -->
-
-    <!-- ============================================================
-         REMAINING SECTIONS — COMING NEXT
-         ============================================================ -->
-    <section class="sg-section" id="typography">
-      <div class="sg-section-header">
-        <div class="sg-eyebrow">Foundation · 02</div>
-        <h2 class="sg-section-title">Typography</h2>
-        <p class="sg-section-desc">Three typefaces cover all content needs. Figtree leads headings and UI; Source Sans 3 carries body and long-form text; JetBrains Mono marks every technical identifier. Source Serif 4 italic is reserved for pull quotes and callout emphasis only.</p>
-      </div>
-
-      <!-- Type scale reference table -->
-      <div class="sg-panel">
-        <div class="sg-panel-label">Type Scale Reference</div>
-        <table class="type-scale-table">
-          <thead>
-            <tr>
-              <th>Token</th>
-              <th>Web</th>
-              <th>Word</th>
-              <th>Weight</th>
-              <th>Family</th>
-              <th>Usage</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">--fs-display</span></td>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;">48px / 3rem</span></td>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;">36pt</span></td>
-              <td>800</td><td>Figtree</td>
-              <td>Hero headlines — one per page, cover pages only</td>
-            </tr>
-            <tr>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">--fs-h1</span></td>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;">36px / 2.25rem</span></td>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;">27pt</span></td>
-              <td>700</td><td>Figtree</td>
-              <td>Document / page title — one per document</td>
-            </tr>
-            <tr>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">--fs-h2</span></td>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;">28px / 1.75rem</span></td>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;">21pt</span></td>
-              <td>700</td><td>Figtree</td>
-              <td>Major section heading</td>
-            </tr>
-            <tr>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">--fs-h3</span></td>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;">22px / 1.375rem</span></td>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;">16pt</span></td>
-              <td>600</td><td>Figtree</td>
-              <td>Sub-section heading</td>
-            </tr>
-            <tr>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">--fs-h4</span></td>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;">18px / 1.125rem</span></td>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;">14pt</span></td>
-              <td>600</td><td>Figtree</td>
-              <td>Clause-level heading</td>
-            </tr>
-            <tr>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">--fs-h5</span></td>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;">16px / 1rem</span></td>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;">12pt</span></td>
-              <td>600</td><td>Figtree</td>
-              <td>Minor heading — weight differentiates from body</td>
-            </tr>
-            <tr>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">--fs-h6</span></td>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;">13px / 0.8125rem</span></td>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;">10pt</span></td>
-              <td>600</td><td>Figtree</td>
-              <td>Lowest level — uppercase, 0.06em letter-spacing</td>
-            </tr>
-            <tr>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">--fs-body</span></td>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;">16px / 1rem</span></td>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;">12pt</span></td>
-              <td>400</td><td>Source Sans 3</td>
-              <td>Running body text, paragraphs</td>
-            </tr>
-            <tr>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">--fs-small</span></td>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;">14px / 0.875rem</span></td>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;">10.5pt</span></td>
-              <td>400</td><td>Source Sans 3</td>
-              <td>Captions, metadata, footnotes</td>
-            </tr>
-            <tr>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">--fs-label</span></td>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;">12px / 0.75rem</span></td>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;">9pt</span></td>
-              <td>600</td><td>Figtree</td>
-              <td>UI labels — uppercase, 0.06em tracking</td>
-            </tr>
-            <tr>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">--fs-mono</span></td>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;">13px / 0.8125rem</span></td>
-              <td><span style="font-family:var(--ff-mono);font-size:11px;">10pt</span></td>
-              <td>400</td><td>JetBrains Mono</td>
-              <td>Code, schema names, file types, version strings</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Live specimens -->
-      <div class="sg-panel">
-        <div class="sg-panel-label">Live Specimens</div>
-
-        <div class="type-specimen-row">
-          <div class="type-specimen-level">
-            <div class="type-specimen-level-name">Display</div>
-            <div class="type-specimen-level-desc">Hero /<br>cover</div>
-          </div>
-          <div style="flex:1;">
-            <div style="font-family:var(--ff-display);font-size:var(--fs-display);font-weight:800;letter-spacing:var(--ls-display);line-height:var(--lh-display);color:var(--c-navy);">buildingSMART</div>
-            <div class="type-meta">
-              <span class="type-meta-chip">--fs-display · 48px</span>
-              <span class="type-meta-chip">weight 800</span>
-              <span class="type-meta-chip">Figtree</span>
-              <span class="type-meta-chip">One per page — covers only</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="type-specimen-row">
-          <div class="type-specimen-level">
-            <div class="type-specimen-level-name">H1</div>
-            <div class="type-specimen-level-desc">Page<br>title</div>
-          </div>
-          <div style="flex:1;">
-            <div style="font-family:var(--ff-display);font-size:var(--fs-h1);font-weight:700;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);">Open Standards for the Built Environment</div>
-            <div class="type-meta">
-              <span class="type-meta-chip">--fs-h1 · 36px</span>
-              <span class="type-meta-chip">weight 700</span>
-              <span class="type-meta-chip">Figtree</span>
-              <span class="type-meta-chip">One per document</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="type-specimen-row">
-          <div class="type-specimen-level">
-            <div class="type-specimen-level-name">H2</div>
-            <div class="type-specimen-level-desc">Major<br>section</div>
-          </div>
-          <div style="flex:1;">
-            <div style="font-family:var(--ff-display);font-size:var(--fs-h2);font-weight:700;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);">IFC Schema Reference</div>
-            <div class="type-meta">
-              <span class="type-meta-chip">--fs-h2 · 28px</span>
-              <span class="type-meta-chip">weight 700</span>
-              <span class="type-meta-chip">Figtree</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="type-specimen-row">
-          <div class="type-specimen-level">
-            <div class="type-specimen-level-name">H3</div>
-            <div class="type-specimen-level-desc">Sub-<br>section</div>
-          </div>
-          <div style="flex:1;">
-            <div style="font-family:var(--ff-display);font-size:var(--fs-h3);font-weight:600;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);">IfcWall — Properties and Constraints</div>
-            <div class="type-meta">
-              <span class="type-meta-chip">--fs-h3 · 22px</span>
-              <span class="type-meta-chip">weight 600</span>
-              <span class="type-meta-chip">Figtree</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="type-specimen-row">
-          <div class="type-specimen-level">
-            <div class="type-specimen-level-name">H4</div>
-            <div class="type-specimen-level-desc">Clause</div>
-          </div>
-          <div style="flex:1;">
-            <div style="font-family:var(--ff-display);font-size:var(--fs-h4);font-weight:600;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);">Pset_WallCommon Attributes</div>
-            <div class="type-meta">
-              <span class="type-meta-chip">--fs-h4 · 18px</span>
-              <span class="type-meta-chip">weight 600</span>
-              <span class="type-meta-chip">Figtree</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="type-specimen-row">
-          <div class="type-specimen-level">
-            <div class="type-specimen-level-name">H5</div>
-            <div class="type-specimen-level-desc">Minor<br>heading</div>
-          </div>
-          <div style="flex:1;">
-            <div style="font-family:var(--ff-display);font-size:var(--fs-h5);font-weight:600;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);">Required attributes</div>
-            <div class="type-meta">
-              <span class="type-meta-chip">--fs-h5 · 16px</span>
-              <span class="type-meta-chip">weight 600</span>
-              <span class="type-meta-chip">Figtree</span>
-              <span class="type-meta-chip">Weight differentiates from body</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="type-specimen-row">
-          <div class="type-specimen-level">
-            <div class="type-specimen-level-name">H6</div>
-            <div class="type-specimen-level-desc">Label /<br>nav</div>
-          </div>
-          <div style="flex:1;">
-            <div style="font-family:var(--ff-display);font-size:var(--fs-h6);font-weight:600;letter-spacing:var(--ls-label);line-height:var(--lh-heading);color:var(--c-slate);text-transform:uppercase;">Normative references</div>
-            <div class="type-meta">
-              <span class="type-meta-chip">--fs-h6 · 13px</span>
-              <span class="type-meta-chip">weight 600</span>
-              <span class="type-meta-chip">uppercase · 0.06em</span>
-              <span class="type-meta-chip">colour: Dark Slate</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="type-specimen-row">
-          <div class="type-specimen-level">
-            <div class="type-specimen-level-name">Body</div>
-            <div class="type-specimen-level-desc">Long-<br>form</div>
-          </div>
-          <div style="flex:1;">
-            <div style="font-family:var(--ff-body);font-size:var(--fs-body);font-weight:400;line-height:var(--lh-body);color:var(--c-charcoal);max-width:640px;">buildingSMART International develops and maintains open standards for Building Information Modelling. The IFC schema provides a neutral, open file format for describing building and construction industry data across software applications and disciplines.</div>
-            <div class="type-meta">
-              <span class="type-meta-chip">--fs-body · 16px</span>
-              <span class="type-meta-chip">weight 400</span>
-              <span class="type-meta-chip">Source Sans 3</span>
-              <span class="type-meta-chip">line-height 1.7</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="type-specimen-row">
-          <div class="type-specimen-level">
-            <div class="type-specimen-level-name">Italic</div>
-            <div class="type-specimen-level-desc">Callout /<br>quote</div>
-          </div>
-          <div style="flex:1;">
-            <div style="font-family:var(--ff-quote);font-size:var(--fs-body);font-weight:400;font-style:italic;line-height:var(--lh-body);color:var(--c-charcoal);max-width:600px;">"Open standards remove barriers to interoperability. They are not a competitive advantage — they are the foundation on which advantages are built."</div>
-            <div class="type-meta">
-              <span class="type-meta-chip">--ff-quote · italic</span>
-              <span class="type-meta-chip">Source Serif 4 italic</span>
-              <span class="type-meta-chip">Pull quotes and callouts only</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="type-specimen-row">
-          <div class="type-specimen-level">
-            <div class="type-specimen-level-name">Small</div>
-            <div class="type-specimen-level-desc">Caption</div>
-          </div>
-          <div style="flex:1;">
-            <div style="font-family:var(--ff-body);font-size:var(--fs-small);font-weight:400;line-height:var(--lh-body);color:var(--c-slate);">Figure 1 — IFC4.3 entity relationship diagram. Source: buildingSMART International, June 2026.</div>
-            <div class="type-meta">
-              <span class="type-meta-chip">--fs-small · 14px</span>
-              <span class="type-meta-chip">weight 400</span>
-              <span class="type-meta-chip">Source Sans 3</span>
-              <span class="type-meta-chip">Captions, metadata, footnotes</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="type-specimen-row">
-          <div class="type-specimen-level">
-            <div class="type-specimen-level-name">Label</div>
-            <div class="type-specimen-level-desc">UI<br>text</div>
-          </div>
-          <div style="flex:1;">
-            <div style="font-family:var(--ff-display);font-size:var(--fs-label);font-weight:600;letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--c-slate);">Published · June 2026 · IDS Version 1.0</div>
-            <div class="type-meta">
-              <span class="type-meta-chip">--fs-label · 12px</span>
-              <span class="type-meta-chip">weight 600</span>
-              <span class="type-meta-chip">Figtree</span>
-              <span class="type-meta-chip">uppercase · 0.06em · UI labels only</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="type-specimen-row">
-          <div class="type-specimen-level">
-            <div class="type-specimen-level-name">Mono</div>
-            <div class="type-specimen-level-desc">Identi-<br>fiers</div>
-          </div>
-          <div style="flex:1;">
-            <div style="font-family:var(--ff-mono);font-size:var(--fs-mono);font-weight:400;line-height:1.7;color:var(--c-charcoal);">IfcWall · IFC4.3 · Pset_WallCommon · BCF 3.0 · IDS · IfcPropertySingleValue</div>
-            <div class="type-meta">
-              <span class="type-meta-chip">--fs-mono · 13px</span>
-              <span class="type-meta-chip">weight 400</span>
-              <span class="type-meta-chip">JetBrains Mono</span>
-              <span class="type-meta-chip">Standards identifiers, schema names, code</span>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /specimens -->
-
-      <!-- Colour pairings for type -->
-      <div class="sg-panel">
-        <div class="sg-panel-label">Approved Colour Pairings for Type</div>
-        <table style="width:100%;border-collapse:collapse;font-size:13px;">
-          <thead>
-            <tr style="border-bottom:2px solid var(--c-gray-light);">
-              <th style="text-align:left;font-family:var(--ff-display);font-weight:600;color:var(--c-navy);padding:0 12px 10px 0;font-size:12px;">Text colour</th>
-              <th style="text-align:left;font-family:var(--ff-display);font-weight:600;color:var(--c-navy);padding:0 12px 10px 0;font-size:12px;">Background</th>
-              <th style="text-align:left;font-family:var(--ff-display);font-weight:600;color:var(--c-navy);padding:0 12px 10px 0;font-size:12px;">Usage</th>
-              <th style="text-align:left;font-family:var(--ff-display);font-weight:600;color:var(--c-navy);padding:0 0 10px 0;font-size:12px;">Sample</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style="border-bottom:1px solid var(--c-gray-light);">
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#041E42 Navy</td>
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">white / #E3E3E3</td>
-              <td style="padding:9px 12px 9px 0;color:var(--c-charcoal);">H1–H5 headings on light backgrounds</td>
-              <td style="padding:9px 0;"><span style="font-family:var(--ff-display);font-size:14px;font-weight:700;color:#041E42;">Heading</span></td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--c-gray-light);">
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#354B55 Slate</td>
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">white / #E3E3E3</td>
-              <td style="padding:9px 12px 9px 0;color:var(--c-charcoal);">H6, supporting text, captions</td>
-              <td style="padding:9px 0;"><span style="font-family:var(--ff-display);font-size:11px;font-weight:600;color:#354B55;text-transform:uppercase;letter-spacing:0.06em;">SECTION</span></td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--c-gray-light);">
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#38363D Charcoal</td>
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">white / #E3E3E3</td>
-              <td style="padding:9px 12px 9px 0;color:var(--c-charcoal);">Body text, paragraphs</td>
-              <td style="padding:9px 0;"><span style="font-family:var(--ff-body);font-size:14px;color:#38363D;">Body copy</span></td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--c-gray-light);">
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#FFFFFF White</td>
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#041E42 Navy</td>
-              <td style="padding:9px 12px 9px 0;color:var(--c-charcoal);">All text on dark backgrounds</td>
-              <td style="padding:9px 0;"><span style="font-family:var(--ff-display);font-size:14px;font-weight:600;color:white;background:#041E42;padding:2px 8px;border-radius:3px;">Reversed</span></td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--c-gray-light);">
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#FFFFFF White</td>
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#354B55 Slate</td>
-              <td style="padding:9px 12px 9px 0;color:var(--c-charcoal);">All text on slate backgrounds</td>
-              <td style="padding:9px 0;"><span style="font-family:var(--ff-body);font-size:14px;color:white;background:#354B55;padding:2px 8px;border-radius:3px;">On Slate</span></td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--c-gray-light);">
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#48BF91 Mint</td>
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#041E42 Navy</td>
-              <td style="padding:9px 12px 9px 0;color:var(--c-charcoal);">Accent labels, active states — dark surfaces only</td>
-              <td style="padding:9px 0;"><span style="font-family:var(--ff-mono);font-size:11px;color:#48BF91;background:#041E42;padding:2px 8px;border-radius:3px;">ACTIVE</span></td>
-            </tr>
-            <tr>
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">#48BF91 Mint</td>
-              <td style="padding:9px 12px 9px 0;font-family:var(--ff-mono);font-size:11px;color:var(--c-slate);">white</td>
-              <td style="padding:9px 12px 9px 0;color:var(--c-charcoal);">Inline links and accents only — never large text blocks</td>
-              <td style="padding:9px 0;"><span style="font-family:var(--ff-body);font-size:14px;color:#48BF91;text-decoration:underline;">link text</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Medium rules -->
-      <div class="sg-panel">
-        <div class="sg-panel-label">Medium-Specific Rules</div>
-        <div class="type-medium-callout">
-          <strong>Web &amp; HTML documents</strong>
-          <ul>
-            <li>Figtree — all headings H1–H6, UI elements, labels, navigation.</li>
-            <li>Source Serif 4 — all running body text. Italic for pull quotes and callouts.</li>
-            <li>Load via Google Fonts CDN — no local font dependency for readers.</li>
-          </ul>
-        </div>
-        <div class="type-medium-callout">
-          <strong>PowerPoint presentations</strong>
-          <ul>
-            <li>Figtree carries <em>all</em> slide text including body. Minimum 18pt — no exceptions.</li>
-            <li>Source Serif 4 italic — callout boxes and pull quotes only. Never upright on slides.</li>
-            <li>Fonts are embedded in the template. Users must also install fonts locally to edit.</li>
-          </ul>
-        </div>
-        <div class="type-medium-callout">
-          <strong>Word documents (.docx)</strong>
-          <ul>
-            <li>Figtree — all headings H1–H6 via named paragraph styles (27pt → 10pt). Never manual size overrides.</li>
-            <li>Source Serif 4 — Normal style for body text at 12pt. Italic for emphasis and pull quotes.</li>
-            <li>Caption style at 10.5pt; JetBrains Mono character style at 10pt for inline identifiers.</li>
-            <li>Fonts must be installed on the authoring machine. The <code style="font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;">.dotx</code> template does not embed fonts.</li>
-          </ul>
-        </div>
-        <div class="type-medium-callout" style="border-left-color:var(--c-mint);">
-          <strong>JetBrains Mono — all media</strong>
-          <ul>
-            <li>IFC schema names, file extensions, version strings: <code style="font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;">IFC4.3</code> <code style="font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;">IfcWall</code> <code style="font-family:var(--ff-mono);font-size:12px;background:white;padding:1px 5px;border-radius:3px;">BCF 3.0</code></li>
-            <li>Never for decorative use. Arial, Calibri, and Times New Roman are forbidden in all distributed materials.</li>
-          </ul>
+        <div class="quad">
+          <div class="tile tile--navy"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap">Navy</span></div>
+          <div class="tile tile--slate"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap">Slate</span></div>
+          <div class="tile tile--charcoal"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap">Charcoal</span></div>
+          <div class="tile tile--silver"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap">Silver</span></div>
         </div>
       </div>
 
-    </section><!-- /typography -->
-
-    <section class="sg-section" id="spacing">
-      <div class="sg-section-header">
-        <div class="sg-eyebrow">Foundation · 03</div>
-        <h2 class="sg-section-title">Spacing Scale</h2>
-        <p class="sg-section-desc">A 4px base unit. Twelve tokens cover all padding, margin, and gap values in the system. Never use arbitrary pixel values — always pick the nearest token.</p>
-      </div>
-
-      <div class="sg-panel">
-        <div class="sg-panel-label">Spacing Tokens</div>
-        <div class="sp-row">
-          <span class="sp-token">--sp-1</span>
-          <div class="sp-bar-wrap"><div class="sp-bar" style="width:4px;"></div></div>
-          <span class="sp-values">4px / 0.25rem</span>
-          <span class="sp-use">Icon gap, tight insets</span>
+      <div class="board-mark">
+        <h3 class="board-label">Logo mark</h3>
+        <div class="tile tile--light" style="aspect-ratio:16/9;">
+          <svg class="logo-mark" role="img" aria-label="buildingSMART mark on Light Gray"><use href="#bsf-mark"/></svg>
+          <span class="cap">Colour</span>
         </div>
-        <div class="sp-row">
-          <span class="sp-token">--sp-2</span>
-          <div class="sp-bar-wrap"><div class="sp-bar" style="width:8px;"></div></div>
-          <span class="sp-values">8px / 0.5rem</span>
-          <span class="sp-use">Label margin, swatch row gap</span>
-        </div>
-        <div class="sp-row">
-          <span class="sp-token">--sp-3</span>
-          <div class="sp-bar-wrap"><div class="sp-bar" style="width:12px;"></div></div>
-          <span class="sp-values">12px / 0.75rem</span>
-          <span class="sp-use">Caption margin, nav item gap</span>
-        </div>
-        <div class="sp-row">
-          <span class="sp-token">--sp-4</span>
-          <div class="sp-bar-wrap"><div class="sp-bar" style="width:16px;"></div></div>
-          <span class="sp-values">16px / 1rem</span>
-          <span class="sp-use">Default component gap, palette grid</span>
-        </div>
-        <div class="sp-row">
-          <span class="sp-token">--sp-5</span>
-          <div class="sp-bar-wrap"><div class="sp-bar" style="width:20px;"></div></div>
-          <span class="sp-values">20px / 1.25rem</span>
-          <span class="sp-use">Section header padding, callout padding</span>
-        </div>
-        <div class="sp-row">
-          <span class="sp-token">--sp-6</span>
-          <div class="sp-bar-wrap"><div class="sp-bar" style="width:24px;"></div></div>
-          <span class="sp-values">24px / 1.5rem</span>
-          <span class="sp-use">Panel padding (horizontal), footer gap</span>
-        </div>
-        <div class="sp-row">
-          <span class="sp-token">--sp-8</span>
-          <div class="sp-bar-wrap"><div class="sp-bar" style="width:32px;"></div></div>
-          <span class="sp-values">32px / 2rem</span>
-          <span class="sp-use">Panel padding, layout padding</span>
-        </div>
-        <div class="sp-row">
-          <span class="sp-token">--sp-10</span>
-          <div class="sp-bar-wrap"><div class="sp-bar" style="width:40px;"></div></div>
-          <span class="sp-values">40px / 2.5rem</span>
-          <span class="sp-use">Section header margin</span>
-        </div>
-        <div class="sp-row">
-          <span class="sp-token">--sp-12</span>
-          <div class="sp-bar-wrap"><div class="sp-bar" style="width:48px;"></div></div>
-          <span class="sp-values">48px / 3rem</span>
-          <span class="sp-use">Layout padding top, sidebar gap</span>
-        </div>
-        <div class="sp-row">
-          <span class="sp-token">--sp-16</span>
-          <div class="sp-bar-wrap"><div class="sp-bar" style="width:64px;"></div></div>
-          <span class="sp-values">64px / 4rem</span>
-          <span class="sp-use">Header padding, hero inset</span>
-        </div>
-        <div class="sp-row">
-          <span class="sp-token">--sp-20</span>
-          <div class="sp-bar-wrap"><div class="sp-bar" style="width:80px;"></div></div>
-          <span class="sp-values">80px / 5rem</span>
-          <span class="sp-use">Section margin-bottom, footer padding</span>
-        </div>
-        <div class="sp-row">
-          <span class="sp-token">--sp-24</span>
-          <div class="sp-bar-wrap"><div class="sp-bar" style="width:96px;"></div></div>
-          <span class="sp-values">96px / 6rem</span>
-          <span class="sp-use">Max vertical rhythm between major sections</span>
+        <div class="quad">
+          <div class="tile tile--navy"><svg class="logo-mark" aria-hidden="true"><use href="#bsf-mark"/></svg><span class="cap">Navy</span></div>
+          <div class="tile tile--slate"><svg class="logo-mark" aria-hidden="true"><use href="#bsf-mark"/></svg><span class="cap">Slate</span></div>
+          <div class="tile tile--charcoal"><svg class="logo-mark" aria-hidden="true"><use href="#bsf-mark"/></svg><span class="cap">Charcoal</span></div>
+          <div class="tile tile--silver"><svg class="logo-mark" aria-hidden="true"><use href="#bsf-mark"/></svg><span class="cap">Silver</span></div>
         </div>
       </div>
 
-    </section><!-- /spacing -->
-
-    <!-- ============================================================
-         SECTION 4.1 — HEADINGS
-         ============================================================ -->
-    <section class="sg-section" id="headings">
-      <div class="sg-section-header">
-        <div class="sg-eyebrow">Components · 01</div>
-        <h2 class="sg-section-title">Headings</h2>
-        <p class="sg-section-desc">All six heading levels use Figtree. Size and weight create hierarchy — colour variation is not used within the heading scale except at H6.</p>
+      <div class="board-colours">
+        <h3 class="board-label">Colours</h3>
+        <div class="colour-stack">
+          <div style="background:#041E42;color:white;"><strong>Deep Navy</strong><span>#041E42</span><span>4 / 30 / 66</span></div>
+          <div style="background:#354B55;color:white;"><strong>Dark Slate</strong><span>#354B55</span><span>53 / 75 / 85</span></div>
+          <div style="background:#38363D;color:white;"><strong>Charcoal</strong><span>#38363D</span><span>56 / 54 / 61</span></div>
+          <div style="background:#C8C6C5;color:#041E42;"><strong>Silver Gray</strong><span>#C8C6C5</span><span>200 / 198 / 197</span></div>
+          <div style="background:#E3E3E3;color:#041E42;"><strong>Light Gray</strong><span>#E3E3E3</span><span>227 / 227 / 227</span></div>
+          <div style="background:#48BF91;color:#041E42;"><strong>Mint</strong><span>#48BF91</span><span>72 / 191 / 145</span></div>
+        </div>
       </div>
 
-      <div class="sg-panel">
-        <div class="heading-specimen-row">
-          <span class="heading-specimen-label">H1</span>
-          <div style="font-family:var(--ff-display);font-size:var(--fs-h1);font-weight:700;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);flex:1;">IFC Schema Reference Guide</div>
-          <div class="heading-specimen-meta">
-            <span class="type-meta-chip">36px</span>
-            <span class="type-meta-chip">700</span>
+      <div class="board-type">
+        <h3 class="board-label">Typography</h3>
+        <div class="type-panel">
+          <div class="type-panel-row">
+            <div>
+              <div class="fam">Figtree 800 / 700 / 600<span class="mono">Headings · UI</span></div>
+              <div class="abc" style="font-family:var(--ff-display);font-weight:700;">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz Ää Öö Åå<br>1234567890</div>
+            </div>
+            <div class="aa" style="font-family:var(--ff-display);font-weight:800;">Aa</div>
           </div>
-        </div>
-        <div class="heading-specimen-row">
-          <span class="heading-specimen-label">H2</span>
-          <div style="font-family:var(--ff-display);font-size:var(--fs-h2);font-weight:700;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);flex:1;">Core Entities</div>
-          <div class="heading-specimen-meta">
-            <span class="type-meta-chip">28px</span>
-            <span class="type-meta-chip">700</span>
+          <div class="type-panel-row">
+            <div>
+              <div class="fam">Source Sans 3 400 / 600<span class="mono">Body</span></div>
+              <div class="abc" style="font-family:var(--ff-body);">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz Ää Öö Åå<br>1234567890</div>
+            </div>
+            <div class="aa" style="font-family:var(--ff-body);">Bb</div>
           </div>
-        </div>
-        <div class="heading-specimen-row">
-          <span class="heading-specimen-label">H3</span>
-          <div style="font-family:var(--ff-display);font-size:var(--fs-h3);font-weight:600;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);flex:1;">IfcWall — Definition and Scope</div>
-          <div class="heading-specimen-meta">
-            <span class="type-meta-chip">22px</span>
-            <span class="type-meta-chip">600</span>
-          </div>
-        </div>
-        <div class="heading-specimen-row">
-          <span class="heading-specimen-label">H4</span>
-          <div style="font-family:var(--ff-display);font-size:var(--fs-h4);font-weight:600;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);flex:1;">Formal Propositions</div>
-          <div class="heading-specimen-meta">
-            <span class="type-meta-chip">18px</span>
-            <span class="type-meta-chip">600</span>
-          </div>
-        </div>
-        <div class="heading-specimen-row">
-          <span class="heading-specimen-label">H5</span>
-          <div style="font-family:var(--ff-display);font-size:var(--fs-h5);font-weight:600;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);flex:1;">WR1 — Required attributes</div>
-          <div class="heading-specimen-meta">
-            <span class="type-meta-chip">16px</span>
-            <span class="type-meta-chip">600</span>
-          </div>
-        </div>
-        <div class="heading-specimen-row">
-          <span class="heading-specimen-label">H6</span>
-          <div style="font-family:var(--ff-display);font-size:var(--fs-h6);font-weight:600;letter-spacing:var(--ls-label);line-height:var(--lh-heading);color:var(--c-slate);text-transform:uppercase;flex:1;">Normative references</div>
-          <div class="heading-specimen-meta">
-            <span class="type-meta-chip">13px</span>
-            <span class="type-meta-chip">600</span>
-            <span class="type-meta-chip">uppercase</span>
-            <span class="type-meta-chip">slate</span>
+          <div class="type-panel-row">
+            <div>
+              <div class="fam">JetBrains Mono 400 / 500<span class="mono">Identifiers</span></div>
+              <div class="abc" style="font-family:var(--ff-mono);font-size:13.5px;">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz<br>1234567890 IfcWall IFC4.3</div>
+            </div>
+            <div class="aa" style="font-family:var(--ff-mono);">Cc</div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
 
-    </section><!-- /headings -->
+<!-- ================================================================
+     01 — LOGO
+     ================================================================ -->
+<section class="band band--white" id="logo">
+  <div class="wrap">
+    <div class="band-head reveal">
+      <span class="band-num" aria-hidden="true">01</span>
+      <div class="band-eyebrow">Identity</div>
+      <h2 class="band-title">Logo</h2>
+      <p class="band-lede">The buildingSMART Finland lockup is used in white on dark grounds and in Deep Navy on light grounds. It is never recoloured in Mint and never placed on a busy image without a solid panel behind it.</p>
+    </div>
 
-    <!-- ============================================================
-         SECTION 4.2 — BODY TEXT
-         ============================================================ -->
-    <section class="sg-section" id="body-text">
-      <div class="sg-section-header">
-        <div class="sg-eyebrow">Components · 02</div>
-        <h2 class="sg-section-title">Body Text</h2>
-        <p class="sg-section-desc">Source Sans 3 handles all long-form reading. Source Serif 4 italic is reserved for pull quotes and callout emphasis. Figtree covers UI labels.</p>
+    <div class="logo-grid reveal">
+      <div class="tile tile--navy"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap">White on Deep Navy — primary</span></div>
+      <div class="tile tile--slate"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap">White on Dark Slate</span></div>
+      <div class="tile tile--light"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap">Navy on Light Gray</span></div>
+      <div class="tile tile--white"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap">Navy on White</span></div>
+    </div>
+
+    <div class="logo-rules reveal">
+      <div class="rule-card">
+        <h3>Clear space <span class="sg-tag sg-tag-neutral">Proposed</span></h3>
+        <p>Keep a margin of <span class="mono">x</span> on every side, where <span class="mono">x</span> is half the height of the mark. Nothing — text, edges, other logos — enters this zone.</p>
+        <svg viewBox="0 0 600 220" aria-label="Clear space diagram" role="img">
+          <rect x="83" y="44" width="434" height="132" fill="none" stroke="#C8C6C5" stroke-width="1"/>
+          <rect x="116" y="77" width="368" height="66" fill="none" stroke="#C8C6C5" stroke-width="1" stroke-dasharray="4 4"/>
+          <svg x="116" y="77" width="368" height="66" viewBox="0 0 4617 830"><use href="#bsf-logo"/></svg>
+          <g fill="none" stroke="#354B55" stroke-width="1">
+            <rect x="83" y="93.5" width="33" height="33"/>
+            <rect x="484" y="93.5" width="33" height="33"/>
+            <rect x="283.5" y="44" width="33" height="33"/>
+            <rect x="283.5" y="143" width="33" height="33"/>
+          </g>
+          <g font-family="JetBrains Mono, monospace" font-size="13" fill="#354B55" text-anchor="middle">
+            <text x="99.5" y="114">x</text><text x="500.5" y="114">x</text><text x="300" y="65">x</text><text x="300" y="164">x</text>
+          </g>
+        </svg>
       </div>
-
-      <div class="sg-panel">
-        <div class="sg-panel-label">Body — Source Sans 3 400</div>
-        <p style="font-family:var(--ff-body);font-size:var(--fs-body);font-weight:400;line-height:var(--lh-body);color:var(--c-charcoal);max-width:660px;margin:0;">buildingSMART International develops and maintains open standards for Building Information Modelling. The IFC schema provides a neutral, open file format for exchanging building and construction industry data across software applications, enabling genuine interoperability across the entire project lifecycle — from design and engineering through construction and operation.</p>
-        <div class="type-meta" style="margin-top:var(--sp-4);">
-          <span class="type-meta-chip">16px / 1rem</span>
-          <span class="type-meta-chip">weight 400</span>
-          <span class="type-meta-chip">line-height 1.7</span>
-          <span class="type-meta-chip">colour: Charcoal</span>
+      <div class="rule-card">
+        <h3>Minimum size <span class="sg-tag sg-tag-neutral">Proposed</span></h3>
+        <p>Below these sizes the wordmark loses legibility. Use the mark alone when space is tighter.</p>
+        <div class="min-sizes">
+          <figure>
+            <svg style="width:120px;height:auto;aspect-ratio:4617/830;" aria-hidden="true"><use href="#bsf-logo"/></svg>
+            <figcaption class="cap">Lockup · 120px / 30mm wide</figcaption>
+          </figure>
+          <figure>
+            <svg style="width:24px;height:24px;" aria-hidden="true"><use href="#bsf-mark"/></svg>
+            <figcaption class="cap">Mark · 24px / 6mm</figcaption>
+          </figure>
         </div>
       </div>
+    </div>
+  </div>
+</section>
 
-      <div class="sg-panel">
-        <div class="sg-panel-label">Small / Caption — Source Sans 3 400</div>
-        <p style="font-family:var(--ff-body);font-size:var(--fs-small);font-weight:400;line-height:var(--lh-body);color:var(--c-slate);margin:0;">Figure 3 — Entity relationship between <span style="font-family:var(--ff-mono);font-size:12px;">IfcWall</span> and <span style="font-family:var(--ff-mono);font-size:12px;">Pset_WallCommon</span> in IFC4.3. Source: buildingSMART International, June 2026. All rights reserved.</p>
-        <div class="type-meta" style="margin-top:var(--sp-4);">
-          <span class="type-meta-chip">14px / 0.875rem</span>
-          <span class="type-meta-chip">weight 400</span>
-          <span class="type-meta-chip">colour: Slate</span>
-          <span class="type-meta-chip">Captions, metadata, footnotes</span>
+<!-- ================================================================
+     02 — COLOUR
+     ================================================================ -->
+<section class="band band--navy" id="colour">
+  <div class="wrap">
+    <div class="band-head reveal">
+      <span class="band-num" aria-hidden="true">02</span>
+      <div class="band-eyebrow">Foundation</div>
+      <h2 class="band-title">Colour</h2>
+      <p class="band-lede">The bSI <em>secondary</em> palette, used exclusively. Block sizes reflect how much of each colour a typical composition uses. Click any value to copy it.</p>
+    </div>
+
+    <div class="swatch-mosaic reveal">
+      <div class="sw sw--navy">
+        <div><div class="sw-name">Deep Navy</div><div class="sw-role">Primary anchor — headlines, hero backgrounds, primary CTAs.</div></div>
+        <div class="sw-vals">
+          <div>#041E42 <button class="copy-btn" data-copy="#041E42" aria-label="Copy #041E42">copy</button></div>
+          <div>rgb(4, 30, 66) <button class="copy-btn" data-copy="rgb(4, 30, 66)" aria-label="Copy rgb(4, 30, 66)">copy</button></div>
         </div>
       </div>
-
-      <div class="sg-panel">
-        <div class="sg-panel-label">Label — Figtree 600 uppercase</div>
-        <div style="font-family:var(--ff-display);font-size:var(--fs-label);font-weight:600;letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--c-slate);">Published · June 2026 &nbsp;·&nbsp; IDS Version 1.0 &nbsp;·&nbsp; IFC4.3</div>
-        <div class="type-meta" style="margin-top:var(--sp-4);">
-          <span class="type-meta-chip">12px / 0.75rem</span>
-          <span class="type-meta-chip">weight 600</span>
-          <span class="type-meta-chip">uppercase · 0.06em</span>
-          <span class="type-meta-chip">UI labels only — never body copy</span>
+      <div class="sw sw--slate">
+        <div><div class="sw-name">Dark Slate</div><div class="sw-role">Secondary surfaces, section backgrounds, H6 heading colour.</div></div>
+        <div class="sw-vals">
+          <div>#354B55 <button class="copy-btn" data-copy="#354B55" aria-label="Copy #354B55">copy</button></div>
+          <div>rgb(53, 75, 85) <button class="copy-btn" data-copy="rgb(53, 75, 85)" aria-label="Copy rgb(53, 75, 85)">copy</button></div>
         </div>
       </div>
+      <div class="sw sw--charcoal">
+        <div><div class="sw-name">Charcoal</div><div class="sw-role">Body text, secondary UI. Replaces pure black.</div></div>
+        <div class="sw-vals">
+          <div>#38363D <button class="copy-btn" data-copy="#38363D" aria-label="Copy #38363D">copy</button></div>
+          <div>rgb(56, 54, 61) <button class="copy-btn" data-copy="rgb(56, 54, 61)" aria-label="Copy rgb(56, 54, 61)">copy</button></div>
+        </div>
+      </div>
+      <div class="sw sw--light">
+        <div><div class="sw-name">Light Gray</div><div class="sw-role">Page backgrounds, card surfaces, code fills.</div></div>
+        <div class="sw-vals">
+          <div>#E3E3E3 <button class="copy-btn" data-copy="#E3E3E3" aria-label="Copy #E3E3E3">copy</button></div>
+          <div>rgb(227, 227, 227) <button class="copy-btn" data-copy="rgb(227, 227, 227)" aria-label="Copy rgb(227, 227, 227)">copy</button></div>
+        </div>
+      </div>
+      <div class="sw sw--silver">
+        <div><div class="sw-name">Silver Gray</div><div class="sw-role">Borders, dividers, muted UI. Not for text.</div></div>
+        <div class="sw-vals">
+          <div>#C8C6C5 <button class="copy-btn" data-copy="#C8C6C5" aria-label="Copy #C8C6C5">copy</button></div>
+        </div>
+      </div>
+      <div class="sw sw--mint">
+        <div><div class="sw-name">Mint</div><div class="sw-role">Sole accent.</div></div>
+        <div class="sw-vals">
+          <div>#48BF91 <button class="copy-btn" data-copy="#48BF91" aria-label="Copy #48BF91">copy</button></div>
+        </div>
+      </div>
+    </div>
 
-    </section><!-- /body-text -->
+    <h3 class="sub-head reveal">Approved pairings <span class="mono">WCAG 2.2</span></h3>
+    <div class="sheet reveal">
+      <table class="pair-table">
+        <thead>
+          <tr><th>Sample</th><th>Text</th><th>Ground</th><th>Ratio</th><th class="hide-sm">Use</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="pair-sample" style="background:#fff;color:#041E42;box-shadow:inset 0 0 0 1px #E3E3E3;">Aa</span></td><td class="mono">Navy</td><td class="mono">White</td><td><span class="wcag-badge wcag-aaa">AAA 15.1</span></td><td class="hide-sm">H1–H5 headings on light grounds</td></tr>
+          <tr><td><span class="pair-sample" style="background:#fff;color:#38363D;box-shadow:inset 0 0 0 1px #E3E3E3;">Aa</span></td><td class="mono">Charcoal</td><td class="mono">White</td><td><span class="wcag-badge wcag-aaa">AAA 11.5</span></td><td class="hide-sm">Body text — replaces pure black</td></tr>
+          <tr><td><span class="pair-sample" style="background:#fff;color:#354B55;box-shadow:inset 0 0 0 1px #E3E3E3;">Aa</span></td><td class="mono">Slate</td><td class="mono">White</td><td><span class="wcag-badge wcag-aaa">AAA 9.1</span></td><td class="hide-sm">H6, captions, supporting text</td></tr>
+          <tr><td><span class="pair-sample" style="background:#E3E3E3;color:#38363D;">Aa</span></td><td class="mono">Charcoal</td><td class="mono">Light Gray</td><td><span class="wcag-badge wcag-aaa">AAA 8.9</span></td><td class="hide-sm">Body text on cards and panels</td></tr>
+          <tr><td><span class="pair-sample" style="background:#041E42;color:#fff;">Aa</span></td><td class="mono">White</td><td class="mono">Navy</td><td><span class="wcag-badge wcag-aaa">AAA 15.1</span></td><td class="hide-sm">All text on navy grounds</td></tr>
+          <tr><td><span class="pair-sample" style="background:#354B55;color:#fff;">Aa</span></td><td class="mono">White</td><td class="mono">Slate</td><td><span class="wcag-badge wcag-aaa">AAA 9.1</span></td><td class="hide-sm">All text on slate grounds</td></tr>
+          <tr><td><span class="pair-sample" style="background:#041E42;color:#48BF91;">Aa</span></td><td class="mono">Mint</td><td class="mono">Navy</td><td><span class="wcag-badge wcag-aa">AA 6.6</span></td><td class="hide-sm">Accent labels and active states — dark grounds only</td></tr>
+          <tr><td><span class="pair-sample" style="background:#354B55;color:#48BF91;">Aa</span></td><td class="mono">Mint</td><td class="mono">Slate</td><td><span class="wcag-badge wcag-lg">AA-LG 3.9</span></td><td class="hide-sm">Large text only (24px+, or 18.7px bold)</td></tr>
+          <tr><td><span class="pair-sample" style="background:#fff;color:#48BF91;box-shadow:inset 0 0 0 1px #E3E3E3;">Aa</span></td><td class="mono">Mint</td><td class="mono">White</td><td><span class="wcag-badge wcag-nc">NC 2.3</span></td><td class="hide-sm">Never for text — icons, borders and indicators only</td></tr>
+          <tr><td><span class="pair-sample" style="background:#fff;color:#C8C6C5;box-shadow:inset 0 0 0 1px #E3E3E3;">Aa</span></td><td class="mono">Silver</td><td class="mono">White</td><td><span class="wcag-badge wcag-nc">NC 1.7</span></td><td class="hide-sm">Never for text — dividers only</td></tr>
+        </tbody>
+      </table>
+    </div>
 
-    <!-- ============================================================
-         SECTION 4.3 — CALLOUTS
-         ============================================================ -->
-    <section class="sg-section" id="callouts">
-      <div class="sg-section-header">
-        <div class="sg-eyebrow">Components · 03</div>
-        <h2 class="sg-section-title">Callouts</h2>
-        <p class="sg-section-desc">Two callout patterns — pull quotes for editorial emphasis, info boxes for inline notices. Both use a left border as the sole structural device.</p>
+    <div class="mint-rule reveal">
+      <div class="dot" aria-hidden="true"><span></span></div>
+      <blockquote>
+        One Mint element per composition. Two or more and it loses its power.
+        <cite>The Mint Principle · Brand direction brief</cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     03 — TYPOGRAPHY
+     ================================================================ -->
+<section class="band band--white" id="typography">
+  <div class="wrap">
+    <div class="band-head reveal">
+      <span class="band-num" aria-hidden="true">03</span>
+      <div class="band-eyebrow">Foundation</div>
+      <h2 class="band-title">Typography</h2>
+      <p class="band-lede">Three families cover everything. Figtree leads headings and UI, Source Sans 3 carries reading text, and JetBrains Mono marks every technical identifier. Hierarchy comes from size and weight, not colour.</p>
+    </div>
+
+    <div class="families reveal">
+      <div class="family">
+        <span class="cap role">Display · Headings · UI</span>
+        <div class="big" style="font-family:var(--ff-display);font-weight:800;">Aa</div>
+        <h3>Figtree</h3>
+        <p>Geometric and warm at display sizes, clean at small sizes. Handles ä, ö and å correctly.</p>
+        <ul class="weights" style="font-family:var(--ff-display);">
+          <li style="font-weight:600;">Semibold <span class="mono">600</span></li>
+          <li style="font-weight:700;">Bold <span class="mono">700</span></li>
+          <li style="font-weight:800;">Extrabold <span class="mono">800</span></li>
+        </ul>
+      </div>
+      <div class="family">
+        <span class="cap role">Body · Long-form</span>
+        <div class="big" style="font-family:var(--ff-body);font-weight:400;">Aa</div>
+        <h3>Source Sans 3</h3>
+        <p>A humanist sans tuned for screen reading. Running text, captions and table cells.</p>
+        <ul class="weights" style="font-family:var(--ff-body);">
+          <li style="font-weight:400;">Regular <span class="mono">400</span></li>
+          <li style="font-weight:600;">Semibold <span class="mono">600</span></li>
+        </ul>
+      </div>
+      <div class="family">
+        <span class="cap role">Technical · Code</span>
+        <div class="big" style="font-family:var(--ff-mono);font-weight:400;letter-spacing:-0.06em;">Aa</div>
+        <h3>JetBrains Mono</h3>
+        <p>For standards identifiers, schema names, code and data — never as decoration.</p>
+        <ul class="weights" style="font-family:var(--ff-mono);">
+          <li style="font-weight:400;font-size:1rem;">IfcWall <span class="mono">400</span></li>
+          <li style="font-weight:500;font-size:1rem;">IFC4.3 <span class="mono">500</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="quote-strip reveal">
+      <div class="meta cap"><strong>Source Serif 4 <em>italic</em></strong>Quote · emphasis<br>Italic only — never upright</div>
+      <p>“Open standards remove barriers to interoperability. They are not a competitive advantage — they are the foundation on which advantages are built.”</p>
+    </div>
+
+    <h3 class="sub-head reveal">Type scale <span class="mono">WEB · WORD</span></h3>
+    <div class="scale reveal">
+      <div class="scale-row">
+        <div class="scale-meta"><b>Display</b><span>--fs-display · 48px · 36pt · 800</span></div>
+        <div style="font-family:var(--ff-display);font-size:var(--fs-display);font-weight:800;letter-spacing:var(--ls-display);line-height:var(--lh-display);color:var(--c-navy);">buildingSMART</div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-meta"><b>H1</b><span>--fs-h1 · 36px · 27pt · 700</span></div>
+        <div style="font-family:var(--ff-display);font-size:var(--fs-h1);font-weight:700;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);">Open Standards for the Built Environment</div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-meta"><b>H2</b><span>--fs-h2 · 28px · 21pt · 700</span></div>
+        <div style="font-family:var(--ff-display);font-size:var(--fs-h2);font-weight:700;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);">IFC Schema Reference</div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-meta"><b>H3</b><span>--fs-h3 · 22px · 16pt · 600</span></div>
+        <div style="font-family:var(--ff-display);font-size:var(--fs-h3);font-weight:600;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);">IfcWall — Properties and Constraints</div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-meta"><b>H4</b><span>--fs-h4 · 18px · 14pt · 600</span></div>
+        <div style="font-family:var(--ff-display);font-size:var(--fs-h4);font-weight:600;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);">Pset_WallCommon Attributes</div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-meta"><b>H5</b><span>--fs-h5 · 16px · 12pt · 600</span></div>
+        <div style="font-family:var(--ff-display);font-size:var(--fs-h5);font-weight:600;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);">Required attributes</div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-meta"><b>H6</b><span>--fs-h6 · 13px · 10pt · 600 · Slate</span></div>
+        <div style="font-family:var(--ff-display);font-size:var(--fs-h6);font-weight:600;letter-spacing:var(--ls-label);line-height:var(--lh-heading);color:var(--c-slate);text-transform:uppercase;">Normative references</div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-meta"><b>Body</b><span>--fs-body · 16px · 12pt · 400 · lh 1.7</span></div>
+        <div style="font-family:var(--ff-body);font-size:var(--fs-body);line-height:var(--lh-body);color:var(--c-charcoal);max-width:66ch;">buildingSMART International develops and maintains open standards for Building Information Modelling. The IFC schema provides a neutral, open file format for exchanging building and construction industry data across software applications and disciplines.</div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-meta"><b>Small</b><span>--fs-small · 14px · 10.5pt · 400 · Slate</span></div>
+        <div style="font-family:var(--ff-body);font-size:var(--fs-small);line-height:var(--lh-body);color:var(--c-slate);">Figure 3 — Entity relationship between <span class="mono">IfcWall</span> and <span class="mono">Pset_WallCommon</span> in IFC4.3. Source: buildingSMART International.</div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-meta"><b>Label</b><span>--fs-label · 12px · 9pt · 600 · uppercase</span></div>
+        <div style="font-family:var(--ff-display);font-size:var(--fs-label);font-weight:600;letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--c-slate);">Published · IDS Version 1.0 · IFC4.3</div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-meta"><b>Mono</b><span>--fs-mono · 13px · 10pt · 400</span></div>
+        <div style="font-family:var(--ff-mono);font-size:var(--fs-mono);line-height:1.7;color:var(--c-charcoal);">IfcWall · IFC4.3 · Pset_WallCommon · BCF 3.0 · IDS · IfcPropertySingleValue</div>
+      </div>
+    </div>
+
+    <h3 class="sub-head reveal">By medium</h3>
+    <div class="mediums reveal">
+      <div class="medium">
+        <h4>Web &amp; HTML</h4>
+        <ul>
+          <li>Figtree — headings H1–H6, UI, labels, navigation.</li>
+          <li>Source Sans 3 — all running body text.</li>
+          <li>Source Serif 4 italic — pull quotes and callouts.</li>
+          <li>Load via Google Fonts — no local dependency.</li>
+        </ul>
+      </div>
+      <div class="medium">
+        <h4>PowerPoint</h4>
+        <ul>
+          <li>Figtree carries <em>all</em> slide text, body included. Minimum 18pt.</li>
+          <li>Source Serif 4 italic — callouts and pull quotes only. Never upright.</li>
+          <li>Fonts are embedded; editors must also install them.</li>
+        </ul>
+      </div>
+      <div class="medium">
+        <h4>Word (.docx)</h4>
+        <ul>
+          <li>Figtree headings via named styles (27pt → 10pt). No manual overrides.</li>
+          <li>Source Sans 3 — Normal style at 12pt.</li>
+          <li>Caption 10.5pt; JetBrains Mono character style at 10pt.</li>
+          <li>The <code class="inline">.dotx</code> does not embed fonts.</li>
+        </ul>
+      </div>
+      <div class="medium medium--mono">
+        <h4>JetBrains Mono — all media</h4>
+        <ul>
+          <li>Schema names, file types, versions: <code class="inline">IFC4.3</code> <code class="inline">IfcWall</code> <code class="inline">BCF 3.0</code></li>
+          <li>Never decorative. Arial, Calibri and Times New Roman are forbidden in distributed materials.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     04 — COMPONENTS
+     ================================================================ -->
+<section class="band band--light" id="components">
+  <div class="wrap">
+    <div class="band-head reveal">
+      <span class="band-num" aria-hidden="true">04</span>
+      <div class="band-eyebrow">Building blocks</div>
+      <h2 class="band-title">Components</h2>
+      <p class="band-lede">The pieces specification pages, documents and the website are built from. Each card is its own composition, so each holds at most one Mint element.</p>
+    </div>
+
+    <div class="cards">
+      <div class="card reveal">
+        <div class="card-label"><h3>Buttons</h3><span class="cap">Figtree 600</span></div>
+        <div class="demo-row"><span class="cap">Primary</span><button class="sg-btn sg-btn-primary">Download IDS</button><span class="note">Navy fill · white text</span></div>
+        <div class="demo-row"><span class="cap">Secondary</span><button class="sg-btn sg-btn-secondary">View schema</button><span class="note">Navy outline</span></div>
+        <div class="demo-row"><span class="cap">Ghost</span><button class="sg-btn sg-btn-ghost">Cancel</button><span class="note">Silver outline</span></div>
+        <div class="demo-row"><span class="cap">Accent</span><button class="sg-btn sg-btn-accent">Register now</button><span class="note">Mint fill · once per composition</span></div>
       </div>
 
-      <div class="sg-panel">
-        <div class="sg-panel-label">Pull Quote — Source Serif 4 italic</div>
-        <blockquote style="border-left:3px solid var(--c-mint);margin:0;padding:var(--sp-3) 0 var(--sp-3) var(--sp-6);">
-          <p style="font-family:var(--ff-quote);font-size:1.125rem;font-weight:400;font-style:italic;line-height:1.65;color:var(--c-charcoal);margin:0 0 var(--sp-3) 0;">"Open standards remove barriers to interoperability. They are not a competitive advantage — they are the foundation on which advantages are built."</p>
-          <cite style="font-family:var(--ff-display);font-size:var(--fs-label);font-weight:600;letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--c-slate);font-style:normal;">buildingSMART International</cite>
+      <div class="card reveal">
+        <div class="card-label"><h3>Tags &amp; badges</h3><span class="cap">Status · ID · WCAG</span></div>
+        <div class="tag-row"><span class="cap">Status</span><span class="sg-tag sg-tag-active">Active</span><span class="sg-tag sg-tag-draft">Draft</span><span class="sg-tag sg-tag-deprecated">Deprecated</span><span class="sg-tag sg-tag-neutral">Informative</span></div>
+        <div class="tag-row"><span class="cap">Identifiers</span><span class="sg-tag-mono">IFC4.3</span><span class="sg-tag-mono">IDS 1.0</span><span class="sg-tag-mono">BCF 3.0</span><span class="sg-tag-mono">IfcWall</span><span class="sg-tag-mono">Pset_WallCommon</span></div>
+        <div class="tag-row"><span class="cap">WCAG</span><span class="wcag-badge wcag-aaa">AAA</span><span class="wcag-badge wcag-aa">AA</span><span class="wcag-badge wcag-lg">AA-LG</span><span class="wcag-badge wcag-nc">NC</span></div>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-label"><h3>Pull quote</h3><span class="cap">Source Serif 4 italic</span></div>
+        <blockquote class="pull-quote">
+          <p>“Open standards remove barriers to interoperability. They are not a competitive advantage — they are the foundation on which advantages are built.”</p>
+          <cite>buildingSMART International</cite>
         </blockquote>
       </div>
 
-      <div class="sg-panel">
-        <div class="sg-panel-label">Info Callout Box</div>
-        <div style="background:var(--c-gray-light);border-left:4px solid var(--c-navy);border-radius:0 var(--r-md) var(--r-md) 0;padding:var(--sp-5) var(--sp-6);">
-          <div style="font-family:var(--ff-display);font-size:var(--fs-h5);font-weight:600;color:var(--c-navy);margin-bottom:var(--sp-2);">Note — IFC4.3 required</div>
-          <p style="font-family:var(--ff-body);font-size:var(--fs-small);line-height:var(--lh-body);color:var(--c-charcoal);margin:0;">This property set is only available in <span style="font-family:var(--ff-mono);font-size:12px;">IFC4.3</span> and later. Software implementing <span style="font-family:var(--ff-mono);font-size:12px;">IFC2x3</span> will not export these attributes. Verify your export settings before sharing files with project partners.</p>
+      <div class="card reveal">
+        <div class="card-label"><h3>Info callout</h3><span class="cap">Navy rule · Light Gray fill</span></div>
+        <div class="info-box">
+          <h4>Note — IFC4.3 required</h4>
+          <p>This property set is only available in <span class="mono">IFC4.3</span> and later. Software implementing <span class="mono">IFC2x3</span> will not export these attributes. Verify your export settings before sharing files with project partners.</p>
         </div>
       </div>
 
-    </section><!-- /callouts -->
-
-    <!-- ============================================================
-         SECTION 4.4 — TABLES
-         ============================================================ -->
-    <section class="sg-section" id="tables">
-      <div class="sg-section-header">
-        <div class="sg-eyebrow">Components · 04</div>
-        <h2 class="sg-section-title">Tables</h2>
-        <p class="sg-section-desc">Specification-style tables. Column headers in Figtree; cell content in Source Sans 3. Technical identifiers always in JetBrains Mono.</p>
-      </div>
-
-      <div class="sg-panel">
-        <div class="sg-panel-label">Property Set Table — IFC example</div>
+      <div class="card card--12 reveal">
+        <div class="card-label"><h3>Specification table</h3><span class="cap">Pset_WallCommon · IFC example</span></div>
         <div style="overflow-x:auto;">
-          <table style="width:100%;border-collapse:collapse;font-size:13.5px;">
-            <thead>
-              <tr style="border-bottom:2px solid var(--c-navy);">
-                <th style="text-align:left;font-family:var(--ff-display);font-weight:600;color:var(--c-navy);padding:0 16px 12px 0;font-size:12px;letter-spacing:0.01em;">Property name</th>
-                <th style="text-align:left;font-family:var(--ff-display);font-weight:600;color:var(--c-navy);padding:0 16px 12px 0;font-size:12px;letter-spacing:0.01em;">Type</th>
-                <th style="text-align:left;font-family:var(--ff-display);font-weight:600;color:var(--c-navy);padding:0 0 12px 0;font-size:12px;letter-spacing:0.01em;">Description</th>
-              </tr>
-            </thead>
+          <table class="spec-table">
+            <thead><tr><th>Property name</th><th>Type</th><th>Description</th></tr></thead>
             <tbody>
-              <tr style="background:rgba(227,227,227,0.35);">
-                <td style="padding:10px 16px 10px 0;font-family:var(--ff-mono);font-size:12px;color:var(--c-charcoal);">IsExternal</td>
-                <td style="padding:10px 16px 10px 0;font-family:var(--ff-mono);font-size:12px;color:var(--c-slate);">IfcBoolean</td>
-                <td style="padding:10px 0;font-family:var(--ff-body);font-size:13px;color:var(--c-charcoal);line-height:1.5;">Indicates whether the element is positioned at the external face of the building envelope.</td>
-              </tr>
-              <tr>
-                <td style="padding:10px 16px 10px 0;font-family:var(--ff-mono);font-size:12px;color:var(--c-charcoal);">LoadBearing</td>
-                <td style="padding:10px 16px 10px 0;font-family:var(--ff-mono);font-size:12px;color:var(--c-slate);">IfcBoolean</td>
-                <td style="padding:10px 0;font-family:var(--ff-body);font-size:13px;color:var(--c-charcoal);line-height:1.5;">Indicates whether the element is load-bearing. This is a design intent — structural analysis governs.</td>
-              </tr>
-              <tr style="background:rgba(227,227,227,0.35);">
-                <td style="padding:10px 16px 10px 0;font-family:var(--ff-mono);font-size:12px;color:var(--c-charcoal);">FireRating</td>
-                <td style="padding:10px 16px 10px 0;font-family:var(--ff-mono);font-size:12px;color:var(--c-slate);">IfcLabel</td>
-                <td style="padding:10px 0;font-family:var(--ff-body);font-size:13px;color:var(--c-charcoal);line-height:1.5;">Fire rating classification according to the relevant national standard. Free-text label — validate against project requirements.</td>
-              </tr>
-              <tr>
-                <td style="padding:10px 16px 10px 0;font-family:var(--ff-mono);font-size:12px;color:var(--c-charcoal);">ThermalTransmittance</td>
-                <td style="padding:10px 16px 10px 0;font-family:var(--ff-mono);font-size:12px;color:var(--c-slate);">IfcThermalTransmittanceMeasure</td>
-                <td style="padding:10px 0;font-family:var(--ff-body);font-size:13px;color:var(--c-charcoal);line-height:1.5;">Overall thermal transmittance (U-value) of the element, in W/m²K. Required for energy performance calculations.</td>
-              </tr>
+              <tr><td class="mono">IsExternal</td><td class="mono">IfcBoolean</td><td>Indicates whether the element is positioned at the external face of the building envelope.</td></tr>
+              <tr><td class="mono">LoadBearing</td><td class="mono">IfcBoolean</td><td>Indicates whether the element is load-bearing. This is a design intent — structural analysis governs.</td></tr>
+              <tr><td class="mono">FireRating</td><td class="mono">IfcLabel</td><td>Fire rating classification according to the relevant national standard. Free-text label — validate against project requirements.</td></tr>
+              <tr><td class="mono">ThermalTransmittance</td><td class="mono">IfcThermalTransmittanceMeasure</td><td>Overall thermal transmittance (U-value) of the element, in W/m²K. Required for energy performance calculations.</td></tr>
             </tbody>
           </table>
         </div>
       </div>
 
-    </section><!-- /tables -->
-
-    <!-- ============================================================
-         SECTION 4.5 — BUTTONS
-         ============================================================ -->
-    <section class="sg-section" id="buttons">
-      <div class="sg-section-header">
-        <div class="sg-eyebrow">Components · 05</div>
-        <h2 class="sg-section-title">Buttons</h2>
-        <p class="sg-section-desc">Four variants. Primary and Secondary for main actions; Ghost for low-priority actions; Accent (Mint) used at most once per composition.</p>
+      <div class="card card--5 reveal">
+        <div class="card-label"><h3>Inline code</h3><span class="cap">JetBrains Mono</span></div>
+        <p>The <code class="inline">IfcWall</code> entity inherits from <code class="inline">IfcBuildingElement</code>. Use <code class="inline">Pset_WallCommon</code> to attach common properties defined by <code class="inline">IFC4.3</code>.</p>
       </div>
 
-      <div class="sg-panel">
-        <div class="btn-row">
-          <span class="btn-row-label">Primary</span>
-          <button class="sg-btn sg-btn-primary">Download IDS</button>
-          <span class="type-meta-chip" style="margin-left:var(--sp-3);">Navy fill · white text</span>
-        </div>
-        <div class="btn-row">
-          <span class="btn-row-label">Secondary</span>
-          <button class="sg-btn sg-btn-secondary">View schema</button>
-          <span class="type-meta-chip" style="margin-left:var(--sp-3);">Transparent · navy border</span>
-        </div>
-        <div class="btn-row">
-          <span class="btn-row-label">Ghost</span>
-          <button class="sg-btn sg-btn-ghost">Cancel</button>
-          <span class="type-meta-chip" style="margin-left:var(--sp-3);">Transparent · silver border</span>
-        </div>
-        <div class="btn-row">
-          <span class="btn-row-label">Accent</span>
-          <button class="sg-btn sg-btn-accent">Register now</button>
-          <span class="type-meta-chip" style="margin-left:var(--sp-3);">Mint fill · navy text · once per composition</span>
-        </div>
-      </div>
-
-    </section><!-- /buttons -->
-
-    <!-- ============================================================
-         SECTION 4.6 — TAGS & BADGES
-         ============================================================ -->
-    <section class="sg-section" id="tags">
-      <div class="sg-section-header">
-        <div class="sg-eyebrow">Components · 06</div>
-        <h2 class="sg-section-title">Tags &amp; Badges</h2>
-        <p class="sg-section-desc">Status tags, mono identifier tags, and WCAG badges. All use existing palette colours — no new colours introduced.</p>
-      </div>
-
-      <div class="sg-panel">
-        <div class="tag-row">
-          <span class="tag-row-label">Status</span>
-          <span class="sg-tag sg-tag-active">Active</span>
-          <span class="sg-tag sg-tag-draft">Draft</span>
-          <span class="sg-tag sg-tag-deprecated">Deprecated</span>
-          <span class="sg-tag sg-tag-neutral">Informative</span>
-        </div>
-        <div class="tag-row">
-          <span class="tag-row-label">Identifiers</span>
-          <span class="sg-tag-mono">IFC4.3</span>
-          <span class="sg-tag-mono">IDS 1.0</span>
-          <span class="sg-tag-mono">BCF 3.0</span>
-          <span class="sg-tag-mono">IfcWall</span>
-          <span class="sg-tag-mono">Pset_WallCommon</span>
-        </div>
-        <div class="tag-row">
-          <span class="tag-row-label">WCAG</span>
-          <span class="wcag-badge wcag-aaa">AAA</span>
-          <span class="wcag-badge wcag-aa">AA</span>
-          <span class="wcag-badge wcag-lg">AA-LG</span>
-          <span class="wcag-badge wcag-nc">NC</span>
-          <span class="type-meta-chip" style="margin-left:var(--sp-3);">Reused from colour palette section</span>
-        </div>
-      </div>
-
-    </section><!-- /tags -->
-
-    <!-- ============================================================
-         SECTION 4.7 — CODE BLOCKS
-         ============================================================ -->
-    <section class="sg-section" id="code">
-      <div class="sg-section-header">
-        <div class="sg-eyebrow">Components · 07</div>
-        <h2 class="sg-section-title">Code Blocks</h2>
-        <p class="sg-section-desc">Inline code for identifiers within running text; block code for schema fragments, snippets, and structured data. Both use JetBrains Mono.</p>
-      </div>
-
-      <div class="sg-panel">
-        <div class="sg-panel-label">Inline Code</div>
-        <p style="font-family:var(--ff-body);font-size:var(--fs-body);line-height:var(--lh-body);color:var(--c-charcoal);margin:0;">The <code style="font-family:var(--ff-mono);font-size:13px;background:var(--c-gray-light);color:var(--c-charcoal);padding:2px 6px;border-radius:3px;">IfcWall</code> entity inherits from <code style="font-family:var(--ff-mono);font-size:13px;background:var(--c-gray-light);color:var(--c-charcoal);padding:2px 6px;border-radius:3px;">IfcBuildingElement</code>. Use <code style="font-family:var(--ff-mono);font-size:13px;background:var(--c-gray-light);color:var(--c-charcoal);padding:2px 6px;border-radius:3px;">Pset_WallCommon</code> to attach common properties defined by <code style="font-family:var(--ff-mono);font-size:13px;background:var(--c-gray-light);color:var(--c-charcoal);padding:2px 6px;border-radius:3px;">IFC4.3</code>.</p>
-      </div>
-
-      <div class="sg-panel">
-        <div class="sg-panel-label">Block Code — Navy background</div>
+      <div class="card card--7 reveal">
+        <div class="card-label"><h3>Code block</h3><span class="cap">Charcoal ground</span></div>
         <div class="sg-code-block">
           <code><span class="token-comment">// IDS requirement — IfcWall must carry Pset_WallCommon</span>
 <span class="token-key">"applicability"</span>: {
@@ -2031,143 +1839,153 @@ body {
         </div>
       </div>
 
-    </section><!-- /code -->
-
-    <!-- ============================================================
-         SECTION 5 — DO / DON'T
-         ============================================================ -->
-    <section class="sg-section" id="usage">
-      <div class="sg-section-header">
-        <div class="sg-eyebrow">Guidance · 01</div>
-        <h2 class="sg-section-title">Do / Don't</h2>
-        <p class="sg-section-desc">Four rules that protect the system's integrity. Each violation erodes the clarity and distinction the palette and type system are designed to create.</p>
+      <div class="card card--12 reveal">
+        <div class="card-label"><h3>Spacing scale</h3><span class="cap">4px base · actual size</span></div>
+        <p style="font-size:var(--fs-small);max-width:70ch;">Twelve tokens cover every padding, margin and gap. Never use arbitrary pixel values — pick the nearest token.</p>
+        <div class="ladder">
+          <figure><div class="sq" style="width:4px;height:4px;"></div><figcaption><b>sp-1</b>4</figcaption></figure>
+          <figure><div class="sq" style="width:8px;height:8px;"></div><figcaption><b>sp-2</b>8</figcaption></figure>
+          <figure><div class="sq" style="width:12px;height:12px;"></div><figcaption><b>sp-3</b>12</figcaption></figure>
+          <figure><div class="sq" style="width:16px;height:16px;"></div><figcaption><b>sp-4</b>16</figcaption></figure>
+          <figure><div class="sq" style="width:20px;height:20px;"></div><figcaption><b>sp-5</b>20</figcaption></figure>
+          <figure><div class="sq" style="width:24px;height:24px;"></div><figcaption><b>sp-6</b>24</figcaption></figure>
+          <figure><div class="sq" style="width:32px;height:32px;"></div><figcaption><b>sp-8</b>32</figcaption></figure>
+          <figure><div class="sq" style="width:40px;height:40px;"></div><figcaption><b>sp-10</b>40</figcaption></figure>
+          <figure><div class="sq" style="width:48px;height:48px;"></div><figcaption><b>sp-12</b>48</figcaption></figure>
+          <figure><div class="sq" style="width:64px;height:64px;"></div><figcaption><b>sp-16</b>64</figcaption></figure>
+          <figure><div class="sq" style="width:80px;height:80px;"></div><figcaption><b>sp-20</b>80</figcaption></figure>
+          <figure><div class="sq" style="width:96px;height:96px;"></div><figcaption><b>sp-24</b>96</figcaption></figure>
+        </div>
       </div>
+    </div>
+  </div>
+</section>
 
-      <!-- Rule 1: One accent -->
-      <div class="sg-panel">
-        <div class="sg-panel-label">Rule 1 — One accent per composition</div>
+<!-- ================================================================
+     05 — DO / DON'T
+     ================================================================ -->
+<section class="band band--slate" id="usage">
+  <div class="wrap">
+    <div class="band-head reveal">
+      <span class="band-num" aria-hidden="true">05</span>
+      <div class="band-eyebrow">Guidance</div>
+      <h2 class="band-title">Do / Don't</h2>
+      <p class="band-lede">Four rules that protect the system. Each violation erodes the clarity and distinction the palette and type are designed to create.</p>
+    </div>
+
+    <div class="rules">
+      <div class="reveal">
+        <div class="rule-head"><span class="n" aria-hidden="true">1</span><h3>One accent per composition</h3></div>
         <div class="guideline-pair">
           <div class="guideline-card guideline-do">
             <div class="guideline-verdict">✓ Do</div>
-            <div class="guideline-preview">
-              <div>
-                <div style="font-family:var(--ff-display);font-size:18px;font-weight:700;color:var(--c-navy);margin-bottom:8px;">IFC4.3 Released</div>
-                <p style="font-family:var(--ff-body);font-size:13px;line-height:1.6;color:var(--c-charcoal);margin:0 0 12px 0;">The latest version of the IFC schema introduces significant improvements to infrastructure modelling.</p>
-                <button class="sg-btn sg-btn-accent" style="font-size:12px;padding:6px 14px;">Read more</button>
-              </div>
-            </div>
-            <div class="guideline-caption">Single Mint element — the CTA button. Everything else is Navy and Charcoal.</div>
+            <div class="guideline-preview"><div>
+              <div style="font-family:var(--ff-display);font-size:20px;font-weight:700;color:var(--c-navy);margin-bottom:8px;">IFC4.3 Released</div>
+              <p style="font-size:14px;line-height:1.6;margin-bottom:14px;">The latest version of the IFC schema introduces significant improvements to infrastructure modelling.</p>
+              <button class="sg-btn sg-btn-accent">Read more</button>
+            </div></div>
+            <div class="guideline-caption">Single Mint element — the CTA. Everything else is Navy and Charcoal.</div>
           </div>
           <div class="guideline-card guideline-dont">
             <div class="guideline-verdict">✗ Don't</div>
-            <div class="guideline-preview">
-              <div>
-                <div style="font-family:var(--ff-display);font-size:18px;font-weight:700;color:var(--c-mint);margin-bottom:8px;">IFC4.3 Released</div>
-                <p style="font-family:var(--ff-body);font-size:13px;line-height:1.6;color:var(--c-charcoal);margin:0 0 12px 0;">The latest version of the IFC schema introduces significant improvements to infrastructure modelling.</p>
-                <button class="sg-btn sg-btn-accent" style="font-size:12px;padding:6px 14px;">Read more</button>
-              </div>
-            </div>
-            <div class="guideline-caption">Mint heading + Mint button. The accent loses its power when it appears twice.</div>
+            <div class="guideline-preview"><div>
+              <div style="font-family:var(--ff-display);font-size:20px;font-weight:700;color:var(--c-mint);margin-bottom:8px;">IFC4.3 Released</div>
+              <p style="font-size:14px;line-height:1.6;margin-bottom:14px;">The latest version of the IFC schema introduces significant improvements to infrastructure modelling.</p>
+              <button class="sg-btn sg-btn-accent">Read more</button>
+            </div></div>
+            <div class="guideline-caption">Mint heading and Mint button. The accent loses its power when it appears twice.</div>
           </div>
         </div>
       </div>
 
-      <!-- Rule 2: Typography -->
-      <div class="sg-panel">
-        <div class="sg-panel-label">Rule 2 — Figtree and Source Sans 3 only</div>
+      <div class="reveal">
+        <div class="rule-head"><span class="n" aria-hidden="true">2</span><h3>Figtree and Source Sans 3 only</h3></div>
         <div class="guideline-pair">
           <div class="guideline-card guideline-do">
             <div class="guideline-verdict">✓ Do</div>
-            <div class="guideline-preview">
-              <div>
-                <div style="font-family:'Figtree',sans-serif;font-size:18px;font-weight:700;color:var(--c-navy);margin-bottom:6px;">Open BIM Standards</div>
-                <p style="font-family:'Source Sans 3',system-ui,sans-serif;font-size:13px;line-height:1.65;color:var(--c-charcoal);margin:0;">Interoperability begins with a shared language for building data.</p>
-              </div>
-            </div>
-            <div class="guideline-caption">Figtree heading + Source Sans 3 body — the correct pairing.</div>
+            <div class="guideline-preview"><div>
+              <div style="font-family:'Figtree',sans-serif;font-size:20px;font-weight:700;color:var(--c-navy);margin-bottom:6px;">Open BIM Standards</div>
+              <p style="font-family:'Source Sans 3',system-ui,sans-serif;font-size:14px;line-height:1.65;">Interoperability begins with a shared language for building data.</p>
+            </div></div>
+            <div class="guideline-caption">Figtree heading with Source Sans 3 body — the correct pairing.</div>
           </div>
           <div class="guideline-card guideline-dont">
             <div class="guideline-verdict">✗ Don't</div>
-            <div class="guideline-preview">
-              <div>
-                <div style="font-family:Arial,sans-serif;font-size:18px;font-weight:700;color:var(--c-navy);margin-bottom:6px;">Open BIM Standards</div>
-                <p style="font-family:'Times New Roman',serif;font-size:13px;line-height:1.65;color:var(--c-charcoal);margin:0;">Interoperability begins with a shared language for building data.</p>
-              </div>
-            </div>
-            <div class="guideline-caption">Arial heading + Times New Roman body. System fonts are forbidden in all distributed materials.</div>
+            <div class="guideline-preview"><div>
+              <div style="font-family:Arial,sans-serif;font-size:20px;font-weight:700;color:var(--c-navy);margin-bottom:6px;">Open BIM Standards</div>
+              <p style="font-family:'Times New Roman',serif;font-size:14px;line-height:1.65;">Interoperability begins with a shared language for building data.</p>
+            </div></div>
+            <div class="guideline-caption">Arial heading with Times New Roman body. System fonts are forbidden in distributed materials.</div>
           </div>
         </div>
       </div>
 
-      <!-- Rule 3: Contrast -->
-      <div class="sg-panel">
-        <div class="sg-panel-label">Rule 3 — Use approved colour pairings only</div>
+      <div class="reveal">
+        <div class="rule-head"><span class="n" aria-hidden="true">3</span><h3>Use approved colour pairings only</h3></div>
         <div class="guideline-pair">
           <div class="guideline-card guideline-do">
             <div class="guideline-verdict">✓ Do</div>
-            <div class="guideline-preview">
-              <div>
-                <div style="font-family:var(--ff-display);font-size:14px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--c-slate);margin-bottom:6px;">Section label</div>
-                <p style="font-family:var(--ff-body);font-size:13px;line-height:1.65;color:var(--c-charcoal);margin:0;">Charcoal (#38363D) on white: 11.5:1 contrast ratio.</p>
-              </div>
-            </div>
+            <div class="guideline-preview"><div>
+              <div style="font-family:var(--ff-display);font-size:14px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--c-slate);margin-bottom:6px;">Section label</div>
+              <p style="font-size:14px;line-height:1.65;">Charcoal (#38363D) on white: 11.5:1 contrast ratio.</p>
+            </div></div>
             <div class="guideline-caption">Charcoal on white passes AAA (11.5:1). Slate passes AAA for the label (9.1:1).</div>
           </div>
           <div class="guideline-card guideline-dont">
             <div class="guideline-verdict">✗ Don't</div>
-            <div class="guideline-preview">
-              <div>
-                <div style="font-family:var(--ff-display);font-size:14px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--c-silver);margin-bottom:6px;">Section label</div>
-                <p style="font-family:var(--ff-body);font-size:13px;line-height:1.65;color:var(--c-silver);margin:0;">Silver (#C8C6C5) on white: 1.7:1 — fails all WCAG criteria.</p>
-              </div>
-            </div>
+            <div class="guideline-preview"><div>
+              <div style="font-family:var(--ff-display);font-size:14px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--c-silver);margin-bottom:6px;">Section label</div>
+              <p style="font-size:14px;line-height:1.65;color:var(--c-silver);">Silver (#C8C6C5) on white: 1.7:1 — fails all WCAG criteria.</p>
+            </div></div>
             <div class="guideline-caption">Silver on white fails WCAG (1.7:1). Silver is for borders and dividers — never for text.</div>
           </div>
         </div>
       </div>
 
-      <!-- Rule 4: Mint at scale -->
-      <div class="sg-panel">
-        <div class="sg-panel-label">Rule 4 — Mint is an accent, not a surface</div>
+      <div class="reveal">
+        <div class="rule-head"><span class="n" aria-hidden="true">4</span><h3>Mint is an accent, not a surface</h3></div>
         <div class="guideline-pair">
           <div class="guideline-card guideline-do">
             <div class="guideline-verdict">✓ Do</div>
             <div class="guideline-preview" style="gap:var(--sp-3);flex-wrap:wrap;">
               <span class="sg-tag sg-tag-active">Active</span>
-              <span style="font-family:var(--ff-mono);font-size:11px;color:var(--c-mint);background:var(--c-navy);padding:3px 8px;border-radius:3px;">ACTIVE STATE</span>
-              <div style="width:24px;height:24px;border-radius:50%;background:var(--c-mint);border:2px solid white;box-shadow:0 0 0 1px rgba(0,0,0,0.1);"></div>
             </div>
-            <div class="guideline-caption">Mint as a small tag, active indicator, or dot. Contained, purposeful.</div>
+            <div class="guideline-caption">Mint as a small tag, active indicator or dot. Contained and purposeful.</div>
           </div>
           <div class="guideline-card guideline-dont">
             <div class="guideline-verdict">✗ Don't</div>
             <div class="guideline-preview" style="padding:0;">
-              <div style="background:var(--c-mint);width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:var(--sp-6);">
-                <p style="font-family:var(--ff-body);font-size:13px;line-height:1.65;color:var(--c-navy);margin:0;text-align:center;">Body text on a full Mint background panel.</p>
+              <div style="background:var(--c-mint);width:100%;align-self:stretch;display:flex;align-items:center;justify-content:center;padding:var(--sp-6);">
+                <p style="font-size:14px;line-height:1.65;color:var(--c-navy);text-align:center;">Body text on a full Mint background panel.</p>
               </div>
             </div>
-            <div class="guideline-caption">Mint as a large background surface. It overwhelms the composition and reads as decorative, not purposeful.</div>
+            <div class="guideline-caption">Mint as a large background surface. It overwhelms the composition and reads as decoration.</div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
 
-    </section><!-- /usage -->
-
-  </main>
-</div><!-- /sg-layout -->
+</main>
 
 <!-- ================================================================
      FOOTER
      ================================================================ -->
 <footer class="sg-footer">
-  <div class="sg-footer-brand">buildingSMART Finland · Style Guide · June 2026</div>
-  <div class="sg-footer-note">Self-contained reference file — do not add external dependencies</div>
+  <div class="wrap">
+    <svg role="img" aria-label="buildingSMART Finland logo"><use href="#bsf-logo"/></svg>
+    <p>Style Guide · Self-contained reference file — do not add external dependencies.</p>
+    <a href="#top">Back to top ↑</a>
+  </div>
 </footer>
 
 <!-- ================================================================
-     JAVASCRIPT — clipboard copy + nav highlight
+     JAVASCRIPT — clipboard copy, nav highlight, reveal on scroll
      ================================================================ -->
 <script>
+document.documentElement.classList.add('js');
+
 /* Clipboard copy */
 document.querySelectorAll('.copy-btn').forEach(function(btn) {
   btn.addEventListener('click', function() {
@@ -2196,11 +2014,11 @@ document.querySelectorAll('.copy-btn').forEach(function(btn) {
 });
 
 /* Active nav highlight on scroll */
-var sections = document.querySelectorAll('.sg-section[id]');
-var navLinks = document.querySelectorAll('.sg-nav a');
+var sections = document.querySelectorAll('.band[id]');
+var navLinks = document.querySelectorAll('.topnav ul a');
 
 function setActiveNav() {
-  var scrollY = window.scrollY + 100;
+  var scrollY = window.scrollY + 120;
   var current = '';
   sections.forEach(function(sec) {
     if (sec.offsetTop <= scrollY) current = sec.id;
@@ -2212,6 +2030,19 @@ function setActiveNav() {
 
 window.addEventListener('scroll', setActiveNav, { passive: true });
 setActiveNav();
+
+/* Reveal on scroll */
+var reveals = document.querySelectorAll('.reveal');
+if ('IntersectionObserver' in window) {
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  reveals.forEach(function(el) { io.observe(el); });
+} else {
+  reveals.forEach(function(el) { el.classList.add('is-in'); });
+}
 </script>
 
 </body>
