@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>buildingSMART Finland — Style Guide</title>
+<script>
+/* Pick the colour scheme before first paint: ?scheme= wins, then the saved choice */
+(function() {
+  var s = null;
+  try { s = new URLSearchParams(location.search).get('scheme'); } catch (e) {}
+  if (s !== 'alt' && s !== 'bsf') { try { s = localStorage.getItem('bsf-sg-scheme'); } catch (e) {} }
+  if (s === 'alt') document.documentElement.setAttribute('data-scheme', 'alt');
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@1,8..60,400;1,8..60,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -26,6 +35,27 @@
   --c-silver:     #C8C6C5;
   --c-gray-light: #E3E3E3;
   --c-white:      #FFFFFF;
+
+  /* Derived colour roles: each scheme sets these */
+  --c-surface:      var(--c-white);          /* white bands */
+  --c-rule:         var(--c-silver);         /* thin geometric rules */
+  --c-navy-hover:   #021530;
+  --c-accent-hover: #39ae80;
+  --c-do-bg:        rgba(72,191,145,0.15);
+  --c-do-fg:        #0f6641;
+  --c-do-bg-soft:   rgba(72,191,145,0.1);
+  --c-do-fg-soft:   #1a7d5a;
+  --c-warn-bg:      rgba(255,180,0,0.12);
+  --c-warn-fg:      #6b4700;
+  --c-dont-bg:      rgba(180,40,40,0.08);
+  --c-dont-fg:      #7a2020;
+  --c-code-text:    #e3e3e3;
+  --c-code-string:  #a8d8c8;
+  --c-code-num:     #f0b868;
+  --c-band2-bg:     var(--c-slate);   /* second band colour */
+  --c-band2-fg:     white;
+  --c-band2-muted:  var(--c-silver);
+  --c-band2-focus:  var(--c-mint);
 
   /* Families */
   --ff-display: 'Figtree', sans-serif;
@@ -81,6 +111,41 @@
   --wrap: 1280px;
 }
 
+/* ---- Alternative scheme (RYTV palette) ----
+   Navy #002651, Blue #1A4687, Teal #018CA1, Lime #B5C42E, Dark lime #879223,
+   Pale lime #D4D89B, Off-white #F9F9FA, plus three grays derived from Navy.
+   Lime is the sole accent. Teal is for thin rules only (3.99:1 on white). */
+:root[data-scheme="alt"] {
+  --c-navy:       #002651;   /* Navy */
+  --c-slate:      #1A4687;   /* Blue: 9.25:1 with white */
+  --c-charcoal:   #2E3A4D;   /* Ink: Navy-derived body text, 11.5:1 on white */
+  --c-mint:       #B5C42E;   /* Lime: the sole accent, Navy text on it 7.8:1 */
+  --c-silver:     #BFC9D4;   /* Mist: Navy 25% tint, 5.5:1 on Blue */
+  --c-gray-light: #E6E9EE;   /* Haze: Navy 10% tint */
+
+  --c-surface:      #F9F9FA; /* Off-white */
+  --c-rule:         #018CA1; /* Teal */
+  --c-navy-hover:   #001A38;
+  --c-accent-hover: #A3B12A; /* Navy text 6.4:1 (Dark lime would be 4.4:1) */
+  --c-do-bg:        #D4D89B; /* Pale lime, Navy text 10.1:1 */
+  --c-do-fg:        #002651;
+  --c-do-bg-soft:   #E5E8C3;
+  --c-do-fg-soft:   #002651;
+  --c-dont-bg:      #F4EBEA; /* Clay 10% tint */
+  --c-dont-fg:      #8C3B2E; /* Clay, the complement of Teal: 6.45:1 on its tint */
+  --c-code-text:    #E6E9EE;
+  --c-code-string:  #8FD3DE;
+  --c-code-num:     #D4D89B;
+  --c-band2-bg:     #B5C42E; /* Lime feature band: Navy text 7.8:1 */
+  --c-band2-fg:     #002651;
+  --c-band2-muted:  #2E3A4D; /* Ink on Lime 6.0:1 */
+  --c-band2-focus:  #002651;
+}
+
+/* Scheme-specific content: show only the block for the active scheme */
+:root:not([data-scheme="alt"]) [data-only="alt"],
+:root[data-scheme="alt"] [data-only="bsf"] { display: none !important; }
+
 /* ---- Base ---- */
 html { scroll-behavior: smooth; }
 
@@ -89,7 +154,7 @@ body {
   font-size: var(--fs-body);
   line-height: var(--lh-body);
   color: var(--c-charcoal);
-  background: var(--c-white);
+  background: var(--c-surface);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -117,7 +182,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
   top: 0;
   z-index: 50;
   background: var(--c-navy);
-  border-bottom: 1px solid rgba(200,198,197,0.18);
+  border-bottom: 1px solid color-mix(in srgb, var(--c-silver) 18%, transparent);
 }
 
 .topnav-inner {
@@ -182,6 +247,30 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
   height: 2px;
   background: var(--c-mint);
 }
+
+/* Colour scheme switch */
+.scheme-toggle {
+  display: flex;
+  flex-shrink: 0;
+  padding: 2px;
+  border: 1px solid color-mix(in srgb, var(--c-silver) 35%, transparent);
+  border-radius: var(--r-pill);
+}
+.scheme-toggle button {
+  border: none;
+  background: transparent;
+  color: var(--c-silver);
+  font-family: var(--ff-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+}
+.scheme-toggle button:hover { color: white; }
+.scheme-toggle button[aria-pressed="true"] { background: var(--c-mint); color: var(--c-navy); }
 
 /* ================================================================
    HERO
@@ -272,14 +361,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
 .hero-index {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  border-top: 1px solid rgba(200,198,197,0.2);
+  border-top: 1px solid color-mix(in srgb, var(--c-silver) 20%, transparent);
   list-style: none;
 }
 
 .hero-index a {
   display: block;
   padding: var(--sp-5) var(--sp-4) var(--sp-6);
-  border-left: 1px solid rgba(200,198,197,0.2);
+  border-left: 1px solid color-mix(in srgb, var(--c-silver) 20%, transparent);
   color: var(--c-silver);
   text-decoration: none;
   transition: color 0.15s;
@@ -319,8 +408,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
 }
 
 .band--navy  { background: var(--c-navy);  color: white; }
-.band--slate { background: var(--c-slate); color: white; }
-.band--white { background: var(--c-white); }
+.band--slate { background: var(--c-band2-bg); color: var(--c-band2-fg); }
+.band--slate :focus-visible { outline-color: var(--c-band2-focus); }
+.band--white { background: var(--c-surface); }
 .band--light { background: var(--c-gray-light); }
 
 .band-head {
@@ -346,8 +436,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
   user-select: none;
 }
 
-.band--navy .band-num,
-.band--slate .band-num { color: white; }
+.band--navy .band-num { color: white; }
+.band--slate .band-num { color: var(--c-band2-fg); }
 
 .band-eyebrow {
   display: flex;
@@ -387,9 +477,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
   color: var(--c-charcoal);
 }
 
-.band--navy .band-eyebrow, .band--slate .band-eyebrow,
-.band--navy .band-lede,    .band--slate .band-lede { color: var(--c-silver); }
-.band--navy .band-title,   .band--slate .band-title { color: white; }
+.band--navy .band-eyebrow, .band--navy .band-lede { color: var(--c-silver); }
+.band--navy .band-title { color: white; }
+.band--slate .band-eyebrow, .band--slate .band-lede { color: var(--c-band2-muted); }
+.band--slate .band-title { color: var(--c-band2-fg); }
 
 .sub-head {
   font-family: var(--ff-display);
@@ -403,8 +494,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
   gap: var(--sp-3);
 }
 .sub-head .mono { font-size: 11px; font-weight: 400; color: var(--c-slate); letter-spacing: 0.1em; }
-.band--navy .sub-head, .band--slate .sub-head { color: white; }
-.band--navy .sub-head .mono, .band--slate .sub-head .mono { color: var(--c-silver); }
+.band--navy .sub-head { color: white; }
+.band--navy .sub-head .mono { color: var(--c-silver); }
+.band--slate .sub-head { color: var(--c-band2-fg); }
+.band--slate .sub-head .mono { color: var(--c-band2-muted); }
 
 .cap {
   font-family: var(--ff-mono);
@@ -503,13 +596,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
 .tile .cap { position: absolute; left: 10px; bottom: 8px; }
 
 .tile--navy     { background: var(--c-navy);       color: white; }
-.tile--slate    { background: var(--c-slate);      color: white; }
+.tile--slate    { background: var(--c-band2-bg);   color: var(--c-band2-fg); }
 .tile--charcoal { background: var(--c-charcoal);   color: white; }
 .tile--silver   { background: var(--c-silver);     color: var(--c-navy); }
 .tile--light    { background: var(--c-gray-light); color: var(--c-navy); }
 .tile--white    { background: white; color: var(--c-navy); box-shadow: inset 0 0 0 1px var(--c-silver); }
 
-.tile--navy .cap, .tile--slate .cap, .tile--charcoal .cap { color: var(--c-silver); }
+.tile--navy .cap, .tile--charcoal .cap { color: var(--c-silver); }
+.tile--slate .cap { color: var(--c-band2-muted); }
 .tile--silver .cap, .tile--light .cap, .tile--white .cap { color: var(--c-slate); }
 .tile--silver .cap { color: var(--c-navy); }
 
@@ -541,6 +635,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
 }
 .colour-stack strong { font-family: var(--ff-display); font-size: 13px; font-weight: 700; }
 .colour-stack span   { font-family: var(--ff-mono); font-size: 10.5px; }
+.colour-stack--7 { grid-template-rows: 2.2fr 1.5fr 1.3fr 1fr 1fr 0.8fr 0.8fr; }
 
 .board-type { grid-column: 2 / span 2; }
 
@@ -653,7 +748,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
 
 .sw--navy     { grid-column: span 6; grid-row: span 3; background: var(--c-navy); color: white; }
 /* Same colour as the band, so give it a faint outline */
-.sw--navy     { box-shadow: inset 0 0 0 1px rgba(200,198,197,0.22); }
+.sw--navy     { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c-silver) 22%, transparent); }
 .sw--slate    { grid-column: span 6; grid-row: span 2; background: var(--c-slate); color: white; }
 .sw--charcoal { grid-column: span 6; background: var(--c-charcoal); color: white; }
 .sw--light    { grid-column: span 6; background: var(--c-gray-light); color: var(--c-navy); }
@@ -661,7 +756,22 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
 .sw--mint     { grid-column: span 2; background: var(--c-mint); color: var(--c-navy); }
 
 .sw--navy .sw-role, .sw--slate .sw-role, .sw--charcoal .sw-role { color: var(--c-silver); }
-.sw--mint .sw-name { font-size: clamp(1.1rem, 1.6vw, 1.4rem); }
+.sw--mint:not(.sw-c6) .sw-name { font-size: clamp(1.1rem, 1.6vw, 1.4rem); }
+
+/* Alternative-scheme swatches: spans set per tile */
+.sw.sw-c6 { grid-column: span 6; } .sw.sw-c5 { grid-column: span 5; }
+.sw.sw-c4 { grid-column: span 4; } .sw.sw-c3 { grid-column: span 3; }
+.sw.sw-c2 { grid-column: span 2; }
+.sw.sw-r3 { grid-row: span 3; } .sw.sw-r2 { grid-row: span 2; }
+.sw.sw-c6:not(.sw-r3):not(.sw-r2), .sw.sw-c5, .sw.sw-c4, .sw.sw-c3, .sw.sw-c2 { grid-row: span 1; }
+.sw--slate.sw-c2 .sw-name { font-size: clamp(1.1rem, 1.6vw, 1.4rem); }
+.sw--offwhite { background: #F9F9FA; color: var(--c-navy); }
+.sw--palelime { background: #D4D89B; color: var(--c-navy); }
+.sw--palelime .sw-name, .sw--teal .sw-name, .sw--darklime .sw-name { font-size: clamp(1.1rem, 1.6vw, 1.4rem); }
+/* No brand colour passes AA on Teal or Dark lime, so these two use a deeper Navy:
+   #00142B is 4.6:1 on Teal and 5.4:1 on Dark lime */
+.sw--teal     { background: #018CA1; color: #00142B; }
+.sw--darklime { background: #879223; color: #00142B; }
 
 .pair-table { width: 100%; border-collapse: collapse; font-size: var(--fs-small); }
 .pair-table th {
@@ -702,10 +812,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
   white-space: nowrap;
 }
 
-.wcag-aaa { background: rgba(72,191,145,0.15); color: #0f6641; }
-.wcag-aa  { background: rgba(72,191,145,0.1);  color: #1a7d5a; }
-.wcag-lg  { background: rgba(255,180,0,0.12);  color: #6b4700; }
-.wcag-nc  { background: rgba(180,40,40,0.08);  color: #7a2020; }
+.wcag-aaa { background: var(--c-do-bg);      color: var(--c-do-fg); }
+.wcag-aa  { background: var(--c-do-bg-soft); color: var(--c-do-fg-soft); }
+.wcag-lg  { background: var(--c-warn-bg);    color: var(--c-warn-fg); }
+.wcag-nc  { background: var(--c-dont-bg);    color: var(--c-dont-fg); }
 
 .mint-rule {
   margin-top: var(--sp-20);
@@ -714,12 +824,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
   gap: var(--sp-10);
   align-items: center;
   padding-top: var(--sp-10);
-  border-top: 1px solid rgba(200,198,197,0.3);
+  border-top: 1px solid color-mix(in srgb, var(--c-silver) 30%, transparent);
 }
 
 .mint-rule .dot {
   width: 96px; height: 96px;
-  border: 1px solid rgba(200,198,197,0.5);
+  border: 1px solid color-mix(in srgb, var(--c-silver) 50%, transparent);
   display: flex; align-items: center; justify-content: center;
 }
 .mint-rule .dot span { width: 16px; height: 16px; background: var(--c-mint); }
@@ -783,7 +893,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
 .weights {
   list-style: none;
   margin-top: var(--sp-5);
-  border-top: 1px solid var(--c-silver);
+  border-top: 1px solid var(--c-rule);
 }
 .weights li {
   display: flex;
@@ -804,8 +914,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
   grid-template-columns: 240px minmax(0, 1fr);
   gap: var(--sp-10);
   padding: var(--sp-10) 0;
-  border-top: 1px solid var(--c-silver);
-  border-bottom: 1px solid var(--c-silver);
+  border-top: 1px solid var(--c-rule);
+  border-bottom: 1px solid var(--c-rule);
 }
 .quote-strip .meta { color: var(--c-slate); display: grid; gap: var(--sp-2); align-content: start; }
 .quote-strip .meta strong { font-family: var(--ff-display); font-size: var(--fs-h4); color: var(--c-navy); text-transform: none; letter-spacing: 0; }
@@ -933,13 +1043,13 @@ code.inline {
   white-space: nowrap;
 }
 .sg-btn-primary   { background: var(--c-navy); color: white; border: 1.5px solid var(--c-navy); }
-.sg-btn-primary:hover { background: #021530; border-color: #021530; }
+.sg-btn-primary:hover { background: var(--c-navy-hover); border-color: var(--c-navy-hover); }
 .sg-btn-secondary { background: transparent; color: var(--c-navy); border: 1.5px solid var(--c-navy); }
 .sg-btn-secondary:hover { background: var(--c-navy); color: white; }
 .sg-btn-ghost     { background: transparent; color: var(--c-charcoal); border: 1px solid var(--c-silver); }
 .sg-btn-ghost:hover { background: var(--c-gray-light); border-color: var(--c-gray-light); }
 .sg-btn-accent    { background: var(--c-mint); color: var(--c-navy); border: 1.5px solid var(--c-mint); }
-.sg-btn-accent:hover { background: #39ae80; border-color: #39ae80; }
+.sg-btn-accent:hover { background: var(--c-accent-hover); border-color: var(--c-accent-hover); }
 
 .sg-tag {
   display: inline-flex;
@@ -951,9 +1061,9 @@ code.inline {
   border-radius: var(--r-pill);
   white-space: nowrap;
 }
-.sg-tag-active     { background: rgba(72,191,145,0.15); color: #0f6641; }
-.sg-tag-draft      { background: rgba(255,180,0,0.12);  color: #6b4700; }
-.sg-tag-deprecated { background: rgba(180,40,40,0.08);  color: #7a2020; }
+.sg-tag-active     { background: var(--c-do-bg);   color: var(--c-do-fg); }
+.sg-tag-draft      { background: var(--c-warn-bg); color: var(--c-warn-fg); }
+.sg-tag-deprecated { background: var(--c-dont-bg); color: var(--c-dont-fg); }
 .sg-tag-neutral    { background: var(--c-gray-light);   color: var(--c-charcoal); }
 
 .sg-tag-mono {
@@ -1010,7 +1120,7 @@ code.inline {
 }
 .spec-table td { padding: 10px var(--sp-4) 10px 0; line-height: 1.5; vertical-align: top; }
 .spec-table td:last-child { padding-right: 0; }
-.spec-table tbody tr:nth-child(odd) { background: rgba(227,227,227,0.45); }
+.spec-table tbody tr:nth-child(odd) { background: color-mix(in srgb, var(--c-gray-light) 45%, transparent); }
 .spec-table td.mono { font-size: 12px; white-space: nowrap; }
 .spec-table td.mono + td.mono { color: var(--c-slate); }
 
@@ -1024,12 +1134,12 @@ code.inline {
   font-family: var(--ff-mono);
   font-size: 13px;
   line-height: 1.8;
-  color: #e3e3e3;
+  color: var(--c-code-text);
   white-space: pre;
 }
 .sg-code-block .token-key     { color: var(--c-mint); }
-.sg-code-block .token-string  { color: #a8d8c8; }
-.sg-code-block .token-num     { color: #f0b868; }
+.sg-code-block .token-string  { color: var(--c-code-string); }
+.sg-code-block .token-num     { color: var(--c-code-num); }
 .sg-code-block .token-comment { color: rgba(255,255,255,0.65); }
 
 /* Spacing ladder — actual-size squares */
@@ -1062,13 +1172,13 @@ code.inline {
   font-size: 3rem;
   font-weight: 800;
   line-height: 1;
-  color: white;
+  color: var(--c-band2-fg);
 }
 .rule-head h3 {
   font-family: var(--ff-display);
   font-size: var(--fs-h2);
   font-weight: 700;
-  color: white;
+  color: var(--c-band2-fg);
   letter-spacing: var(--ls-heading);
 }
 
@@ -1091,8 +1201,8 @@ code.inline {
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
-.guideline-do .guideline-verdict   { background: rgba(72,191,145,0.15); color: #0f6641; }
-.guideline-dont .guideline-verdict { background: rgba(180,40,40,0.08);  color: #7a2020; }
+.guideline-do .guideline-verdict   { background: var(--c-do-bg);   color: var(--c-do-fg); }
+.guideline-dont .guideline-verdict { background: var(--c-dont-bg); color: var(--c-dont-fg); }
 
 .guideline-preview {
   flex: 1;
@@ -1114,8 +1224,9 @@ code.inline {
    FOOTER
    ================================================================ */
 
-.sg-footer { background: var(--c-navy); color: var(--c-silver); padding: var(--sp-12) 0; }
-.sg-footer .wrap { display: flex; align-items: center; gap: var(--sp-8); flex-wrap: wrap; }
+/* Padding follows the logo clear-space rule: x = half the logo height (28px / 2) */
+.sg-footer { background: var(--c-navy); color: var(--c-silver); padding: calc(28px / 2) 0; }
+.sg-footer .wrap { display: flex; align-items: center; gap: calc(28px / 2) var(--sp-8); flex-wrap: wrap; }
 .sg-footer svg { height: 28px; width: auto; aspect-ratio: 4617 / 830; color: white; }
 .sg-footer a {
   margin-left: auto;
@@ -1124,7 +1235,7 @@ code.inline {
   font-size: 13px;
   color: white;
   text-decoration: none;
-  border-bottom: 1px solid rgba(200,198,197,0.5);
+  border-bottom: 1px solid color-mix(in srgb, var(--c-silver) 50%, transparent);
 }
 
 /* ================================================================
@@ -1153,6 +1264,7 @@ code.inline {
   .board-rail-title { writing-mode: horizontal-tb; transform: none; }
   .board-colours { grid-column: 1 / -1; grid-row: auto; }
   .colour-stack { grid-template-rows: none; grid-template-columns: repeat(6, minmax(0, 1fr)); min-height: 140px; }
+  .colour-stack--7 { grid-template-columns: repeat(7, minmax(0, 1fr)); }
   .board-type { grid-column: 1 / -1; }
   .families { grid-template-columns: 1fr; }
   .mediums { grid-template-columns: 1fr 1fr; }
@@ -1167,7 +1279,7 @@ code.inline {
   .sg-header-art { display: none; }
   .hero-index { grid-template-columns: repeat(3, 1fr); }
   .hero-index li:nth-child(4) a { border-left: none; padding-left: 0; }
-  .hero-index li:nth-child(n+4) a { border-top: 1px solid rgba(200,198,197,0.2); }
+  .hero-index li:nth-child(n+4) a { border-top: 1px solid color-mix(in srgb, var(--c-silver) 20%, transparent); }
   .band { padding: var(--sp-16) 0; }
   .band-head { margin-bottom: var(--sp-10); }
   .band-head { padding-right: 0; }
@@ -1178,6 +1290,8 @@ code.inline {
   .swatch-mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .sw--navy, .sw--slate, .sw--charcoal, .sw--light { grid-column: span 2; grid-row: span 1; }
   .sw--silver, .sw--mint { grid-column: span 1; }
+  .sw.sw-c6 { grid-column: span 2; grid-row: span 1; }
+  .sw.sw-c5, .sw.sw-c4, .sw.sw-c3, .sw.sw-c2 { grid-column: span 1; }
   .pair-table .hide-sm { display: none; }
   .mint-rule { grid-template-columns: 1fr; }
   .quote-strip, .scale-row { grid-template-columns: 1fr; gap: var(--sp-3); }
@@ -1329,6 +1443,10 @@ code.inline {
       <li><a href="#components"><span class="n">04</span>Components</a></li>
       <li><a href="#usage"><span class="n">05</span>Do / Don't</a></li>
     </ul>
+    <div class="scheme-toggle" role="group" aria-label="Colour scheme">
+      <button type="button" data-scheme-set="bsf" aria-pressed="true">bSF</button>
+      <button type="button" data-scheme-set="alt" aria-pressed="false">RYTV</button>
+    </div>
   </div>
 </nav>
 
@@ -1385,9 +1503,9 @@ code.inline {
         </div>
         <div class="quad">
           <div class="tile tile--navy"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap">Navy</span></div>
-          <div class="tile tile--slate"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap">Slate</span></div>
-          <div class="tile tile--charcoal"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap">Charcoal</span></div>
-          <div class="tile tile--silver"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap">Silver</span></div>
+          <div class="tile tile--slate"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap"><span data-c="band2">Slate</span></span></div>
+          <div class="tile tile--charcoal"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap"><span data-c="charcoal">Charcoal</span></span></div>
+          <div class="tile tile--silver"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap"><span data-c="silver">Silver</span></span></div>
         </div>
       </div>
 
@@ -1399,21 +1517,30 @@ code.inline {
         </div>
         <div class="quad">
           <div class="tile tile--navy"><svg class="logo-mark" aria-hidden="true"><use href="#bsf-mark"/></svg><span class="cap">Navy</span></div>
-          <div class="tile tile--slate"><svg class="logo-mark" aria-hidden="true"><use href="#bsf-mark"/></svg><span class="cap">Slate</span></div>
-          <div class="tile tile--charcoal"><svg class="logo-mark" aria-hidden="true"><use href="#bsf-mark"/></svg><span class="cap">Charcoal</span></div>
-          <div class="tile tile--silver"><svg class="logo-mark" aria-hidden="true"><use href="#bsf-mark"/></svg><span class="cap">Silver</span></div>
+          <div class="tile tile--slate"><svg class="logo-mark" aria-hidden="true"><use href="#bsf-mark"/></svg><span class="cap"><span data-c="band2">Slate</span></span></div>
+          <div class="tile tile--charcoal"><svg class="logo-mark" aria-hidden="true"><use href="#bsf-mark"/></svg><span class="cap"><span data-c="charcoal">Charcoal</span></span></div>
+          <div class="tile tile--silver"><svg class="logo-mark" aria-hidden="true"><use href="#bsf-mark"/></svg><span class="cap"><span data-c="silver">Silver</span></span></div>
         </div>
       </div>
 
       <div class="board-colours">
         <h3 class="board-label">Colours</h3>
-        <div class="colour-stack">
+        <div class="colour-stack" data-only="bsf">
           <div style="background:#041E42;color:white;"><strong>Deep Navy</strong><span>#041E42</span><span>4 / 30 / 66</span></div>
           <div style="background:#354B55;color:white;"><strong>Dark Slate</strong><span>#354B55</span><span>53 / 75 / 85</span></div>
           <div style="background:#38363D;color:white;"><strong>Charcoal</strong><span>#38363D</span><span>56 / 54 / 61</span></div>
           <div style="background:#C8C6C5;color:#041E42;"><strong>Silver Gray</strong><span>#C8C6C5</span><span>200 / 198 / 197</span></div>
           <div style="background:#E3E3E3;color:#041E42;"><strong>Light Gray</strong><span>#E3E3E3</span><span>227 / 227 / 227</span></div>
           <div style="background:#48BF91;color:#041E42;"><strong>Mint</strong><span>#48BF91</span><span>72 / 191 / 145</span></div>
+        </div>
+        <div class="colour-stack colour-stack--7" data-only="alt">
+          <div style="background:#002651;color:white;"><strong>Navy</strong><span>#002651</span><span>0 / 38 / 81</span></div>
+          <div style="background:#B5C42E;color:#002651;"><strong>Lime</strong><span>#B5C42E</span><span>181 / 196 / 46</span></div>
+          <div style="background:#2E3A4D;color:white;"><strong>Ink</strong><span>#2E3A4D</span><span>46 / 58 / 77</span></div>
+          <div style="background:#BFC9D4;color:#002651;"><strong>Mist</strong><span>#BFC9D4</span><span>191 / 201 / 212</span></div>
+          <div style="background:#E6E9EE;color:#002651;"><strong>Haze</strong><span>#E6E9EE</span><span>230 / 233 / 238</span></div>
+          <div style="background:#018CA1;color:#00142B;"><strong>Teal</strong><span>#018CA1</span><span>1 / 140 / 161</span></div>
+          <div style="background:#1A4687;color:white;"><strong>Blue</strong><span>#1A4687</span><span>26 / 70 / 135</span></div>
         </div>
       </div>
 
@@ -1453,13 +1580,13 @@ code.inline {
       <span class="band-num" aria-hidden="true">01</span>
       <div class="band-eyebrow">Identity</div>
       <h2 class="band-title">Logo</h2>
-      <p class="band-lede">Use the white logo on dark backgrounds and the Deep Navy logo on light ones. Don't recolour it in Mint. If it has to go over a photo, put a solid panel behind it.</p>
+      <p class="band-lede">Use the white logo on dark backgrounds and the <span data-c="deepnavy">Deep Navy</span> logo on light ones. Don't recolour it in <span data-c="mint">Mint</span>. If it has to go over a photo, put a solid panel behind it.</p>
     </div>
 
     <div class="logo-grid reveal">
-      <div class="tile tile--navy"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap">White on Deep Navy (default)</span></div>
-      <div class="tile tile--slate"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap">White on Dark Slate</span></div>
-      <div class="tile tile--light"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap">Navy on Light Gray</span></div>
+      <div class="tile tile--navy"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap">White on <span data-c="deepnavy">Deep Navy</span> (default)</span></div>
+      <div class="tile tile--slate"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap" data-c="band2-logo">White on Dark Slate</span></div>
+      <div class="tile tile--light"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap">Navy on <span data-c="lightgray">Light Gray</span></span></div>
       <div class="tile tile--white"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap">Navy on White</span></div>
     </div>
 
@@ -1468,16 +1595,16 @@ code.inline {
         <h3>Clear space <span class="sg-tag sg-tag-neutral">Proposed</span></h3>
         <p>Leave a gap of <span class="mono">x</span> on every side, where <span class="mono">x</span> is half the height of the mark. Keep text, page edges and other logos outside it.</p>
         <svg viewBox="0 0 600 220" aria-label="Clear space diagram" role="img">
-          <rect x="83" y="44" width="434" height="132" fill="none" stroke="#C8C6C5" stroke-width="1"/>
-          <rect x="116" y="77" width="368" height="66" fill="none" stroke="#C8C6C5" stroke-width="1" stroke-dasharray="4 4"/>
+          <rect x="83" y="44" width="434" height="132" fill="none" style="stroke:var(--c-rule)" stroke-width="1"/>
+          <rect x="116" y="77" width="368" height="66" fill="none" style="stroke:var(--c-rule)" stroke-width="1" stroke-dasharray="4 4"/>
           <svg x="116" y="77" width="368" height="66" viewBox="0 0 4617 830"><use href="#bsf-logo"/></svg>
-          <g fill="none" stroke="#354B55" stroke-width="1">
+          <g fill="none" style="stroke:var(--c-slate)" stroke-width="1">
             <rect x="83" y="93.5" width="33" height="33"/>
             <rect x="484" y="93.5" width="33" height="33"/>
             <rect x="283.5" y="44" width="33" height="33"/>
             <rect x="283.5" y="143" width="33" height="33"/>
           </g>
-          <g font-family="JetBrains Mono, monospace" font-size="13" fill="#354B55" text-anchor="middle">
+          <g font-family="JetBrains Mono, monospace" font-size="13" style="fill:var(--c-slate)" text-anchor="middle">
             <text x="99.5" y="114">x</text><text x="500.5" y="114">x</text><text x="300" y="65">x</text><text x="300" y="164">x</text>
           </g>
         </svg>
@@ -1509,10 +1636,11 @@ code.inline {
       <span class="band-num" aria-hidden="true">02</span>
       <div class="band-eyebrow">Foundation</div>
       <h2 class="band-title">Colour</h2>
-      <p class="band-lede">We use only the bSI <em>secondary</em> palette. The size of each block shows roughly how much of that colour a typical page uses. Click a value to copy it.</p>
+      <p class="band-lede" data-only="bsf">We use only the bSI <em>secondary</em> palette. The size of each block shows roughly how much of that colour a typical page uses. Click a value to copy it.</p>
+      <p class="band-lede" data-only="alt">The alternative palette: seven brand colours plus three grays mixed from Navy. Lime is the accent and the feature-band colour; always put Navy on it. The size of each block shows roughly how much of that colour a typical page uses. Click a value to copy it.</p>
     </div>
 
-    <div class="swatch-mosaic reveal">
+    <div class="swatch-mosaic reveal" data-only="bsf">
       <div class="sw sw--navy">
         <div><div class="sw-name">Deep Navy</div><div class="sw-role">Our main colour. Headings, large background areas and main buttons.</div></div>
         <div class="sw-vals">
@@ -1555,8 +1683,75 @@ code.inline {
       </div>
     </div>
 
+    <div class="swatch-mosaic reveal" data-only="alt">
+      <div class="sw sw--navy sw-c6 sw-r3">
+        <div><div class="sw-name">Navy</div><div class="sw-role">Our main colour. Headings, large background areas and main buttons.</div></div>
+        <div class="sw-vals">
+          <div>#002651 <button class="copy-btn" data-copy="#002651" aria-label="Copy #002651"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
+          <div>rgb(0, 38, 81) <button class="copy-btn" data-copy="rgb(0, 38, 81)" aria-label="Copy rgb(0, 38, 81)"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
+        </div>
+      </div>
+      <div class="sw sw--mint sw-c6 sw-r2">
+        <div><div class="sw-name">Lime</div><div class="sw-role">Our accent, and the colour of feature bands. Always with Navy on top.</div></div>
+        <div class="sw-vals">
+          <div>#B5C42E <button class="copy-btn" data-copy="#B5C42E" aria-label="Copy #B5C42E"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
+          <div>rgb(181, 196, 46) <button class="copy-btn" data-copy="rgb(181, 196, 46)" aria-label="Copy rgb(181, 196, 46)"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
+        </div>
+      </div>
+      <div class="sw sw--charcoal sw-c6">
+        <div><div class="sw-name">Ink</div><div class="sw-role">Body text and smaller interface elements. Mixed from Navy; use it instead of black.</div></div>
+        <div class="sw-vals">
+          <div>#2E3A4D <button class="copy-btn" data-copy="#2E3A4D" aria-label="Copy #2E3A4D"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
+          <div>rgb(46, 58, 77) <button class="copy-btn" data-copy="rgb(46, 58, 77)" aria-label="Copy rgb(46, 58, 77)"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
+        </div>
+      </div>
+      <div class="sw sw--light sw-c5">
+        <div><div class="sw-name">Haze</div><div class="sw-role">Light bands, cards and code chips. Navy at 10%.</div></div>
+        <div class="sw-vals">
+          <div>#E6E9EE <button class="copy-btn" data-copy="#E6E9EE" aria-label="Copy #E6E9EE"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
+          <div>rgb(230, 233, 238) <button class="copy-btn" data-copy="rgb(230, 233, 238)" aria-label="Copy rgb(230, 233, 238)"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
+        </div>
+      </div>
+      <div class="sw sw--offwhite sw-c4">
+        <div><div class="sw-name">Off-white</div><div class="sw-role">Page background behind white cards.</div></div>
+        <div class="sw-vals">
+          <div>#F9F9FA <button class="copy-btn" data-copy="#F9F9FA" aria-label="Copy #F9F9FA"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
+        </div>
+      </div>
+      <div class="sw sw--silver sw-c3">
+        <div><div class="sw-name">Mist</div><div class="sw-role">Borders, and muted text on Navy or Blue. Navy at 25%.</div></div>
+        <div class="sw-vals">
+          <div>#BFC9D4 <button class="copy-btn" data-copy="#BFC9D4" aria-label="Copy #BFC9D4"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
+        </div>
+      </div>
+      <div class="sw sw--teal sw-c4">
+        <div><div class="sw-name">Teal</div><div class="sw-role">Thin rules and dividers. Too light for small text.</div></div>
+        <div class="sw-vals">
+          <div>#018CA1 <button class="copy-btn" data-copy="#018CA1" aria-label="Copy #018CA1"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
+        </div>
+      </div>
+      <div class="sw sw--palelime sw-c3">
+        <div><div class="sw-name">Pale lime</div><div class="sw-role">Positive status fills, with Navy text.</div></div>
+        <div class="sw-vals">
+          <div>#D4D89B <button class="copy-btn" data-copy="#D4D89B" aria-label="Copy #D4D89B"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
+        </div>
+      </div>
+      <div class="sw sw--darklime sw-c3">
+        <div><div class="sw-name">Dark lime</div><div class="sw-role">Charts and large graphics. Not for text.</div></div>
+        <div class="sw-vals">
+          <div>#879223 <button class="copy-btn" data-copy="#879223" aria-label="Copy #879223"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
+        </div>
+      </div>
+      <div class="sw sw--slate sw-c2">
+        <div><div class="sw-name">Blue</div><div class="sw-role">H6 headings, captions and supporting text.</div></div>
+        <div class="sw-vals">
+          <div>#1A4687 <button class="copy-btn" data-copy="#1A4687" aria-label="Copy #1A4687"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
+        </div>
+      </div>
+    </div>
+
     <h3 class="sub-head reveal">Approved pairings <span class="mono">WCAG 2.2</span></h3>
-    <div class="sheet reveal">
+    <div class="sheet reveal" data-only="bsf">
       <table class="pair-table">
         <thead>
           <tr><th>Sample</th><th>Text</th><th>Ground</th><th>Ratio</th><th class="hide-sm">Use</th></tr>
@@ -1575,11 +1770,34 @@ code.inline {
         </tbody>
       </table>
     </div>
+    <div class="sheet reveal" data-only="alt">
+      <table class="pair-table">
+        <thead>
+          <tr><th>Sample</th><th>Text</th><th>Ground</th><th>Ratio</th><th class="hide-sm">Use</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="pair-sample" style="background:#fff;color:#002651;box-shadow:inset 0 0 0 1px #E6E9EE;">Aa</span></td><td class="mono">Navy</td><td class="mono">White</td><td><span class="wcag-badge wcag-aaa">AAA 15.0</span></td><td class="hide-sm">Headings H1–H5 on light backgrounds</td></tr>
+          <tr><td><span class="pair-sample" style="background:#fff;color:#2E3A4D;box-shadow:inset 0 0 0 1px #E6E9EE;">Aa</span></td><td class="mono">Ink</td><td class="mono">White</td><td><span class="wcag-badge wcag-aaa">AAA 11.5</span></td><td class="hide-sm">Body text</td></tr>
+          <tr><td><span class="pair-sample" style="background:#fff;color:#1A4687;box-shadow:inset 0 0 0 1px #E6E9EE;">Aa</span></td><td class="mono">Blue</td><td class="mono">White</td><td><span class="wcag-badge wcag-aaa">AAA 9.3</span></td><td class="hide-sm">H6, captions, supporting text</td></tr>
+          <tr><td><span class="pair-sample" style="background:#E6E9EE;color:#2E3A4D;">Aa</span></td><td class="mono">Ink</td><td class="mono">Haze</td><td><span class="wcag-badge wcag-aaa">AAA 9.4</span></td><td class="hide-sm">Body text on cards and panels</td></tr>
+          <tr><td><span class="pair-sample" style="background:#002651;color:#fff;">Aa</span></td><td class="mono">White</td><td class="mono">Navy</td><td><span class="wcag-badge wcag-aaa">AAA 15.0</span></td><td class="hide-sm">Any text on Navy</td></tr>
+          <tr><td><span class="pair-sample" style="background:#1A4687;color:#fff;">Aa</span></td><td class="mono">White</td><td class="mono">Blue</td><td><span class="wcag-badge wcag-aaa">AAA 9.3</span></td><td class="hide-sm">Logo tile and small panels</td></tr>
+          <tr><td><span class="pair-sample" style="background:#B5C42E;color:#002651;">Aa</span></td><td class="mono">Navy</td><td class="mono">Lime</td><td><span class="wcag-badge wcag-aaa">AAA 7.8</span></td><td class="hide-sm">Text on Lime bands, buttons and tags</td></tr>
+          <tr><td><span class="pair-sample" style="background:#B5C42E;color:#2E3A4D;">Aa</span></td><td class="mono">Ink</td><td class="mono">Lime</td><td><span class="wcag-badge wcag-aa">AA 6.0</span></td><td class="hide-sm">Muted text on Lime bands</td></tr>
+          <tr><td><span class="pair-sample" style="background:#B5C42E;color:#fff;">Aa</span></td><td class="mono">White</td><td class="mono">Lime</td><td><span class="wcag-badge wcag-nc">NC 1.9</span></td><td class="hide-sm">Never. Put Navy on Lime instead.</td></tr>
+          <tr><td><span class="pair-sample" style="background:#002651;color:#B5C42E;">Aa</span></td><td class="mono">Lime</td><td class="mono">Navy</td><td><span class="wcag-badge wcag-aaa">AAA 7.8</span></td><td class="hide-sm">Small labels and active states, on dark backgrounds only</td></tr>
+          <tr><td><span class="pair-sample" style="background:#1A4687;color:#B5C42E;">Aa</span></td><td class="mono">Lime</td><td class="mono">Blue</td><td><span class="wcag-badge wcag-aa">AA 4.8</span></td><td class="hide-sm">Labels and active states on Blue</td></tr>
+          <tr><td><span class="pair-sample" style="background:#fff;color:#018CA1;box-shadow:inset 0 0 0 1px #E6E9EE;">Aa</span></td><td class="mono">Teal</td><td class="mono">White</td><td><span class="wcag-badge wcag-lg">AA-LG 4.0</span></td><td class="hide-sm">Large text only (24px+, or 18.7px bold). Best kept to rules.</td></tr>
+          <tr><td><span class="pair-sample" style="background:#fff;color:#B5C42E;box-shadow:inset 0 0 0 1px #E6E9EE;">Aa</span></td><td class="mono">Lime</td><td class="mono">White</td><td><span class="wcag-badge wcag-nc">NC 1.9</span></td><td class="hide-sm">Too faint for text. Use it for fills with Navy text.</td></tr>
+          <tr><td><span class="pair-sample" style="background:#fff;color:#BFC9D4;box-shadow:inset 0 0 0 1px #E6E9EE;">Aa</span></td><td class="mono">Mist</td><td class="mono">White</td><td><span class="wcag-badge wcag-nc">NC 1.7</span></td><td class="hide-sm">Too faint for text. Use it for dividing lines.</td></tr>
+        </tbody>
+      </table>
+    </div>
 
     <div class="mint-rule reveal">
       <div class="dot" aria-hidden="true"><span></span></div>
       <blockquote>
-        Use Mint for one thing per layout, such as a button or an active tab. If two things are Mint, neither stands out.
+        Use <span data-c="mint">Mint</span> for one thing per layout, such as a button or an active tab. If two things are <span data-c="mint">Mint</span>, neither stands out.
         <cite>From the brand direction brief</cite>
       </blockquote>
     </div>
@@ -1664,7 +1882,7 @@ code.inline {
         <div style="font-family:var(--ff-display);font-size:var(--fs-h5);font-weight:600;letter-spacing:var(--ls-heading);line-height:var(--lh-heading);color:var(--c-navy);">Required attributes</div>
       </div>
       <div class="scale-row">
-        <div class="scale-meta"><b>H6</b><span>--fs-h6 · 13px · 10pt · 600 · Slate</span></div>
+        <div class="scale-meta"><b>H6</b><span>--fs-h6 · 13px · 10pt · 600 · <span data-c="slate">Slate</span></span></div>
         <div style="font-family:var(--ff-display);font-size:var(--fs-h6);font-weight:600;letter-spacing:var(--ls-label);line-height:var(--lh-heading);color:var(--c-slate);text-transform:uppercase;">Normative references</div>
       </div>
       <div class="scale-row">
@@ -1672,7 +1890,7 @@ code.inline {
         <div style="font-family:var(--ff-body);font-size:var(--fs-body);line-height:var(--lh-body);color:var(--c-charcoal);max-width:66ch;">buildingSMART International develops open standards for building information modelling. IFC is an open file format for sharing building and construction data between different software.</div>
       </div>
       <div class="scale-row">
-        <div class="scale-meta"><b>Small</b><span>--fs-small · 14px · 10.5pt · 400 · Slate</span></div>
+        <div class="scale-meta"><b>Small</b><span>--fs-small · 14px · 10.5pt · 400 · <span data-c="slate">Slate</span></span></div>
         <div style="font-family:var(--ff-body);font-size:var(--fs-small);line-height:var(--lh-body);color:var(--c-slate);">Figure 3 – Entity relationship between <span class="mono">IfcWall</span> and <span class="mono">Pset_WallCommon</span> in IFC4.3. Source: buildingSMART International.</div>
       </div>
       <div class="scale-row">
@@ -1733,7 +1951,7 @@ code.inline {
       <span class="band-num" aria-hidden="true">04</span>
       <div class="band-eyebrow">Building blocks</div>
       <h2 class="band-title">Components</h2>
-      <p class="band-lede">The parts we use to build spec pages, documents and the website. Each card counts as one layout, so it has at most one Mint element.</p>
+      <p class="band-lede">The parts we use to build spec pages, documents and the website. Each card counts as one layout, so it has at most one <span data-c="mint">Mint</span> element.</p>
     </div>
 
     <div class="cards">
@@ -1741,8 +1959,8 @@ code.inline {
         <div class="card-label"><h3>Buttons</h3><span class="cap">Figtree 600</span></div>
         <div class="demo-row"><span class="cap">Primary</span><button class="sg-btn sg-btn-primary">Download IDS</button><span class="note">Navy fill · white text</span></div>
         <div class="demo-row"><span class="cap">Secondary</span><button class="sg-btn sg-btn-secondary">View schema</button><span class="note">Navy outline</span></div>
-        <div class="demo-row"><span class="cap">Ghost</span><button class="sg-btn sg-btn-ghost">Cancel</button><span class="note">Silver outline</span></div>
-        <div class="demo-row"><span class="cap">Accent</span><button class="sg-btn sg-btn-accent">Register now</button><span class="note">Mint fill · once per layout</span></div>
+        <div class="demo-row"><span class="cap">Ghost</span><button class="sg-btn sg-btn-ghost">Cancel</button><span class="note"><span data-c="silver">Silver</span> outline</span></div>
+        <div class="demo-row"><span class="cap">Accent</span><button class="sg-btn sg-btn-accent">Register now</button><span class="note"><span data-c="mint">Mint</span> fill · once per layout</span></div>
       </div>
 
       <div class="card reveal">
@@ -1761,7 +1979,7 @@ code.inline {
       </div>
 
       <div class="card reveal">
-        <div class="card-label"><h3>Info callout</h3><span class="cap">Navy rule · Light Gray fill</span></div>
+        <div class="card-label"><h3>Info callout</h3><span class="cap">Navy rule · <span data-c="lightgray">Light Gray</span> fill</span></div>
         <div class="info-box">
           <h4>Note: IFC4.3 required</h4>
           <p>This property set is only available in <span class="mono">IFC4.3</span> and later. Software implementing <span class="mono">IFC2x3</span> will not export these attributes. Verify your export settings before sharing files with project partners.</p>
@@ -1789,7 +2007,7 @@ code.inline {
       </div>
 
       <div class="card card--7 reveal">
-        <div class="card-label"><h3>Code block</h3><span class="cap">Charcoal background</span></div>
+        <div class="card-label"><h3>Code block</h3><span class="cap"><span data-c="charcoal">Charcoal</span> background</span></div>
         <div class="sg-code-block">
           <code><span class="token-comment">// IDS requirement: IfcWall must carry Pset_WallCommon</span>
 <span class="token-key">"applicability"</span>: {
@@ -1851,7 +2069,7 @@ code.inline {
               <p style="font-size:14px;line-height:1.6;margin-bottom:14px;">IFC4.3 adds support for roads, railways, bridges and ports.</p>
               <button class="sg-btn sg-btn-accent">Read more</button>
             </div></div>
-            <div class="guideline-caption">Only the button is Mint. Everything else is Navy or Charcoal.</div>
+            <div class="guideline-caption">Only the button is <span data-c="mint">Mint</span>. Everything else is Navy or <span data-c="charcoal">Charcoal</span>.</div>
           </div>
           <div class="guideline-card guideline-dont">
             <div class="guideline-verdict">✗ Don't</div>
@@ -1860,7 +2078,7 @@ code.inline {
               <p style="font-size:14px;line-height:1.6;margin-bottom:14px;">IFC4.3 adds support for roads, railways, bridges and ports.</p>
               <button class="sg-btn sg-btn-accent">Read more</button>
             </div></div>
-            <div class="guideline-caption">Both the heading and the button are Mint, so neither one stands out.</div>
+            <div class="guideline-caption">Both the heading and the button are <span data-c="mint">Mint</span>, so neither one stands out.</div>
           </div>
         </div>
       </div>
@@ -1894,39 +2112,62 @@ code.inline {
             <div class="guideline-verdict">✓ Do</div>
             <div class="guideline-preview"><div>
               <div style="font-family:var(--ff-display);font-size:14px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--c-slate);margin-bottom:6px;">Section label</div>
-              <p style="font-size:14px;line-height:1.65;">Charcoal (#38363D) on white: 11.5:1 contrast ratio.</p>
+              <p style="font-size:14px;line-height:1.65;"><span data-c="charcoal">Charcoal</span> (<span data-c="hex-charcoal">#38363D</span>) on white: 11.5:1 contrast ratio.</p>
             </div></div>
-            <div class="guideline-caption">Charcoal on white (11.5:1) and Slate on white (9.1:1) both pass WCAG AAA.</div>
+            <div class="guideline-caption"><span data-c="charcoal">Charcoal</span> on white (11.5:1) and <span data-c="slate">Slate</span> on white (<span data-c="r-slate">9.1</span>:1) both pass WCAG AAA.</div>
           </div>
           <div class="guideline-card guideline-dont">
             <div class="guideline-verdict">✗ Don't</div>
             <div class="guideline-preview"><div>
               <div style="font-family:var(--ff-display);font-size:14px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--c-silver);margin-bottom:6px;">Section label</div>
-              <p style="font-size:14px;line-height:1.65;color:var(--c-silver);">Silver (#C8C6C5) on white: 1.7:1, which fails WCAG.</p>
+              <p style="font-size:14px;line-height:1.65;color:var(--c-silver);"><span data-c="silver">Silver</span> (<span data-c="hex-silver">#C8C6C5</span>) on white: 1.7:1, which fails WCAG.</p>
             </div></div>
-            <div class="guideline-caption">Silver on white is too faint to read (1.7:1). Use Silver for borders and lines only.</div>
+            <div class="guideline-caption"><span data-c="silver">Silver</span> on white is too faint to read (1.7:1). Use <span data-c="silver">Silver</span> for borders and lines only.</div>
           </div>
         </div>
       </div>
 
-      <div class="reveal">
-        <div class="rule-head"><span class="n" aria-hidden="true">4</span><h3>Keep Mint small</h3></div>
+      <div class="reveal" data-only="bsf">
+        <div class="rule-head"><span class="n" aria-hidden="true">4</span><h3>Keep <span data-c="mint">Mint</span> small</h3></div>
         <div class="guideline-pair">
           <div class="guideline-card guideline-do">
             <div class="guideline-verdict">✓ Do</div>
             <div class="guideline-preview" style="gap:var(--sp-3);flex-wrap:wrap;">
               <span class="sg-tag sg-tag-active">Active</span>
             </div>
-            <div class="guideline-caption">A small Mint tag or active indicator draws the eye to one thing.</div>
+            <div class="guideline-caption">A small <span data-c="mint">Mint</span> tag or active indicator draws the eye to one thing.</div>
           </div>
           <div class="guideline-card guideline-dont">
             <div class="guideline-verdict">✗ Don't</div>
             <div class="guideline-preview" style="padding:0;">
               <div style="background:var(--c-mint);width:100%;align-self:stretch;display:flex;align-items:center;justify-content:center;padding:var(--sp-6);">
-                <p style="font-size:14px;line-height:1.65;color:var(--c-navy);text-align:center;">Body text on a large Mint panel.</p>
+                <p style="font-size:14px;line-height:1.65;color:var(--c-navy);text-align:center;">Body text on a large <span data-c="mint">Mint</span> panel.</p>
               </div>
             </div>
-            <div class="guideline-caption">A large Mint area is tiring to read on and pulls attention from everything else on the page.</div>
+            <div class="guideline-caption">A large <span data-c="mint">Mint</span> area is tiring to read on and pulls attention from everything else on the page.</div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal" data-only="alt">
+        <div class="rule-head"><span class="n" aria-hidden="true">4</span><h3>Put Navy on Lime, never white</h3></div>
+        <div class="guideline-pair">
+          <div class="guideline-card guideline-do">
+            <div class="guideline-verdict">✓ Do</div>
+            <div class="guideline-preview">
+              <div style="background:var(--c-mint);width:100%;min-height:96px;display:flex;align-items:center;justify-content:center;padding:var(--sp-6);">
+                <p style="font-size:14px;line-height:1.65;color:var(--c-navy);text-align:center;">Navy body text on a Lime panel.</p>
+              </div>
+            </div>
+            <div class="guideline-caption">Navy on Lime is 7.8:1 and passes AAA at any size.</div>
+          </div>
+          <div class="guideline-card guideline-dont">
+            <div class="guideline-verdict">✗ Don't</div>
+            <div class="guideline-preview">
+              <div style="background:var(--c-mint);width:100%;min-height:96px;display:flex;align-items:center;justify-content:center;padding:var(--sp-6);">
+                <p style="font-size:14px;line-height:1.65;color:white;text-align:center;">White body text on a Lime panel.</p>
+              </div>
+            </div>
+            <div class="guideline-caption">White on Lime is 1.9:1 and fails WCAG. Use Navy.</div>
           </div>
         </div>
       </div>
@@ -2013,6 +2254,43 @@ if ('IntersectionObserver' in window) {
   reveals.forEach(function(el) { el.classList.add('is-in'); });
 }
 
+/* Colour scheme switch */
+var SCHEME_NAMES = {
+  bsf: { deepnavy: 'Deep Navy', darkslate: 'Dark Slate', slate: 'Slate', charcoal: 'Charcoal',
+         silver: 'Silver', silvergray: 'Silver Gray', lightgray: 'Light Gray', mint: 'Mint',
+         'hex-charcoal': '#38363D', 'hex-silver': '#C8C6C5', 'r-slate': '9.1',
+         band2: 'Slate', 'band2-logo': 'White on Dark Slate' },
+  alt: { deepnavy: 'Navy', darkslate: 'Blue', slate: 'Blue', charcoal: 'Ink',
+         silver: 'Mist', silvergray: 'Mist', lightgray: 'Haze', mint: 'Lime',
+         'hex-charcoal': '#2E3A4D', 'hex-silver': '#BFC9D4', 'r-slate': '9.3',
+         band2: 'Lime', 'band2-logo': 'Navy on Lime' }
+};
+var schemeButtons = document.querySelectorAll('[data-scheme-set]');
+
+function applyScheme(scheme) {
+  var root = document.documentElement;
+  if (scheme === 'alt') root.setAttribute('data-scheme', 'alt');
+  else root.removeAttribute('data-scheme');
+  var names = SCHEME_NAMES[scheme];
+  document.querySelectorAll('[data-c]').forEach(function(el) {
+    var t = names[el.getAttribute('data-c')];
+    if (t) el.textContent = t;
+  });
+  schemeButtons.forEach(function(b) {
+    b.setAttribute('aria-pressed', b.getAttribute('data-scheme-set') === scheme ? 'true' : 'false');
+  });
+  document.dispatchEvent(new CustomEvent('schemechange'));
+}
+
+schemeButtons.forEach(function(b) {
+  b.addEventListener('click', function() {
+    var scheme = b.getAttribute('data-scheme-set');
+    try { localStorage.setItem('bsf-sg-scheme', scheme); } catch (e) {}
+    applyScheme(scheme);
+  });
+});
+applyScheme(document.documentElement.getAttribute('data-scheme') === 'alt' ? 'alt' : 'bsf');
+
 /* Hero dot grid: a slow diagonal wave of brightness */
 (function() {
   var canvas = document.querySelector('.sg-header-art');
@@ -2021,6 +2299,11 @@ if ('IntersectionObserver' in window) {
   var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   var GAP = 24, PERIOD = 16000;
   var w = 0, h = 0, raf = 0, onScreen = true;
+  var dotColour = '#C8C6C5';
+  function readColour() {
+    dotColour = getComputedStyle(document.documentElement).getPropertyValue('--c-silver').trim() || '#C8C6C5';
+  }
+  readColour();
 
   function resize() {
     var dpr = window.devicePixelRatio || 1;
@@ -2039,7 +2322,7 @@ if ('IntersectionObserver' in window) {
     var phase = (sec * 1000 % PERIOD) / PERIOD * Math.PI * 2;
     var cx = w / 2, cy = h / 2, R = h * 0.46, sx = h / w;   // sx stretches the shape to the wider canvas
     ctx.clearRect(0, 0, w, h);
-    ctx.fillStyle = '#C8C6C5';
+    ctx.fillStyle = dotColour;
     for (var r = 0; r < rows; r++) {
       for (var c = 0; c < cols; c++) {
         var x = ox + c * GAP, y = oy + r * GAP;
@@ -2087,6 +2370,7 @@ if ('IntersectionObserver' in window) {
   }
   if ('ResizeObserver' in window) new ResizeObserver(update).observe(canvas);
   document.addEventListener('visibilitychange', update);
+  document.addEventListener('schemechange', function() { readColour(); update(); });
   if (motion.addEventListener) motion.addEventListener('change', update);
   update();
 })();
