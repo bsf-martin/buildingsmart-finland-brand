@@ -2323,7 +2323,7 @@ applyScheme(document.documentElement.getAttribute('data-scheme') === 'alt' ? 'al
         }
         ctx.globalAlpha = m * (0.18 + b * 0.82);
         ctx.beginPath();
-        ctx.arc(x, y, 1.1 + b * 0.15, 0, Math.PI * 2);
+        ctx.arc(x, y, 1.1 - b * 0.1, 0, Math.PI * 2);
         ctx.fill();
       }
     }
