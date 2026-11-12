@@ -596,13 +596,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
 .tile .cap { position: absolute; left: 10px; bottom: 8px; }
 
 .tile--navy     { background: var(--c-navy);       color: white; }
-.tile--slate    { background: var(--c-slate);      color: white; }
+.tile--slate    { background: var(--c-band2-bg);   color: var(--c-band2-fg); }
 .tile--charcoal { background: var(--c-charcoal);   color: white; }
 .tile--silver   { background: var(--c-silver);     color: var(--c-navy); }
 .tile--light    { background: var(--c-gray-light); color: var(--c-navy); }
 .tile--white    { background: white; color: var(--c-navy); box-shadow: inset 0 0 0 1px var(--c-silver); }
 
-.tile--navy .cap, .tile--slate .cap, .tile--charcoal .cap { color: var(--c-silver); }
+.tile--navy .cap, .tile--charcoal .cap { color: var(--c-silver); }
+.tile--slate .cap { color: var(--c-band2-muted); }
 .tile--silver .cap, .tile--light .cap, .tile--white .cap { color: var(--c-slate); }
 .tile--silver .cap { color: var(--c-navy); }
 
@@ -766,11 +767,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
 .sw--slate.sw-c2 .sw-name { font-size: clamp(1.1rem, 1.6vw, 1.4rem); }
 .sw--offwhite { background: #F9F9FA; color: var(--c-navy); }
 .sw--palelime { background: #D4D89B; color: var(--c-navy); }
-.sw--palelime .sw-name, .sw--bar .sw-name { font-size: clamp(1.1rem, 1.6vw, 1.4rem); }
-/* Teal and Dark lime can't carry small text in any brand colour, so they show as a bar on white */
-.sw--bar { background: white; color: var(--c-navy); border-top: 16px solid var(--bar); }
-.sw--teal     { --bar: #018CA1; }
-.sw--darklime { --bar: #879223; }
+.sw--palelime .sw-name, .sw--teal .sw-name, .sw--darklime .sw-name { font-size: clamp(1.1rem, 1.6vw, 1.4rem); }
+/* No brand colour passes AA on Teal or Dark lime, so these two use a deeper Navy:
+   #00142B is 4.6:1 on Teal and 5.4:1 on Dark lime */
+.sw--teal     { background: #018CA1; color: #00142B; }
+.sw--darklime { background: #879223; color: #00142B; }
 
 .pair-table { width: 100%; border-collapse: collapse; font-size: var(--fs-small); }
 .pair-table th {
@@ -1223,8 +1224,9 @@ code.inline {
    FOOTER
    ================================================================ */
 
-.sg-footer { background: var(--c-navy); color: var(--c-silver); padding: var(--sp-12) 0; }
-.sg-footer .wrap { display: flex; align-items: center; gap: var(--sp-8); flex-wrap: wrap; }
+/* Padding follows the logo clear-space rule: x = half the logo height (28px / 2) */
+.sg-footer { background: var(--c-navy); color: var(--c-silver); padding: calc(28px / 2) 0; }
+.sg-footer .wrap { display: flex; align-items: center; gap: calc(28px / 2) var(--sp-8); flex-wrap: wrap; }
 .sg-footer svg { height: 28px; width: auto; aspect-ratio: 4617 / 830; color: white; }
 .sg-footer a {
   margin-left: auto;
@@ -1501,7 +1503,7 @@ code.inline {
         </div>
         <div class="quad">
           <div class="tile tile--navy"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap">Navy</span></div>
-          <div class="tile tile--slate"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap"><span data-c="slate">Slate</span></span></div>
+          <div class="tile tile--slate"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap"><span data-c="band2">Slate</span></span></div>
           <div class="tile tile--charcoal"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap"><span data-c="charcoal">Charcoal</span></span></div>
           <div class="tile tile--silver"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap"><span data-c="silver">Silver</span></span></div>
         </div>
@@ -1515,7 +1517,7 @@ code.inline {
         </div>
         <div class="quad">
           <div class="tile tile--navy"><svg class="logo-mark" aria-hidden="true"><use href="#bsf-mark"/></svg><span class="cap">Navy</span></div>
-          <div class="tile tile--slate"><svg class="logo-mark" aria-hidden="true"><use href="#bsf-mark"/></svg><span class="cap"><span data-c="slate">Slate</span></span></div>
+          <div class="tile tile--slate"><svg class="logo-mark" aria-hidden="true"><use href="#bsf-mark"/></svg><span class="cap"><span data-c="band2">Slate</span></span></div>
           <div class="tile tile--charcoal"><svg class="logo-mark" aria-hidden="true"><use href="#bsf-mark"/></svg><span class="cap"><span data-c="charcoal">Charcoal</span></span></div>
           <div class="tile tile--silver"><svg class="logo-mark" aria-hidden="true"><use href="#bsf-mark"/></svg><span class="cap"><span data-c="silver">Silver</span></span></div>
         </div>
@@ -1537,7 +1539,7 @@ code.inline {
           <div style="background:#2E3A4D;color:white;"><strong>Ink</strong><span>#2E3A4D</span><span>46 / 58 / 77</span></div>
           <div style="background:#BFC9D4;color:#002651;"><strong>Mist</strong><span>#BFC9D4</span><span>191 / 201 / 212</span></div>
           <div style="background:#E6E9EE;color:#002651;"><strong>Haze</strong><span>#E6E9EE</span><span>230 / 233 / 238</span></div>
-          <div style="background:#fff;color:#002651;box-shadow:inset 0 6px 0 #018CA1;"><strong>Teal</strong><span>#018CA1</span><span>1 / 140 / 161</span></div>
+          <div style="background:#018CA1;color:#00142B;"><strong>Teal</strong><span>#018CA1</span><span>1 / 140 / 161</span></div>
           <div style="background:#1A4687;color:white;"><strong>Blue</strong><span>#1A4687</span><span>26 / 70 / 135</span></div>
         </div>
       </div>
@@ -1583,7 +1585,7 @@ code.inline {
 
     <div class="logo-grid reveal">
       <div class="tile tile--navy"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap">White on <span data-c="deepnavy">Deep Navy</span> (default)</span></div>
-      <div class="tile tile--slate"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap">White on <span data-c="darkslate">Dark Slate</span></span></div>
+      <div class="tile tile--slate"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap" data-c="band2-logo">White on Dark Slate</span></div>
       <div class="tile tile--light"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap">Navy on <span data-c="lightgray">Light Gray</span></span></div>
       <div class="tile tile--white"><svg class="logo-full" aria-hidden="true"><use href="#bsf-logo"/></svg><span class="cap">Navy on White</span></div>
     </div>
@@ -1722,7 +1724,7 @@ code.inline {
           <div>#BFC9D4 <button class="copy-btn" data-copy="#BFC9D4" aria-label="Copy #BFC9D4"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
         </div>
       </div>
-      <div class="sw sw--bar sw--teal sw-c4">
+      <div class="sw sw--teal sw-c4">
         <div><div class="sw-name">Teal</div><div class="sw-role">Thin rules and dividers. Too light for small text.</div></div>
         <div class="sw-vals">
           <div>#018CA1 <button class="copy-btn" data-copy="#018CA1" aria-label="Copy #018CA1"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
@@ -1734,7 +1736,7 @@ code.inline {
           <div>#D4D89B <button class="copy-btn" data-copy="#D4D89B" aria-label="Copy #D4D89B"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
         </div>
       </div>
-      <div class="sw sw--bar sw--darklime sw-c3">
+      <div class="sw sw--darklime sw-c3">
         <div><div class="sw-name">Dark lime</div><div class="sw-role">Charts and large graphics. Not for text.</div></div>
         <div class="sw-vals">
           <div>#879223 <button class="copy-btn" data-copy="#879223" aria-label="Copy #879223"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
@@ -2256,10 +2258,12 @@ if ('IntersectionObserver' in window) {
 var SCHEME_NAMES = {
   bsf: { deepnavy: 'Deep Navy', darkslate: 'Dark Slate', slate: 'Slate', charcoal: 'Charcoal',
          silver: 'Silver', silvergray: 'Silver Gray', lightgray: 'Light Gray', mint: 'Mint',
-         'hex-charcoal': '#38363D', 'hex-silver': '#C8C6C5', 'r-slate': '9.1' },
+         'hex-charcoal': '#38363D', 'hex-silver': '#C8C6C5', 'r-slate': '9.1',
+         band2: 'Slate', 'band2-logo': 'White on Dark Slate' },
   alt: { deepnavy: 'Navy', darkslate: 'Blue', slate: 'Blue', charcoal: 'Ink',
          silver: 'Mist', silvergray: 'Mist', lightgray: 'Haze', mint: 'Lime',
-         'hex-charcoal': '#2E3A4D', 'hex-silver': '#BFC9D4', 'r-slate': '9.3' }
+         'hex-charcoal': '#2E3A4D', 'hex-silver': '#BFC9D4', 'r-slate': '9.3',
+         band2: 'Lime', 'band2-logo': 'Navy on Lime' }
 };
 var schemeButtons = document.querySelectorAll('[data-scheme-set]');
 
