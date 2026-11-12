@@ -78,7 +78,7 @@ Primary bSI palette (`#E5172A`, `#004F9F`, `#9F3588`) is off-limits in all mater
 
 ### Alternative scheme — RYTV
 
-A second colour scheme lives alongside the locked bSF palette in the style guide (`docs/index.html`). It does not replace it. Readers switch with the **bSF / RYTV** toggle in the top nav. The choice is saved per browser, and a link with `?scheme=alt` or `?scheme=bsf` opens a specific scheme.
+A second colour scheme lives alongside the locked bSF palette in the style guide (`docs/index.html`). It does not replace it. RYTV is the default scheme on first visit. Readers switch with the **bSF / RYTV** toggle in the top nav. The choice is saved per browser, and a link with `?scheme=alt` or `?scheme=bsf` opens a specific scheme.
 
 | Name | Hex | Role | Replaces (bSF) |
 |------|-----|------|----------------|
