@@ -112,9 +112,9 @@
 }
 
 /* ---- Alternative scheme (RYTV palette) ----
-   Navy #002651, Blue #1A4687, Teal #018CA1, Lime #B5C42E, Dark lime #879223,
-   Pale lime #D4D89B, Off-white #F9F9FA, plus three grays derived from Navy.
-   Lime is the sole accent. Teal is for thin rules only (3.99:1 on white). */
+   Six swatches, like bSF: Navy #002651, Blue #1A4687, Lime #B5C42E, plus three
+   grays derived from Navy. Lime is the sole accent. Pale lime #D4D89B and
+   Off-white #F9F9FA are derived tints, set as tokens only (no swatch). */
 :root[data-scheme="alt"] {
   --c-navy:       #002651;   /* Navy */
   --c-slate:      #1A4687;   /* Blue: 9.25:1 with white */
@@ -124,15 +124,14 @@
   --c-gray-light: #E6E9EE;   /* Haze: Navy 10% tint */
 
   --c-surface:      #F9F9FA; /* Off-white */
-  --c-rule:         #018CA1; /* Teal */
   --c-navy-hover:   #001A38;
-  --c-accent-hover: #A3B12A; /* Navy text 6.4:1 (Dark lime would be 4.4:1) */
+  --c-accent-hover: #A3B12A; /* Navy text 6.4:1 */
   --c-do-bg:        #D4D89B; /* Pale lime, Navy text 10.1:1 */
   --c-do-fg:        #002651;
   --c-do-bg-soft:   #E5E8C3;
   --c-do-fg-soft:   #002651;
   --c-dont-bg:      #F4EBEA; /* Clay 10% tint */
-  --c-dont-fg:      #8C3B2E; /* Clay, the complement of Teal: 6.45:1 on its tint */
+  --c-dont-fg:      #8C3B2E; /* Clay: 6.45:1 on its tint */
   --c-code-text:    #E6E9EE;
   --c-code-string:  #8FD3DE;
   --c-code-num:     #D4D89B;
@@ -635,7 +634,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
 }
 .colour-stack strong { font-family: var(--ff-display); font-size: 13px; font-weight: 700; }
 .colour-stack span   { font-family: var(--ff-mono); font-size: 10.5px; }
-.colour-stack--7 { grid-template-rows: 2.2fr 1.5fr 1.3fr 1fr 1fr 0.8fr 0.8fr; }
 
 .board-type { grid-column: 2 / span 2; }
 
@@ -759,19 +757,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
 .sw--mint:not(.sw-c6) .sw-name { font-size: clamp(1.1rem, 1.6vw, 1.4rem); }
 
 /* Alternative-scheme swatches: spans set per tile */
-.sw.sw-c6 { grid-column: span 6; } .sw.sw-c5 { grid-column: span 5; }
-.sw.sw-c4 { grid-column: span 4; } .sw.sw-c3 { grid-column: span 3; }
+.sw.sw-c6 { grid-column: span 6; } .sw.sw-c4 { grid-column: span 4; }
 .sw.sw-c2 { grid-column: span 2; }
 .sw.sw-r3 { grid-row: span 3; } .sw.sw-r2 { grid-row: span 2; }
-.sw.sw-c6:not(.sw-r3):not(.sw-r2), .sw.sw-c5, .sw.sw-c4, .sw.sw-c3, .sw.sw-c2 { grid-row: span 1; }
+.sw.sw-c6:not(.sw-r3):not(.sw-r2), .sw.sw-c4, .sw.sw-c2 { grid-row: span 1; }
 .sw--slate.sw-c2 .sw-name { font-size: clamp(1.1rem, 1.6vw, 1.4rem); }
-.sw--offwhite { background: #F9F9FA; color: var(--c-navy); }
-.sw--palelime { background: #D4D89B; color: var(--c-navy); }
-.sw--palelime .sw-name, .sw--teal .sw-name, .sw--darklime .sw-name { font-size: clamp(1.1rem, 1.6vw, 1.4rem); }
-/* No brand colour passes AA on Teal or Dark lime, so these two use a deeper Navy:
-   #00142B is 4.6:1 on Teal and 5.4:1 on Dark lime */
-.sw--teal     { background: #018CA1; color: #00142B; }
-.sw--darklime { background: #879223; color: #00142B; }
 
 .pair-table { width: 100%; border-collapse: collapse; font-size: var(--fs-small); }
 .pair-table th {
@@ -1264,7 +1254,6 @@ code.inline {
   .board-rail-title { writing-mode: horizontal-tb; transform: none; }
   .board-colours { grid-column: 1 / -1; grid-row: auto; }
   .colour-stack { grid-template-rows: none; grid-template-columns: repeat(6, minmax(0, 1fr)); min-height: 140px; }
-  .colour-stack--7 { grid-template-columns: repeat(7, minmax(0, 1fr)); }
   .board-type { grid-column: 1 / -1; }
   .families { grid-template-columns: 1fr; }
   .mediums { grid-template-columns: 1fr 1fr; }
@@ -1291,7 +1280,7 @@ code.inline {
   .sw--navy, .sw--slate, .sw--charcoal, .sw--light { grid-column: span 2; grid-row: span 1; }
   .sw--silver, .sw--mint { grid-column: span 1; }
   .sw.sw-c6 { grid-column: span 2; grid-row: span 1; }
-  .sw.sw-c5, .sw.sw-c4, .sw.sw-c3, .sw.sw-c2 { grid-column: span 1; }
+  .sw.sw-c4, .sw.sw-c2 { grid-column: span 1; }
   .pair-table .hide-sm { display: none; }
   .mint-rule { grid-template-columns: 1fr; }
   .quote-strip, .scale-row { grid-template-columns: 1fr; gap: var(--sp-3); }
@@ -1533,13 +1522,12 @@ code.inline {
           <div style="background:#E3E3E3;color:#041E42;"><strong>Light Gray</strong><span>#E3E3E3</span><span>227 / 227 / 227</span></div>
           <div style="background:#48BF91;color:#041E42;"><strong>Mint</strong><span>#48BF91</span><span>72 / 191 / 145</span></div>
         </div>
-        <div class="colour-stack colour-stack--7" data-only="alt">
+        <div class="colour-stack" data-only="alt">
           <div style="background:#002651;color:white;"><strong>Navy</strong><span>#002651</span><span>0 / 38 / 81</span></div>
           <div style="background:#B5C42E;color:#002651;"><strong>Lime</strong><span>#B5C42E</span><span>181 / 196 / 46</span></div>
           <div style="background:#2E3A4D;color:white;"><strong>Ink</strong><span>#2E3A4D</span><span>46 / 58 / 77</span></div>
           <div style="background:#BFC9D4;color:#002651;"><strong>Mist</strong><span>#BFC9D4</span><span>191 / 201 / 212</span></div>
           <div style="background:#E6E9EE;color:#002651;"><strong>Haze</strong><span>#E6E9EE</span><span>230 / 233 / 238</span></div>
-          <div style="background:#018CA1;color:#00142B;"><strong>Teal</strong><span>#018CA1</span><span>1 / 140 / 161</span></div>
           <div style="background:#1A4687;color:white;"><strong>Blue</strong><span>#1A4687</span><span>26 / 70 / 135</span></div>
         </div>
       </div>
@@ -1637,7 +1625,7 @@ code.inline {
       <div class="band-eyebrow">Foundation</div>
       <h2 class="band-title">Colour</h2>
       <p class="band-lede" data-only="bsf">We use only the bSI <em>secondary</em> palette. The size of each block shows roughly how much of that colour a typical page uses. Click a value to copy it.</p>
-      <p class="band-lede" data-only="alt">The alternative palette: seven brand colours plus three grays mixed from Navy. Lime is the accent and the feature-band colour; always put Navy on it. The size of each block shows roughly how much of that colour a typical page uses. Click a value to copy it.</p>
+      <p class="band-lede" data-only="alt">The alternative palette: six colours, Navy, Blue and Lime, plus three grays mixed from Navy. Lime is the accent and the feature-band colour; always put Navy on it. The size of each block shows roughly how much of that colour a typical page uses. Click a value to copy it.</p>
     </div>
 
     <div class="swatch-mosaic reveal" data-only="bsf">
@@ -1705,41 +1693,17 @@ code.inline {
           <div>rgb(46, 58, 77) <button class="copy-btn" data-copy="rgb(46, 58, 77)" aria-label="Copy rgb(46, 58, 77)"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
         </div>
       </div>
-      <div class="sw sw--light sw-c5">
-        <div><div class="sw-name">Haze</div><div class="sw-role">Light bands, cards and code chips. Navy at 10%.</div></div>
+      <div class="sw sw--light sw-c6">
+        <div><div class="sw-name">Haze</div><div class="sw-role">Light bands, cards and code chips. Navy at 10%. Pages sit on Off-white (#F9F9FA).</div></div>
         <div class="sw-vals">
           <div>#E6E9EE <button class="copy-btn" data-copy="#E6E9EE" aria-label="Copy #E6E9EE"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
           <div>rgb(230, 233, 238) <button class="copy-btn" data-copy="rgb(230, 233, 238)" aria-label="Copy rgb(230, 233, 238)"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
         </div>
       </div>
-      <div class="sw sw--offwhite sw-c4">
-        <div><div class="sw-name">Off-white</div><div class="sw-role">Page background behind white cards.</div></div>
-        <div class="sw-vals">
-          <div>#F9F9FA <button class="copy-btn" data-copy="#F9F9FA" aria-label="Copy #F9F9FA"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
-        </div>
-      </div>
-      <div class="sw sw--silver sw-c3">
+      <div class="sw sw--silver sw-c4">
         <div><div class="sw-name">Mist</div><div class="sw-role">Borders, and muted text on Navy or Blue. Navy at 25%.</div></div>
         <div class="sw-vals">
           <div>#BFC9D4 <button class="copy-btn" data-copy="#BFC9D4" aria-label="Copy #BFC9D4"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
-        </div>
-      </div>
-      <div class="sw sw--teal sw-c4">
-        <div><div class="sw-name">Teal</div><div class="sw-role">Thin rules and dividers. Too light for small text.</div></div>
-        <div class="sw-vals">
-          <div>#018CA1 <button class="copy-btn" data-copy="#018CA1" aria-label="Copy #018CA1"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
-        </div>
-      </div>
-      <div class="sw sw--palelime sw-c3">
-        <div><div class="sw-name">Pale lime</div><div class="sw-role">Positive status fills, with Navy text.</div></div>
-        <div class="sw-vals">
-          <div>#D4D89B <button class="copy-btn" data-copy="#D4D89B" aria-label="Copy #D4D89B"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
-        </div>
-      </div>
-      <div class="sw sw--darklime sw-c3">
-        <div><div class="sw-name">Dark lime</div><div class="sw-role">Charts and large graphics. Not for text.</div></div>
-        <div class="sw-vals">
-          <div>#879223 <button class="copy-btn" data-copy="#879223" aria-label="Copy #879223"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
         </div>
       </div>
       <div class="sw sw--slate sw-c2">
@@ -1787,7 +1751,6 @@ code.inline {
           <tr><td><span class="pair-sample" style="background:#B5C42E;color:#fff;">Aa</span></td><td class="mono">White</td><td class="mono">Lime</td><td><span class="wcag-badge wcag-nc">NC 1.9</span></td><td class="hide-sm">Never. Put Navy on Lime instead.</td></tr>
           <tr><td><span class="pair-sample" style="background:#002651;color:#B5C42E;">Aa</span></td><td class="mono">Lime</td><td class="mono">Navy</td><td><span class="wcag-badge wcag-aaa">AAA 7.8</span></td><td class="hide-sm">Small labels and active states, on dark backgrounds only</td></tr>
           <tr><td><span class="pair-sample" style="background:#1A4687;color:#B5C42E;">Aa</span></td><td class="mono">Lime</td><td class="mono">Blue</td><td><span class="wcag-badge wcag-aa">AA 4.8</span></td><td class="hide-sm">Labels and active states on Blue</td></tr>
-          <tr><td><span class="pair-sample" style="background:#fff;color:#018CA1;box-shadow:inset 0 0 0 1px #E6E9EE;">Aa</span></td><td class="mono">Teal</td><td class="mono">White</td><td><span class="wcag-badge wcag-lg">AA-LG 4.0</span></td><td class="hide-sm">Large text only (24px+, or 18.7px bold). Best kept to rules.</td></tr>
           <tr><td><span class="pair-sample" style="background:#fff;color:#B5C42E;box-shadow:inset 0 0 0 1px #E6E9EE;">Aa</span></td><td class="mono">Lime</td><td class="mono">White</td><td><span class="wcag-badge wcag-nc">NC 1.9</span></td><td class="hide-sm">Too faint for text. Use it for fills with Navy text.</td></tr>
           <tr><td><span class="pair-sample" style="background:#fff;color:#BFC9D4;box-shadow:inset 0 0 0 1px #E6E9EE;">Aa</span></td><td class="mono">Mist</td><td class="mono">White</td><td><span class="wcag-badge wcag-nc">NC 1.7</span></td><td class="hide-sm">Too faint for text. Use it for dividing lines.</td></tr>
         </tbody>
