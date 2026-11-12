@@ -52,6 +52,10 @@
   --c-code-text:    #e3e3e3;
   --c-code-string:  #a8d8c8;
   --c-code-num:     #f0b868;
+  --c-band2-bg:     var(--c-slate);   /* second band colour */
+  --c-band2-fg:     white;
+  --c-band2-muted:  var(--c-silver);
+  --c-band2-focus:  var(--c-mint);
 
   /* Families */
   --ff-display: 'Figtree', sans-serif;
@@ -132,6 +136,10 @@
   --c-code-text:    #E6E9EE;
   --c-code-string:  #8FD3DE;
   --c-code-num:     #D4D89B;
+  --c-band2-bg:     #B5C42E; /* Lime feature band: Navy text 7.8:1 */
+  --c-band2-fg:     #002651;
+  --c-band2-muted:  #2E3A4D; /* Ink on Lime 6.0:1 */
+  --c-band2-focus:  #002651;
 }
 
 /* Scheme-specific content: show only the block for the active scheme */
@@ -400,7 +408,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
 }
 
 .band--navy  { background: var(--c-navy);  color: white; }
-.band--slate { background: var(--c-slate); color: white; }
+.band--slate { background: var(--c-band2-bg); color: var(--c-band2-fg); }
+.band--slate :focus-visible { outline-color: var(--c-band2-focus); }
 .band--white { background: var(--c-surface); }
 .band--light { background: var(--c-gray-light); }
 
@@ -427,8 +436,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
   user-select: none;
 }
 
-.band--navy .band-num,
-.band--slate .band-num { color: white; }
+.band--navy .band-num { color: white; }
+.band--slate .band-num { color: var(--c-band2-fg); }
 
 .band-eyebrow {
   display: flex;
@@ -468,9 +477,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
   color: var(--c-charcoal);
 }
 
-.band--navy .band-eyebrow, .band--slate .band-eyebrow,
-.band--navy .band-lede,    .band--slate .band-lede { color: var(--c-silver); }
-.band--navy .band-title,   .band--slate .band-title { color: white; }
+.band--navy .band-eyebrow, .band--navy .band-lede { color: var(--c-silver); }
+.band--navy .band-title { color: white; }
+.band--slate .band-eyebrow, .band--slate .band-lede { color: var(--c-band2-muted); }
+.band--slate .band-title { color: var(--c-band2-fg); }
 
 .sub-head {
   font-family: var(--ff-display);
@@ -484,8 +494,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
   gap: var(--sp-3);
 }
 .sub-head .mono { font-size: 11px; font-weight: 400; color: var(--c-slate); letter-spacing: 0.1em; }
-.band--navy .sub-head, .band--slate .sub-head { color: white; }
-.band--navy .sub-head .mono, .band--slate .sub-head .mono { color: var(--c-silver); }
+.band--navy .sub-head { color: white; }
+.band--navy .sub-head .mono { color: var(--c-silver); }
+.band--slate .sub-head { color: var(--c-band2-fg); }
+.band--slate .sub-head .mono { color: var(--c-band2-muted); }
 
 .cap {
   font-family: var(--ff-mono);
@@ -743,14 +755,15 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--c-mint); outlin
 .sw--mint     { grid-column: span 2; background: var(--c-mint); color: var(--c-navy); }
 
 .sw--navy .sw-role, .sw--slate .sw-role, .sw--charcoal .sw-role { color: var(--c-silver); }
-.sw--mint .sw-name { font-size: clamp(1.1rem, 1.6vw, 1.4rem); }
+.sw--mint:not(.sw-c6) .sw-name { font-size: clamp(1.1rem, 1.6vw, 1.4rem); }
 
 /* Alternative-scheme swatches: spans set per tile */
 .sw.sw-c6 { grid-column: span 6; } .sw.sw-c5 { grid-column: span 5; }
 .sw.sw-c4 { grid-column: span 4; } .sw.sw-c3 { grid-column: span 3; }
 .sw.sw-c2 { grid-column: span 2; }
 .sw.sw-r3 { grid-row: span 3; } .sw.sw-r2 { grid-row: span 2; }
-.sw.sw-c6:not(.sw-r3):not(.sw-r2) { grid-row: span 1; }
+.sw.sw-c6:not(.sw-r3):not(.sw-r2), .sw.sw-c5, .sw.sw-c4, .sw.sw-c3, .sw.sw-c2 { grid-row: span 1; }
+.sw--slate.sw-c2 .sw-name { font-size: clamp(1.1rem, 1.6vw, 1.4rem); }
 .sw--offwhite { background: #F9F9FA; color: var(--c-navy); }
 .sw--palelime { background: #D4D89B; color: var(--c-navy); }
 .sw--palelime .sw-name, .sw--bar .sw-name { font-size: clamp(1.1rem, 1.6vw, 1.4rem); }
@@ -1158,13 +1171,13 @@ code.inline {
   font-size: 3rem;
   font-weight: 800;
   line-height: 1;
-  color: white;
+  color: var(--c-band2-fg);
 }
 .rule-head h3 {
   font-family: var(--ff-display);
   font-size: var(--fs-h2);
   font-weight: 700;
-  color: white;
+  color: var(--c-band2-fg);
   letter-spacing: var(--ls-heading);
 }
 
@@ -1520,12 +1533,12 @@ code.inline {
         </div>
         <div class="colour-stack colour-stack--7" data-only="alt">
           <div style="background:#002651;color:white;"><strong>Navy</strong><span>#002651</span><span>0 / 38 / 81</span></div>
-          <div style="background:#1A4687;color:white;"><strong>Blue</strong><span>#1A4687</span><span>26 / 70 / 135</span></div>
+          <div style="background:#B5C42E;color:#002651;"><strong>Lime</strong><span>#B5C42E</span><span>181 / 196 / 46</span></div>
           <div style="background:#2E3A4D;color:white;"><strong>Ink</strong><span>#2E3A4D</span><span>46 / 58 / 77</span></div>
           <div style="background:#BFC9D4;color:#002651;"><strong>Mist</strong><span>#BFC9D4</span><span>191 / 201 / 212</span></div>
           <div style="background:#E6E9EE;color:#002651;"><strong>Haze</strong><span>#E6E9EE</span><span>230 / 233 / 238</span></div>
           <div style="background:#fff;color:#002651;box-shadow:inset 0 6px 0 #018CA1;"><strong>Teal</strong><span>#018CA1</span><span>1 / 140 / 161</span></div>
-          <div style="background:#B5C42E;color:#002651;"><strong>Lime</strong><span>#B5C42E</span><span>181 / 196 / 46</span></div>
+          <div style="background:#1A4687;color:white;"><strong>Blue</strong><span>#1A4687</span><span>26 / 70 / 135</span></div>
         </div>
       </div>
 
@@ -1622,7 +1635,7 @@ code.inline {
       <div class="band-eyebrow">Foundation</div>
       <h2 class="band-title">Colour</h2>
       <p class="band-lede" data-only="bsf">We use only the bSI <em>secondary</em> palette. The size of each block shows roughly how much of that colour a typical page uses. Click a value to copy it.</p>
-      <p class="band-lede" data-only="alt">The alternative palette: seven brand colours plus three grays mixed from Navy. Lime is the only accent. The size of each block shows roughly how much of that colour a typical page uses. Click a value to copy it.</p>
+      <p class="band-lede" data-only="alt">The alternative palette: seven brand colours plus three grays mixed from Navy. Lime is the accent and the feature-band colour; always put Navy on it. The size of each block shows roughly how much of that colour a typical page uses. Click a value to copy it.</p>
     </div>
 
     <div class="swatch-mosaic reveal" data-only="bsf">
@@ -1676,11 +1689,11 @@ code.inline {
           <div>rgb(0, 38, 81) <button class="copy-btn" data-copy="rgb(0, 38, 81)" aria-label="Copy rgb(0, 38, 81)"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
         </div>
       </div>
-      <div class="sw sw--slate sw-c6 sw-r2">
-        <div><div class="sw-name">Blue</div><div class="sw-role">The second background colour, for sections and panels. Also used for H6 headings.</div></div>
+      <div class="sw sw--mint sw-c6 sw-r2">
+        <div><div class="sw-name">Lime</div><div class="sw-role">Our accent, and the colour of feature bands. Always with Navy on top.</div></div>
         <div class="sw-vals">
-          <div>#1A4687 <button class="copy-btn" data-copy="#1A4687" aria-label="Copy #1A4687"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
-          <div>rgb(26, 70, 135) <button class="copy-btn" data-copy="rgb(26, 70, 135)" aria-label="Copy rgb(26, 70, 135)"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
+          <div>#B5C42E <button class="copy-btn" data-copy="#B5C42E" aria-label="Copy #B5C42E"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
+          <div>rgb(181, 196, 46) <button class="copy-btn" data-copy="rgb(181, 196, 46)" aria-label="Copy rgb(181, 196, 46)"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
         </div>
       </div>
       <div class="sw sw--charcoal sw-c6">
@@ -1727,10 +1740,10 @@ code.inline {
           <div>#879223 <button class="copy-btn" data-copy="#879223" aria-label="Copy #879223"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
         </div>
       </div>
-      <div class="sw sw--mint sw-c2">
-        <div><div class="sw-name">Lime</div><div class="sw-role">Our accent colour.</div></div>
+      <div class="sw sw--slate sw-c2">
+        <div><div class="sw-name">Blue</div><div class="sw-role">H6 headings, captions and supporting text.</div></div>
         <div class="sw-vals">
-          <div>#B5C42E <button class="copy-btn" data-copy="#B5C42E" aria-label="Copy #B5C42E"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
+          <div>#1A4687 <button class="copy-btn" data-copy="#1A4687" aria-label="Copy #1A4687"><svg aria-hidden="true" viewBox="0 0 12 12"><rect x="3.5" y="3.5" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 8V2a.5.5 0 0 1 .5-.5h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Copy</button></div>
         </div>
       </div>
     </div>
@@ -1766,8 +1779,10 @@ code.inline {
           <tr><td><span class="pair-sample" style="background:#fff;color:#1A4687;box-shadow:inset 0 0 0 1px #E6E9EE;">Aa</span></td><td class="mono">Blue</td><td class="mono">White</td><td><span class="wcag-badge wcag-aaa">AAA 9.3</span></td><td class="hide-sm">H6, captions, supporting text</td></tr>
           <tr><td><span class="pair-sample" style="background:#E6E9EE;color:#2E3A4D;">Aa</span></td><td class="mono">Ink</td><td class="mono">Haze</td><td><span class="wcag-badge wcag-aaa">AAA 9.4</span></td><td class="hide-sm">Body text on cards and panels</td></tr>
           <tr><td><span class="pair-sample" style="background:#002651;color:#fff;">Aa</span></td><td class="mono">White</td><td class="mono">Navy</td><td><span class="wcag-badge wcag-aaa">AAA 15.0</span></td><td class="hide-sm">Any text on Navy</td></tr>
-          <tr><td><span class="pair-sample" style="background:#1A4687;color:#fff;">Aa</span></td><td class="mono">White</td><td class="mono">Blue</td><td><span class="wcag-badge wcag-aaa">AAA 9.3</span></td><td class="hide-sm">Any text on Blue</td></tr>
-          <tr><td><span class="pair-sample" style="background:#B5C42E;color:#002651;">Aa</span></td><td class="mono">Navy</td><td class="mono">Lime</td><td><span class="wcag-badge wcag-aaa">AAA 7.8</span></td><td class="hide-sm">Text on Lime buttons and tags</td></tr>
+          <tr><td><span class="pair-sample" style="background:#1A4687;color:#fff;">Aa</span></td><td class="mono">White</td><td class="mono">Blue</td><td><span class="wcag-badge wcag-aaa">AAA 9.3</span></td><td class="hide-sm">Logo tile and small panels</td></tr>
+          <tr><td><span class="pair-sample" style="background:#B5C42E;color:#002651;">Aa</span></td><td class="mono">Navy</td><td class="mono">Lime</td><td><span class="wcag-badge wcag-aaa">AAA 7.8</span></td><td class="hide-sm">Text on Lime bands, buttons and tags</td></tr>
+          <tr><td><span class="pair-sample" style="background:#B5C42E;color:#2E3A4D;">Aa</span></td><td class="mono">Ink</td><td class="mono">Lime</td><td><span class="wcag-badge wcag-aa">AA 6.0</span></td><td class="hide-sm">Muted text on Lime bands</td></tr>
+          <tr><td><span class="pair-sample" style="background:#B5C42E;color:#fff;">Aa</span></td><td class="mono">White</td><td class="mono">Lime</td><td><span class="wcag-badge wcag-nc">NC 1.9</span></td><td class="hide-sm">Never. Put Navy on Lime instead.</td></tr>
           <tr><td><span class="pair-sample" style="background:#002651;color:#B5C42E;">Aa</span></td><td class="mono">Lime</td><td class="mono">Navy</td><td><span class="wcag-badge wcag-aaa">AAA 7.8</span></td><td class="hide-sm">Small labels and active states, on dark backgrounds only</td></tr>
           <tr><td><span class="pair-sample" style="background:#1A4687;color:#B5C42E;">Aa</span></td><td class="mono">Lime</td><td class="mono">Blue</td><td><span class="wcag-badge wcag-aa">AA 4.8</span></td><td class="hide-sm">Labels and active states on Blue</td></tr>
           <tr><td><span class="pair-sample" style="background:#fff;color:#018CA1;box-shadow:inset 0 0 0 1px #E6E9EE;">Aa</span></td><td class="mono">Teal</td><td class="mono">White</td><td><span class="wcag-badge wcag-lg">AA-LG 4.0</span></td><td class="hide-sm">Large text only (24px+, or 18.7px bold). Best kept to rules.</td></tr>
@@ -2110,7 +2125,7 @@ code.inline {
         </div>
       </div>
 
-      <div class="reveal">
+      <div class="reveal" data-only="bsf">
         <div class="rule-head"><span class="n" aria-hidden="true">4</span><h3>Keep <span data-c="mint">Mint</span> small</h3></div>
         <div class="guideline-pair">
           <div class="guideline-card guideline-do">
@@ -2128,6 +2143,29 @@ code.inline {
               </div>
             </div>
             <div class="guideline-caption">A large <span data-c="mint">Mint</span> area is tiring to read on and pulls attention from everything else on the page.</div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal" data-only="alt">
+        <div class="rule-head"><span class="n" aria-hidden="true">4</span><h3>Put Navy on Lime, never white</h3></div>
+        <div class="guideline-pair">
+          <div class="guideline-card guideline-do">
+            <div class="guideline-verdict">✓ Do</div>
+            <div class="guideline-preview">
+              <div style="background:var(--c-mint);width:100%;min-height:96px;display:flex;align-items:center;justify-content:center;padding:var(--sp-6);">
+                <p style="font-size:14px;line-height:1.65;color:var(--c-navy);text-align:center;">Navy body text on a Lime panel.</p>
+              </div>
+            </div>
+            <div class="guideline-caption">Navy on Lime is 7.8:1 and passes AAA at any size.</div>
+          </div>
+          <div class="guideline-card guideline-dont">
+            <div class="guideline-verdict">✗ Don't</div>
+            <div class="guideline-preview">
+              <div style="background:var(--c-mint);width:100%;min-height:96px;display:flex;align-items:center;justify-content:center;padding:var(--sp-6);">
+                <p style="font-size:14px;line-height:1.65;color:white;text-align:center;">White body text on a Lime panel.</p>
+              </div>
+            </div>
+            <div class="guideline-caption">White on Lime is 1.9:1 and fails WCAG. Use Navy.</div>
           </div>
         </div>
       </div>
