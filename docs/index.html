@@ -2266,9 +2266,12 @@ applyScheme(document.documentElement.getAttribute('data-scheme') === 'alt' ? 'al
   var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   var GAP = 24, PERIOD = 16000;
   var w = 0, h = 0, raf = 0, onScreen = true;
-  var dotColour = '#C8C6C5';
+  var dotColour = '#C8C6C5', dotRGB = [200, 198, 197];
   function readColour() {
     dotColour = getComputedStyle(document.documentElement).getPropertyValue('--c-silver').trim() || '#C8C6C5';
+    var hx = /^#([0-9a-f]{6})$/i.exec(dotColour);
+    if (hx) { var n = parseInt(hx[1], 16); dotRGB = [n >> 16, (n >> 8) & 255, n & 255]; }
+    else { dotColour = '#C8C6C5'; dotRGB = [200, 198, 197]; }
   }
   readColour();
 
@@ -2309,9 +2312,18 @@ applyScheme(document.documentElement.getAttribute('data-scheme') === 'alt' ? 'al
           var bend = 1.8 * Math.sin(r * 0.22 + sec * 0.25) + 1.2 * Math.sin(c * 0.15 - sec * 0.19);
           b = Math.pow(Math.max(0, Math.cos((c + r) * 0.16 + bend - phase)), 4);
         }
-        ctx.globalAlpha = m * (0.2 + b * 0.6);
+        // Peak dots stay small but blend from silver toward white at the crest
+        if (b > 0) {
+          var b3 = b * b * b;
+          ctx.fillStyle = 'rgb(' + Math.round(dotRGB[0] + (255 - dotRGB[0]) * b3) + ','
+                                 + Math.round(dotRGB[1] + (255 - dotRGB[1]) * b3) + ','
+                                 + Math.round(dotRGB[2] + (255 - dotRGB[2]) * b3) + ')';
+        } else {
+          ctx.fillStyle = dotColour;
+        }
+        ctx.globalAlpha = m * (0.18 + b * 0.82);
         ctx.beginPath();
-        ctx.arc(x, y, 1.2 + b * 0.5, 0, Math.PI * 2);
+        ctx.arc(x, y, 1.1 + b * 0.15, 0, Math.PI * 2);
         ctx.fill();
       }
     }
