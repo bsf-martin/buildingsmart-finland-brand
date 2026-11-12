@@ -88,17 +88,16 @@ A second colour scheme lives alongside the locked bSF palette in the style guide
 | Ink | `#2E3A4D` | Body text, code background *(derived from Navy)* | Charcoal |
 | Mist | `#BFC9D4` | Borders, muted text on dark bands *(Navy 25%)* | Silver Gray |
 | Haze | `#E6E9EE` | Light bands, cards *(Navy 10%)* | Light Gray |
-| Off-white | `#F9F9FA` | White-band / page background | White |
-| Teal | `#018CA1` | Thin rules only | — |
-| Pale lime | `#D4D89B` | "Do" / positive status fills, Navy text | — |
-| Dark lime | `#879223` | Charts, large graphics — not text | — |
+| Off-white | `#F9F9FA` | White-band / page background *(tint, token only)* | White |
+| Pale lime | `#D4D89B` | "Do" / positive status fills, Navy text *(tint, token only)* | — |
 | Clay | `#8C3B2E` on `#F4EBEA` | "Don't" / negative status (6.45:1) | Red `#7A2020` |
+
+Like bSF, the style guide shows six RYTV swatches (Navy, Lime, Ink, Haze, Mist, Blue). Tints such as Off-white, Pale lime and Clay live only as tokens. Thin rules use Mist, as bSF uses Silver Gray. Teal and Dark lime were dropped.
 
 RYTV contrast rules:
 - Navy on Lime is 7.8:1 (AAA). **Never put white on Lime** (1.9:1).
 - Ink on Lime is 6.0:1; use it for muted text on Lime bands.
-- Teal (3.99:1 on white) and Dark lime fail AA for small text with every brand colour. Their swatch cards use `#00142B` text, a deeper Navy for those two cards only.
-- The accent hover is `#A3B12A`, not Dark lime, because Navy on Dark lime is only 4.4:1.
+- The accent hover is `#A3B12A` (Navy text 6.4:1). Don't go darker: Navy on `#879223` is only 4.4:1.
 
 How it's built:
 - Colour roles are CSS tokens in `:root`. `:root[data-scheme="alt"]` overrides them. Second-band colours use the `--c-band2-*` tokens.
