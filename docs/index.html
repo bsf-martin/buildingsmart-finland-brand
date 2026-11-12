@@ -1184,15 +1184,17 @@ code.inline {
   display: flex;
   align-items: center;
   gap: var(--sp-2);
-  padding: 10px var(--sp-6);
+  padding: var(--sp-4) var(--sp-6) var(--sp-3);
+  border-bottom: 1px solid var(--c-gray-light);
   font-family: var(--ff-display);
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
-.guideline-do .guideline-verdict   { background: var(--c-do-bg);   color: var(--c-do-fg); }
-.guideline-dont .guideline-verdict { background: var(--c-dont-bg); color: var(--c-dont-fg); }
+.guideline-do .guideline-verdict   { color: var(--c-do-fg); }
+.guideline-dont .guideline-verdict { color: var(--c-dont-fg); }
+.verdict-mark { width: 12px; height: 12px; flex: none; }
 
 .guideline-preview {
   flex: 1;
@@ -1416,6 +1418,8 @@ code.inline {
         </g>
     </g>
   </symbol>
+  <symbol id="mark-do" viewBox="0 0 12 12"><rect x="1" y="1" width="10" height="10" fill="currentColor"/></symbol>
+  <symbol id="mark-dont" viewBox="0 0 12 12"><rect x="1.75" y="1.75" width="8.5" height="8.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2 10 L10 2" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
 </svg>
 
 <!-- ================================================================
@@ -2026,7 +2030,7 @@ code.inline {
         <div class="rule-head"><span class="n" aria-hidden="true">1</span><h3>Use one accent per layout</h3></div>
         <div class="guideline-pair">
           <div class="guideline-card guideline-do">
-            <div class="guideline-verdict">✓ Do</div>
+            <div class="guideline-verdict"><svg class="verdict-mark" aria-hidden="true"><use href="#mark-do"/></svg>Do</div>
             <div class="guideline-preview"><div>
               <div style="font-family:var(--ff-display);font-size:20px;font-weight:700;color:var(--c-navy);margin-bottom:8px;">IFC4.3 Released</div>
               <p style="font-size:14px;line-height:1.6;margin-bottom:14px;">IFC4.3 adds support for roads, railways, bridges and ports.</p>
@@ -2035,7 +2039,7 @@ code.inline {
             <div class="guideline-caption">Only the button is <span data-c="mint">Mint</span>. Everything else is Navy or <span data-c="charcoal">Charcoal</span>.</div>
           </div>
           <div class="guideline-card guideline-dont">
-            <div class="guideline-verdict">✗ Don't</div>
+            <div class="guideline-verdict"><svg class="verdict-mark" aria-hidden="true"><use href="#mark-dont"/></svg>Don't</div>
             <div class="guideline-preview"><div>
               <div style="font-family:var(--ff-display);font-size:20px;font-weight:700;color:var(--c-mint);margin-bottom:8px;">IFC4.3 Released</div>
               <p style="font-size:14px;line-height:1.6;margin-bottom:14px;">IFC4.3 adds support for roads, railways, bridges and ports.</p>
@@ -2050,7 +2054,7 @@ code.inline {
         <div class="rule-head"><span class="n" aria-hidden="true">2</span><h3>Use only Figtree and Source Sans 3</h3></div>
         <div class="guideline-pair">
           <div class="guideline-card guideline-do">
-            <div class="guideline-verdict">✓ Do</div>
+            <div class="guideline-verdict"><svg class="verdict-mark" aria-hidden="true"><use href="#mark-do"/></svg>Do</div>
             <div class="guideline-preview"><div>
               <div style="font-family:'Figtree',sans-serif;font-size:20px;font-weight:700;color:var(--c-navy);margin-bottom:6px;">Open BIM Standards</div>
               <p style="font-family:'Source Sans 3',system-ui,sans-serif;font-size:14px;line-height:1.65;">This is how a heading and body text look together.</p>
@@ -2058,7 +2062,7 @@ code.inline {
             <div class="guideline-caption">Figtree heading and Source Sans 3 body text.</div>
           </div>
           <div class="guideline-card guideline-dont">
-            <div class="guideline-verdict">✗ Don't</div>
+            <div class="guideline-verdict"><svg class="verdict-mark" aria-hidden="true"><use href="#mark-dont"/></svg>Don't</div>
             <div class="guideline-preview"><div>
               <div style="font-family:Arial,sans-serif;font-size:20px;font-weight:700;color:var(--c-navy);margin-bottom:6px;">Open BIM Standards</div>
               <p style="font-family:'Times New Roman',serif;font-size:14px;line-height:1.65;">This is how a heading and body text look together.</p>
@@ -2072,7 +2076,7 @@ code.inline {
         <div class="rule-head"><span class="n" aria-hidden="true">3</span><h3>Stick to the approved colour pairs</h3></div>
         <div class="guideline-pair">
           <div class="guideline-card guideline-do">
-            <div class="guideline-verdict">✓ Do</div>
+            <div class="guideline-verdict"><svg class="verdict-mark" aria-hidden="true"><use href="#mark-do"/></svg>Do</div>
             <div class="guideline-preview"><div>
               <div style="font-family:var(--ff-display);font-size:14px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--c-slate);margin-bottom:6px;">Section label</div>
               <p style="font-size:14px;line-height:1.65;"><span data-c="charcoal">Charcoal</span> (<span data-c="hex-charcoal">#38363D</span>) on white: 11.5:1 contrast ratio.</p>
@@ -2080,7 +2084,7 @@ code.inline {
             <div class="guideline-caption"><span data-c="charcoal">Charcoal</span> on white (11.5:1) and <span data-c="slate">Slate</span> on white (<span data-c="r-slate">9.1</span>:1) both pass WCAG AAA.</div>
           </div>
           <div class="guideline-card guideline-dont">
-            <div class="guideline-verdict">✗ Don't</div>
+            <div class="guideline-verdict"><svg class="verdict-mark" aria-hidden="true"><use href="#mark-dont"/></svg>Don't</div>
             <div class="guideline-preview"><div>
               <div style="font-family:var(--ff-display);font-size:14px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--c-silver);margin-bottom:6px;">Section label</div>
               <p style="font-size:14px;line-height:1.65;color:var(--c-silver);"><span data-c="silver">Silver</span> (<span data-c="hex-silver">#C8C6C5</span>) on white: 1.7:1, which fails WCAG.</p>
@@ -2094,14 +2098,14 @@ code.inline {
         <div class="rule-head"><span class="n" aria-hidden="true">4</span><h3>Keep <span data-c="mint">Mint</span> small</h3></div>
         <div class="guideline-pair">
           <div class="guideline-card guideline-do">
-            <div class="guideline-verdict">✓ Do</div>
+            <div class="guideline-verdict"><svg class="verdict-mark" aria-hidden="true"><use href="#mark-do"/></svg>Do</div>
             <div class="guideline-preview" style="gap:var(--sp-3);flex-wrap:wrap;">
               <span class="sg-tag sg-tag-active">Active</span>
             </div>
             <div class="guideline-caption">A small <span data-c="mint">Mint</span> tag or active indicator draws the eye to one thing.</div>
           </div>
           <div class="guideline-card guideline-dont">
-            <div class="guideline-verdict">✗ Don't</div>
+            <div class="guideline-verdict"><svg class="verdict-mark" aria-hidden="true"><use href="#mark-dont"/></svg>Don't</div>
             <div class="guideline-preview" style="padding:0;">
               <div style="background:var(--c-mint);width:100%;align-self:stretch;display:flex;align-items:center;justify-content:center;padding:var(--sp-6);">
                 <p style="font-size:14px;line-height:1.65;color:var(--c-navy);text-align:center;">Body text on a large <span data-c="mint">Mint</span> panel.</p>
@@ -2115,7 +2119,7 @@ code.inline {
         <div class="rule-head"><span class="n" aria-hidden="true">4</span><h3>Put Navy on Lime, never white</h3></div>
         <div class="guideline-pair">
           <div class="guideline-card guideline-do">
-            <div class="guideline-verdict">✓ Do</div>
+            <div class="guideline-verdict"><svg class="verdict-mark" aria-hidden="true"><use href="#mark-do"/></svg>Do</div>
             <div class="guideline-preview">
               <div style="background:var(--c-mint);width:100%;min-height:96px;display:flex;align-items:center;justify-content:center;padding:var(--sp-6);">
                 <p style="font-size:14px;line-height:1.65;color:var(--c-navy);text-align:center;">Navy body text on a Lime panel.</p>
@@ -2124,7 +2128,7 @@ code.inline {
             <div class="guideline-caption">Navy on Lime is 7.8:1 and passes AAA at any size.</div>
           </div>
           <div class="guideline-card guideline-dont">
-            <div class="guideline-verdict">✗ Don't</div>
+            <div class="guideline-verdict"><svg class="verdict-mark" aria-hidden="true"><use href="#mark-dont"/></svg>Don't</div>
             <div class="guideline-preview">
               <div style="background:var(--c-mint);width:100%;min-height:96px;display:flex;align-items:center;justify-content:center;padding:var(--sp-6);">
                 <p style="font-size:14px;line-height:1.65;color:white;text-align:center;">White body text on a Lime panel.</p>
